@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.lenso.jixiangbao.R;
@@ -12,6 +13,12 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        init();
+    }
+     private void init(){
+        Intent intent = new Intent(this, LaunchActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 
