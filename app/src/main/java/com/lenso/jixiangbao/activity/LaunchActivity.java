@@ -12,14 +12,20 @@ import com.lenso.jixiangbao.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by Chung on 2016/5/11.
  */
 public class LaunchActivity extends BaseActivity {
-    private ViewPager launchViewPager;//引导页视图
+    @Bind(R.id.vp_launch)
+    ViewPager vpLaunch;//引导页视图
+    @Bind(R.id.ll_launch)
+    LinearLayout llLaunch;//引导页导航视图
+
     private ArrayList<View> viewList;//引导页子页
-    private LinearLayout ll_launch;//引导页导航视图
     private ImageView[] dots;//引导页导航点
     private int currentDot;//当前导航点
     private MyPagerAdapter mPagerAdapter;//引导页适配器
@@ -28,9 +34,7 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-
-        launchViewPager = (ViewPager) findViewById(R.id.vp_launch);
-        ll_launch = (LinearLayout) findViewById(R.id.ll_launch);
+        ButterKnife.bind(this);
 
         initPageView();//初始化引导页面
         initDotView();//初始化导航小圆点
@@ -40,7 +44,7 @@ public class LaunchActivity extends BaseActivity {
     /**
      * 初始化引导页面
      */
-    private void initPageView(){
+    private void initPageView() {
         LayoutInflater mLayoutInflater = getLayoutInflater();
 
         viewList = new ArrayList<>();
@@ -57,19 +61,21 @@ public class LaunchActivity extends BaseActivity {
          * 设置适配器
          */
         mPagerAdapter = new MyPagerAdapter(viewList);
-        launchViewPager.setAdapter(mPagerAdapter);
+        vpLaunch.setAdapter(mPagerAdapter);
 
         /**
          * 设置监听器
          */
-        launchViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpLaunch.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }
+
             @Override
             public void onPageSelected(int i) {
                 setCurrentDot(i);//设置选中导航点状态
             }
+
             @Override
             public void onPageScrollStateChanged(int i) {
             }
@@ -84,10 +90,10 @@ public class LaunchActivity extends BaseActivity {
         dots = new ImageView[viewList.size()];
 
         for (int i = 0; i < viewList.size(); i++) {
-            dots[i] = (ImageView) ll_launch.getChildAt(i);
-            if(i == 0){
+            dots[i] = (ImageView) llLaunch.getChildAt(i);
+            if (i == 0) {
                 dots[i].setEnabled(true);// 设为选中
-            }else{
+            } else {
                 dots[i].setEnabled(false);// 设为灰色
             }
         }
@@ -96,6 +102,7 @@ public class LaunchActivity extends BaseActivity {
 
     /**
      * 设置当前导航点
+     *
      * @param position ViewPager当前位置
      */
     private void setCurrentDot(int position) {
