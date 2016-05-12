@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.adapter.MyPagerAdapter;
+import com.lenso.jixiangbao.adapter.LaunchViewPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class LaunchActivity extends BaseActivity {
     private ArrayList<View> viewList;//引导页子页
     private ImageView[] dots;//引导页导航点
     private int currentDot;//当前导航点
-    private MyPagerAdapter mPagerAdapter;//引导页适配器
+    private LaunchViewPagerAdapter mPagerAdapter;//引导页适配器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class LaunchActivity extends BaseActivity {
         /**
          * 设置适配器
          */
-        mPagerAdapter = new MyPagerAdapter(viewList);
+        mPagerAdapter = new LaunchViewPagerAdapter(viewList);
         vpLaunch.setAdapter(mPagerAdapter);
 
         /**

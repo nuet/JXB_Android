@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * Created by Chung on 2016/5/11.
  */
-public class MyPagerAdapter extends PagerAdapter{
+public class LaunchViewPagerAdapter extends PagerAdapter{
     private ArrayList<View> viewLists;
 
-    public MyPagerAdapter(){
+    public LaunchViewPagerAdapter(){
     }
-    public MyPagerAdapter(ArrayList<View> viewLists){
+    public LaunchViewPagerAdapter(ArrayList<View> viewLists){
         super();
         this.viewLists = viewLists;
     }
