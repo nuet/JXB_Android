@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:menuitem="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/ll_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <com.lenso.jixiangbao.view.MenuItemView
+            android:id="@+id/menu_item_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:text_content="@string/app_name">
+
+        </com.lenso.jixiangbao.view.MenuItemView>
+        <com.lenso.jixiangbao.view.MenuItemView
+            android:id="@+id/menu_item_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:text_content="@string/app_name">
+
+        </com.lenso.jixiangbao.view.MenuItemView>
+        <com.lenso.jixiangbao.view.MenuItemView
+            android:id="@+id/menu_item_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:text_content="@string/app_name">
+
+        </com.lenso.jixiangbao.view.MenuItemView>
+        <com.lenso.jixiangbao.view.MenuItemView
+            android:id="@+id/menu_item_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:text_content="@string/app_name">
+
+        </com.lenso.jixiangbao.view.MenuItemView>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_home">
+
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

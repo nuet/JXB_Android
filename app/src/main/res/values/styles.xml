@@ -4,5 +4,7 @@
     <style name="AppTheme" parent="android:Theme.Translucent.NoTitleBar">
 
     </style>
-
+    <style name="SplashTheme" parent="android:Theme.Translucent.NoTitleBar">
+    <item name="android:windowBackground">@mipmap/ic_launcher</item>
+    </style>
 </resources>
