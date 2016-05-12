@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -74,6 +75,27 @@ public class LaunchActivity extends BaseActivity {
             @Override
             public void onPageSelected(int i) {
                 setCurrentDot(i);//设置选中导航点状态
+                if(i == 4){
+                    viewList.get(i).findViewById(R.id.btn_login_register).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showToast("登陆/注册");
+                            Intent intent = new Intent();
+                            intent.setClass(LaunchActivity.this,HomeActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    viewList.get(i).findViewById(R.id.btn_go_enjoy).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            showToast("去体验咯");
+                            Intent intent = new Intent();
+                            intent.setClass(LaunchActivity.this,HomeActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
 
             @Override

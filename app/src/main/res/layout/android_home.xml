@@ -14,10 +14,11 @@
         <com.lenso.jixiangbao.view.MenuItemView
             android:id="@+id/menu_item_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            menuitem:image_src="@mipmap/ic_launcher"
-            menuitem:text_content="@string/app_name">
+            menuitem:image_src="@drawable/home_menu_selection"
+            menuitem:text_content="@string/app_name"
+            android:orientation="horizontal">
 
         </com.lenso.jixiangbao.view.MenuItemView>
         <com.lenso.jixiangbao.view.MenuItemView
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:image_src="@drawable/home_menu_finanical"
             menuitem:text_content="@string/app_name">
 
         </com.lenso.jixiangbao.view.MenuItemView>
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:image_src="@drawable/home_menu_loan"
             menuitem:text_content="@string/app_name">
 
         </com.lenso.jixiangbao.view.MenuItemView>
@@ -43,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            menuitem:image_src="@mipmap/ic_launcher"
+            menuitem:image_src="@drawable/home_menu_mine"
             menuitem:text_content="@string/app_name">
 
         </com.lenso.jixiangbao.view.MenuItemView>

@@ -8,6 +8,10 @@ import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.HomeViewPageAdapter;
+import com.lenso.jixiangbao.fragment.FinanicalFragment;
+import com.lenso.jixiangbao.fragment.LoanFragment;
+import com.lenso.jixiangbao.fragment.MineFragment;
+import com.lenso.jixiangbao.fragment.SelectionFragment;
 import com.lenso.jixiangbao.fragment.TestFragment;
 import com.lenso.jixiangbao.view.MenuItemView;
 
@@ -21,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by king on 2016/5/10.
  */
 public class HomeActivity extends BaseActivity {
-    private static final String TAG="HomeActivity";
+    private static final String TAG = "HomeActivity";
     @Bind(R.id.menu_item_1)
     MenuItemView menuItem1;
     @Bind(R.id.menu_item_2)
@@ -42,32 +46,34 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
     }
-private void select(int index){
-    menuItem1.setSelected(false);
-    menuItem2.setSelected(false);
-    menuItem3.setSelected(false);
-    menuItem4.setSelected(false);
-    switch (index){
-        case 0:
-            menuItem1.setSelected(true);
-            break;
-        case 1:
-            menuItem2.setSelected(true);
-            break;
-        case 2:
-            menuItem3.setSelected(true);
-            break;
-        case 3:
-            menuItem4.setSelected(true);
-            break;
+
+    private void select(int index) {
+        menuItem1.setSelected(false);
+        menuItem2.setSelected(false);
+        menuItem3.setSelected(false);
+        menuItem4.setSelected(false);
+        switch (index) {
+            case 0:
+                menuItem1.setSelected(true);
+                break;
+            case 1:
+                menuItem2.setSelected(true);
+                break;
+            case 2:
+                menuItem3.setSelected(true);
+                break;
+            case 3:
+                menuItem4.setSelected(true);
+                break;
+        }
     }
-}
+
     private void initView() {
-        List<Fragment> fragments=new ArrayList<>();
-        fragments.add(new TestFragment());
-        fragments.add(new TestFragment());
-        fragments.add(new TestFragment());
-        fragments.add(new TestFragment());
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new SelectionFragment());
+        fragments.add(new FinanicalFragment());
+        fragments.add(new LoanFragment());
+        fragments.add(new MineFragment());
 
         HomeViewPageAdapter adapter = new HomeViewPageAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
