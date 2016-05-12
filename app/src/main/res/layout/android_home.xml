@@ -11,50 +11,54 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+
         <com.lenso.jixiangbao.view.MenuItemView
             android:id="@+id/menu_item_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:orientation="horizontal"
             menuitem:image_src="@drawable/home_menu_selection"
-            menuitem:text_content="@string/app_name"
-            android:orientation="horizontal">
+            menuitem:text_content="@string/choice">
 
         </com.lenso.jixiangbao.view.MenuItemView>
+
         <com.lenso.jixiangbao.view.MenuItemView
             android:id="@+id/menu_item_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            menuitem:image_src="@drawable/home_menu_finanical"
-            menuitem:text_content="@string/app_name">
+            menuitem:image_src="@drawable/home_menu_financing"
+            menuitem:text_content="@string/financing">
 
         </com.lenso.jixiangbao.view.MenuItemView>
+
         <com.lenso.jixiangbao.view.MenuItemView
             android:id="@+id/menu_item_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             menuitem:image_src="@drawable/home_menu_loan"
-            menuitem:text_content="@string/app_name">
+            menuitem:text_content="@string/loan">
 
         </com.lenso.jixiangbao.view.MenuItemView>
+
         <com.lenso.jixiangbao.view.MenuItemView
             android:id="@+id/menu_item_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             menuitem:image_src="@drawable/home_menu_mine"
-            menuitem:text_content="@string/app_name">
+            menuitem:text_content="@string/mine">
 
         </com.lenso.jixiangbao.view.MenuItemView>
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.lenso.jixiangbao.view.JViewPager
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ll_home">
 
-    </android.support.v4.view.ViewPager>
+    </com.lenso.jixiangbao.view.JViewPager>
 </RelativeLayout>

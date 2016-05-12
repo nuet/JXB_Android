@@ -51,12 +51,12 @@ public class MenuItemView extends LinearLayout {
     }
     public MenuItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (attrs == null)
-            return;
         View view = View.inflate(context, R.layout.item_menu_home, null);
         this.addView(view);
         this.setGravity(Gravity.CENTER_HORIZONTAL);
         ButterKnife.bind(this);
+        if (attrs == null)
+            return;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MenuItemView);
         int resId = typedArray.getResourceId(R.styleable.MenuItemView_image_src, R.mipmap.ic_launcher);
         String text = typedArray.getString(R.styleable.MenuItemView_text_content);

@@ -13,6 +13,7 @@ import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.SelectionFragment;
 import com.lenso.jixiangbao.fragment.TestFragment;
+import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
 
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import butterknife.ButterKnife;
  * Created by king on 2016/5/10.
  */
 public class HomeActivity extends BaseActivity {
-    private static final String TAG = "HomeActivity";
     @Bind(R.id.menu_item_1)
     MenuItemView menuItem1;
     @Bind(R.id.menu_item_2)
@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity {
     @Bind(R.id.ll_home)
     LinearLayout llHome;
     @Bind(R.id.vp_home)
-    ViewPager vpHome;
+    JViewPager vpHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class HomeActivity extends BaseActivity {
 
         HomeViewPageAdapter adapter = new HomeViewPageAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
+        vpHome.setScrollable(false);
         vpHome.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

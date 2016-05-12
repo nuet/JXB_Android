@@ -9,7 +9,7 @@ import android.widget.Toast;
  * Created by king on 2016/5/10.
  */
 public class BaseActivity extends FragmentActivity{
-    protected static final String TAG = "BaseActivity";
+    private String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

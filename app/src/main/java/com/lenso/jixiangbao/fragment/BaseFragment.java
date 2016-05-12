@@ -13,7 +13,7 @@ import android.widget.Toast;
  * Created by king on 2016/5/10.
  */
 public class BaseFragment extends Fragment {
-    protected static final String TAG = "BaseFragment";
+    private String TAG = getClass().getSimpleName();
 
     @Nullable
     @Override
