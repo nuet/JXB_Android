@@ -11,5 +11,6 @@
 
     <color name="white">#ffffffff</color> <!-- 白色 -->
 
+    <color name="black">#ff000000</color> <!-- 黑色 -->
 
 </resources>

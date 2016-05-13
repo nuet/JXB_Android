@@ -5,32 +5,39 @@
     android:layout_margin="5dp"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:clickable="false">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:clickable="false"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
-            android:src="@mipmap/loanfragment_dfl" />
+            android:src="@mipmap/loanfragment_dfl"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="低费率" />
+            android:text="低费率"
+            android:textColor="@color/black"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111" />
+            android:text="111111"
+            android:textColor="@color/black"
+            android:clickable="false"/>
 
     </LinearLayout>
 
@@ -39,24 +46,30 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:clickable="false"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/loanfragment_ged" />
+            android:src="@mipmap/loanfragment_ged"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="高额度" />
+            android:text="高额度"
+            android:textColor="@color/black"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111" />
+            android:text="111111"
+            android:textColor="@color/black"
+            android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -64,24 +77,30 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:clickable="false"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/loanfragment_ckj" />
+            android:src="@mipmap/loanfragment_ckj"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="超快捷" />
+            android:text="超快捷"
+            android:textColor="@color/black"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111" />
+            android:text="111111"
+            android:textColor="@color/black"
+            android:clickable="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,24 +108,30 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:clickable="false"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/loanfragment_fqh" />
+            android:src="@mipmap/loanfragment_fqh"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="分期还" />
+            android:text="分期还"
+            android:textColor="@color/black"
+            android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111" />
+            android:text="111111"
+            android:textColor="@color/black"
+            android:clickable="false"/>
     </LinearLayout>
 
 
