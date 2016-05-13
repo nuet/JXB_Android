@@ -13,4 +13,6 @@
 
     <color name="black">#ff000000</color> <!-- 黑色 -->
 
+    <color name="blue">#7B68EE</color> <!-- 天蓝色 -->
+
 </resources>
