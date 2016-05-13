@@ -36,47 +36,52 @@ public class LoanFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         data = new ArrayList<>();
+
         map = new HashMap<>();
-
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jfangd);
         map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
-        map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map = new HashMap<>();
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jxued);
+        map.put("tv_loanfragment_title","吉学贷");
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
-        map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map = new HashMap<>();
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jched);
+        map.put("tv_loanfragment_title","吉车贷");
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
-        map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map = new HashMap<>();
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jyingd);
+        map.put("tv_loanfragment_title","吉英贷");
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
-        map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map = new HashMap<>();
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jxind );
+        map.put("tv_loanfragment_title","吉薪贷");
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
-        map.put("iv_loanfragment_title",R.mipmap.ic_launcher);
-        map.put("tv_loanfragment_title","吉房贷");
-        map.put("iv_loanfragment_arrow",R.mipmap.right_arrow);
+        map = new HashMap<>();
+        map.put("iv_loanfragment_title",R.mipmap.loanfragment_jweid);
+        map.put("tv_loanfragment_title","吉微贷");
+        map.put("iv_loanfragment_arrow",R.mipmap.loanfragment_rightarrow);
         map.put("tv_loanfragment_content","吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷吉房贷");
         data.add(map);
 
+        logInfo(data.toString());
 
-//        lvLoanfragment.addFooterView();
-
+        lvLoanfragment.addFooterView(inflater.inflate(R.layout.listitem_footer_fragment_loan, null));
         mLoanFragmentListViewAdapter = new LoanFragmentListViewAdapter(data, getActivity());
         lvLoanfragment.setAdapter(mLoanFragmentListViewAdapter);
 
