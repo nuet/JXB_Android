@@ -46,12 +46,27 @@
                         android:gravity="center"
                         android:text="普通用户" />
 
-                    <ImageView
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
                         android:layout_weight="1"
-                        android:src="@mipmap/minefragment_message" />
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="top">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/minefragment_message" />
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="top|right"
+                            android:gravity="center"
+                            android:background="@drawable/minefragment_message_count"
+                            android:textColor="@color/black"
+                            android:text="3"/>
+                    </FrameLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
