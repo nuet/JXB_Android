@@ -9,10 +9,10 @@ import java.util.List;
 /**
  * Created by king on 2016/5/11.
  */
-public class HomeViewPageAdapter extends FragmentStatePagerAdapter{
+public class FragmentViewPageAdapter extends FragmentStatePagerAdapter{
     private final List<Fragment> fragmentList;
 
-    public HomeViewPageAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+    public FragmentViewPageAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList=fragmentList;
     }

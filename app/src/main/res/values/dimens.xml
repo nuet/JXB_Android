@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="menu_title_size">25sp</dimen>
+
+    <!--理财-->
+    <!--优选理财-->
+    <dimen name="financing_list_item_padding">10dp</dimen>
+    <dimen name="financing_list_item_padding_left_right">20dp</dimen>
+    <dimen name="financing_list_item_padding_top_bottom">10dp</dimen>
+    <dimen name="financing_list_item_title_size">20sp</dimen>
+    <dimen name="financing_list_item_text_size">25sp</dimen>
+    <dimen name="financing_list_item_content_size">18sp</dimen>
+    <dimen name="financing_list_item_content_1_percent_size">12sp</dimen>
+    <dimen name="financing_list_item_content_2_day_size">12sp</dimen>
+    <dimen name="financing_list_item_content_1_size">30sp</dimen>
+    <dimen name="financing_list_item_content_2_size">25sp</dimen>
+    <dimen name="pw_list_item_text_size">20sp</dimen>
 </resources>

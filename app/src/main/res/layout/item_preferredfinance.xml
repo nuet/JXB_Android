@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progress="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/financing_list_item_padding"
+    android:paddingRight="@dimen/financing_list_item_padding">
+
+    <TextView
+        android:id="@+id/tv_list_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/financing_list_item_padding"
+        android:text="@string/financing_list_item_title"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/financing_list_item_title_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/financing_list_item_padding_top_bottom"
+        android:paddingLeft="@dimen/financing_list_item_padding_left_right"
+        android:paddingRight="@dimen/financing_list_item_padding_left_right"
+        android:paddingTop="@dimen/financing_list_item_padding_top_bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/shape_list_item_line"
+            android:orientation="vertical"
+            android:showDividers="end">
+
+            <TextView
+                android:id="@+id/tv_list_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/financing_list_item_text"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/financing_list_item_text_size" />
+
+            <TextView
+                android:id="@+id/tv_list_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/financing_list_item_padding_top_bottom"
+                android:paddingTop="@dimen/financing_list_item_padding_top_bottom"
+                android:text="@string/financing_list_item_content"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/financing_list_item_content_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:baselineAligned="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/financing_list_item_padding_top_bottom">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_list_item_text_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/financing_list_item_text_1"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/financing_list_item_content_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:id="@+id/tv_list_item_content_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/financing_list_item_content_1"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/financing_list_item_content_1_size" />
+
+                    <TextView
+                        android:id="@+id/tv_list_item_content_1_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/financing_list_item_content_1_percent"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/financing_list_item_content_1_percent_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_list_item_text_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/financing_list_item_text_2"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/financing_list_item_content_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="bottom|center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_list_item_content_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/financing_list_item_content_2"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/financing_list_item_content_2_size" />
+
+                    <TextView
+                        android:id="@+id/tv_list_item_content_2_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/financing_list_item_content_2_day"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/financing_list_item_content_2_day_size" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+                <com.lenso.jixiangbao.view.ProgressWheel
+                    android:id="@+id/pw_list_item"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    progress:pwBarColor="#0097D6"
+                    progress:pwBarWidth="5dp"
+                    progress:pwRimColor="#330097D6"
+                    progress:pwRimWidth="2dp"
+                    progress:pwText="OK"
+                    progress:pwTextColor="#222"
+                    progress:pwTextSize="@dimen/pw_list_item_text_size"
+                    progress:pwContourSize="5dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

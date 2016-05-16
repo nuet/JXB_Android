@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.adapter.PreferredFinanceListAdapter;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import butterknife.Bind;
@@ -27,6 +28,5 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initView() {
-
     }
 }

@@ -7,12 +7,11 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.adapter.HomeViewPageAdapter;
-import com.lenso.jixiangbao.fragment.FinanicalFragment;
+import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.SelectionFragment;
-import com.lenso.jixiangbao.fragment.TestFragment;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
 
@@ -71,13 +70,14 @@ public class HomeActivity extends BaseActivity {
     private void initView() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new SelectionFragment());
-        fragments.add(new FinanicalFragment());
+        fragments.add(new FinancingFragment());
         fragments.add(new LoanFragment());
         fragments.add(new MineFragment());
 
-        HomeViewPageAdapter adapter = new HomeViewPageAdapter(getSupportFragmentManager(), fragments);
+        FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
         vpHome.setScrollable(false);
+        vpHome.setOffscreenPageLimit(4);
         vpHome.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

@@ -8,4 +8,18 @@
     <string name="mine">我的</string>
     <!--注册或登陆 -->
     <string name="login_title">注册或登陆</string>
+    <!--理财-->
+    <!--优选理财-->
+    <string name="financing_preferred">优选理财</string>
+    <string name="financing_list_item_title">title</string>
+    <string name="financing_list_item_text">text</string>
+    <string name="financing_list_item_content">content</string>
+    <string name="financing_list_item_text_1">预期年化</string>
+    <string name="financing_list_item_content_1">0.0</string>
+    <string name="financing_list_item_content_1_percent">%</string>
+    <string name="financing_list_item_text_2">期限</string>
+    <string name="financing_list_item_content_2">0</string>
+    <string name="financing_list_item_content_2_day">天</string>
+    <string name="credit_list">债权列表</string>
+    <string name="transfer_zone">转让专区</string>
 </resources>
