@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         top_menu:background="@android:color/holo_blue_dark"
         top_menu:backSrc="@null"
-        top_menu:menuSrc="@mipmap/ic_launcher"
+        top_menu:menuSrc="@mipmap/topmenu_more"
         top_menu:text="借款"
         top_menu:textSize="@dimen/menu_title_size">
 

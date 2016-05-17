@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     android:clickable="false">
 
     <LinearLayout
@@ -26,17 +26,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="低费率"
-            android:textColor="@color/black"
+            android:textColor="@color/loanbottom"
+            android:textSize="15sp"
             android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111"
-            android:textColor="@color/black"
+            android:text="月利率低至0.7%"
+            android:textColor="@color/loanbottom"
+            android:textSize="8sp"
             android:clickable="false"/>
 
     </LinearLayout>
@@ -58,17 +61,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="高额度"
-            android:textColor="@color/black"
+            android:textColor="@color/loanbottom"
+            android:textSize="15sp"
             android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111"
-            android:textColor="@color/black"
+            android:text="额度最高500万"
+            android:textColor="@color/loanbottom"
+            android:textSize="8sp"
             android:clickable="false"/>
     </LinearLayout>
 
@@ -89,17 +95,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="超快捷"
-            android:textColor="@color/black"
+            android:textColor="@color/loanbottom"
+            android:textSize="15sp"
             android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111"
-            android:textColor="@color/black"
+            android:text="最快次日放款"
+            android:textColor="@color/loanbottom"
+            android:textSize="8sp"
             android:clickable="false"/>
     </LinearLayout>
 
@@ -120,17 +129,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="分期还"
-            android:textColor="@color/black"
+            android:textColor="@color/loanbottom"
+            android:textSize="15sp"
             android:clickable="false"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="111111"
-            android:textColor="@color/black"
+            android:text="1-12个月自由选择"
+            android:textColor="@color/loanbottom"
+            android:textSize="8sp"
             android:clickable="false"/>
     </LinearLayout>
 

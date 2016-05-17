@@ -1,6 +1,10 @@
 package com.lenso.jixiangbao.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +64,9 @@ public class LoanFragmentListViewAdapter extends BaseAdapter {
         mLoanFragmentViewHolder.iv_loanfragment_title.setImageResource((Integer) data.get(position).get("iv_loanfragment_title"));
         mLoanFragmentViewHolder.tv_loanfragment_title.setText((CharSequence) data.get(position).get("tv_loanfragment_title"));
         mLoanFragmentViewHolder.iv_loanfragment_arrow.setImageResource((Integer) data.get(position).get("iv_loanfragment_arrow"));
-        mLoanFragmentViewHolder.tv_loanfragment_content.setText((CharSequence) data.get(position).get("tv_loanfragment_content"));
+
+
+        mLoanFragmentViewHolder.tv_loanfragment_content.setText((SpannableString) data.get(position).get("tv_loanfragment_content"));
 
         return convertView;
     }
