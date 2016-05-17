@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/j-style.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/hammer.min.js"></script>
+    <script type="text/javascript" src="js/commen.js"></script>
+    <title>收益计算器</title>
+</head>
+<style>
+    .formgroup label:first-child:before{
+        content: url("images/js-1.png");
+        position: absolute;
+        left: 0;
+        top: 5px;
+    }
+    .formgroup label:last-child:before{
+        content: url("images/js-2.png");
+        position: absolute;
+        left: 10px;
+        top: 5px;
+    }
+    label{
+        text-align: center;
+        position: relative;
+    }
+    label:last-child{
+        border-left: 1px solid #c8c7cc;
+        padding-left: 10px;
+    }
+    input{
+        width: 59%;
+        margin-left: 16px;
+    }
+    .progress{
+        height: 60px;
+        border-radius: 0;
+        margin: 10px  0;
+        background-color: #fff;
+        position: relative;
+    }
+    .progress p{
+       position: absolute;
+        padding: 0 10px;
+        height: 40px;
+        left: 0;
+        top: 12px;
+        color: #fff;
+    }
+    .progress span{
+        position: absolute;
+        padding: 0 10px;
+        line-height: 40px;
+        right: 0;
+        top: 12px;
+        font-size: 16px;
+    }
+
+</style>
+<body>
+
+    <div class="fullsecen martop padboth">
+        <div class="formgroup thebox">
+            <label class="inlin1"><input type="text" id="money"  placeholder="请输入金额"><o>元</o></label>
+            <label class="inlin1"><input type="text" id="data"  placeholder="请输入天数"><o>天</o></label>
+        </div>
+    </div>
+    <button type="button" class="btn bttnmid btnsmal" id="calcuator">计算</button>
+
+  <div id="caarea">
+    <!--<p class="gray" style="text-align: right;margin: 30px 0;">收益（元）</p>-->
+    <!--<div class="progress" id="jixiangbao">-->
+        <!--<p>吉祥宝金额<br>5.0%</p>-->
+        <!--<div class="progress-bar" ></div>-->
+        <!--<span id="jixiangbaonum" class="stress"></span>-->
+    <!--</div>-->
+      <!--<div class="progress" id="huobi">-->
+          <!--<p>货币基金<br>3.0%</p>-->
+          <!--<div class="progress-bar"   style="background: #3DA7FF;" ></div>-->
+          <!--<span id="huobinum"></span>-->
+      <!--</div>-->
+      <!--<div class="progress"  id="bank">-->
+          <!--<p>银行活期<br>0.38%</p>-->
+          <!--<div class="progress-bar"  style="background:#87C8FF;"></div>-->
+          <!--<span id="banknum"></span>-->
+      <!--</div>-->
+  </div>
+</body>
+<script>
+//    $(function () {
+//        $(".progress").ProgressBarWars({porcentaje:66});
+//    });
+
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+
+            if(e.target.id=="calcuator"){
+                calcuator(0.05,0.03,0.038);
+            }
+
+
+        });
+    }
+    bindEvent();
+
+    function calcuator(a,b,c){
+        $("#caarea").empty();
+        var money=parseInt($("#money").val());
+        var data=parseInt($("#data").val());
+        var jixiang=(a*money*data).toFixed(2);
+        var huobi=(b*money*data).toFixed(2);
+        var bank=(c*money*data).toFixed(2);
+        $("#caarea").html("<p class='gray' style='text-align: right;margin: 30px 0;'>收益（元）</p>"+
+                              " <div class='progress' id='jixiangbao'>"+
+                                   " <p>吉祥宝金额<br>5.0%</p>"+
+                                   " <div class='progress-bar' ></div>"+
+                                   "<span id='jixiangbaonum' class='stress'></span>"+
+                               "</div>"+
+                               " <div class='progress' id='huobi'>"+
+                                    " <p>货币基金<br>3.0%</p>"+
+                                    " <div class='progress-bar'   style='background: #3DA7FF;' ></div>"+
+                                    "<span id='huobinum'></span>"+
+                                "</div>"+
+                                "<div class='progress'  id='bank'>"+
+                                      " <p>银行活期<br>0.38%</p>"+
+                                      "<div class='progress-bar'  style='background:#87C8FF;'></div>"+
+                                     " <span id='banknum'></span>"+
+                             "</div>");
+
+        $("#jixiangbao").ProgressBarWars({porcentaje:80});
+        $("#huobi").ProgressBarWars({porcentaje:30});
+        $("#bank").ProgressBarWars({porcentaje:20});
+        $("#jixiangbaonum").text(jixiang);
+        $("#huobinum").text(huobi);
+        $("#banknum").text(bank);
+    }
+</script>
+</html>

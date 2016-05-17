@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/j-style.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/hammer.min.js"></script>
+    <title>债权转让</title>
+</head>
+<body>
+
+<section class="padleft">
+    <ul class="list1">
+        <li data="recommend-money">可转让债权<span class="florigh" data="recommend-money">0.00元</span></li>
+        <li data="recommend-people">转让中债权<span class="florigh" data="recommend-people">0.00元</span></li>
+    </ul>
+</section>
+<nav class="navtabsmall thebox">
+    <div class="active inlin1" data-toggle="tab">转让中</div>
+    <div class="inlin1" data-toggle="tab">可转让</div>
+</nav>
+
+
+<div class="fullsecen nopadd" id="transfer-0">
+    <table class="listtable">
+        <thead>
+        <tr>
+            <td>标题</td>
+            <td>金额</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>XXXXX贷款</td>
+            <td>10,000.00元</td>
+            <td class="caozuo" >撤回</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="fullsecen nopadd" id="transfer-1" style="display: none">
+    <table class="listtable">
+        <thead>
+        <tr>
+            <td>标题</td>
+            <td>金额</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>XXXXX贷款</td>
+            <td>10,000.00元</td>
+            <td class="caozuo" data="to-transfer">转让</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+<script>
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var ontab=$(e.target).attr("data-toggle");
+            if(ontab=="tab"){
+                var index=$(e.target).index();
+                var old=$(".active").index();
+                $(e.target).addClass("active").siblings().removeClass("active");
+//                $(".fullsecen").hide();
+                if(old<index){
+                    $("#transfer-"+old).animate({marginLeft: '-1000px'}, 300);
+                    $("#transfer-"+old).hide();
+                    $("#transfer-"+index).css("marginLeft","1000px");
+                    $("#transfer-"+index).animate({marginLeft: '10px', opacity: 'show'}, 300);
+                } else if(old>index){
+                    $("#transfer-"+old).animate({marginLeft: '1000px'}, 300);
+                    $("#transfer-"+old).hide();
+                    $("#transfer-"+index).css("marginLeft","-1000px");
+                    $("#transfer-"+index).animate({marginLeft: '10px', opacity: 'show'}, 300);
+                }
+
+            }
+
+
+            var onurl=$(e.target).attr("data");
+            if(onurl=="to-transfer"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+        });
+    }
+    bindEvent();
+</script>
+</html>

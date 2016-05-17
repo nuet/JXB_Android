@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/j-style.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/hammer.min.js"></script>
+    <title>商品详情</title>
+</head>
+<body>
+
+<div class="fullsecen productop">
+    <img src="../images/pro.png">
+    <p class="title">小米充电器</p>
+    <p>所需积分：<span class="stress">3000</span><span class="florigh">剩余数量：0</span></p>
+    <button type="button" class="btn" data="address">立即兑换</button>
+</div>
+
+
+<div class="fullsecen productop">
+    <nav class="navtabig thebox">
+        <div class="active inlin1">商品详情</div>
+    </nav>
+    <img src="../images/product.png">
+
+
+</div>
+
+</body>
+<script>
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="address"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+        });
+    }
+    bindEvent();
+</script>
+</html>

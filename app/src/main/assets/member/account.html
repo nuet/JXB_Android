@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/j-style.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/hammer.min.js"></script>
+    <title>账号信息</title>
+</head>
+<body>
+
+<section class="padleft martop">
+    <ul class="list1">
+        <li class="useimg">头像<i class="abb right"></i><img class="florigh" src="../images/wd-1.png"></li>
+        <li>用户名<i class="abb right"></i><span class="florigh gray">nuwsdf41</span></li>
+        <li data="verified">实名认证<i class="abb right" data="verified"></i><span class="florigh gray" data="verified">未认证</span></li>
+        <li data="bindingPhone">手机号码<i class="abb right" data="bindingPhone"></i><span class="florigh gray" data="bindingPhone">130*****5677</span></li>
+        <li data="bindingEmail">电子邮箱<i class="abb right" data="bindingEmail"></i><span class="florigh gray" data="bindingEmail">313****@qq.com</span></li>
+        <li data="bindingCard">银行卡<i class="abb right" data="bindingCard"></i><span class="florigh gray" data="bindingCard">未绑定</span></li>
+    </ul>
+</section>
+<section class="padleft">
+    <ul class="list1">
+        <li data="loginpassword">登录密码<i class="abb right" data="loginpassword"></i></li>
+        <li data="paypassword">支付密码<i class="abb right" data="paypassword"></i></li>
+        <li data="movepassword">手势密码<i class="abb right" data="movepassword"></i></li>
+    </ul>
+</section>
+
+<button type="button" class="btn loginout" data="loginout">退出登录</button>
+
+</body>
+<script>
+    $(function () {
+        $(".progress").ProgressBarWars({porcentaje:66});
+    });
+
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="verified"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="bindingEmail"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="bindingCard"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="loginpassword"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="paypassword"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="movepassword"){
+                //原生页面
+            }
+            if(onurl=="loginout"){
+                //到首页，即精选页面
+            }
+
+        });
+    }
+    bindEvent();
+</script>
+</html>

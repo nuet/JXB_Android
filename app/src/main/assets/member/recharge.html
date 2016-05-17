@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/j-style.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/hammer.min.js"></script>
+    <title>充值</title>
+</head>
+
+<body>
+<form>
+    <p class="padleft gray martop">为了保障资金安全，充值的金额只能通过原卡提现</p>
+    <section class="padleft martop">
+        <ul class="list1" data="bindingCard">
+            <li data="bindingCard">添加银行卡<i class="abb right" data="bindingCard"></i></li>
+        </ul>
+    </section>
+
+    <h4 class="padleft martop">银行卡<span class="stress">已绑定银行卡时显示这里</span></h4>
+    <div class="fullsecen">
+        <div class="formgroup bank">
+            <img src="../images/china.png">
+            <p>中国银行 ****4666</p>
+            <p>单笔5万，单日10万</p>
+        </div>
+    </div>
+
+    <section class="padleft" style="margin: 30px 0 5px">
+        <div class="formgroup ">
+            <label class="thebox"><span>充值金额</span><input type="text" name="money" class="inlin1" placeholder="请输入金额"></label>
+        </div>
+
+        <!--<div class="formgroup ">-->
+            <!--<label class="thebox"><span>支付密码</span><input type="password" name="paypassword" class="inlin1" placeholder="请输入支付密码"></label>-->
+        <!--</div>-->
+    </section>
+    <p class="padleft gray">可用余额：0.00 元</p>
+
+    <!--<button type="button" class="btn findpass florigh" data="forgetpassword-1">找回密码</button>-->
+    <button type="button" class="btn bttnmid btnsmal">充值</button>
+</form>
+
+<div class="cecurity">
+    <p>账户资金安全银行级保障</p>
+    <p class="gray">© 2016 吉祥宝金融</p>
+</div>
+</body>
+<script>
+
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="forgetpassword-1"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+            if(onurl=="bindingCard"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+        });
+    }
+    bindEvent();
+</script>
+</html>

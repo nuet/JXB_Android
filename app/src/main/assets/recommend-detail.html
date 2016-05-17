@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/j-style.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/hammer.min.js"></script>
+    <title>活动详情</title>
+</head>
+
+<body>
+<div class="fulltext nopadd">
+    <img src="images/tuijian.png" style="margin: 0">
+</div>
+
+<div class="endfix">
+    <img  src="images/yaoqing.png" >
+    <a data="recommend-list"></a>
+</div>
+</body>
+<script>
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="recommend-list"){
+                window.location.href="member/"+$(e.target).attr("data")+".html";
+            }
+        });
+    }
+    bindEvent();
+</script>
+</html>

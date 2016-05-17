@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/j-style.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/hammer.min.js"></script>
+    <title>关于我们</title>
+</head>
+<style>
+    .modal{
+        text-align: center;
+    }
+    .modal-footer{
+        margin: 0;
+        text-align: center;
+    }
+    .modal-footer .btn{
+        width: 40%;
+    }
+    .florigh{
+        margin-top: 2px;
+    }
+    .abb.right{top: 7px;}
+    li span{
+        color: #676767;
+    }
+</style>
+<body>
+
+<div style="text-align: center;margin: 30px 0;">
+  <img src="images/logo.png" >
+    <p class="gray" style="margin-top: 10px;font-size: 16px;">版本号 1.0.0</p>
+</div>
+<section class="padleft martop">
+    <ul class="list1 morenavlist">
+        <li data="website" class="gray">官方网站<i class="abb right" data="website"></i><span class="florigh" data="website">http://jixiangbao.net</span></li>
+        <li class="gray">官方微信<span class="florigh">吉祥宝金融</span></li>
+        <li data-toggle="modal" data-target="#callPhone" class="gray">客服电话<i class="abb right" ></i><span class="florigh" id="Phonenum">400-680-8885</span>
+        </li>
+    </ul>
+</section>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="callPhone" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>确定要拨打客服热线吗？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="btn-call">呼叫</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="website"){
+                window.location.href="http://jixiangbao.net";
+            }
+
+
+            if(e.target.id=="btn-call"){
+                var phoneNum=$("#Phonenum").text();
+                api.makeCall(phoneNum);
+            }
+
+        });
+    }
+    bindEvent();
+
+
+</script>
+</html>

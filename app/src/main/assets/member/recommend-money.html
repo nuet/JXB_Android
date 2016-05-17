@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/j-style.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/hammer.min.js"></script>
+    <title>现金奖励</title>
+</head>
+<style>
+    nav{border-bottom: 1px solid #c8c7cc;}
+    .yuehead{margin-top: 20px;border-bottom: 1px solid #c8c7cc;}
+</style>
+<body>
+<nav class="navtabig thebox">
+    <div class="active inlin1" >现金奖励</div>
+    <div class="inlin1" data="recommend-people">推荐结果</div>
+</nav>
+
+<div class="yuehead">
+    <p>奖励总额：0.00 元</p>
+</div>
+
+<p class="tablehead " >推荐用户/奖励日期<span class="florigh" >奖励金额</span></p>
+
+<section style="padding: 0 0 0 10px">
+    <ul class="listxt">
+        <li>
+            <p>z***k<span class="florigh" >50.00</span></p>
+            <p>2016-05-28 08:30:41</p>
+        </li>
+        <li>
+            <p>z***k<span class="florigh" >100.00</span></p>
+            <p>2016-05-28 08:30:41</p>
+        </li>
+        <li>
+            <p>z***k<span class="florigh" >50.00</span></p>
+            <p>2016-05-28 08:30:41</p>
+        </li>
+    </ul>
+</section>
+    <img src="../images/877.jpg" class="norecord">
+</body>
+<script>
+    function bindEvent () {
+        mc = new Hammer.Manager(document.body);
+        mc.add(new Hammer.Tap());
+        mc.on("tap", function (e) {
+            var onurl=$(e.target).attr("data");
+            if(onurl=="recommend-people"){
+                window.location.href=$(e.target).attr("data")+".html";
+            }
+        });
+    }
+    bindEvent();
+</script>
+</html>
