@@ -2,9 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:top_menu="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/lighter_gray">
+    <com.lenso.jixiangbao.view.TopMenuBar
+        android:id="@+id/top_menu_bar_loan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        top_menu:background="@android:color/holo_blue_dark"
+        top_menu:backSrc="@null"
+        top_menu:menuSrc="@mipmap/ic_launcher"
+        top_menu:text="借款"
+        top_menu:textSize="@dimen/menu_title_size">
 
+    </com.lenso.jixiangbao.view.TopMenuBar>
     <!--<TextView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
