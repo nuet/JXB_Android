@@ -444,6 +444,7 @@ section{
     border-color: #ccc;
     box-shadow: 0 0 2px #BCBCBC;
     height: 49px;
+    letter-spacing: 1px;
 }
 .yzmbtn{
     border-left: 1px solid #ccc;

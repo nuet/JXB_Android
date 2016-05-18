@@ -108,7 +108,9 @@
                 window.location.href=$(e.target).attr("data")+".html";
             }
             if(onurl=="novice-sail"){
-                window.location.href=$(e.target).attr("data")+".html";
+
+                api.open("新手起航","file:///android_asset/novice-sail.html");
+             // window.location.href=$(e.target).attr("data")+".html";
             }
             if(onurl=="top-activities"){
                 window.location.href=$(e.target).attr("data")+".html";
