@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lighter_gray">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="轮播图"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+                <ImageView
+                    android:id="@+id/iv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:id="@+id/tv_info_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    android:layout_alignParentRight="true"
+                    android:text="累计投资：1000亿"/>
+                <TextView
+                    android:id="@+id/tv_info_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    android:layout_toLeftOf="@id/tv_info_2"
+                    android:text="累计投资2：1000亿"/>
+            </RelativeLayout>
+            <com.lenso.jixiangbao.view.LoopViewPager
+                android:id="@+id/vp_choice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.lenso.jixiangbao.view.LoopViewPager>
+            <include layout="@layout/item_safe_foot"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
