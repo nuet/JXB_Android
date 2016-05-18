@@ -45,7 +45,7 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        vpChoice.setDisplayMode(JViewPager.DisplayMode.DISPLAY_BY_FIRST_ONE);
+        vpChoice.setDisplayMode(JViewPager.DisplayMode.DISPLAY_BY_EVERY_ONE);
         vpChoice.addLoopViews(new TestFragment(),new TestFragment());
     }
 

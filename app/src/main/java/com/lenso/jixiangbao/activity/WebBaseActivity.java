@@ -3,6 +3,8 @@ package com.lenso.jixiangbao.activity;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.lenso.jixiangbao.view.JWebView;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class WebBaseActivity extends BaseActivity {
         }
         if (webViews.containsKey(tag))
             return webViews.get(tag);
-        WebView webView = new WebView(this);
+        WebView webView = new JWebView(this);
         webViews.put(tag, webView);
         return webView;
     }

@@ -3,6 +3,8 @@ package com.lenso.jixiangbao.fragment;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.lenso.jixiangbao.view.JWebView;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class WebBaseFragment extends BaseFragment {
         }
         if (webViews.containsKey(tag))
             return webViews.get(tag);
-        WebView webView = new WebView(getActivity());
+        WebView webView = new JWebView(getActivity());
         webViews.put(tag, webView);
         return webView;
     }
