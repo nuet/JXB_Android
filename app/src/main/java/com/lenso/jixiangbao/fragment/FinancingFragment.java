@@ -24,8 +24,6 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/12.
  */
 public class FinancingFragment extends BaseFragment {
-    @Bind(R.id.top_menu_bar_login)
-    TopMenuBar topMenuBarLogin;
     @Bind(R.id.tv_menu_preferred_finance)
     TextView tvMenuPreferredFinance;
     @Bind(R.id.tv_menu_credit_list)

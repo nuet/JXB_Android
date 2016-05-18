@@ -6,14 +6,13 @@
     android:orientation="vertical">
 
     <com.lenso.jixiangbao.view.TopMenuBar
+        style="@style/topMenu"
         android:id="@+id/top_menu_bar_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         top_menu:text="@string/login_title"
         top_menu:backSrc="@mipmap/ic_launcher"
-        top_menu:menuSrc="@mipmap/ic_launcher"
-        top_menu:textSize="@dimen/menu_title_size"
-        top_menu:background="@android:color/holo_blue_dark">
+        top_menu:menuSrc="@mipmap/ic_launcher">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 

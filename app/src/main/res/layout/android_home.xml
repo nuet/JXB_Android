@@ -4,7 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
+<com.lenso.jixiangbao.view.TopMenuBar
+    android:id="@+id/top_menu_bar"
+    style="@style/topMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    menuitem:backSrc="@mipmap/ic_launcher"
+    menuitem:menuSrc="@mipmap/topmenu_more">
 
+</com.lenso.jixiangbao.view.TopMenuBar>
     <LinearLayout
         android:id="@+id/ll_home"
         android:layout_width="match_parent"
@@ -58,7 +66,8 @@
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/ll_home">
+        android:layout_above="@id/ll_home"
+        android:layout_below="@id/top_menu_bar">
 
     </com.lenso.jixiangbao.view.JViewPager>
 </RelativeLayout>

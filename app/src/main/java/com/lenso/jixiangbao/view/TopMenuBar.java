@@ -42,7 +42,7 @@ public class TopMenuBar extends LinearLayout {
         View view = View.inflate(context, R.layout.view_top_menu_bar, null);
         this.addView(view);
         ViewGroup.LayoutParams viewParams = view.getLayoutParams();
-        viewParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+        viewParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         view.setLayoutParams(viewParams);
         ButterKnife.bind(this);
         if (attrs == null)
@@ -51,62 +51,113 @@ public class TopMenuBar extends LinearLayout {
         String text = typedArray.getString(R.styleable.TopMenuBar_text);
         float textSize = typedArray.getDimension(R.styleable.TopMenuBar_textSize, getResources().getDimension(R.dimen.menu_title_size));
         int textColor = typedArray.getColor(R.styleable.TopMenuBar_textColor, Color.WHITE);
-        int background=typedArray.getResourceId(R.styleable.TopMenuBar_background, 0);
-        int backSrc=typedArray.getResourceId(R.styleable.TopMenuBar_backSrc, 0);
-        int menuSrc=typedArray.getResourceId(R.styleable.TopMenuBar_menuSrc, 0);
+        int background = typedArray.getResourceId(R.styleable.TopMenuBar_background, 0);
+        int backSrc = typedArray.getResourceId(R.styleable.TopMenuBar_backSrc, 0);
+        int menuSrc = typedArray.getResourceId(R.styleable.TopMenuBar_menuSrc, 0);
+        boolean backVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_backVisibility, true);
+        boolean menuVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_menuVisibility,true);
+        boolean textVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_textVisibility,true);
+        int padding = (int) typedArray.getDimension(R.styleable.TopMenuBar_padding, 0);
+        view.setPadding(view.getPaddingLeft(),view.getPaddingTop()+padding,view.getPaddingRight(),view.getPaddingBottom()+padding);
         back.setImageResource(backSrc);
         title.setText(text);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         title.setTextColor(textColor);
         menu.setImageResource(menuSrc);
         view.setBackgroundResource(background);
-        back.setOnClickListener(backClickListener);
-        menu.setOnClickListener(menuClickListener);
-        title.setOnClickListener(textClickListener);
+
+        if(!backVisibility)
+            back.setVisibility(View.INVISIBLE);
+        if(!menuVisibility)
+            menu.setVisibility(View.INVISIBLE);
+        if(!textVisibility)
+            title.setVisibility(View.INVISIBLE);
+
+            back.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (backClickListener != null)
+                        backClickListener.onClick(v);
+                }
+            });
+            menu.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (menuClickListener != null)
+                        menuClickListener.onClick(v);
+                }
+            });
+            title.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (textClickListener != null)
+                        textClickListener.onClick(v);
+                }
+            });
     }
-    public void setBackSrc(int resId){
-        if(back!=null)
+    public void setBackVisibility(int visibility){
+        back.setVisibility(visibility);
+    }
+    public void setMenuVisibility(int visibility){
+        menu.setVisibility(visibility);
+    }
+    public void setTitleVisibility(int visibility){
+        title.setVisibility(visibility);
+    }
+    public void setBackSrc(int resId) {
+        if (back != null)
             back.setImageResource(resId);
     }
-    public void setBackSrc(Drawable drawable){
-        if(back!=null)
+
+    public void setBackSrc(Drawable drawable) {
+        if (back != null)
             back.setImageDrawable(drawable);
     }
-    public void setBackSrc(Bitmap bitmap){
-        if(back!=null)
+
+    public void setBackSrc(Bitmap bitmap) {
+        if (back != null)
             back.setImageBitmap(bitmap);
     }
-    public void setMenuSrc(int resId){
-        if(menu!=null)
+
+    public void setMenuSrc(int resId) {
+        if (menu != null)
             menu.setImageResource(resId);
     }
-    public void setMenuSrc(Drawable drawable){
-        if(menu!=null)
+
+    public void setMenuSrc(Drawable drawable) {
+        if (menu != null)
             menu.setImageDrawable(drawable);
     }
-    public void setMenuSrc(Bitmap bitmap){
-        if(menu!=null)
+
+    public void setMenuSrc(Bitmap bitmap) {
+        if (menu != null)
             menu.setImageBitmap(bitmap);
     }
-    public void setTitleText(String textTitle){
-        if(title!=null)
+
+    public void setTitleText(String textTitle) {
+        if (title != null)
             title.setText(textTitle);
     }
-    public void setTitleColor(int color){
-        if(title!=null)
-        title.setTextColor(color);
+
+    public void setTitleColor(int color) {
+        if (title != null)
+            title.setTextColor(color);
     }
-    public void setTitleSize(float size){
-        if(title!=null)
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
+
+    public void setTitleSize(float size) {
+        if (title != null)
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
-    public void setOnBackClickListener(OnClickListener backClickListener){
-        this.backClickListener=backClickListener;
+
+    public void setOnBackClickListener(OnClickListener backClickListener) {
+        this.backClickListener = backClickListener;
     }
-    public void setOnTextClickListener(OnClickListener textClickListener){
-        this.textClickListener=textClickListener;
+
+    public void setOnTextClickListener(OnClickListener textClickListener) {
+        this.textClickListener = textClickListener;
     }
-    public void setOnMenuClickListener(OnClickListener menuClickListener){
-        this.menuClickListener=menuClickListener;
+
+    public void setOnMenuClickListener(OnClickListener menuClickListener) {
+        this.menuClickListener = menuClickListener;
     }
 }

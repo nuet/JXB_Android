@@ -6,6 +6,8 @@
     <string name="financing">理财</string>
     <string name="loan">借款</string>
     <string name="mine">我的</string>
+
+    <string name="more">更多</string>
     <!--注册或登陆 -->
     <string name="login_title">注册或登陆</string>
     <!--理财-->
