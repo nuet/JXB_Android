@@ -16,8 +16,7 @@ public class JWebView extends WebView {
         super(context, attrs);
     }
 
-    @Override
-    public void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
+    public void onScrollChanged(int l, int t) {
+        super.onScrollChanged(l, t, l, t);
     }
 }

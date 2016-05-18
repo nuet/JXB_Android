@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.view.JWebView;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import butterknife.Bind;
@@ -37,6 +38,7 @@ public class WebViewActivity extends WebBaseActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl(url);
+        ((JWebView)webView).onScrollChanged(webView.getScrollX(), webView.getScrollY());
         topMenuBar.setTitleText(title);
         topMenuBar.setOnBackClickListener(new View.OnClickListener() {
             @Override
