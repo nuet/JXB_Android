@@ -4,11 +4,14 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.adapter.LoopFragmentPagerAdapter;
+import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +20,9 @@ import java.util.List;
 public class LoopViewPager extends JViewPager {
     private OnPageChangeListener changeListener;
     private int count;
+    private long time;
+    private boolean isTouch = false;
+    private boolean openTimer;
 
     public LoopViewPager(Context context) {
         super(context);
@@ -26,60 +32,94 @@ public class LoopViewPager extends JViewPager {
         super(context, attrs);
     }
 
-    public void addLoopViews(View... views) {
-        this.count = views.length;
 
+
+    private Runnable action = new Runnable() {
+        @Override
+        public void run() {
+            if (!isTouch)
+                setCurrentItem(getCurrentItem() + 1);
+            if (openTimer)
+                setLoopTimer(time);
+        }
+    };
+
+    public void setLoopTimer(long time) {
+        this.time = time;
+        openTimer = true;
+        postDelayed(action, time);
+    }
+    public void openLoopTimer(){
+        if(time>0 && !openTimer)
+            setLoopTimer(time);
+    }
+    public void cancelLoopTimer() {
+        this.openTimer = false;
     }
 
-    public void addLoopViews(Fragment... fragments) {
-        this.count = fragments.length;
-        if (count > 1)
-            setAdapter(new LoopFragmentPagerAdapter(((FragmentActivity) getContext()).getSupportFragmentManager(), this, fragments));
-        else
-            setAdapter(new FragmentViewPageAdapter(((FragmentActivity) getContext()).getSupportFragmentManager(), fragments));
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        isTouch=false;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                isTouch = true;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                isTouch = true;
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+    public  void addLoopImageUrl(List<String> urls){
+        count=urls.size();
+        setAdapter(new LoopViewPagerAdapter(getContext(),urls));
         pagerChangeListener();
+        super.setOffscreenPageLimit(count);
     }
+    public  void addLoopImageUrl(String... us){
+        List<String> urls=new ArrayList<>();
+        for(String u:us){
+            urls.add(u);
+        }
+        addLoopImageUrl(urls);
+    }
+
+
 
     @Override
     public void setOffscreenPageLimit(int limit) {
 
     }
 
-    public void addLoopViews(List<Object> objectList) {
-        Object[] objects = objectList.toArray();
-        if (objects instanceof View[])
-            addLoopViews((View[]) objects);
-        if (objects instanceof Fragment[])
-            addLoopViews((Fragment[]) objects);
-    }
+
 
     public void setOnLoopPagerChangeListener(OnPageChangeListener changeListener) {
         this.changeListener = changeListener;
     }
 
     private void pagerChangeListener() {
-//        setCurrentItem(1);
+        setCurrentItem(1);
         setOnPageChangeListener(new OnPageChangeListener() {
-//            private int index(int i) {
-//                if (i == 0)
-//                    i = count - 1;
-//                else if (i == count + 1)
-//                    i = 0;
-//                else
-//                    i--;
-//                return i;
-//            }
+            private int index(int i) {
+                if (i == 0)
+                    i = count - 1;
+                else if (i == count + 1)
+                    i = 0;
+                else
+                    i--;
+                return i;
+            }
 
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-//                if (i == 0 && i1 == 0) {
-//                    setCurrentItem(count, false);
-//                }
-//                if (i == getAdapter().getCount()-1 && i1 == 0) {
-//                    setCurrentItem(1, false);
-//                }
-//                if(changeListener!=null)
-//                changeListener.onPageScrolled(index(i),v,i1);
+                if (i == 0 && i1 == 0) {
+                    setCurrentItem(count, false);
+                }
+                if (i == getAdapter().getCount() - 1 && i1 == 0) {
+                    setCurrentItem(1, false);
+                }
+                if (changeListener != null)
+                    changeListener.onPageScrolled(index(i), v, i1);
             }
 
             @Override

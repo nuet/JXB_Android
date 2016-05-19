@@ -8,9 +8,7 @@
     android:id="@+id/top_menu_bar"
     style="@style/topMenu"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    menuitem:backSrc="@mipmap/ic_launcher"
-    menuitem:menuSrc="@mipmap/topmenu_more">
+    android:layout_height="wrap_content">
 
 </com.lenso.jixiangbao.view.TopMenuBar>
     <LinearLayout

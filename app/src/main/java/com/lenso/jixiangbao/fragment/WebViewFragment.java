@@ -9,7 +9,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.lenso.jixiangbao.api.JSInterface;
-import com.lenso.jixiangbao.view.JWebView;
 
 /**
  * Created by king on 2016/5/18.
@@ -27,7 +26,6 @@ public class WebViewFragment extends WebBaseFragment {
     public void webViewLoader(String url){
         WebView webView = getWebView(toString());
         webView.loadUrl(url);
-        ((JWebView)webView).onScrollChanged(webView.getScrollX(), webView.getScrollY());
     }
     public WebView getWebView(){
         return getWebView(toString());

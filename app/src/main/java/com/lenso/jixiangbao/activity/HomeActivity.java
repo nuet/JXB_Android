@@ -182,6 +182,7 @@ public class HomeActivity extends BaseActivity {
         if(moreOpen){
             if(vpHome!=null)
                 vpHome.setCurrentItem(currentItem);
+            return;
         }
         super.onBackPressed();
     }
