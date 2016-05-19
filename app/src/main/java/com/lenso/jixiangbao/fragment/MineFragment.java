@@ -36,7 +36,32 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_headpic, R.id.tv_username, R.id.usertype, R.id.fl_message, R.id.ll_ljty, R.id.ll_tjyj, R.id.ll_qd, R.id.ll_jf, R.id.btn_tx, R.id.btn_cz, R.id.ll_dsze, R.id.ll_zjgk, R.id.ll_wdtz, R.id.ll_zqzr, R.id.ll_wdjk, R.id.ll_tyb, R.id.ll_zhxx})
+    @OnClick({R.id.iv_headpic,
+            R.id.tv_username,
+            R.id.usertype,
+            R.id.fl_message,
+            R.id.ll_ljty,
+            R.id.tv_ljty1,
+            R.id.tv_ljty2,
+            R.id.btn_ljty,
+            R.id.ll_tjyj,
+            R.id.ib_tjyj,
+            R.id.tv_tjyj,
+            R.id.ll_qd,
+            R.id.ib_qd,
+            R.id.tv_qd,
+            R.id.ll_jf,
+            R.id.ib_jf,
+            R.id.tv_jf,
+            R.id.btn_tx,
+            R.id.btn_cz,
+            R.id.ll_dsze,
+            R.id.ll_zjgk,
+            R.id.ll_wdtz,
+            R.id.ll_zqzr,
+            R.id.ll_wdjk,
+            R.id.ll_tyb,
+            R.id.ll_zhxx})
     public void onClick(View view) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
@@ -62,19 +87,28 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_ljty:
+            case R.id.tv_ljty1:
+            case R.id.tv_ljty2:
+            case R.id.btn_ljty:
                 intent.putExtra(H5_URL, HTMLInterface.LJTY);
                 intent.putExtra(H5_TITLE, "体验宝");
                 startActivity(intent);
                 break;
             case R.id.ll_tjyj:
+            case R.id.ib_tjyj:
+            case R.id.tv_tjyj:
                 intent.putExtra(H5_URL, HTMLInterface.TJYJ);
                 intent.putExtra(H5_TITLE, "推荐有奖");
                 startActivity(intent);
                 break;
             case R.id.ll_qd:
+            case R.id.ib_qd:
+            case R.id.tv_qd:
                 showToast("签到成功");
                 break;
             case R.id.ll_jf:
+            case R.id.ib_jf:
+            case R.id.tv_jf:
                 intent.putExtra(H5_URL, HTMLInterface.JF);
                 intent.putExtra(H5_TITLE, "积分商城");
                 startActivity(intent);

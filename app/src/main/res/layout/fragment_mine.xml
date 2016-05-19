@@ -95,6 +95,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_ljty1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -103,6 +104,7 @@
                         android:textSize="30sp" />
 
                     <TextView
+                        android:id="@+id/tv_ljty2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -112,6 +114,7 @@
                         android:textSize="15sp" />
 
                     <Button
+                        android:id="@+id/btn_ljty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -141,6 +144,7 @@
                         android:padding="5dp">
 
                         <ImageButton
+                            android:id="@+id/ib_tjyj"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -148,6 +152,7 @@
                             android:src="@mipmap/minefragment_tj" />
 
                         <TextView
+                            android:id="@+id/tv_tjyj"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="推荐有奖"
@@ -172,6 +177,7 @@
                         android:padding="5dp">
 
                         <ImageButton
+                            android:id="@+id/ib_qd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -179,6 +185,7 @@
                             android:src="@mipmap/minefragment_qd" />
 
                         <TextView
+                            android:id="@+id/tv_qd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="签到"
@@ -203,6 +210,7 @@
                         android:padding="5dp">
 
                         <ImageButton
+                            android:id="@+id/ib_jf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -210,6 +218,7 @@
                             android:src="@mipmap/minefragment_jf" />
 
                         <TextView
+                            android:id="@+id/tv_jf"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="积分"
