@@ -56,6 +56,11 @@
 
 </body>
 <script>
+    $("input:checkbox").click(function(){
+        if($(this).is(":checked")){
+            alert($(this).attr("name"));
+        }
+    })
 
 </script>
 </html>

@@ -101,6 +101,7 @@
 </body>
 <script>
     function bindEvent () {
+
         mc = new Hammer.Manager(document.body);
         mc.add(new Hammer.Tap());
         mc.on("tap", function (e) {
@@ -110,8 +111,8 @@
                 api.open("关于我们","http://meishusheng.len.so/assets/aboutus.html");
             }
             if(onurl=="setmessage"){
-                //api.open("消息设置","http://meishusheng.len.so/assets/setmessage.html");
-                api.open("消息设置","http://meishusheng.len.so/assets/buy.html");
+                api.open("消息设置","http://meishusheng.len.so/assets/setmessage.html");
+
             }
             if(onurl=="novice-sail"){
                 api.open("新手起航","http://meishusheng.len.so/assets/novice-sail.html");
