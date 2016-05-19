@@ -70,7 +70,8 @@
         mc.on("tap", function (e) {
             var onurl=$(e.target).attr("data");
             if(onurl=="website"){
-                window.location.href="http://jixiangbao.net";
+
+                api.open("官方网站","http://jixiangbao.net/index.html");
             }
 
 
