@@ -13,6 +13,11 @@
     <title>更多</title>
 </head>
 <style>
+    window,html,body{
+        overflow-x:hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        overflow: scroll !important;
+    }
     .modal{
         text-align: center;
     }
@@ -102,24 +107,23 @@
 
             var onurl=$(e.target).attr("data");
             if(onurl=="aboutus"){
-                window.location.href=$(e.target).attr("data")+".html";
+                api.open("关于我们","http://meishusheng.len.so/assets/aboutus.html");
             }
             if(onurl=="setmessage"){
-                window.location.href=$(e.target).attr("data")+".html";
+                //api.open("消息设置","http://meishusheng.len.so/assets/setmessage.html");
+                api.open("消息设置","http://meishusheng.len.so/assets/buy.html");
             }
             if(onurl=="novice-sail"){
-
-                api.open("新手起航","file:///android_asset/novice-sail.html");
-             // window.location.href=$(e.target).attr("data")+".html";
+                api.open("新手起航","http://meishusheng.len.so/assets/novice-sail.html");
             }
             if(onurl=="top-activities"){
-                window.location.href=$(e.target).attr("data")+".html";
+                api.open("热门活动","http://meishusheng.len.so/assets/top-activities.html");
             }
             if(onurl=="latest-news"){
-                window.location.href=$(e.target).attr("data")+".html";
+                api.open("最新动态","http://meishusheng.len.so/assets/latest-news.html");
             }
             if(onurl=="introduction"){
-                window.location.href=$(e.target).attr("data")+".html";
+                api.open("平台介绍","http://meishusheng.len.so/assets/introduction.html");
             }
 
 
