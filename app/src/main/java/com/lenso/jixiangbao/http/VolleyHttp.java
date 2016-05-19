@@ -54,8 +54,7 @@ public class VolleyHttp {
 
     private boolean isInit() {
         if (queue == null || mCache == null) {
-            Log.e(TAG, "No init,please init first!");
-            return false;
+            throw new RuntimeException("No init,please init first!");
         }
         return true;
     }
@@ -147,13 +146,14 @@ public class VolleyHttp {
     }
 
     public void imageLoader(String url, final ImageView view, Options opt) {
+        isInit();
         final Options options;
         if(opt==null) {
             options = new Options();
         }else{
             options=opt;
         }
-        ImageLoader imageLoader = new ImageLoader(queue, options.cacheInMemory?mCache:null);
+        ImageLoader imageLoader = new ImageLoader(queue, mCache);
         ImageLoader.ImageListener listener = new ImageLoader.ImageListener() {
 
             @Override
@@ -182,48 +182,7 @@ public class VolleyHttp {
             imageLoader.get(url, listener, options.width, options.height);
     }
 
-    public class Options {
-        private ImageProcessing imageProcessing;
-        private int width;
-        private int height;
-        private int errImage;
-        private int defImage;
-        private boolean cacheInMemory;
 
-        public Options() {
-            width = 0;
-            height = 0;
-            cacheInMemory=true;
-        }
-
-        public void cacheInMemory(boolean cacheInMemory) {
-            this.cacheInMemory = cacheInMemory;
-        }
-
-        /**
-         * image processing
-         * @param imageProcessing
-         */
-        public void imageProcessing(ImageProcessing imageProcessing) {
-            this.imageProcessing = imageProcessing;
-        }
-
-        public void width(int width) {
-            this.width = width;
-        }
-
-        public void height(int height) {
-            this.height = height;
-        }
-
-        public void errImage(int resId) {
-            this.errImage = resId;
-        }
-
-        public void defImage(int resId) {
-            this.defImage = resId;
-        }
-    }
 
     private class BitmapCache implements ImageLoader.ImageCache {
         private LruCache<String, Bitmap> cache;
@@ -242,14 +201,14 @@ public class VolleyHttp {
             if (cache == null || s == null || s.equals(""))
                 return null;
             Bitmap bitmap = cache.get(s);
-            if (bitmap.isRecycled())
+            if (bitmap==null || bitmap.isRecycled())
                 bitmap = null;
             return bitmap;
         }
 
         @Override
         public void putBitmap(String s, Bitmap bitmap) {
-            if (cache == null || s == null || s.equals("") || bitmap.isRecycled())
+            if (cache == null || s == null || s.equals("") )
                 return;
             cache.put(s, bitmap);
         }

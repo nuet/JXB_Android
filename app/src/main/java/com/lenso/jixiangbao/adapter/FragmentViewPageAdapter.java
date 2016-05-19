@@ -17,7 +17,7 @@ public class FragmentViewPageAdapter extends FragmentStatePagerAdapter{
         super(fm);
         this.fragmentList=fragmentList;
     }
-    public FragmentViewPageAdapter(FragmentManager fm, Fragment[] fragments) {
+    public FragmentViewPageAdapter(FragmentManager fm, Fragment... fragments) {
         super(fm);
         fragmentList= new ArrayList<>();
         for(Fragment f:fragments){

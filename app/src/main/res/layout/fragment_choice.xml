@@ -11,10 +11,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
+            <com.lenso.jixiangbao.view.LoopViewPager
+                android:id="@+id/lvp_banner"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="轮播图"/>
+                android:layout_height="200dp">
+
+            </com.lenso.jixiangbao.view.LoopViewPager>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +48,7 @@
             <com.lenso.jixiangbao.view.LoopViewPager
                 android:id="@+id/vp_choice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="500dp">
 
             </com.lenso.jixiangbao.view.LoopViewPager>
             <include layout="@layout/item_safe_foot"/>

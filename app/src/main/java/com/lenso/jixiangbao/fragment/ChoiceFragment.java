@@ -1,8 +1,10 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,9 @@ import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
-import com.lenso.jixiangbao.view.TopMenuBar;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +32,8 @@ public class ChoiceFragment extends BaseFragment {
     TextView tvInfo1;
     @Bind(R.id.vp_choice)
     LoopViewPager vpChoice;
+    @Bind(R.id.lvp_banner)
+    LoopViewPager lvpBanner;
 
     @Nullable
     @Override
@@ -45,8 +45,17 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        vpChoice.setDisplayMode(JViewPager.DisplayMode.DISPLAY_BY_EVERY_ONE);
-        vpChoice.addLoopViews(new TestFragment(),new TestFragment());
+        String[] urls=new String[]{"http://cdn.duitang.com/uploads/item/201510/11/20151011195344_aVZRx.jpeg","http://pic43.nipic.com/20140704/11284670_150403334001_2.jpg","http://att2.citysbs.com/fz/bbs_attachments/2010/month_1002/10020312250ba11460cb93cf95.jpg"};
+        lvpBanner.addLoopImageUrl(urls);
+        lvpBanner.setLoopTimer(3000);
+        vpChoice.setAdapter(new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), new TestFragment(), new TestFragment(), new TestFragment(), new TestFragment(), new TestFragment()));
+    }
+
+    @Override
+    public void onPause() {
+        if (lvpBanner!=null)
+            lvpBanner.cancelLoopTimer();
+        super.onPause();
     }
 
     @Override

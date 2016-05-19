@@ -146,7 +146,6 @@ public class JViewPager extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.d("jgm", MeasureSpec.getSize(heightMeasureSpec) + "<<");
         switch (mode) {
             case DISPLAY_BY_FIRST_ONE:
 //                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -173,6 +172,7 @@ public class JViewPager extends ViewPager {
             result = v.getMeasuredWidth();
         if (measureMode == MeasureSpec.AT_MOST)
             result = Math.min(result, measureSize);
+        Log.d("jgm","w"+result);
         return result;
     }
 
@@ -189,18 +189,6 @@ public class JViewPager extends ViewPager {
         return result;
     }
 
-    private int onRemeasureFirstOne(int widthMeasureSpec) {
-        int height = 0;
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-            int h = child.getMeasuredHeight();
-            if (h > height) height = h;
-        }
-        Log.d("jgm", MeasureSpec.getSize(widthMeasureSpec) + "---" + height);
-        return MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-    }
-
     private void onRemeasureEveryOne(int widthMeasureSpec, int heightMeasureSpec) {
         if (getAdapter() == null)
             return;
@@ -210,36 +198,17 @@ public class JViewPager extends ViewPager {
             view = ((Fragment) object).getView();
         if (object instanceof View)
             view = (View) object;
+
         if (view != null) {
-            // measure the first child view with the specified measure spec
-            view.measure(widthMeasureSpec, heightMeasureSpec);
+            int i=getChildCount();
+            Log.d("jgm",i+"--");
+            for(int ii=0;ii<i;ii++){
+                View v = getChildAt(ii);
+                if(v!=null)
+                    v.measure(widthMeasureSpec,heightMeasureSpec);
+            }
         }
         setMeasuredDimension(measureWidth(widthMeasureSpec, view), measureHeight(heightMeasureSpec, view));
     }
 
-//    /**
-//     * Determines the height of this view
-//     *
-//     * @param measureSpec A measureSpec packed into an int
-//     * @param view        the base view with already measured height
-//     * @return The height of the view, honoring constraints from measureSpec
-//     */
-//    private int measureHeight(int measureSpec, View view) {
-//        int result = 0;
-//        int specMode = MeasureSpec.getMode(measureSpec);
-//        int specSize = MeasureSpec.getSize(measureSpec);
-//
-//        if (specMode == MeasureSpec.EXACTLY) {
-//            result = specSize;
-//        } else {
-//            // set the height from the base view if available
-//            if (view != null) {
-//                result = view.getMeasuredHeight();
-//            }
-//            if (specMode == MeasureSpec.AT_MOST) {
-//                result = Math.min(result, specSize);
-//            }
-//        }
-//        return result;
-//    }
 }
