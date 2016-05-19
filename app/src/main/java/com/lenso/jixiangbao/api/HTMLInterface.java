@@ -4,6 +4,14 @@ package com.lenso.jixiangbao.api;
  * Created by Chung on 2016/5/19.
  */
 public class HTMLInterface {
+    public static final String H5_URL = "h5_url";
+    public static final String H5_TITLE = "h5_title";
+
+    /**
+     * LoanFragment HTML 5 API
+     */
+    public static final String LOAN = "http://meishusheng.len.so/assets/borrowdetail.html";
+
     /**
      * MineFragment HTML 5 API
      */

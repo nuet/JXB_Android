@@ -21,8 +21,8 @@ public class RegisterActivity extends BaseActivity {
     @Bind(R.id.et_register_psw)
     EditText etRegisterPsw;
 
-    private static boolean BOXCHECKED = false;
-    private static boolean EYECLICKED = false;
+    private static boolean BOXCHECKED = true;//默认同意
+    private static boolean EYECLICKED = false;//默认暗文
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

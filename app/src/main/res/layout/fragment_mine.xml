@@ -325,7 +325,8 @@
                         android:gravity="left"
                         android:padding="5dp"
                         android:text="待收总额:"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/darker_gray"/>
 
                     <TextView
                         android:layout_width="0dp"
@@ -455,6 +456,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
@@ -493,6 +495,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
