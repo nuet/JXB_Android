@@ -26,4 +26,8 @@ public class JSInterface {
         intent.putExtra(H5_TITLE,title);
         context.startActivity(intent);
     }
+    @JavascriptInterface
+    public void gestureLock(){
+
+    }
 }
