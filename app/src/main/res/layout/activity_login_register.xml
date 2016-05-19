@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:top_menu="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.lenso.jixiangbao.view.TopMenuBar
+        android:id="@+id/top_menu_bar_login_or_register"
         style="@style/topMenu"
-        android:id="@+id/top_menu_bar_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:text="@string/login_title"
+        top_menu:text="注册或登录"
         top_menu:menuVisibility="false">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
@@ -21,18 +21,10 @@
         android:orientation="vertical"
         android:background="@color/lighter_gray">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="center_horizontal"
-            android:text="157****6360"
-            android:textSize="15sp"
-            android:textColor="@color/black"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:background="@color/white">
@@ -42,47 +34,48 @@
                 android:layout_weight="3"
                 android:layout_marginLeft="10dp"
                 android:gravity="left"
-                android:text="登录密码"
+                android:text="手机号码"
                 android:textSize="15sp"
                 android:textColor="#555555"
                 android:background="@null"/>
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="7"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:hint="请输入登录密码"
+                android:hint="请输入手机号码进行注册或登录"
                 android:textSize="15sp"
                 android:singleLine="true"
-                android:inputType="textPassword"
-                android:background="@null"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:layout_marginRight="10dp"
-                android:gravity="right|center_vertical"
-                android:text="找回密码"
-                android:textSize="15sp"
-                android:textColor="@color/blue"
+                android:inputType="phone"
+                android:maxLength="11"
                 android:background="@null"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="吉祥宝金融不会再任何地方泄露您的号码"
+            android:textSize="12sp"/>
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_login_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="确定"
+            android:text="下一步"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:background="@color/orange"/>
-        <include
-            layout="@layout/item_safe_foot">
-
-        </include>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/login_or_register"/>
     </LinearLayout>
+
 </LinearLayout>

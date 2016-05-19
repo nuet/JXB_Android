@@ -79,20 +79,22 @@ public class LaunchActivity extends BaseActivity {
                     viewList.get(i).findViewById(R.id.btn_login_register).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showToast("登陆/注册");
+//                            showToast("登陆/注册");
                             Intent intent = new Intent();
-                            intent.setClass(LaunchActivity.this,HomeActivity.class);
+                            intent.setClass(LaunchActivity.this,LoginOrRegisterActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     });
 
                     viewList.get(i).findViewById(R.id.btn_go_enjoy).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showToast("去体验咯");
+//                            showToast("去体验咯");
                             Intent intent = new Intent();
                             intent.setClass(LaunchActivity.this,HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     });
                 }

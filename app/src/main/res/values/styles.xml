@@ -16,11 +16,11 @@
         <item name="android:clickable">true</item>
     </style>
     <style name="topMenu" >
-        <item name="padding">7dp</item>
+        <item name="padding">5dp</item>
         <item name="textSize">20sp</item>
         <item name="textColor">@android:color/white</item>
         <item name="background">@android:color/holo_blue_dark</item>
-        <item name="backSrc">@mipmap/ic_launcher</item>
+        <item name="backSrc">@mipmap/topmenu_back</item>
         <item name="menuSrc">@mipmap/topmenu_more</item>
     </style>
 </resources>

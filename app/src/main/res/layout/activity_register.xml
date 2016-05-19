@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:top_menu="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lenso.jixiangbao.view.TopMenuBar
+        android:id="@+id/top_menu_bar_register"
+        style="@style/topMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        top_menu:backSrc="@mipmap/topmenu_back"
+        top_menu:menuSrc="@null"
+        top_menu:text="@string/login_title">
+
+    </com.lenso.jixiangbao.view.TopMenuBar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lighter_gray"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="短信已发送至157****6360"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="left"
+                android:text="验证码"
+                android:textColor="#555555"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:background="@null"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:singleLine="true"
+                android:textSize="15sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:text="获取"
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="left"
+                android:text="登录密码"
+                android:textColor="#555555"
+                android:textSize="15sp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:background="@null"
+                android:hint="8位以上数字+字母"
+                android:inputType="textPassword"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:singleLine="true"
+                android:textSize="15sp" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@mipmap/minefragment_tyb"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/orange"
+            android:padding="10dp"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <include layout="@layout/item_safe_foot">
+
+        </include>
+    </LinearLayout>
+</LinearLayout>

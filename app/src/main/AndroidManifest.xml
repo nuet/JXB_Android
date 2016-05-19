@@ -19,6 +19,8 @@
         <activity android:name=".activity.HomeActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".activity.WebViewActivity"/>
+        <activity android:name=".activity.LoginOrRegisterActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
     </application>
 
 </manifest>

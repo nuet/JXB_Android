@@ -356,13 +356,10 @@
                             android:textSize="18sp" />
                     </LinearLayout>
 
-                    <LinearLayout
+                    <ImageView
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/lighter_gray"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
+                        android:background="@color/minedivider" />
 
                     <LinearLayout
                         android:layout_width="0dp"
