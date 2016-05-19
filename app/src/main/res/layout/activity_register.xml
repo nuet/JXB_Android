@@ -10,8 +10,6 @@
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:backSrc="@mipmap/topmenu_back"
-        top_menu:menuSrc="@null"
         top_menu:text="@string/login_title">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
@@ -42,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:background="@null"
                 android:gravity="left"
                 android:text="验证码"
@@ -50,6 +48,7 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/et_register_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
@@ -66,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:background="@null"
                 android:gravity="right|center_vertical"
                 android:text="获取"
@@ -86,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 android:background="@null"
                 android:gravity="left"
                 android:text="登录密码"
@@ -94,9 +93,10 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/et_register_psw"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
+                android:layout_weight="7.5"
                 android:background="@null"
                 android:hint="8位以上数字+字母"
                 android:inputType="textPassword"
@@ -106,11 +106,12 @@
                 android:textSize="15sp" />
 
             <Button
+                android:id="@+id/btn_eye"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@mipmap/minefragment_tyb"
+                android:background="@mipmap/eye"
                 android:gravity="right|center_vertical"
                 android:textColor="@color/blue"
                 android:textSize="15sp" />
@@ -118,11 +119,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <CheckBox
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:gravity="left|center_vertical">
+            <ImageView
+                android:id="@+id/iv_register_agree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:src="@mipmap/checkbox_unchecked"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="注册即视为同意"
+                android:textSize="12sp"
+                android:textColor="@color/darker_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《吉祥宝金融用户协议》"
+                android:textSize="12sp"
+                android:textColor="@color/blue"/>
         </LinearLayout>
         <Button
             android:id="@+id/btn_register"
