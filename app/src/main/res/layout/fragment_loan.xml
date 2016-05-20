@@ -5,12 +5,6 @@
     android:orientation="vertical"
     android:background="@color/lighter_gray">
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:text="借款" />-->
-
     <ListView
         android:id="@+id/lv_loanfragment"
         android:layout_width="match_parent"
