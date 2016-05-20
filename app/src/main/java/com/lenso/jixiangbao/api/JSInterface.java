@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
+import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 
 /**
@@ -28,6 +29,8 @@ public class JSInterface {
     }
     @JavascriptInterface
     public void gestureLock(){
-
+        Log.i("JSInterface","getstureLock() executed!");
+        Intent intent = new Intent(context, GestureSettingsActivity.class);
+        context.startActivity(intent);
     }
 }

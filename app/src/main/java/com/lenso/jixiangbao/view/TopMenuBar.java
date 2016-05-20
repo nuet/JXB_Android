@@ -51,7 +51,7 @@ public class TopMenuBar extends LinearLayout {
         String text = typedArray.getString(R.styleable.TopMenuBar_text);
         float textSize = typedArray.getDimension(R.styleable.TopMenuBar_textSize, getResources().getDimension(R.dimen.menu_title_size));
         int textColor = typedArray.getColor(R.styleable.TopMenuBar_textColor, Color.WHITE);
-        int background = typedArray.getResourceId(R.styleable.TopMenuBar_background, 0);
+        int background = typedArray.getResourceId(R.styleable.TopMenuBar_backgroundColor, 0);
         int backSrc = typedArray.getResourceId(R.styleable.TopMenuBar_backSrc, 0);
         int menuSrc = typedArray.getResourceId(R.styleable.TopMenuBar_menuSrc, 0);
         boolean backVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_backVisibility, true);
