@@ -30,4 +30,5 @@ public class HTMLInterface {
     public static final String TYB = DOMAIN + "/assets/member/experience-detail.html";
     public static final String WDJK = DOMAIN + "/assets/member/loan-record.html";
     public static final String ZHXX = DOMAIN + "/assets/member/account.html";
+    public static final String GD = DOMAIN + "/assets/more.html";
 }

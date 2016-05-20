@@ -58,7 +58,8 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zqzr,
             R.id.ll_wdjk,
             R.id.ll_tyb,
-            R.id.ll_zhxx})
+            R.id.ll_zhxx,
+            R.id.ll_gd})
     public void onClick(View view) {
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
@@ -153,6 +154,11 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_zhxx:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
+                startActivity(intent);
+                break;
+            case R.id.ll_gd:
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD);
+                intent.putExtra(HTMLInterface.H5_TITLE, "更多");
                 startActivity(intent);
                 break;
         }
