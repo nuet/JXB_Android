@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Translucent.NoTitleBar">
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
 
     </style>
     <style name="SplashTheme" parent="android:Theme.Translucent.NoTitleBar">
@@ -20,7 +20,7 @@
         <item name="textSize">20sp</item>
         <item name="textColor">@android:color/white</item>
         <item name="backgroundColor">@android:color/holo_blue_dark</item>
-        <item name="backSrc">@mipmap/topmenu_back</item>
+        <item name="backSrc">@mipmap/top_menu_back</item>
         <item name="menuSrc">@mipmap/topmenu_more</item>
     </style>
 </resources>

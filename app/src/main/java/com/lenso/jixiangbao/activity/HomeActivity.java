@@ -1,6 +1,8 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,10 +11,11 @@ import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
-import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
+import com.lenso.jixiangbao.fragment.ScreenFragment;
 import com.lenso.jixiangbao.fragment.TestFragment;
 import com.lenso.jixiangbao.fragment.WebViewFragment;
 import com.lenso.jixiangbao.view.JViewPager;
@@ -24,6 +27,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import king.dominic.slidingmenu.SlidingMenu;
 
 /**
  * Created by king on 2016/5/10.
@@ -45,26 +49,32 @@ public class HomeActivity extends BaseActivity {
     TopMenuBar topMenuBar;
     private WebViewFragment moreFragment;
     private int currentItem;
-    private boolean moreOpen=false;
+    private boolean moreOpen = false;
+    private SlidingMenu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.android_home);
         ButterKnife.bind(this);
-        initView();
+        initViewPager();
+        initSlidingMenu();
+    }
+
+    public SlidingMenu getSlidingMenu() {
+        return menu;
     }
 
     private void select(int index) {
         if (index <= 3) {
-            moreOpen=false;
+            moreOpen = false;
             menuItem1.setSelected(false);
             menuItem2.setSelected(false);
             menuItem3.setSelected(false);
             menuItem4.setSelected(false);
             currentItem = index;
-        }else{
-            moreOpen=true;
+        } else {
+            moreOpen = true;
         }
         Resources res = getResources();
         switch (index) {
@@ -101,6 +111,28 @@ public class HomeActivity extends BaseActivity {
                 break;
         }
     }
+    private void initSlidingMenu() {
+        menu = new SlidingMenu(this);
+        menu.setMode(SlidingMenu.RIGHT);
+        // 设置触摸屏幕的模式
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        menu.setShadowWidth(50);
+        menu.setShadowDrawable(R.drawable.shadow);
+        Point outSize = new Point();
+        getWindowManager().getDefaultDisplay().getSize(outSize);
+        // 设置滑动菜单视图的宽度
+        menu.setBehindOffset(outSize.x / 4);
+        // 设置渐入渐出效果的值
+        menu.setFadeDegree(0.35f);
+        /**
+         * SLIDING_WINDOW will include the Title/ActionBar in the content
+         * section of the SlidingMenu, while SLIDING_CONTENT does not.
+         */
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        //为侧滑菜单设置布局
+        menu.setMenu(R.layout.layout_sliding_menu);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu,new ScreenFragment()).commit();
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -109,12 +141,14 @@ public class HomeActivity extends BaseActivity {
         super.onWindowFocusChanged(hasFocus);
     }
 
-    private void initView() {
+
+
+    private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
         moreFragment = new WebViewFragment();
         fragments.add(new ChoiceFragment());
         fragments.add(new FinancingFragment());
-        fragments.add(new LoanFragment());
+        fragments.add(new TestFragment());
         fragments.add(new MineFragment());
         fragments.add(moreFragment);
 
@@ -122,7 +156,7 @@ public class HomeActivity extends BaseActivity {
         vpHome.setAdapter(adapter);
         vpHome.setScrollable(false);
         vpHome.setOffscreenPageLimit(5);
-        vpHome.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
@@ -151,10 +185,20 @@ public class HomeActivity extends BaseActivity {
                 vpHome.setCurrentItem(1);
             }
         });
+//        menuItem3.setMenuItemClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                vpHome.setCurrentItem(2);
+//            }
+//        });
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vpHome.setCurrentItem(2);
+                Intent intent =new Intent(HomeActivity.this,WebViewActivity.class);
+                intent.putExtra(JSInterface.H5_TITLE,"吉车贷");
+                intent.putExtra(JSInterface.H5_URL,"http://meishusheng.len.so/assets/borrowdetail.html");
+                intent.putExtra("intent",JSInterface.JI_CHE_DAI);
+                startActivity(intent);
             }
         });
         menuItem4.setMenuItemClickListener(new View.OnClickListener() {
@@ -179,8 +223,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if(moreOpen){
-            if(vpHome!=null)
+        if (moreOpen) {
+            if (vpHome != null)
                 vpHome.setCurrentItem(currentItem);
             return;
         }

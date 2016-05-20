@@ -67,7 +67,7 @@ public class LaunchActivity extends BaseActivity {
         /**
          * 设置监听器
          */
-        vpLaunch.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        vpLaunch.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }

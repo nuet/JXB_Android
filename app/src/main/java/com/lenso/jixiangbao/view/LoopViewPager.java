@@ -1,14 +1,9 @@
 package com.lenso.jixiangbao.view;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
-import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
-import com.lenso.jixiangbao.adapter.LoopFragmentPagerAdapter;
 import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -99,7 +94,7 @@ public class LoopViewPager extends JViewPager {
 
     private void pagerChangeListener() {
         setCurrentItem(1);
-        setOnPageChangeListener(new OnPageChangeListener() {
+        addOnPageChangeListener(new OnPageChangeListener() {
             private int index(int i) {
                 if (i == 0)
                     i = count - 1;

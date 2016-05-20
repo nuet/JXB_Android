@@ -50,5 +50,34 @@ public class WebViewActivity extends WebBaseActivity {
                 finish();
             }
         });
+        menuSet(intent);
+    }
+    private void menuSet(Intent intent){
+        int i=intent.getIntExtra("intent",-1);
+        switch (i){
+            case JSInterface.JI_CHE_DAI:
+                ji_che_dai();
+                break;
+            case JSInterface.CALCULATOR:
+                calculator();
+                break;
+        }
+    }
+    private void calculator(){
+        topMenuBar.setBackSrc(R.mipmap.ic_launcher);
+    }
+    private void ji_che_dai(){
+        topMenuBar.setMenuSrc(R.mipmap.calculator);
+        topMenuBar.setMenuVisibility(View.VISIBLE);
+        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(WebViewActivity.this,WebViewActivity.class);
+                intent.putExtra(JSInterface.H5_TITLE,"计算器");
+                intent.putExtra(JSInterface.H5_URL,"http://meishusheng.len.so/assets/borrow-calculator.html");
+                intent.putExtra("intent",JSInterface.CALCULATOR);
+                startActivity(intent);
+            }
+        });
     }
 }

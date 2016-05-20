@@ -1,5 +1,7 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,11 +13,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.CreditListAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import king.dominic.slidingmenu.SlidingMenu;
 
 /**
  * Created by king on 2016/5/19.
@@ -41,6 +45,7 @@ public class CreditListFragment extends BaseFragment {
     ImageView buttonScreen;
     @Bind(R.id.lv_credit_list)
     ListView lvCreditList;
+    private SlidingMenu menu;
 
     @Nullable
     @Override
@@ -53,7 +58,7 @@ public class CreditListFragment extends BaseFragment {
 
     private void initView(LayoutInflater inflater) {
         lvCreditList.setAdapter(new CreditListAdapter(getActivity(), null));
-        lvCreditList.addFooterView(inflater.inflate(R.layout.item_safe_footer,null));
+        lvCreditList.addFooterView(inflater.inflate(R.layout.item_safe_footer, null));
         unselected();
         buttonDefault.setSelected(true);
     }
@@ -71,7 +76,6 @@ public class CreditListFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
     @OnClick({R.id.button_default, R.id.button_time_limit, R.id.button_annual_rate, R.id.button_screen})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -90,6 +94,14 @@ public class CreditListFragment extends BaseFragment {
                 ivAnnualRate.setVisibility(View.VISIBLE);
                 break;
             case R.id.button_screen:
+                if(menu==null){
+                    menu=((HomeActivity)getActivity()).getSlidingMenu();
+                    if(menu!=null){
+                        menu.getContent();
+                    }
+                }
+                if (menu != null)
+                    menu.showMenu();
                 break;
         }
     }
