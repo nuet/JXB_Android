@@ -16,6 +16,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.view.GestureLockDisplayViews;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
+import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.util.Arrays;
 
@@ -30,19 +31,12 @@ public class GestureSettingsActivity extends AppCompatActivity {
     TextView idTextView;
     @Bind(R.id.id_gestureLockDisplayViews)
     GestureLockDisplayViews idGestureLockDisplayViews;
-    @Bind(R.id.id_textView1)
-    TextView idTextView1;
     @Bind(R.id.id_gestureLockViewGroup)
     GestureLockViewGroup idGestureLockViewGroup;
     @Bind(R.id.id_button)
     Button idButton;
-    @Bind(R.id.ll_show)
-    LinearLayout llShow;
-//    private GestureLockViewGroup mGestureLockViewGroup;
-//    private GestureLockDisplayViews mGestureLockDisplayViews;
-//    private TextView mTextView;
-//    private TextView mTextView1;
-//    private Button mButton;
+    @Bind(R.id.top_menu_bar)
+    TopMenuBar topMenuBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +44,21 @@ public class GestureSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gesture_settings);
         ButterKnife.bind(this);
 
-//        mGestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.id_gestureLockViewGroup);
-//        mGestureLockDisplayViews = (GestureLockDisplayViews) findViewById(R.id.id_gestureLockDisplayViews);
-//        mTextView = (TextView) findViewById(R.id.id_textView);
-//        mTextView1 = (TextView) findViewById(R.id.id_textView1);
-//        mButton = (Button) findViewById(R.id.id_button);
+        topMenuBar.setTitleText("修改手势密码");
+        topMenuBar.setOnBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         idGestureLockViewGroup.setInitMode(true);
         idGestureLockViewGroup.setLimitSelect(5);
 
         idGestureLockViewGroup.setOnGestureLockViewInitModeListener(new GestureLockViewGroup.OnGestureLockViewInitModeListener() {
             @Override
             public void onLimitSelect(int limitSelect, int select) {
-                Toast.makeText(GestureSettingsActivity.this, "最少连接" + limitSelect + "个", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GestureSettingsActivity.this, "最少连接" + limitSelect + "个点", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -84,7 +81,7 @@ public class GestureSettingsActivity extends AppCompatActivity {
                 idGestureLockViewGroup.setInitMode(false);
                 SharedPreferences sp = getSharedPreferences("GestureLockView", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putString("GestureLockView", Arrays.toString(secondAnswer));
+                editor.putString("GestureLock", Arrays.toString(secondAnswer));
                 editor.commit();
                 Toast.makeText(GestureSettingsActivity.this, Arrays.toString(secondAnswer), Toast.LENGTH_SHORT).show();
                 finish();
@@ -96,6 +93,8 @@ public class GestureSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 idGestureLockViewGroup.reDraw();
                 idGestureLockDisplayViews.clearSelect();
+                idTextView.setText("请绘制手势密码");
+                idTextView.setTextColor(Color.parseColor("#669EFF"));
                 startErrorAnim(false);
             }
         });
@@ -104,13 +103,11 @@ public class GestureSettingsActivity extends AppCompatActivity {
 
     private void startErrorAnim(boolean isVisible) {
         if (isVisible) {
-            idTextView1.setVisibility(View.VISIBLE);
-            idTextView1.setText("两次绘制的图形不一致");
-            idTextView1.setTextColor(Color.parseColor("#FF0000"));
-            CommonUtils.startShakeAnim(GestureSettingsActivity.this, idTextView1);
+            idTextView.setText("两次绘制的图形不一致");
+            idTextView.setTextColor(Color.parseColor("#FF0000"));
+            CommonUtils.startShakeAnim(GestureSettingsActivity.this, idTextView);
             idButton.setVisibility(View.VISIBLE);
         } else {
-            idTextView1.setVisibility(View.GONE);
             idButton.setVisibility(View.GONE);
         }
     }

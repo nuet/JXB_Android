@@ -21,6 +21,12 @@ public class JSInterface {
     public JSInterface(Context context){
         this.context=context;
     }
+
+    /**
+     * 打开网页
+     * @param title 标题栏标题
+     * @param url 打开的网址
+     */
     @JavascriptInterface
     public void open(String title,String url){
         Intent intent = new Intent(context, WebViewActivity.class);
@@ -28,18 +34,32 @@ public class JSInterface {
         intent.putExtra(H5_TITLE,title);
         context.startActivity(intent);
     }
+
+    /**
+     * 拨打电话
+     * @param phoneNumber 电话号码
+     */
     @JavascriptInterface
     public void makeCall(String phoneNumber){
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:"+phoneNumber));
         context.startActivity(intent);
     }
+
+    /**
+     * 我的->账户信息->手势密码
+     */
     @JavascriptInterface
     public void gestureLock(){
         Log.i("JSInterface","getstureLock() executed!");
         Intent intent = new Intent(context, GestureSettingsActivity.class);
         context.startActivity(intent);
     }
+
+    /**
+     * 显示吐司
+     * @param msg 要显示的消息
+     */
     @JavascriptInterface
     public void showToast(String msg){
         Toast.makeText(context.getApplicationContext(),msg,Toast.LENGTH_SHORT).show();

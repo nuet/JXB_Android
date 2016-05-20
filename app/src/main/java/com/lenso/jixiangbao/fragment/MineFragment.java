@@ -18,8 +18,6 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/11.
  */
 public class MineFragment extends BaseFragment {
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
