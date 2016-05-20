@@ -5,13 +5,14 @@
     android:orientation="vertical"
     android:background="@color/lighter_gray">
 
-    <ListView
-        android:id="@+id/lv_loanfragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:padding="5dp">
+    <!--此fragment已废弃-->
+    <!--<ListView-->
+        <!--android:id="@+id/lv_loanfragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:divider="@null"-->
+        <!--android:padding="5dp">-->
 
-    </ListView>
+    <!--</ListView>-->
 
 </LinearLayout>
