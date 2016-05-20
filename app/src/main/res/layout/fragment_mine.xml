@@ -636,7 +636,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/item_safe_foot">
+            <include layout="@layout/item_safe_footer">
 
             </include>
             <!--<LinearLayout-->

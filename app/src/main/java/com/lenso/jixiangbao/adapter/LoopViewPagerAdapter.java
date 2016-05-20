@@ -20,12 +20,6 @@ import java.util.List;
 public class LoopViewPagerAdapter extends PagerAdapter {
     private List<View> viewList;
 
-    private LoopViewPagerAdapter(View... views){
-        viewList=new ArrayList<>();
-        for(View v:views){
-            viewList.add(v);
-        }
-    }
     public LoopViewPagerAdapter(Context context,String... us){
         List<String> urls=new ArrayList<>();
         for(String u:us){
@@ -50,6 +44,7 @@ public class LoopViewPagerAdapter extends PagerAdapter {
     }
     private void onCreateView(Context context,VolleyHttp vh,String url,Options opt){
         ImageView view=new ImageView(context);
+        view.setTag(url);
         vh.imageLoader(url,view,opt);
         viewList.add(view);
     }

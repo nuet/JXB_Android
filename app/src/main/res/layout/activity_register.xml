@@ -137,7 +137,7 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <include layout="@layout/item_safe_foot">
+        <include layout="@layout/item_safe_footer">
 
         </include>
     </LinearLayout>

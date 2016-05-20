@@ -2,6 +2,7 @@ package com.lenso.jixiangbao.api;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
@@ -20,10 +21,15 @@ public class JSInterface {
     }
     @JavascriptInterface
     public void open(String title,String url){
-        Log.d("jgm","---"+title+url);
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(H5_URL,url);
         intent.putExtra(H5_TITLE,title);
+        context.startActivity(intent);
+    }
+    @JavascriptInterface
+    public void makeCall(String phoneNumber){
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+phoneNumber));
         context.startActivity(intent);
     }
 }

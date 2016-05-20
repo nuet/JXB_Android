@@ -47,12 +47,11 @@ public class FinancingFragment extends BaseFragment {
         if(adapter==null) {
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(new PreferredFinanceFragment());
-            fragmentList.add(new TestFragment());
-            fragmentList.add(new TestFragment());
+            fragmentList.add(new CreditListFragment());
+            fragmentList.add(new CreditListFragment());
             adapter = new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         }
         jvpFinance.setAdapter(adapter);
-        jvpFinance.setScrollable(false);
         tvMenuPreferredFinance.setSelected(true);
     }
 

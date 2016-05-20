@@ -1,5 +1,9 @@
 package com.lenso.jixiangbao.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -7,6 +11,15 @@ import java.security.NoSuchAlgorithmException;
  * Created by king on 2016/5/10.
  */
 public class CommonUtils {
+    /**
+     * 检测网络是否可用
+     * @return
+     */
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        return ni != null && ni.isConnectedOrConnecting();
+    }
     /**
      * MD5加密
      * @param msg

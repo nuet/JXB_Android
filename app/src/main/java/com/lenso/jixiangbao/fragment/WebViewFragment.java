@@ -21,6 +21,8 @@ public class WebViewFragment extends WebBaseFragment {
         webView.addJavascriptInterface(new JSInterface(getActivity()), "api");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        setWebZoom(webSettings);
+        setNetworkCache(webSettings);
         return webView;
     }
     public void webViewLoader(String url){

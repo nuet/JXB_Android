@@ -52,6 +52,13 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        if (lvpBanner!=null)
+            lvpBanner.openLoopTimer();
+        super.onResume();
+    }
+
+    @Override
     public void onPause() {
         if (lvpBanner!=null)
             lvpBanner.cancelLoopTimer();

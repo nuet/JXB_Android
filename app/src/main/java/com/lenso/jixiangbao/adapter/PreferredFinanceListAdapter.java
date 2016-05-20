@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 
@@ -41,6 +43,8 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
         if(view==null){
             holder=new ViewHolder();
             view=View.inflate(context, R.layout.item_preferredfinance,null);
+            holder.ll_list_item_text2= (LinearLayout) view.findViewById(R.id.ll_list_item_text2);
+            holder.ll_list_item_text2.setVisibility(View.GONE);
             view.setTag(holder);
         }else{
             holder= (ViewHolder) view.getTag();
@@ -48,6 +52,13 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
         return view;
     }
     private static class ViewHolder{
-
+        private LinearLayout ll_list_item_text;
+        private LinearLayout ll_list_item_text2;
+        private TextView tv_list_item_title;
+        private TextView tv_list_item_text;
+        private TextView tv_list_item_content;
+        private TextView tv_list_item_content_1;
+        private TextView tv_list_item_content_2;
+        private TextView tv_list_item_content_2_day;
     }
 }

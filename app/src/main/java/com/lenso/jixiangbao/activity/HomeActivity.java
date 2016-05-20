@@ -105,7 +105,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         if (hasFocus)
-            moreFragment.webViewLoader("file:///android_asset/more.html");
+            moreFragment.webViewLoader("http://meishusheng.len.so/assets/more.html");
         super.onWindowFocusChanged(hasFocus);
     }
 

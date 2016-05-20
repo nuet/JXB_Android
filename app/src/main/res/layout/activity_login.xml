@@ -81,7 +81,7 @@
             android:textColor="@color/white"
             android:background="@color/orange"/>
         <include
-            layout="@layout/item_safe_foot">
+            layout="@layout/item_safe_footer">
 
         </include>
     </LinearLayout>

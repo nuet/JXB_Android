@@ -51,7 +51,7 @@
                 android:layout_height="500dp">
 
             </com.lenso.jixiangbao.view.LoopViewPager>
-            <include layout="@layout/item_safe_foot"/>
+            <include layout="@layout/item_safe_footer"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -62,9 +62,9 @@ public class JViewPager extends ViewPager {
         DISPLAY_BY_FIRST_ONE, DISPLAY_BY_EVERY_ONE, DEFAULT
     }
 
+
     private boolean onTouch(MotionEvent event) {
         switch (event.getAction()) {
-
             case MotionEvent.ACTION_DOWN:
                 isClick = true;
                 previousX = (int) event.getX();
@@ -91,9 +91,7 @@ public class JViewPager extends ViewPager {
                     onSingleTouch();
                 break;
         }
-
-        return super.onTouchEvent(event);
-
+        return  super.onTouchEvent(event);
     }
 
     /**
@@ -135,12 +133,11 @@ public class JViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        if (isCanScroll) {
-            return true;
+        if (  isCanScroll ) {
+            return super.onInterceptTouchEvent(arg0);
         } else {
             return false;
         }
-
     }
 
 

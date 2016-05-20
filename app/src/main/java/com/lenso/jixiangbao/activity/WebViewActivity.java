@@ -1,7 +1,9 @@
 package com.lenso.jixiangbao.activity;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -30,12 +32,16 @@ public class WebViewActivity extends WebBaseActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         String url = intent.getStringExtra(JSInterface.H5_URL);
-        String title=intent.getStringExtra(JSInterface.H5_TITLE);
+        String title = intent.getStringExtra(JSInterface.H5_TITLE);
         WebView webView = getWebView(url);
         flWeb.addView(webView);
         webView.addJavascriptInterface(new JSInterface(this), "api");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        setWebZoom(webSettings);
+        setNetworkCache(webSettings);
+
         webView.loadUrl(url);
         topMenuBar.setTitleText(title);
         topMenuBar.setOnBackClickListener(new View.OnClickListener() {

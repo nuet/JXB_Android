@@ -10,8 +10,6 @@ import android.widget.ListView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.PreferredFinanceListAdapter;
 
-import java.util.ArrayList;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -34,7 +32,7 @@ public class PreferredFinanceFragment extends BaseFragment {
     private void initView(LayoutInflater inflater) {
         PreferredFinanceListAdapter adapter=new PreferredFinanceListAdapter(getActivity(),null);
         lvFragmentPreferredFinance.setAdapter(adapter);
-        View footer=inflater.inflate(R.layout.item_safe_foot,null);
+        View footer=inflater.inflate(R.layout.item_safe_footer,null);
         lvFragmentPreferredFinance.addFooterView(footer);
     }
 
