@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5e1fbb96-5d8f-4f24-9e79-4f63b18a125f" name="meis-jixiangbao" url="http://121.40.214.189">
+        <fileTransfer host="121.40.214.189" port="21" rootFolder="/public_html/assets" password="dfc7dfcfdfc3dfd9dfc2dfdfdfd9dfc2dfcfdfc4dfcddfccdfdedfdadfdfdfd9dfcfdfd8df9bdf98df99" username="meishushengftpuser">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

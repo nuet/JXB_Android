@@ -23,6 +23,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick() {
         Intent intent = new Intent();
         intent.setClass(LoginActivity.this,HomeActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

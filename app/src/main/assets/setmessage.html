@@ -15,6 +15,7 @@
 }
 </style>
 <body>
+
 <form>
     <h5 class="padleft">免打扰时段</h5>
     <section style="padding: 0;">
@@ -22,7 +23,7 @@
             <li ><p>免打扰时段</p><p class="gray">每日22：00点到次日08:00为免打扰时段</p>
 
                     <label class="switch switch-primary florigh">
-                        <input class="switch-input"  type="checkbox">
+                        <input class="switch-input"  type="checkbox" name="a1">
                         <span class="switch-label" data-on="On" data-off="Off"></span>
                         <span class="switch-handle"></span>
                     </label>
@@ -56,10 +57,19 @@
 
 </body>
 <script>
-    $("input:checkbox").click(function(){
+    //app 点击无反应，需要加事件进行渲染
+    $("input:checkbox").change(function () {
+//        api.showTosat($(this).attr("name"));
         if($(this).is(":checked")){
-            alert($(this).attr("name"));
+            var a=$(this).attr("name");
+            $("#test").text(a);
+            $(this).siblings(".switch-handle").css("left","36px");
+            $(this).siblings(".switch-label").css("background","#20a8d8");
+        }else{
+            $(this).siblings(".switch-handle").css("left","1px");
+            $(this).siblings(".switch-label").css("background","#eeeeee");
         }
+
     })
 
 </script>

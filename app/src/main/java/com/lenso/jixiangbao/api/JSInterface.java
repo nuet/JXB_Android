@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
+import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 
 /**
@@ -31,5 +33,15 @@ public class JSInterface {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:"+phoneNumber));
         context.startActivity(intent);
+    }
+    @JavascriptInterface
+    public void gestureLock(){
+        Log.i("JSInterface","getstureLock() executed!");
+        Intent intent = new Intent(context, GestureSettingsActivity.class);
+        context.startActivity(intent);
+    }
+    @JavascriptInterface
+    public void showToast(String msg){
+        Toast.makeText(context.getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
     }
 }

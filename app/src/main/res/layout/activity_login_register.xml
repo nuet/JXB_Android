@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.lenso.jixiangbao.view.TopMenuBar
-        android:id="@+id/top_menu_bar_login_or_register"
+        android:id="@+id/top_menu_bar_login_register"
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -76,6 +76,15 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/login_or_register"/>
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="100dp"
+            android:layout_gravity="center"
+            android:text="测试注册页面"
+            android:textColor="@color/blue"/>
     </LinearLayout>
+
 
 </LinearLayout>
