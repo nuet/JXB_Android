@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
@@ -32,5 +33,9 @@ public class JSInterface {
         Log.i("JSInterface","getstureLock() executed!");
         Intent intent = new Intent(context, GestureSettingsActivity.class);
         context.startActivity(intent);
+    }
+    @JavascriptInterface
+    public void showToast(String msg){
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
     }
 }
