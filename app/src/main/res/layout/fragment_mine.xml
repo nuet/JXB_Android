@@ -17,6 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:background="@color/blue"
                 android:orientation="vertical">
 
@@ -40,12 +41,16 @@
                         android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:padding="5dp"
                         android:text="chung"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
-
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/minedivider" />
                     <TextView
                         android:id="@+id/usertype"
                         android:layout_width="wrap_content"
@@ -90,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
@@ -263,6 +268,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="可用余额(元)"
+                            android:textColor="@color/darker_gray"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -290,7 +296,8 @@
                             android:id="@+id/btn_cz"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
                             android:background="@color/orange"
                             android:paddingBottom="10dp"
                             android:paddingLeft="20dp"
@@ -301,10 +308,10 @@
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                    <!--<View-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1" />-->
 
                 </LinearLayout>
 
@@ -366,6 +373,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="待收本金(元)"
+                            android:textColor="@color/darker_gray"
                             android:textSize="15sp" />
 
                         <TextView
@@ -395,6 +403,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="待收利息(元)"
+                            android:textColor="@color/darker_gray"
                             android:textSize="15sp" />
 
                         <TextView

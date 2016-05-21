@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
 
+    <color name="text">#555555</color> <!-- 暗灰色 -->
+
     <color name="darker_gray">#aaa</color> <!-- 暗灰色 -->
 
     <color name="lighter_gray">#F0F0F0</color> <!-- 亮灰色 -->

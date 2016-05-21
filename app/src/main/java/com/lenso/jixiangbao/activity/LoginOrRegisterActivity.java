@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.view.TopMenuBar;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -14,12 +16,21 @@ import butterknife.OnClick;
  */
 public class LoginOrRegisterActivity extends BaseActivity {
 
+    @Bind(R.id.top_menu_bar_login_register)
+    TopMenuBar topMenuBarLoginRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         ButterKnife.bind(this);
 
+        topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @OnClick({R.id.btn_login_register, R.id.tv_test})

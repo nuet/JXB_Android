@@ -10,7 +10,7 @@
         android:id="@+id/top_menu_bar_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:text="@string/login_title"
+        top_menu:text="登陆"
         top_menu:menuVisibility="false">
 
     </com.lenso.jixiangbao.view.TopMenuBar>

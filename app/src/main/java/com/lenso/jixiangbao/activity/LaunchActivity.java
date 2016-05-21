@@ -83,7 +83,7 @@ public class LaunchActivity extends BaseActivity {
                             Intent intent = new Intent();
                             intent.setClass(LaunchActivity.this,LoginOrRegisterActivity.class);
                             startActivity(intent);
-                            finish();
+//                            finish();
                         }
                     });
 

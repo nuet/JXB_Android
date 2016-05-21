@@ -10,7 +10,7 @@
     tools:context="com.lenso.jixiangbao.activity.GestureSettingsActivity">
 
     <com.lenso.jixiangbao.view.TopMenuBar
-        android:id="@+id/top_menu_bar"
+        android:id="@+id/top_menu_bar_gesture"
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,12 +103,14 @@
 
         <Button
             android:id="@+id/id_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center_horizontal"
             android:text="重 绘"
-            android:background="@mipmap/minefragment_btn"
+            android:background="@mipmap/ch"
             android:visibility="gone" />
     </LinearLayout>
 

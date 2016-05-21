@@ -1,6 +1,7 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -35,17 +36,22 @@ public class GestureSettingsActivity extends AppCompatActivity {
     GestureLockViewGroup idGestureLockViewGroup;
     @Bind(R.id.id_button)
     Button idButton;
-    @Bind(R.id.top_menu_bar)
-    TopMenuBar topMenuBar;
+    @Bind(R.id.top_menu_bar_gesture)
+    TopMenuBar topMenuBarGesture;
+
+    private boolean jsFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gesture_settings);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        String gestureTitle = intent.getStringExtra("gestureTitle");
+        jsFlag = intent.getBooleanExtra("jsFlag", true);
 
-        topMenuBar.setTitleText("修改手势密码");
-        topMenuBar.setOnBackClickListener(new View.OnClickListener() {
+        topMenuBarGesture.setTitleText(gestureTitle);
+        topMenuBarGesture.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -84,7 +90,13 @@ public class GestureSettingsActivity extends AppCompatActivity {
                 editor.putString("GestureLock", Arrays.toString(secondAnswer));
                 editor.commit();
                 Toast.makeText(GestureSettingsActivity.this, Arrays.toString(secondAnswer), Toast.LENGTH_SHORT).show();
-                finish();
+                if(jsFlag){
+                    finish();
+                }else{
+                    Intent intent = new Intent();
+                    intent.setClass(GestureSettingsActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

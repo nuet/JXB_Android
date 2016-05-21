@@ -75,6 +75,8 @@ public class JSInterface {
     public void gestureLock() {
         Log.i("JSInterface", "getstureLock() executed!");
         Intent intent = new Intent(context, GestureSettingsActivity.class);
+        intent.putExtra("gestureTitle","修改手势密码");
+        intent.putExtra("jsFlag",true);
         context.startActivity(intent);
     }
 
