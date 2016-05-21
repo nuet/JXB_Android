@@ -1,17 +1,20 @@
 package com.lenso.jixiangbao.api;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
-
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
+import com.lenso.jixiangbao.activity.GestureUnlockActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 
 /**
@@ -74,9 +77,18 @@ public class JSInterface {
     @JavascriptInterface
     public void gestureLock() {
         Log.i("JSInterface", "getstureLock() executed!");
-        Intent intent = new Intent(context, GestureSettingsActivity.class);
-        intent.putExtra("gestureTitle","修改手势密码");
-        intent.putExtra("jsFlag",true);
+        SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+        String password = sp.getString("GestureLock", "");
+        Intent intent = new Intent();
+//        if(TextUtils.isEmpty(password)){
+//            intent.putExtra("gestureTitle","设置手势密码");
+//            intent.putExtra("jsFlag",true);
+//            intent.setClass(context, GestureSettingsActivity.class);
+//        }else{
+            intent.putExtra("gestureTitle","输入手势密码");
+            intent.putExtra("jsFlag",true);
+            intent.setClass(context, GestureUnlockActivity.class);
+//        }
         context.startActivity(intent);
     }
 

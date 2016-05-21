@@ -46,9 +46,9 @@ public class GestureSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gesture_settings);
         ButterKnife.bind(this);
-        Intent intent = getIntent();
-        String gestureTitle = intent.getStringExtra("gestureTitle");
-        jsFlag = intent.getBooleanExtra("jsFlag", true);
+        Intent intent0 = getIntent();
+        String gestureTitle = intent0.getStringExtra("gestureTitle");
+        jsFlag = intent0.getBooleanExtra("jsFlag", true);
 
         topMenuBarGesture.setTitleText(gestureTitle);
         topMenuBarGesture.setOnBackClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class GestureSettingsActivity extends AppCompatActivity {
             @Override
             public void onSecondGestureSuccess(int[] secondAnswer) {
                 idGestureLockViewGroup.setInitMode(false);
-                SharedPreferences sp = getSharedPreferences("GestureLockView", Activity.MODE_PRIVATE);
+                SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("GestureLock", Arrays.toString(secondAnswer));
                 editor.commit();
@@ -96,6 +96,7 @@ public class GestureSettingsActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(GestureSettingsActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

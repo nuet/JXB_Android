@@ -1,25 +1,34 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.DownTimer;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
+import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.util.Arrays;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Chung on 2016/5/20.
  */
 public class GestureUnlockActivity extends AppCompatActivity {
+    @Bind(R.id.top_menu_bar_gesture_unlock)
+    TopMenuBar topMenuBarGestureUnlock;
+    private boolean jsFlag;
     private GestureLockViewGroup mGestureLockViewGroup;
     private TextView mTextView;
     private DownTimer timer;
@@ -35,25 +44,38 @@ public class GestureUnlockActivity extends AppCompatActivity {
     private static final int CLEAR_MILLS = 1000;
 
     private boolean isFirstSelect = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gesture_unlock);
+        ButterKnife.bind(this);
+
+        Intent intent0 = getIntent();
+        jsFlag = intent0.getBooleanExtra("jsFlag", false);
+
+        topMenuBarGestureUnlock.setTitleText("输入手势密码");
+        topMenuBarGestureUnlock.setOnBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mGestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.id_gestureLockViewGroup_1);
         mTextView = (TextView) findViewById(R.id.id_textView2);
         timer = new DownTimer();//实例化
-        SharedPreferences sp = getSharedPreferences("GestureLockView", Activity.MODE_PRIVATE);
-        String password = sp.getString("GestureLockView", "");
+        SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+        String password = sp.getString("GestureLock", "");
         if (TextUtils.isEmpty(password)) {
-            mGestureLockViewGroup.setAnswer(new int[]{1, 2, 5, 8});
-            mTextView.setText("默认密码是1，2，5，8");
+            Log.e("GestreUnlockActivity", "password  null!!!");
+//            mGestureLockViewGroup.setAnswer(new int[]{1, 2, 5, 8});
+//            mTextView.setText("默认密码是1，2，5，8");
         } else {
             Log.i("format", Arrays.toString(CommonUtils.toIntArray(password)));
             mGestureLockViewGroup.setAnswer(CommonUtils.toIntArray(password));
         }
         mGestureLockViewListener = new GestureLockViewGroup.OnGestureLockViewListener() {
-
             @Override
             public void onUnmatchedExceedBoundary() {
 //                        Toast.makeText(MainActivity.this, "错误5次...",
@@ -75,8 +97,15 @@ public class GestureUnlockActivity extends AppCompatActivity {
 //                                Toast.LENGTH_SHORT).show();
                 if (matched) {
                     mTextView.setText("手势密码正确");
-                    mTextView.setTextColor(Color.parseColor("#00FF00"));
-                    finish();
+                    mTextView.setTextColor(Color.parseColor("#008000"));
+                    if(jsFlag){
+                        Intent intent = new Intent();
+                        intent.putExtra("gestureTitle","修改手势密码");
+                        intent.putExtra("jsFlag",jsFlag);
+                        intent.setClass(GestureUnlockActivity.this, GestureSettingsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 } else {
                     mTextView.setText("手势密码不正确");
                     mTextView.setTextColor(Color.parseColor("#FF0000"));
