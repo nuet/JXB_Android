@@ -3,6 +3,7 @@ package com.lenso.jixiangbao.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,33 @@ public class FinancingFragment extends BaseFragment {
         }
         jvpFinance.setAdapter(adapter);
         tvMenuPreferredFinance.setSelected(true);
+        jvpFinance.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                unSelected();
+                switch (position){
+                    case 0:
+                        tvMenuPreferredFinance.setSelected(true);
+                        break;
+                    case 1:
+                        tvMenuCreditList.setSelected(true);
+                        break;
+                    case 2:
+                        tvMenuTransferZone.setSelected(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -81,7 +109,7 @@ public class FinancingFragment extends BaseFragment {
                 position = 2;
                 break;
         }
-        jvpFinance.setCurrentItem(position, false);
+        jvpFinance.setCurrentItem(position);
         unSelected();
         view.setSelected(true);
     }

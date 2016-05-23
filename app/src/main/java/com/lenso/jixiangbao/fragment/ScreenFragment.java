@@ -10,6 +10,9 @@ import android.widget.ListView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.ScreenListAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,12 +29,20 @@ public class ScreenFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_screen, null);
         ButterKnife.bind(this, view);
-        initView(inflater);
+        initView();
         return view;
     }
 
-    private void initView(LayoutInflater inflater) {
-        lvScreen.setAdapter(new ScreenListAdapter(inflater));
+    private void initView() {
+        List<List<String>> data=new ArrayList<>();
+        List<String> texts=new ArrayList<>();
+        texts.add("hello1");
+        texts.add("hello2");
+        texts.add("hello3");
+        texts.add("hello4");
+        texts.add("hello5");
+        data.add(texts);
+        lvScreen.setAdapter(new ScreenListAdapter(getContext(),data));
     }
 
     @Override

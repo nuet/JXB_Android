@@ -4,17 +4,35 @@
         <attr name="image_src" format="reference"/>
         <attr name="text_content" format="string"/>
     </declare-styleable>
+    <declare-styleable name="ScreenItemView">
+        <attr name="sv_title" format="string"/>
+        <attr name="sv_content" format="string"/>
+        <attr name="sv_arrowSrc" format="reference"/>
+        <attr name="sv_titleSize" format="dimension"/>
+        <attr name="sv_contentSize" format="dimension"/>
+        <attr name="sv_itemTextSize" format="dimension"/>
+        <attr name="sv_titleColor" format="color"/>
+        <attr name="sv_contentColor" format="color"/>
+        <attr name="sv_contentVisibility" format="enum">
+            <enum name="VISIBLE" value="0x00000000"/>
+            <enum name="INVISIBLE" value="0x00000004"/>
+            <enum name="GONE" value="0x00000008"/>
+        </attr>
+        <attr name="sv_itemTextColor" format="reference"/>
+        <attr name="sv_itemTextBackground" format="reference"/>
+    </declare-styleable>
     <declare-styleable name="TopMenuBar">
-        <attr name="backSrc" format="reference"/>
-        <attr name="menuSrc" format="reference"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="text" format="string"/>
-        <attr name="textColor" format="color"/>
-        <attr name="backgroundColor" format="color"/>
-        <attr name="backVisibility" format="boolean"/>
-        <attr name="menuVisibility" format="boolean"/>
-        <attr name="textVisibility" format="boolean"/>
-        <attr name="padding" format="dimension"/>
+        <attr name="tmb_backSrc" format="reference"/>
+        <attr name="tmb_menuSrc" format="reference"/>
+        <attr name="tmb_textSize" format="dimension"/>
+        <attr name="tmb_text" format="string"/>
+        <attr name="tmb_textColor" format="color"/>
+        <attr name="tmb_backgroundColor" format="color"/>
+        <attr name="tmb_backVisibility" format="boolean"/>
+        <attr name="tmb_menuVisibility" format="boolean"/>
+        <attr name="tmb_textVisibility" format="boolean"/>
+        <attr name="tmb_padding" format="dimension"/>
+        <attr name="tmb_paddingTop" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="ProgressWheel">
         <attr name="pwText" format="string" />

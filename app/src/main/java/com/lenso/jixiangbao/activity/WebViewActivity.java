@@ -64,7 +64,7 @@ public class WebViewActivity extends WebBaseActivity {
         }
     }
     private void calculator(){
-        topMenuBar.setBackSrc(R.mipmap.ic_launcher);
+        topMenuBar.setBackSrc(R.mipmap.close);
     }
     private void ji_che_dai(){
         topMenuBar.setMenuSrc(R.mipmap.calculator);

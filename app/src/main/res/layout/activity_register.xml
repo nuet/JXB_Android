@@ -10,8 +10,8 @@
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:menuVisibility="false"
-        top_menu:text="注册">
+        top_menu:tmb_menuVisibility="false"
+        top_menu:tmb_text="注册">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 

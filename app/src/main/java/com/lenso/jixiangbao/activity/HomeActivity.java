@@ -51,6 +51,7 @@ public class HomeActivity extends BaseActivity {
     private int currentItem;
     private boolean moreOpen = false;
     private SlidingMenu menu;
+    private boolean isFirst=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,6 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.android_home);
         ButterKnife.bind(this);
         initViewPager();
-        initSlidingMenu();
     }
 
     public SlidingMenu getSlidingMenu() {
@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void select(int index) {
-        if (index <= 3) {
+        if (index != 2) {
             moreOpen = false;
             menuItem1.setSelected(false);
             menuItem2.setSelected(false);
@@ -93,21 +93,25 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setMenuVisibility(View.VISIBLE);
                 break;
             case 2:
-                menuItem3.setSelected(true);
-                topMenuBar.setTitleText(res.getString(R.string.loan));
+//                menuItem3.setSelected(true);
+//                topMenuBar.setTitleText(res.getString(R.string.loan));
+//                topMenuBar.setVisibility(View.VISIBLE);
+//                topMenuBar.setBackVisibility(View.INVISIBLE);
+//                topMenuBar.setMenuVisibility(View.VISIBLE);
+                topMenuBar.setTitleText(res.getString(R.string.more));
                 topMenuBar.setVisibility(View.VISIBLE);
-                topMenuBar.setBackVisibility(View.INVISIBLE);
-                topMenuBar.setMenuVisibility(View.VISIBLE);
+                topMenuBar.setBackVisibility(View.VISIBLE);
+                topMenuBar.setMenuVisibility(View.INVISIBLE);
                 break;
             case 3:
                 menuItem4.setSelected(true);
                 topMenuBar.setVisibility(View.GONE);
                 break;
             case 4:
-                topMenuBar.setTitleText(res.getString(R.string.more));
-                topMenuBar.setVisibility(View.VISIBLE);
-                topMenuBar.setBackVisibility(View.VISIBLE);
-                topMenuBar.setMenuVisibility(View.INVISIBLE);
+//                topMenuBar.setTitleText(res.getString(R.string.more));
+//                topMenuBar.setVisibility(View.VISIBLE);
+//                topMenuBar.setBackVisibility(View.VISIBLE);
+//                topMenuBar.setMenuVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -136,8 +140,11 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        if (hasFocus)
+        if (hasFocus && isFirst) {
+            isFirst=false;
+            initSlidingMenu();
             moreFragment.webViewLoader("http://meishusheng.len.so/assets/more.html");
+        }
         super.onWindowFocusChanged(hasFocus);
     }
 
@@ -148,9 +155,8 @@ public class HomeActivity extends BaseActivity {
         moreFragment = new WebViewFragment();
         fragments.add(new ChoiceFragment());
         fragments.add(new FinancingFragment());
-        fragments.add(new TestFragment());
-        fragments.add(new MineFragment());
         fragments.add(moreFragment);
+        fragments.add(new MineFragment());
 
         FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
@@ -185,12 +191,6 @@ public class HomeActivity extends BaseActivity {
                 vpHome.setCurrentItem(1);
             }
         });
-//        menuItem3.setMenuItemClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                vpHome.setCurrentItem(2);
-//            }
-//        });
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,7 +210,7 @@ public class HomeActivity extends BaseActivity {
         topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vpHome.setCurrentItem(4);
+                vpHome.setCurrentItem(2);
             }
         });
         topMenuBar.setOnBackClickListener(new View.OnClickListener() {

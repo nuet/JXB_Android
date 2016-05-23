@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
 <LinearLayout
+    android:id="@+id/ll_screen_title"
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:layout_width="match_parent"
@@ -34,10 +35,23 @@
         android:layout_weight="1"
         android:text="重置"/>
 </LinearLayout>
+    <TextView
+        android:id="@+id/tv_screen_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确认"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:background="@color/blue"
+        android:layout_alignParentBottom="true"
+        android:padding="15dp"/>
     <ListView
         android:id="@+id/lv_screen"
+        android:layout_above="@id/tv_screen_ok"
+        android:layout_below="@id/ll_screen_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </ListView>
-</LinearLayout>
+</RelativeLayout>

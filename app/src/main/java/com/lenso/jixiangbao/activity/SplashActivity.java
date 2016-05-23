@@ -2,7 +2,7 @@ package com.lenso.jixiangbao.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.LruCache;
+import android.os.Handler;
 
 import com.lenso.jixiangbao.R;
 
@@ -21,7 +21,12 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         if (hasFocus)
-            init();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    init();
+                }
+            },1000);
     }
 
     private void init() {

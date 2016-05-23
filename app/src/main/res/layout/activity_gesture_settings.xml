@@ -14,8 +14,8 @@
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:menuVisibility="false"
-        top_menu:text="GestureLock">
+        top_menu:tmb_menuVisibility="false"
+        top_menu:tmb_text="GestureLock">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 

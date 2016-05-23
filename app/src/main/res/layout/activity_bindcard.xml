@@ -10,8 +10,8 @@
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:menuSrc="@mipmap/tg"
-        top_menu:text="添加银行卡">
+        top_menu:tmb_menuSrc="@mipmap/tg"
+        top_menu:tmb_text="添加银行卡">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 

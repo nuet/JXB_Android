@@ -10,8 +10,8 @@
         style="@style/topMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        top_menu:menuVisibility="false"
-        top_menu:text="h5">
+        top_menu:tmb_menuVisibility="false"
+        top_menu:tmb_text="h5">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 

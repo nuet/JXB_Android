@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LaunchActivity" />
+        <activity android:name=".activity.LaunchActivity"
+            android:theme="@style/LaunchActivityTheme"/>
         <activity
             android:name=".activity.HomeActivity"
             android:launchMode="singleTask"/>
