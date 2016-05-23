@@ -1,6 +1,7 @@
 package com.lenso.jixiangbao.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,19 +22,29 @@ import java.util.Set;
 public class ScreenListAdapter extends BaseAdapter {
     private final Context context;
     private final Map<String, String> map;
-    private final Map<String,List<String>> data;
+    private final Map<String, List<String>> data;
     private final List<String> keyList;
 
-    public ScreenListAdapter(Context context, Map<String,List<String>> data) {
+    public ScreenListAdapter(Context context, Map<String, List<String>> data) {
         this.context = context;
         this.map = new HashMap<>();
         this.data = data;
-        this.keyList=new ArrayList<>();
+        this.keyList = new ArrayList<>();
         Set<String> keys = data.keySet();
-        for(String key:keys){
-            map.put(key,data.get(key).get(0)+".true");
+        for (String key : keys) {
+            map.put(key, data.get(key).get(0) + ".true");
             keyList.add(key);
         }
+    }
+
+    public void resetScreenList() {
+        for (String key : keyList) {
+            if (map.get(key).indexOf("true")!=-1)
+                map.put(key, data.get(key).get(0) + ".true");
+            else
+                map.put(key, data.get(key).get(0) + ".false");
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -56,12 +67,13 @@ public class ScreenListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = new ScreenItemView(context);
         }
-        ((ScreenItemView) convertView).setScreenArrow(R.mipmap.ic_launcher);
+        ((ScreenItemView) convertView).setScreenArrow(R.mipmap.xl);
         ((ScreenItemView) convertView).setOnScreenItemListener(listener);
-        String info = map.get(position);
+        ((ScreenItemView) convertView).setTitleText(keyList.get(position));
+        String info = map.get(keyList.get(position));
         String text = info.substring(0, info.lastIndexOf("."));
         boolean isUp;
-        if (info.endsWith(".true"))
+        if (info.indexOf("true")!=-1)
             isUp = true;
         else
             isUp = false;

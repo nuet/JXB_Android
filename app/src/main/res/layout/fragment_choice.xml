@@ -21,12 +21,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white">
-                <ImageView
+                <com.lenso.jixiangbao.view.SpeakerView
                     android:id="@+id/iv_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/ic_launcher"
                     android:layout_marginLeft="10dp"/>
                 <TextView
                     android:id="@+id/tv_info_2"

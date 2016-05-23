@@ -1,21 +1,16 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
-import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
-import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
+import com.lenso.jixiangbao.view.SpeakerView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +20,7 @@ import butterknife.ButterKnife;
  */
 public class ChoiceFragment extends BaseFragment {
     @Bind(R.id.iv_info)
-    ImageView ivInfo;
+    SpeakerView ivInfo;
     @Bind(R.id.tv_info_2)
     TextView tvInfo2;
     @Bind(R.id.tv_info_1)
@@ -53,6 +48,7 @@ public class ChoiceFragment extends BaseFragment {
 
     @Override
     public void onResume() {
+        ivInfo.startSpeaker(300);
         if (lvpBanner!=null)
             lvpBanner.openLoopTimer();
         super.onResume();
@@ -60,6 +56,7 @@ public class ChoiceFragment extends BaseFragment {
 
     @Override
     public void onPause() {
+        ivInfo.stopSpeaker();
         if (lvpBanner!=null)
             lvpBanner.cancelLoopTimer();
         super.onPause();

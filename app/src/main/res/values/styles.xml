@@ -21,7 +21,7 @@
         <item name="tmb_padding">5dp</item>
         <item name="tmb_textSize">20sp</item>
         <item name="tmb_textColor">@android:color/white</item>
-        <item name="tmb_backgroundColor">@android:color/holo_blue_dark</item>
+        <item name="tmb_backgroundColor">@color/blue</item>
         <item name="tmb_backSrc">@mipmap/top_menu_back</item>
         <item name="tmb_menuSrc">@mipmap/top_menu_more</item>
     </style>

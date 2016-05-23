@@ -45,35 +45,34 @@ public class TopMenuBar extends LinearLayout {
         viewParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         view.setLayoutParams(viewParams);
         ButterKnife.bind(this);
-        if (attrs == null)
-            return;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TopMenuBar);
-        String text = typedArray.getString(R.styleable.TopMenuBar_tmb_text);
-        float textSize = typedArray.getDimension(R.styleable.TopMenuBar_tmb_textSize, getResources().getDimension(R.dimen.menu_title_size));
-        int textColor = typedArray.getColor(R.styleable.TopMenuBar_tmb_textColor, Color.WHITE);
-        int background = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_backgroundColor, 0);
-        int backSrc = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_backSrc, 0);
-        int menuSrc = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_menuSrc, 0);
-        boolean backVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_backVisibility, true);
-        boolean menuVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_menuVisibility,true);
-        boolean textVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_textVisibility,true);
-        int padding = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_padding, 0);
-        int paddingTop = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_paddingTop, 0);
-        view.setPadding(view.getPaddingLeft(),view.getPaddingTop()+padding+paddingTop,view.getPaddingRight(),view.getPaddingBottom()+padding);
-        back.setImageResource(backSrc);
-        title.setText(text);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        title.setTextColor(textColor);
-        menu.setImageResource(menuSrc);
-        view.setBackgroundResource(background);
+        if (attrs != null) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TopMenuBar);
+            String text = typedArray.getString(R.styleable.TopMenuBar_tmb_text);
+            float textSize = typedArray.getDimension(R.styleable.TopMenuBar_tmb_textSize, getResources().getDimension(R.dimen.menu_title_size));
+            int textColor = typedArray.getColor(R.styleable.TopMenuBar_tmb_textColor, Color.WHITE);
+            int background = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_backgroundColor, 0);
+            int backSrc = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_backSrc, 0);
+            int menuSrc = typedArray.getResourceId(R.styleable.TopMenuBar_tmb_menuSrc, 0);
+            boolean backVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_backVisibility, true);
+            boolean menuVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_menuVisibility, true);
+            boolean textVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_textVisibility, true);
+            int padding = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_padding, 0);
+            int paddingTop = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_paddingTop, 0);
+            view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + padding + paddingTop, view.getPaddingRight(), view.getPaddingBottom() + padding);
+            back.setImageResource(backSrc);
+            title.setText(text);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+            title.setTextColor(textColor);
+            menu.setImageResource(menuSrc);
+            view.setBackgroundResource(background);
 
-        if(!backVisibility)
-            back.setVisibility(View.INVISIBLE);
-        if(!menuVisibility)
-            menu.setVisibility(View.INVISIBLE);
-        if(!textVisibility)
-            title.setVisibility(View.INVISIBLE);
-
+            if (!backVisibility)
+                back.setVisibility(View.INVISIBLE);
+            if (!menuVisibility)
+                menu.setVisibility(View.INVISIBLE);
+            if (!textVisibility)
+                title.setVisibility(View.INVISIBLE);
+        }
             back.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

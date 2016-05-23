@@ -5,6 +5,7 @@
     android:orientation="vertical">
     <RelativeLayout
         android:padding="15dp"
+        android:background="@drawable/shape_screen_item_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -29,13 +30,14 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="5dp"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/ll_screen_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/ll_screen_item_1"
