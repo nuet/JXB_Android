@@ -52,8 +52,8 @@
                 android:textColor="@color/text"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/et_bindcard_bank"
+            <Spinner
+                android:id="@+id/sp_bindcard_bank"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
