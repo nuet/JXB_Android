@@ -105,6 +105,9 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void changeHeadPic() {
+
+        showToast("修改头像");
+
         /**
          * 显示popupWindow
          */
@@ -136,7 +139,7 @@ public class JSInterface {
         take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("照相");
+                showToast("拍照");
             }
         });
         Button choose = (Button) view.findViewById(R.id.pop_btn_choose_photo);
@@ -162,14 +165,13 @@ public class JSInterface {
             }
         });
 
-//        Toast.makeText(context.getApplicationContext(), "修改头像", Toast.LENGTH_SHORT).show();
     }
 
     /**
      * 我的->账户信息->退出登录
      */
     public void logout() {
-        Toast.makeText(context.getApplicationContext(), "退出登录", Toast.LENGTH_SHORT).show();
+        showToast("退出登录");
     }
 
     /**
