@@ -116,9 +116,9 @@ public class LaunchActivity extends BaseActivity {
         for (int i = 0; i < viewList.size(); i++) {
             dots[i] = (ImageView) llLaunch.getChildAt(i);
             if (i == 0) {
-                dots[i].setEnabled(true);// 设为选中
+                dots[i].setSelected(true);// 设为选中
             } else {
-                dots[i].setEnabled(false);// 设为灰色
+                dots[i].setSelected(false);// 设为为选中
             }
         }
         currentDot = 0;
@@ -130,8 +130,8 @@ public class LaunchActivity extends BaseActivity {
      * @param position ViewPager当前位置
      */
     private void setCurrentDot(int position) {
-        dots[currentDot].setEnabled(false);//改变上一页状态
-        dots[position].setEnabled(true);//设置当前页状态
+        dots[currentDot].setSelected(false);//改变上一页状态
+        dots[position].setSelected(true);//设置当前页状态
         currentDot = position;//重设当前导航点位置
     }
 
