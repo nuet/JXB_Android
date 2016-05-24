@@ -144,15 +144,15 @@ public class JViewPager extends ViewPager {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         switch (mode) {
-            case DISPLAY_BY_FIRST_ONE:
-//                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//                getChildAt(0).measure(widthMeasureSpec,heightMeasureSpec);
-//                setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
-                break;
             case DISPLAY_BY_EVERY_ONE:
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
                 onRemeasureEveryOne(widthMeasureSpec, heightMeasureSpec);
                 break;
+            case DISPLAY_BY_FIRST_ONE:
+//                super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//                getChildAt(0).measure(widthMeasureSpec,heightMeasureSpec);
+//                setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
+//                break;
             case DEFAULT:
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
                 break;

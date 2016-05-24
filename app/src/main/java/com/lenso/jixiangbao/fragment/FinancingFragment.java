@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.view.JViewPager;
-import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,10 @@ public class FinancingFragment extends BaseFragment {
     TextView tvMenuTransferZone;
     @Bind(R.id.jvp_finance)
     JViewPager jvpFinance;
+    @Bind(R.id.view_line)
+    View viewLine;
     private FragmentViewPageAdapter adapter;
+    private int width;
 
     @Nullable
     @Override
@@ -45,7 +49,13 @@ public class FinancingFragment extends BaseFragment {
     }
 
     private void initView() {
-        if(adapter==null) {
+        Point outSize = new Point();
+        getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
+        width = outSize.x / 3;
+        ViewGroup.LayoutParams lp = viewLine.getLayoutParams();
+        lp.width = width;
+        viewLine.setLayoutParams(lp);
+        if (adapter == null) {
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(new PreferredFinanceFragment());
             fragmentList.add(new CreditListFragment());
@@ -55,15 +65,18 @@ public class FinancingFragment extends BaseFragment {
         jvpFinance.setAdapter(adapter);
         tvMenuPreferredFinance.setSelected(true);
         jvpFinance.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) viewLine.getLayoutParams();
+                lp.leftMargin = (int) (position*width+positionOffset * width);
+                viewLine.setLayoutParams(lp);
             }
 
             @Override
             public void onPageSelected(int position) {
                 unSelected();
-                switch (position){
+                switch (position) {
                     case 0:
                         tvMenuPreferredFinance.setSelected(true);
                         break;
@@ -78,7 +91,7 @@ public class FinancingFragment extends BaseFragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                logDebug(state + "++");
             }
         });
     }

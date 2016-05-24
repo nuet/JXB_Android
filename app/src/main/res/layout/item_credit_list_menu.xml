@@ -38,9 +38,8 @@
                 android:layout_centerInParent="true"
                 />
             <ImageView
-                android:layout_margin="5dp"
                 android:id="@+id/iv_time_limit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_time_limit"
                 android:src="@mipmap/sx2"/>
@@ -60,9 +59,8 @@
                 android:layout_centerInParent="true"
                 />
             <ImageView
-                android:layout_margin="5dp"
                 android:id="@+id/iv_annual_rate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_annual_rate"
                 android:src="@mipmap/sx2"/>

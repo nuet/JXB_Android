@@ -2,7 +2,9 @@ package com.lenso.jixiangbao.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
 
@@ -120,13 +122,13 @@ public class LoopViewPager extends JViewPager {
             @Override
             public void onPageSelected(int i) {
                 if (changeListener != null)
-                    changeListener.onPageSelected(i);
+                    changeListener.onPageSelected(index(i));
             }
 
             @Override
             public void onPageScrollStateChanged(int i) {
                 if (changeListener != null)
-                    changeListener.onPageScrollStateChanged(i);
+                    changeListener.onPageScrollStateChanged(index(i));
             }
         });
     }

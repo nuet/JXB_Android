@@ -2,55 +2,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/lighter_gray">
+    android:background="@color/lighter_gray"
+    android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.lenso.jixiangbao.view.LoopViewPager
-                android:id="@+id/lvp_banner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
 
-            </com.lenso.jixiangbao.view.LoopViewPager>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.lenso.jixiangbao.view.LoopViewPager
+                    android:id="@+id/lvp_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                </com.lenso.jixiangbao.view.LoopViewPager>
+
+                <LinearLayout
+                    android:id="@+id/ll_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </FrameLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white">
+
                 <com.lenso.jixiangbao.view.SpeakerView
                     android:id="@+id/iv_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp" />
+
                 <TextView
                     android:id="@+id/tv_info_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:padding="5dp"
-                    android:layout_alignParentRight="true"
-                    android:text="累计投资：1000亿"/>
+                    android:text="累计投资：1000亿" />
+
                 <TextView
                     android:id="@+id/tv_info_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:padding="5dp"
                     android:layout_toLeftOf="@id/tv_info_2"
-                    android:text="累计投资2：1000亿"/>
+                    android:padding="5dp"
+                    android:text="累计投资2：1000亿" />
             </RelativeLayout>
+
             <com.lenso.jixiangbao.view.LoopViewPager
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/vp_choice"
                 android:layout_width="match_parent"
-                android:layout_height="500dp">
+                android:layout_height="match_parent">
 
             </com.lenso.jixiangbao.view.LoopViewPager>
-            <include layout="@layout/item_safe_footer"/>
+
+            <include layout="@layout/item_safe_footer" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
