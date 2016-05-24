@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,6 +26,8 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.GestureUnlockActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
+
+import java.io.File;
 
 /**
  * Created by king on 2016/5/17.
@@ -118,7 +122,7 @@ public class JSInterface {
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
 
-        PopupWindow window = new PopupWindow(view,
+        final PopupWindow window = new PopupWindow(view,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
 
@@ -139,14 +143,23 @@ public class JSInterface {
         take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("拍照");
+//                showToast("拍照");
+                Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.png")));
+                ((Activity) context).startActivityForResult(intentFromCapture, 1);
+                window.dismiss();
             }
         });
         Button choose = (Button) view.findViewById(R.id.pop_btn_choose_photo);
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("相册");
+//                showToast("相册");
+                Intent intentFromGallery = new Intent();
+                intentFromGallery.setType("image/*"); // 设置文件类型
+                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                ((Activity) context).startActivityForResult(intentFromGallery, 2);
+                window.dismiss();
             }
         });
         Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
@@ -154,16 +167,17 @@ public class JSInterface {
             @Override
             public void onClick(View v) {
                 showToast("取消");
+                window.dismiss();
             }
         });
 
-        //popWindow消失监听方法
-        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                showToast("popWindow消失");
-            }
-        });
+//        //popWindow消失监听方法
+//        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                showToast("popWindow消失");
+//            }
+//        });
 
     }
 
