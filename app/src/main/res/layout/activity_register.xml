@@ -150,7 +150,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@color/orange"
+            android:background="@drawable/shape_circle_btn_orange"
             android:padding="10dp"
             android:text="确定"
             android:textColor="@color/white"
