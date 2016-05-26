@@ -143,7 +143,7 @@ public class HomeActivity extends BaseActivity {
         if (hasFocus && isFirst) {
             isFirst=false;
             initSlidingMenu();
-            moreFragment.webViewLoader("http://meishusheng.len.so/assets/more.html");
+            moreFragment.webViewLoader("http://app.pongyoo.com/appdemo/more.html");
         }
         super.onWindowFocusChanged(hasFocus);
     }
@@ -196,7 +196,7 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent =new Intent(HomeActivity.this,WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE,"吉车贷");
-                intent.putExtra(JSInterface.H5_URL,"http://meishusheng.len.so/assets/borrowdetail.html");
+                intent.putExtra(JSInterface.H5_URL,"http://app.pongyoo.com/appdemo/borrowdetail.html");
                 intent.putExtra("intent",JSInterface.JI_CHE_DAI);
                 startActivity(intent);
             }

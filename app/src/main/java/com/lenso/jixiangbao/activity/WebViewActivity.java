@@ -88,7 +88,7 @@ public class WebViewActivity extends WebBaseActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(WebViewActivity.this,WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE,"计算器");
-                intent.putExtra(JSInterface.H5_URL,"http://meishusheng.len.so/assets/borrow-calculator.html");
+                intent.putExtra(JSInterface.H5_URL,"http://app.pongyoo.com/appdemo/borrow-calculator.html");
                 intent.putExtra("intent",JSInterface.CALCULATOR);
                 startActivity(intent);
             }
