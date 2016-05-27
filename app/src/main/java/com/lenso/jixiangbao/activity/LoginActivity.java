@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity {
 
         getIntent = getIntent();
         mobile = getIntent.getStringExtra("mobile");
-        tvLoginTips.setText("短信已发送至" + mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
+        tvLoginTips.setText(mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
 
         topMenuBarLogin.setOnBackClickListener(new View.OnClickListener() {
             @Override
