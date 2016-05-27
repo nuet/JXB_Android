@@ -3,9 +3,19 @@ package com.lenso.jixiangbao.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.view.TopMenuBar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,12 +27,24 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity {
     @Bind(R.id.top_menu_bar_login)
     TopMenuBar topMenuBarLogin;
+    @Bind(R.id.tv_login_tips)
+    TextView tvLoginTips;
+    @Bind(R.id.et_login_psw)
+    EditText etLoginPsw;
+
+    private Map agrs = new HashMap();
+    private Intent getIntent;
+    private String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        getIntent = getIntent();
+        mobile = getIntent.getStringExtra("mobile");
+        tvLoginTips.setText("短信已发送至" + mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
 
         topMenuBarLogin.setOnBackClickListener(new View.OnClickListener() {
             @Override
@@ -32,15 +54,40 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.btn_login)
+    @OnClick({R.id.tv_login_forget, R.id.btn_login_confirm})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_login:
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, HomeActivity.class);
-//              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+            case R.id.tv_login_forget:
+                showToast("用户" + mobile + "忘记密码");
+                break;
+            case R.id.btn_login_confirm:
+                agrs.put("username", mobile);
+                agrs.put("password", etLoginPsw.getText().toString().trim());
+                agrs.put("actionType", "login");
+                VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGIN, new VolleyHttp.JsonResponseListener() {
+                    @Override
+                    public void getJson(String json, boolean isConnectSuccess) {
+                        if(isConnectSuccess){
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                if (jsonObject.getString("status").equals("1")) {
+                                    logInfo("login succeed!");
+                                    Intent intent = new Intent();
+                                    intent.setClass(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    showToast(jsonObject.getString("rsmsg"));
+                                }
+                            } catch (JSONException e) {
+                                logInfo("login http error!");
+                                e.printStackTrace();
+                            }
+                        }else {
+                            showToast("请检查网络设置");
+                        }
+                    }
+                }, agrs);
                 break;
         }
     }

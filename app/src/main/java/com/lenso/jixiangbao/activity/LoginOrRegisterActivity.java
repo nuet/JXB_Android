@@ -63,6 +63,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
                             if (jsonObject.getString("status").equals("1")) {
                                 if (jsonObject.getString("reged").equals("1")) {
                                     intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                 } else {
                                     intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
                                     intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
