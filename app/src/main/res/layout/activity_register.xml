@@ -22,6 +22,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_register_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -62,7 +63,8 @@
                 android:singleLine="true"
                 android:textSize="15sp" />
 
-            <Button
+            <TextView
+                android:id="@+id/tv_register_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
@@ -107,7 +109,7 @@
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/btn_eye"
+                android:id="@+id/btn_register_eye"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -137,6 +139,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/darker_gray"/>
             <TextView
+                android:id="@+id/tv_register_yhxy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《吉祥宝金融用户协议》"
@@ -144,7 +147,7 @@
                 android:textColor="@color/blue"/>
         </LinearLayout>
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_register_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

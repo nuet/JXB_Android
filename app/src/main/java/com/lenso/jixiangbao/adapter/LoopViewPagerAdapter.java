@@ -32,7 +32,7 @@ public class LoopViewPagerAdapter extends PagerAdapter {
     }
     private void loopViewPagerAdapter(Context context,List<String> urls){
         viewList=new ArrayList<>();
-        VolleyHttp vh = VolleyHttp.getIntance();
+        VolleyHttp vh = VolleyHttp.getInstance();
         Options opt = new Options();
         opt.defImage(R.mipmap.ic_launcher)
                 .errImage(R.mipmap.ic_launcher);

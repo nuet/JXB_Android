@@ -34,7 +34,7 @@ public class VolleyHttp {
 
     }
 
-    public static VolleyHttp getIntance() {
+    public static VolleyHttp getInstance() {
         if (mVolley == null)
             synchronized (VolleyHttp.class) {
                 if (mVolley == null)

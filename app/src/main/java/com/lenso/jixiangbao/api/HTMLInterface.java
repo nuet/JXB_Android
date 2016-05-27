@@ -9,6 +9,11 @@ public class HTMLInterface {
     public static final String DOMAIN = "http://app.pongyoo.com/appdemo/";
 
     /**
+     * 用户协议API
+     */
+    public static final String YHXY = DOMAIN + "article.html?type=protocol";
+
+    /**
      * LoanFragment HTML 5 API
      */
     public static final String LOAN = DOMAIN + "borrowdetail.html";
