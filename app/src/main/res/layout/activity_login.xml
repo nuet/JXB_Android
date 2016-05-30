@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         top_menu:tmb_text="登陆"
-        top_menu:tmb_menuVisibility="false">
+        top_menu:tmb_menuSrc="@mipmap/qhyh">
 
     </com.lenso.jixiangbao.view.TopMenuBar>
 
@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_gravity="center_horizontal"
-            android:text="157****6360"
             android:textSize="15sp"
             android:textColor="@color/black"/>
 

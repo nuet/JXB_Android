@@ -53,6 +53,7 @@ public class RegisterActivity extends BaseActivity {
     private String mobile;
     private static boolean BOXCHECKED = true;//默认同意
     private static boolean EYECLICKED = false;//默认暗文
+    private static String app_key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class RegisterActivity extends BaseActivity {
 
         getIntent = getIntent();
         mobile = getIntent.getStringExtra("mobile");
-        tvRegisterTips.setText("短信已发送至" + mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
+
         topMenuBarRegister.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +76,7 @@ public class RegisterActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_register_code:
+                tvRegisterTips.setText("短信已发送至" + mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
                 agrsCode.put("mobile", mobile);
                 VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_GETPHONECODE, new VolleyHttp.JsonResponseListener() {
                     @Override
@@ -105,6 +107,7 @@ public class RegisterActivity extends BaseActivity {
                         tvRegisterCode.setText("获取");
                         tvRegisterCode.setTextColor(Color.parseColor("#669EFF"));
                         tvRegisterCode.setClickable(true);
+                        tvRegisterTips.setText("");
                     }
                 }.start();
                 break;
@@ -145,6 +148,8 @@ public class RegisterActivity extends BaseActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if(jsonObject.getString("status").equals("1")){
+                                    app_key = jsonObject.getString("app_key");
+                                    Config.getInstance(RegisterActivity.this).putConfig("app_key",app_key);
                                     Config.getInstance(RegisterActivity.this).putConfig("phone",mobile);
                                     Intent intent = new Intent();
                                     intent.setClass(RegisterActivity.this, IdentifyActivity.class);

@@ -58,25 +58,30 @@ public class LoginOrRegisterActivity extends BaseActivity {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
                         logInfo(json);
-                        try {
-                            JSONObject jsonObject = new JSONObject(json);
-                            if (jsonObject.getString("status").equals("1")) {
-                                if (jsonObject.getString("reged").equals("1")) {
-                                    intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
-                                    intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                        if (isConnectSuccess) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                if (jsonObject.getString("status").equals("1")) {
+                                    if (jsonObject.getString("reged").equals("1")) {
+                                        intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
+                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                                    } else {
+                                        intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
+                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                                    }
+                                    startActivity(intent);
+                                    finish();
                                 } else {
-                                    intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
-                                    intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                                    showToast(jsonObject.getString("rsmsg"));
                                 }
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                showToast(jsonObject.getString("rsmsg"));
+                            } catch (JSONException e) {
+                                logInfo("next http error");
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            logInfo("next http error");
-                            e.printStackTrace();
+                        } else {
+                            showToast("请检查网络设置");
                         }
+
                     }
                 }, args
         );

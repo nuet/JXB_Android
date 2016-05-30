@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -32,6 +33,7 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.et_login_psw)
     EditText etLoginPsw;
 
+    private static String app_key;
     private Map agrs = new HashMap();
     private Intent getIntent;
     private String mobile;
@@ -49,6 +51,15 @@ public class LoginActivity extends BaseActivity {
         topMenuBarLogin.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        topMenuBarLogin.setOnMenuClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this, LoginOrRegisterActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -71,7 +82,10 @@ public class LoginActivity extends BaseActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
+                                    app_key = jsonObject.getString("app_key");
                                     logInfo("login succeed!");
+                                    Config.getInstance(LoginActivity.this).putConfig("app_key",app_key);
+                                    Config.getInstance(LoginActivity.this).putConfig("phone",mobile);
                                     Intent intent = new Intent();
                                     intent.setClass(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);

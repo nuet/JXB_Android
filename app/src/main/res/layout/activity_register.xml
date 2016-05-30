@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
-            android:text="短信已发送至157****6360"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
