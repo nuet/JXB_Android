@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.receiver.JPushReceiver;
+
+import cn.jpush.android.api.JPushInterface;
 
 
 /**
@@ -33,6 +36,18 @@ public class SplashActivity extends BaseActivity {
         Intent intent = new Intent(this, LaunchActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(SplashActivity.this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(SplashActivity.this);
     }
 }
 

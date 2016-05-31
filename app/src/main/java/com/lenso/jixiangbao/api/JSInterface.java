@@ -25,7 +25,9 @@ import android.widget.Toast;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.GestureUnlockActivity;
+import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.util.Config;
 
 import java.io.File;
 
@@ -38,9 +40,11 @@ public class JSInterface {
     public static final int JI_CHE_DAI = 0;
     public static final int CALCULATOR = 1;
     private final Context context;
+    private final Activity activity;
 
     public JSInterface(Context context) {
         this.context = context;
+        this.activity = (Activity) context;
     }
 
     /**
@@ -89,18 +93,18 @@ public class JSInterface {
     @JavascriptInterface
     public void gestureLock() {
         Log.i("JSInterface", "getstureLock() executed!");
-//        SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-//        String password = sp.getString("GestureLock", "");
+        SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+        String password = sp.getString("GestureLock", "");
         Intent intent = new Intent();
-//        if(TextUtils.isEmpty(password)){
-//            intent.putExtra("gestureTitle","设置手势密码");
-//            intent.putExtra("jsFlag",true);
-//            intent.setClass(context, GestureSettingsActivity.class);
-//        }else{
-        intent.putExtra("gestureTitle", "输入手势密码");
-        intent.putExtra("jsFlag", true);
-        intent.setClass(context, GestureUnlockActivity.class);
-//        }
+        if (TextUtils.isEmpty(password)) {
+            intent.putExtra("gestureTitle", "设置手势密码");
+            intent.putExtra("jsFlag", true);
+            intent.setClass(context, GestureSettingsActivity.class);
+        } else {
+            intent.putExtra("gestureTitle", "输入手势密码");
+            intent.putExtra("jsFlag", true);
+            intent.setClass(context, GestureUnlockActivity.class);
+        }
         context.startActivity(intent);
     }
 
@@ -185,7 +189,11 @@ public class JSInterface {
      * 我的->账户信息->退出登录
      */
     public void logout() {
-        showToast("退出登录");
+        Intent intent = new Intent();
+        intent.setClass(context, LoginOrRegisterActivity.class);
+        context.startActivity(intent);
+        activity.finish();
+//        Toast.makeText(context.getApplicationContext(), "logout", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -196,5 +204,42 @@ public class JSInterface {
     @JavascriptInterface
     public void showToast(String msg) {
         Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 打印日志
+     * @param TAG 标志
+     * @param log 日志
+     */
+    @JavascriptInterface
+    public void log(String TAG, String log){
+        Log.i(TAG, log);
+    }
+
+    /**
+     * 存储数据
+     * @param key 键
+     * @param value 值
+     */
+    @JavascriptInterface
+    public void putConfig(String key, String value){
+        Config.getInstance(context).putConfig(key, value);
+    }
+
+    /**
+     * 获取数据
+     * @param key 键
+     */
+    @JavascriptInterface
+    public void getConfig(String key){
+        Config.getInstance(context).getConfig(key);
+    }
+
+    /**
+     * 返回
+     */
+    @JavascriptInterface
+    public void back(){
+        activity.finish();
     }
 }
