@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.GestureUnlockActivity;
+import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.util.Config;
@@ -114,7 +115,7 @@ public class JSInterface {
     @JavascriptInterface
     public void changeHeadPic() {
 
-        showToast("修改头像");
+//        showToast("修改头像");
 
         /**
          * 显示popupWindow
@@ -188,12 +189,12 @@ public class JSInterface {
     /**
      * 我的->账户信息->退出登录
      */
+    @JavascriptInterface
     public void logout() {
-        Intent intent = new Intent();
-        intent.setClass(context, LoginOrRegisterActivity.class);
-        context.startActivity(intent);
+        Intent intentLogout = new Intent();
+        intentLogout.setClass(context, LoginOrRegisterActivity.class);
+        context.startActivity(intentLogout);
         activity.finish();
-//        Toast.makeText(context.getApplicationContext(), "logout", Toast.LENGTH_SHORT).show();
     }
 
     /**

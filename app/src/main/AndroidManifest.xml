@@ -52,6 +52,8 @@
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.IdentifyActivity"/>
         <activity android:name=".activity.BindCardActivity"/>
+        <activity android:name=".activity.ForgetPasswordActivity"/>
+        <activity android:name=".activity.SetPasswordActivity"/>
         <activity android:name=".activity.GestureSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".activity.GestureUnlockActivity"

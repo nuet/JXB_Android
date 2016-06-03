@@ -58,8 +58,9 @@
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
             android:gravity="center"
-            android:text="吉祥宝金融不会再任何地方泄露您的号码"
-            android:textSize="12sp"/>
+            android:text="吉祥宝金融不会在任何地方泄露您的号码"
+            android:textSize="12sp"
+            android:textColor="@color/darker_gray"/>
         <Button
             android:id="@+id/btn_login_register"
             android:layout_width="match_parent"
@@ -74,7 +75,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:src="@mipmap/login_or_register"/>
         <!--<TextView-->

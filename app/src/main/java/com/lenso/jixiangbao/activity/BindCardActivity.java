@@ -102,7 +102,7 @@ public class BindCardActivity extends BaseActivity {
 
     }
 
-    @OnClick(R.id.btn_bindcard)
+    @OnClick(R.id.btn_bindcard_confirm)
     public void onClick() {
         if (bank != null) {
             args.put("app_key", Config.getInstance(BindCardActivity.this).getConfig("app_key"));

@@ -58,7 +58,7 @@ public class IdentifyActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.btn_identify)
+    @OnClick(R.id.btn_identify_confirm)
     public void onClick() {
         args.put("app_key", Config.getInstance(IdentifyActivity.this).getConfig("app_key"));
         args.put("realname", etIdentifyName.getText().toString().trim());

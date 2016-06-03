@@ -69,7 +69,10 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_forget:
-                showToast("用户" + mobile + "忘记密码");
+                Intent intentForget = new Intent();
+                intentForget.setClass(LoginActivity.this, ForgetPasswordActivity.class);
+                startActivity(intentForget);
+//                finish();
                 break;
             case R.id.btn_login_confirm:
                 agrs.put("username", mobile);
