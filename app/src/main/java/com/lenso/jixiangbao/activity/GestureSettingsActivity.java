@@ -89,7 +89,7 @@ public class GestureSettingsActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("GestureLock", Arrays.toString(secondAnswer));
                 editor.commit();
-                Toast.makeText(GestureSettingsActivity.this, Arrays.toString(secondAnswer), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(GestureSettingsActivity.this, Arrays.toString(secondAnswer), Toast.LENGTH_SHORT).show();
                 if(jsFlag){
                     finish();
                 }else{

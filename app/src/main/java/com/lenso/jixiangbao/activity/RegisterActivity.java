@@ -48,7 +48,7 @@ public class RegisterActivity extends BaseActivity {
     EditText etRegisterCode;
 
     private Map agrsCode = new HashMap();
-    private Map agrsRegister = new HashMap();
+    private Map<String,String> agrsRegister = new HashMap();
     private Intent getIntent;
     private String mobile;
     private static boolean BOXCHECKED = true;//默认同意
@@ -107,7 +107,7 @@ public class RegisterActivity extends BaseActivity {
                         tvRegisterCode.setText("获取");
                         tvRegisterCode.setTextColor(Color.parseColor("#669EFF"));
                         tvRegisterCode.setClickable(true);
-                        tvRegisterTips.setText("");
+//                        tvRegisterTips.setText("");
                     }
                 }.start();
                 break;
@@ -115,12 +115,14 @@ public class RegisterActivity extends BaseActivity {
                 if (!BOXCHECKED) {
                     ivRegisterAgree.setImageResource(R.mipmap.checkbox_checked);
                     BOXCHECKED = true;
-                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#FF6600"));
+                    btnRegisterConfirm.setBackgroundResource(R.drawable.shape_circle_btn_orange);
+//                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#FF6600"));
                     btnRegisterConfirm.setClickable(true);
                 } else {
                     ivRegisterAgree.setImageResource(R.mipmap.checkbox_unchecked);
                     BOXCHECKED = false;
-                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#BFBFBF"));
+                    btnRegisterConfirm.setBackgroundResource(R.drawable.shape_circle_btn_gray);
+//                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#BFBFBF"));
                     btnRegisterConfirm.setClickable(false);
                 }
                 break;
@@ -141,9 +143,11 @@ public class RegisterActivity extends BaseActivity {
                 agrsRegister.put("password", etRegisterPsw.getText().toString().trim());
 //                agrsRegister.put("invite_code", "");
                 agrsRegister.put("actionType", "register");
+                logInfo(agrsRegister.toString());
                 VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_REGISTER, new VolleyHttp.JsonResponseListener() {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
+                        logInfo(json);
                         if(isConnectSuccess){
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
