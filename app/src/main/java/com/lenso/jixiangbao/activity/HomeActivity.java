@@ -1,5 +1,7 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -16,8 +18,8 @@ import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
-import com.lenso.jixiangbao.fragment.TestFragment;
 import com.lenso.jixiangbao.fragment.WebViewFragment;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -51,7 +53,7 @@ public class HomeActivity extends BaseActivity {
     private int currentItem;
     private boolean moreOpen = false;
     private SlidingMenu menu;
-    private boolean isFirst=true;
+    private boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,7 @@ public class HomeActivity extends BaseActivity {
                 break;
         }
     }
+
     private void initSlidingMenu() {
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.RIGHT);
@@ -135,19 +138,18 @@ public class HomeActivity extends BaseActivity {
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.layout_sliding_menu);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu,new ScreenFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, new ScreenFragment()).commit();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         if (hasFocus && isFirst) {
-            isFirst=false;
+            isFirst = false;
             initSlidingMenu();
             moreFragment.webViewLoader("http://app.pongyoo.com/appdemo/more.html");
         }
         super.onWindowFocusChanged(hasFocus);
     }
-
 
 
     private void initViewPager() {
@@ -194,17 +196,39 @@ public class HomeActivity extends BaseActivity {
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(HomeActivity.this,WebViewActivity.class);
-                intent.putExtra(JSInterface.H5_TITLE,"吉车贷");
-                intent.putExtra(JSInterface.H5_URL,"http://app.pongyoo.com/appdemo/borrowdetail.html");
-                intent.putExtra("intent",JSInterface.JI_CHE_DAI);
+                Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
+                intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
+                intent.putExtra(JSInterface.H5_URL, "http://app.pongyoo.com/appdemo/borrowdetail.html");
+                intent.putExtra("intent", JSInterface.JI_CHE_DAI);
                 startActivity(intent);
             }
         });
         menuItem4.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                vpHome.setCurrentItem(3);
+                String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
+                if (app_key == null || app_key.equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_DeviceDefault_Light);
+                    builder.setTitle("温馨提示");
+                    builder.setMessage("系统检测到您尚未登录，是否登录？");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intentLogin = new Intent();
+                            intentLogin.setClass(HomeActivity.this, LoginActivity.class);
+                            startActivity(intentLogin);
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.create().show();
+                } else {
+                    vpHome.setCurrentItem(3);
+                }
             }
         });
         topMenuBar.setOnMenuClickListener(new View.OnClickListener() {

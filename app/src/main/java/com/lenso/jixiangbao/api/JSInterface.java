@@ -28,9 +28,14 @@ import com.lenso.jixiangbao.activity.GestureUnlockActivity;
 import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by king on 2016/5/17.
@@ -191,6 +196,26 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void logout() {
+        HashMap map = new HashMap();
+        map.put("app_key", Config.getInstance(context).getConfig("app_key"));
+        Config.getInstance(context).putConfig("app_key", "");
+        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGOUT, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if(isConnectSuccess){
+                    try {
+                        JSONObject jsonObject = new JSONObject(json);
+                        if(jsonObject.getString("status").equals("1")){
+                            showToast("退出成功");
+                        }else{
+                            showToast(jsonObject.getString("rsmsg"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, map);
         Intent intentLogout = new Intent();
         intentLogout.setClass(context, LoginOrRegisterActivity.class);
         context.startActivity(intentLogout);
@@ -213,8 +238,8 @@ public class JSInterface {
      * @param log 日志
      */
     @JavascriptInterface
-    public void log(String TAG, String log){
-        Log.i(TAG, log);
+    public void log(String log){
+        Log.i("h5", log);
     }
 
     /**

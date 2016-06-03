@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.receiver.JPushReceiver;
+import com.lenso.jixiangbao.util.Config;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -33,7 +34,14 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void init() {
-        Intent intent = new Intent(this, LaunchActivity.class);
+        Intent intent = new Intent();
+        String isFirstOpen = Config.getInstance(SplashActivity.this).getConfig("isFirstOpen");
+        if(isFirstOpen == null || isFirstOpen.equals("")){
+            intent.setClass(this, LaunchActivity.class);
+            Config.getInstance(SplashActivity.this).putConfig("isFirstOpen","0");
+        } else {
+            intent.setClass(this, HomeActivity.class);
+        }
         startActivity(intent);
         finish();
     }

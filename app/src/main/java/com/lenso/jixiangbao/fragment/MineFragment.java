@@ -1,15 +1,19 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
+import com.lenso.jixiangbao.util.Config;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
