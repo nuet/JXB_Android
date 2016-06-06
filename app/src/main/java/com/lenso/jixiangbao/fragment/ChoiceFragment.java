@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
 import com.lenso.jixiangbao.view.SpeakerView;
@@ -51,8 +54,11 @@ public class ChoiceFragment extends BaseFragment {
 
     private void initView() {
         int padding = (int) getResources().getDimension(R.dimen.dp_5);
-        String[] urls = new String[]{"http://cdn.duitang.com/uploads/item/201510/11/20151011195344_aVZRx.jpeg", "http://pic43.nipic.com/20140704/11284670_150403334001_2.jpg", "http://att2.citysbs.com/fz/bbs_attachments/2010/month_1002/10020312250ba11460cb93cf95.jpg"};
-        lvpBanner.addLoopImageUrl(urls);
+        ArrayList<String> pics=new ArrayList<>();
+        for(AppScrollPic pic:App.BASE_BEAN.getAppScrollPic()){
+            pics.add(App.HOST+pic.getPic());
+        }
+        lvpBanner.addLoopImageUrl(pics);
         lvpBanner.setLoopTimer(3000);
         lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -77,7 +83,7 @@ public class ChoiceFragment extends BaseFragment {
             }
         });
         dots=new ArrayList<>();
-        for(int i=0;i<urls.length;i++) {
+        for(int i=0;i<pics.size();i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setImageResource(R.drawable.selector_dot);
             dots.add(imageView);

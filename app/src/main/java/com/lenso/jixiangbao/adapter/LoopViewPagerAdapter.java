@@ -45,6 +45,7 @@ public class LoopViewPagerAdapter extends PagerAdapter {
     private void onCreateView(Context context,VolleyHttp vh,String url,Options opt){
         ImageView view=new ImageView(context);
         view.setTag(url);
+        view.setScaleType(ImageView.ScaleType.FIT_XY);
         vh.imageLoader(url,view,opt);
         viewList.add(view);
     }

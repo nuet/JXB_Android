@@ -46,14 +46,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/tv_list_item_text2"
+                    android:id="@+id/tv_list_item_text_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:text="Text2"
+
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/financing_list_item_text_size" />
                 <TextView
-                    android:id="@+id/tv_list_item_content2"
+                    android:id="@+id/tv_list_item_content_one"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -67,15 +71,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_list_item_text"
+                    android:id="@+id/tv_list_item_text_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:text="@string/financing_list_item_text"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/financing_list_item_text_size" />
 
                 <TextView
-                    android:id="@+id/tv_list_item_content"
+                    android:gravity="right"
+                    android:id="@+id/tv_list_item_content_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/financing_list_item_padding_top_bottom"
@@ -102,7 +110,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_list_item_text_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/financing_list_item_text_1"
@@ -120,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/financing_list_item_content_1"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/orange"
                         android:textSize="@dimen/financing_list_item_content_1_size" />
 
                     <TextView
@@ -128,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/financing_list_item_content_1_percent"
-                        android:textColor="@android:color/darker_gray"
+                        android:textColor="@color/orange"
                         android:textSize="@dimen/financing_list_item_content_1_percent_size" />
                 </LinearLayout>
             </LinearLayout>
@@ -141,7 +148,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_list_item_text_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/financing_list_item_text_2"
@@ -159,7 +165,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/financing_list_item_content_2"
-                        android:textColor="@android:color/darker_gray"
                         android:textSize="@dimen/financing_list_item_content_2_size" />
                     <TextView
                         android:id="@+id/tv_list_item_content_2_day"
@@ -179,14 +184,15 @@
                     android:id="@+id/pw_list_item"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    progress:pwBarColor="#0097D6"
+                    progress:pwBarColor="@color/orange"
+                    progress:pwContourColor="@color/lighter_gray"
+                    progress:pwRimColor="@color/lighter_gray"
                     progress:pwBarWidth="5dp"
-                    progress:pwRimColor="#330097D6"
-                    progress:pwRimWidth="2dp"
+                    progress:pwContourSize="1dp"
+                    progress:pwRimWidth="4dp"
                     progress:pwText="OK"
-                    progress:pwTextColor="#222"
-                    progress:pwTextSize="@dimen/pw_list_item_text_size"
-                    progress:pwContourSize="5dp"/>
+                    progress:pwTextColor="@color/blue"
+                    progress:pwTextSize="@dimen/pw_list_item_text_size"/>
             </LinearLayout>
 
         </LinearLayout>

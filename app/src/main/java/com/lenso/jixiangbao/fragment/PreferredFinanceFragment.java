@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.PreferredFinanceListAdapter;
 
@@ -30,7 +31,7 @@ public class PreferredFinanceFragment extends BaseFragment {
     }
 
     private void initView(LayoutInflater inflater) {
-        PreferredFinanceListAdapter adapter=new PreferredFinanceListAdapter(getActivity(),null);
+        PreferredFinanceListAdapter adapter=new PreferredFinanceListAdapter(getActivity(), App.BASE_BEAN);
         lvFragmentPreferredFinance.setAdapter(adapter);
         View footer=inflater.inflate(R.layout.item_safe_footer,null);
         lvFragmentPreferredFinance.addFooterView(footer);

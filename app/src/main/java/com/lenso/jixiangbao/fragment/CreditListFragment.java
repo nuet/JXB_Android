@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.CreditListAdapter;
@@ -57,7 +58,7 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void initView(LayoutInflater inflater) {
-        lvCreditList.setAdapter(new CreditListAdapter(getActivity(), null));
+        lvCreditList.setAdapter(new CreditListAdapter(getActivity(), App.BASE_BEAN.getBorrowList()));
         lvCreditList.addFooterView(inflater.inflate(R.layout.item_safe_footer, null));
         unselected();
         buttonDefault.setSelected(true);

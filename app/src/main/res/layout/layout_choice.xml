@@ -44,12 +44,12 @@
         android:background="@drawable/shape_choice_text_frame"
         android:gravity="center_vertical"
         android:padding="10dp"
-        android:text="七天尝鲜 16%预期年化收益"
+        android:text="短期高息，新手尝鲜"
         android:textColor="@color/orange" />
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
         android:layout_gravity="center"
         android:background="@drawable/shape_choice_text_circle"
         android:gravity="center_horizontal"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="16%"
                 android:textColor="@android:color/white"
-                android:textSize="70sp" />
+                android:textSize="60sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                 android:padding="5dp"
                 android:text="预期年化收益率"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
@@ -88,8 +88,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="立即抢购"
+            android:paddingBottom="20dp"
             android:textColor="@android:color/white"
-            android:textSize="45sp" />
+            android:textSize="40sp" />
     </LinearLayout>
 
     <TextView
@@ -97,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:gravity="center"
+        android:visibility="invisible"
         android:text="已购买人数2333333人" />
 
     <FrameLayout

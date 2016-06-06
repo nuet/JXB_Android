@@ -24,4 +24,15 @@
     <string name="financing_list_item_content_2_day">天</string>
     <string name="credit_list">债权列表</string>
     <string name="transfer_zone">转让专区</string>
+    <string name="no_internet">网络异常</string>
+    <string name="xin_list_title">新手专享</string>
+    <string name="tender_amount">招标金额：</string>
+    <string name="wan">万</string>
+    <string name="month">个月</string>
+    <string name="day">天</string>
+    <string name="example_list_title">体验专区</string>
+    <string name="example_list_text">体验标</string>
+    <string name="san_list_title">散标专区</string>
+    <string name="buy">抢购</string>
+    <string name="sell_out">售罄</string>
 </resources>
