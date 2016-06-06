@@ -208,14 +208,14 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View view) {
                 String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
                 if (app_key == null || app_key.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_DeviceDefault_Light);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                     builder.setTitle("温馨提示");
                     builder.setMessage("系统检测到您尚未登录，是否登录？");
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intentLogin = new Intent();
-                            intentLogin.setClass(HomeActivity.this, LoginActivity.class);
+                            intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
                             startActivity(intentLogin);
                         }
                     });

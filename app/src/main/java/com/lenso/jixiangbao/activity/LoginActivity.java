@@ -70,6 +70,7 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_login_forget:
                 Intent intentForget = new Intent();
+                intentForget.putExtra("mobile", mobile);
                 intentForget.setClass(LoginActivity.this, ForgetPasswordActivity.class);
                 startActivity(intentForget);
 //                finish();

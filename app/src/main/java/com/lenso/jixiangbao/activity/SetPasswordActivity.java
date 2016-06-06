@@ -7,7 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,12 +35,17 @@ public class SetPasswordActivity extends BaseActivity {
     @Bind(R.id.btn_set_confirm)
     Button btnSetConfirm;
 
+    private String id;
+    private Map argsSet = new HashMap();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_password);
         ButterKnife.bind(this);
 
+        Intent intentGet = getIntent();
+        id = intentGet.getStringExtra("id");
         topMenuBarSet.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,8 +56,33 @@ public class SetPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.btn_set_confirm)
     public void onClick() {
-        Intent intent = new Intent();
-        intent.setClass(SetPasswordActivity.this, HomeActivity.class);
-        startActivity(intent);
+        argsSet.put("password", etSetPsw.getText().toString().trim());
+        argsSet.put("confirm_password", etSetAgain.getText().toString().trim());
+        argsSet.put("type", "setpwd");
+        argsSet.put("id", id);
+        logInfo(argsSet.toString());
+        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_SETPSW, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if(isConnectSuccess){
+                    try {
+                        JSONObject jsonObject = new JSONObject(json);
+                        if(jsonObject.getString("status").equals("1")){
+                            Config.getInstance(SetPasswordActivity.this).putConfig("app_key", jsonObject.getString("app_key"));
+                            Intent intent = new Intent();
+                            intent.setClass(SetPasswordActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        }else {
+                            showToast(jsonObject.getString("rsmsg"));
+                        }
+                    } catch (JSONException e) {
+                        logInfo("setPassword failed!");
+                        e.printStackTrace();
+                    }
+                }else{
+                    showToast("请检查网络设置");
+                }
+            }
+        }, argsSet);
     }
 }
