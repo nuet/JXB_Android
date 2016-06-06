@@ -15,5 +15,7 @@ public class ServerInterface {
     public final static String SERVER_REALNAME = SERVER_DOMAIN + "realname.html";
     public final static String SERVER_BINDCARD = SERVER_DOMAIN + "addbank.html";
     public final static String SERVER_USERINFO = SERVER_DOMAIN + "account.html";
+    public final static String SERVER_FORGETPSW = SERVER_DOMAIN + "getpwdverify.html";
+    public final static String SERVER_SETPSW = SERVER_DOMAIN + "getpwd.html";
 
 }

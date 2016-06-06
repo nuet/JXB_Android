@@ -57,14 +57,12 @@ public class LoginOrRegisterActivity extends BaseActivity {
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_ISPHONEREGISTER, new VolleyHttp.JsonResponseListener() {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
-                        logInfo(json);
+//                        logInfo(json);
                         if (isConnectSuccess) {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     if (jsonObject.getString("reged").equals("1")) {
-//                                        intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
-//                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                         intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
                                         intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                     } else {
