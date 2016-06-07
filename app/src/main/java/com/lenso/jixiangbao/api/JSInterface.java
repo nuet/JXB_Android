@@ -176,7 +176,7 @@ public class JSInterface {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("取消");
+//                showToast("取消");
                 window.dismiss();
             }
         });
@@ -206,7 +206,7 @@ public class JSInterface {
                     try {
                         JSONObject jsonObject = new JSONObject(json);
                         if(jsonObject.getString("status").equals("1")){
-                            showToast("退出成功");
+//                            showToast("退出成功");
                         }else{
                             showToast(jsonObject.getString("rsmsg"));
                         }
@@ -218,6 +218,7 @@ public class JSInterface {
         }, map);
         Intent intentLogout = new Intent();
         intentLogout.setClass(context, LoginOrRegisterActivity.class);
+//        intentLogout.setFlags(intentLogout.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(intentLogout);
         activity.finish();
     }
@@ -234,7 +235,6 @@ public class JSInterface {
 
     /**
      * 打印日志
-     * @param TAG 标志
      * @param log 日志
      */
     @JavascriptInterface

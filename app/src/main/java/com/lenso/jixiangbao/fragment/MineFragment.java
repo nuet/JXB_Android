@@ -1,20 +1,37 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.bean.UserInfo;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -22,12 +39,135 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/11.
  */
 public class MineFragment extends BaseFragment {
+    @Bind(R.id.iv_headpic)
+    ImageView ivHeadpic;
+    @Bind(R.id.tv_username)
+    TextView tvUsername;
+    @Bind(R.id.usertype)
+    TextView usertype;
+    @Bind(R.id.fl_message)
+    FrameLayout flMessage;
+    @Bind(R.id.tv_ljty1)
+    TextView tvLjty1;
+    @Bind(R.id.tv_ljty2)
+    TextView tvLjty2;
+    @Bind(R.id.btn_ljty)
+    Button btnLjty;
+    @Bind(R.id.ll_ljty)
+    LinearLayout llLjty;
+    @Bind(R.id.ib_tjyj)
+    ImageButton ibTjyj;
+    @Bind(R.id.tv_tjyj)
+    TextView tvTjyj;
+    @Bind(R.id.ll_tjyj)
+    LinearLayout llTjyj;
+    @Bind(R.id.ib_qd)
+    ImageButton ibQd;
+    @Bind(R.id.tv_qd)
+    TextView tvQd;
+    @Bind(R.id.ll_qd)
+    LinearLayout llQd;
+    @Bind(R.id.ib_jf)
+    ImageButton ibJf;
+    @Bind(R.id.tv_jf)
+    TextView tvJf;
+    @Bind(R.id.ll_jf)
+    LinearLayout llJf;
+    @Bind(R.id.btn_tx)
+    Button btnTx;
+    @Bind(R.id.btn_cz)
+    Button btnCz;
+    @Bind(R.id.ll_dsze)
+    LinearLayout llDsze;
+    @Bind(R.id.ll_zjgk)
+    LinearLayout llZjgk;
+    @Bind(R.id.ll_wdtz)
+    LinearLayout llWdtz;
+    @Bind(R.id.ll_zqzr)
+    LinearLayout llZqzr;
+    @Bind(R.id.ll_wdjk)
+    LinearLayout llWdjk;
+    @Bind(R.id.ll_tyb)
+    LinearLayout llTyb;
+    @Bind(R.id.ll_zhxx)
+    LinearLayout llZhxx;
+    @Bind(R.id.ll_gd)
+    LinearLayout llGd;
+    @Bind(R.id.tv_mine_unreadmsg)
+    TextView tvMineUnreadmsg;
+    @Bind(R.id.tv_mine_usemoney)
+    TextView tvMineUsemoney;
+    @Bind(R.id.tv_mine_total)
+    TextView tvMineTotal;
+    @Bind(R.id.tv_mine_origin)
+    TextView tvMineOrigin;
+    @Bind(R.id.tv_mine_interest)
+    TextView tvMineInterest;
+
+    private UserInfo userInfo;
+    private Map args = new HashMap();
+    private Map argsign = new HashMap();
+    //    private String username;
+//    private String userType;
+//    private String real_status;
+//    private int unreadmsg;
+//    private int signed;
+//    private double accountUseMoney;
+//    private double collectTotal;
+//    private double collectOrigin;
+//    private double collectInterest;
+    private DecimalFormat df = new DecimalFormat("0.00");
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
+
         return view;
+    }
+
+    public void initData() {
+        args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERINFO, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (isConnectSuccess) {
+                    Gson gson = new Gson();
+                    userInfo = gson.fromJson(json, UserInfo.class);
+                } else {
+                    showToast("请检查网络设置");
+                }
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        initUI();
+                    }
+                });
+            }
+
+        }, args);
+    }
+
+    public void initUI() {
+        tvUsername.setText(userInfo.getDetailuser().getUsername());
+        if (userInfo.getDetailuser().getReal_status().equals("0")) {
+            usertype.setText("尚未实名认证");
+        } else {
+            usertype.setText(userInfo.getDetailuser().getTypename());
+        }
+
+        if (userInfo.getUnreadmsg() == 0) {
+            tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
+        } else {
+            tvMineUnreadmsg.setText(userInfo.getUnreadmsg());
+            tvMineUnreadmsg.setBackgroundResource(R.drawable.minefragment_message_count);
+        }
+
+        tvMineUsemoney.setText(String.valueOf(df.format(userInfo.getSummary().getAccountUseMoney())));
+        tvMineTotal.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal())));
+        tvMineInterest.setText(String.valueOf(df.format(userInfo.getSummary().getCollectInterest())));
+        tvMineOrigin.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal() - userInfo.getSummary().getCollectInterest())));
     }
 
     @Override
@@ -69,7 +209,6 @@ public class MineFragment extends BaseFragment {
         intent.setClass(getActivity(), WebViewActivity.class);
         switch (view.getId()) {
             case R.id.iv_headpic:
-//                pop();
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
@@ -107,7 +246,28 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_qd:
             case R.id.ib_qd:
             case R.id.tv_qd:
-                showToast("签到成功");
+
+                argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+                VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
+                    @Override
+                    public void getJson(String json, boolean isConnectSuccess) {
+                        if (isConnectSuccess) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                if (jsonObject.getString("status").equals("1")) {
+                                    showToast("签到成功");
+                                } else {
+                                    showToast(jsonObject.getString("rsmsg"));
+                                }
+                            } catch (JSONException e) {
+                                logInfo("sign error!");
+                                e.printStackTrace();
+                            }
+                        } else {
+                            showToast("请检查网络设置！");
+                        }
+                    }
+                }, argsign);
                 break;
             case R.id.ll_jf:
             case R.id.ib_jf:

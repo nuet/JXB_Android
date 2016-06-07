@@ -1,13 +1,17 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -37,6 +41,8 @@ public class LoginActivity extends BaseActivity {
     private Map agrs = new HashMap();
     private Intent getIntent;
     private String mobile;
+    private SharedPreferences sp;
+    private String gesturePsw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+        gesturePsw = sp.getString("GestureLock", "");
         getIntent = getIntent();
         mobile = getIntent.getStringExtra("mobile");
         tvLoginTips.setText(mobile.substring(0, 3) + "****" + mobile.substring(7, 11));
@@ -91,7 +99,13 @@ public class LoginActivity extends BaseActivity {
                                     Config.getInstance(LoginActivity.this).putConfig("app_key",app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("phone",mobile);
                                     Intent intent = new Intent();
-                                    intent.setClass(LoginActivity.this, HomeActivity.class);
+                                    if(TextUtils.isEmpty(gesturePsw)){
+                                        intent.setClass(LoginActivity.this, GestureSettingsActivity.class);
+                                        intent.putExtra("gestureTitle", "设置手势密码");
+                                        intent.putExtra("jsFlag", false);
+                                    }else{
+                                        intent.setClass(LoginActivity.this, HomeActivity.class);
+                                    }
                                     startActivity(intent);
                                     finish();
                                 }else{

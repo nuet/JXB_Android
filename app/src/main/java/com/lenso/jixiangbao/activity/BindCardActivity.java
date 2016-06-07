@@ -2,14 +2,17 @@ package com.lenso.jixiangbao.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.bean.BankList;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -37,6 +40,7 @@ public class BindCardActivity extends BaseActivity {
     @Bind(R.id.et_bindcard_cardnumber)
     EditText etBindcardCardnumber;
 
+    private BankList banklist;
     private List<String> dataList;
     private ArrayAdapter<String> arrayAdapter;
     private Map args = new HashMap();
@@ -66,20 +70,37 @@ public class BindCardActivity extends BaseActivity {
             }
         });
 
+        init();
+    }
+
+    private void init() {
+        VolleyHttp.getInstance().getJson(ServerInterface.SERVER_BANKLIST, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if(isConnectSuccess){
+                    Gson gson = new Gson();
+                    banklist = gson.fromJson(json, BankList.class);
+                }else{
+                    showToast("请检查网络设置");
+                }
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setBankData();
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void setBankData() {
         dataList = new ArrayList<String>();
         dataList.add("请选择");
-        dataList.add("工商银行");
-        dataList.add("中国银行");
-        dataList.add("建设银行");
-        dataList.add("农业银行");
-        dataList.add("交通银行");
-        dataList.add("上海银行");
-        dataList.add("平安银行");
-        dataList.add("兴业银行");
-        dataList.add("上海浦东发展银行");
-        dataList.add("中信银行");
-        dataList.add("光大银行");
-        dataList.add("邮政银行");
+        for(int i=0;i<banklist.getBanklist().size();i++){
+            dataList.add(banklist.getBanklist().get(i).getName());
+        }
+
         //适配器
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dataList);
         //设置样式
@@ -90,7 +111,6 @@ public class BindCardActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bank = dataList.get(position);
-                showToast(bank);
             }
 
             @Override
@@ -99,7 +119,6 @@ public class BindCardActivity extends BaseActivity {
                 showToast("bank is null");
             }
         });
-
     }
 
     @OnClick(R.id.btn_bindcard_confirm)

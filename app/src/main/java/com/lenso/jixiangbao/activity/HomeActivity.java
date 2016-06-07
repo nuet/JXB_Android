@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,6 +55,7 @@ public class HomeActivity extends BaseActivity {
     private boolean moreOpen = false;
     private SlidingMenu menu;
     private boolean isFirst = true;
+    private MineFragment mineFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +160,8 @@ public class HomeActivity extends BaseActivity {
         fragments.add(new ChoiceFragment());
         fragments.add(new FinancingFragment());
         fragments.add(moreFragment);
-        fragments.add(new MineFragment());
+        mineFragment = new MineFragment();
+        fragments.add(mineFragment);
 
         FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
@@ -210,7 +213,7 @@ public class HomeActivity extends BaseActivity {
                 if (app_key == null || app_key.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                     builder.setTitle("温馨提示");
-                    builder.setMessage("系统检测到您尚未登录，是否登录？");
+                    builder.setMessage("系统检测到您尚未登录，是否前往登录页进行登录？");
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -222,11 +225,11 @@ public class HomeActivity extends BaseActivity {
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                         }
                     });
                     builder.create().show();
                 } else {
+                    mineFragment.initData();
                     vpHome.setCurrentItem(3);
                 }
             }
@@ -254,4 +257,5 @@ public class HomeActivity extends BaseActivity {
         }
         super.onBackPressed();
     }
+
 }

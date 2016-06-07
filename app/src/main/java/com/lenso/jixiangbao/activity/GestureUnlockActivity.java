@@ -29,6 +29,7 @@ public class GestureUnlockActivity extends AppCompatActivity {
     @Bind(R.id.top_menu_bar_gesture_unlock)
     TopMenuBar topMenuBarGestureUnlock;
     private boolean jsFlag;
+    private boolean splashFlag;
     private GestureLockViewGroup mGestureLockViewGroup;
     private TextView mTextView;
     private DownTimer timer;
@@ -53,6 +54,7 @@ public class GestureUnlockActivity extends AppCompatActivity {
 
         Intent intent0 = getIntent();
         jsFlag = intent0.getBooleanExtra("jsFlag", false);
+        splashFlag = intent0.getBooleanExtra("splashFlag", false);
 
         topMenuBarGestureUnlock.setTitleText("输入手势密码");
         topMenuBarGestureUnlock.setOnBackClickListener(new View.OnClickListener() {
@@ -103,6 +105,12 @@ public class GestureUnlockActivity extends AppCompatActivity {
                         intent.putExtra("gestureTitle","修改手势密码");
                         intent.putExtra("jsFlag",jsFlag);
                         intent.setClass(GestureUnlockActivity.this, GestureSettingsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    if(splashFlag){
+                        Intent intent = new Intent();
+                        intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
                     }

@@ -7,20 +7,22 @@ public class ServerInterface {
 
     public final static String SERVER_DOMAIN = "http://app.pongyoo.com/app/";
 
-    public final static String SERVER_ISPHONEREGISTER= SERVER_DOMAIN + "isphonereged.html";
+    public final static String SERVER_ISPHONEREGISTER = SERVER_DOMAIN + "isphonereged.html";
     public final static String SERVER_GETPHONECODE = SERVER_DOMAIN + "getphonecode.html";
+    public final static String SERVER_BANKLIST = SERVER_DOMAIN + "getbanklist.html";
     public final static String SERVER_LOGIN = SERVER_DOMAIN + "login.html";
     public final static String SERVER_LOGOUT = SERVER_DOMAIN + "logout.html";
     public final static String SERVER_REGISTER = SERVER_DOMAIN + "register.html";
     public final static String SERVER_REALNAME = SERVER_DOMAIN + "realname.html";
     public final static String SERVER_BINDCARD = SERVER_DOMAIN + "addbank.html";
     public final static String SERVER_USERINFO = SERVER_DOMAIN + "account.html";
+    public final static String SERVER_USERSIGN = SERVER_DOMAIN + "usersign.html";
 
     public final static String SERVER_FORGETPSW = SERVER_DOMAIN + "getpwdverify.html";
     public final static String SERVER_SETPSW = SERVER_DOMAIN + "getpwd.html";
 
-    public static final String ALL_LIST=SERVER_DOMAIN+"getallsystemlist.html";
-    public final static String INVEST_LIST=SERVER_DOMAIN+"investlist.html";
-    public static final String ALL_DATA=SERVER_DOMAIN+"getallsystemdata.html";
+    public static final String ALL_LIST = SERVER_DOMAIN+"getallsystemlist.html";
+    public final static String INVEST_LIST = SERVER_DOMAIN+"investlist.html";
+    public static final String ALL_DATA = SERVER_DOMAIN+"getallsystemdata.html";
 
 }

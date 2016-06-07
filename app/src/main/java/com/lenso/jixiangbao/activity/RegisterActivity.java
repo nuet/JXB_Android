@@ -107,7 +107,6 @@ public class RegisterActivity extends BaseActivity {
                         tvRegisterCode.setText("获取");
                         tvRegisterCode.setTextColor(Color.parseColor("#669EFF"));
                         tvRegisterCode.setClickable(true);
-//                        tvRegisterTips.setText("");
                     }
                 }.start();
                 break;
@@ -116,13 +115,11 @@ public class RegisterActivity extends BaseActivity {
                     ivRegisterAgree.setImageResource(R.mipmap.checkbox_checked);
                     BOXCHECKED = true;
                     btnRegisterConfirm.setBackgroundResource(R.drawable.shape_circle_btn_orange);
-//                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#FF6600"));
                     btnRegisterConfirm.setClickable(true);
                 } else {
                     ivRegisterAgree.setImageResource(R.mipmap.checkbox_unchecked);
                     BOXCHECKED = false;
                     btnRegisterConfirm.setBackgroundResource(R.drawable.shape_circle_btn_gray);
-//                    btnRegisterConfirm.setBackgroundColor(Color.parseColor("#BFBFBF"));
                     btnRegisterConfirm.setClickable(false);
                 }
                 break;

@@ -41,25 +41,24 @@
                         android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:text="chung"
+                        android:text="　　　　"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                     <ImageView
                         android:layout_width="1dp"
-                        android:layout_height="15dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
                         android:background="@color/minedivider" />
                     <TextView
                         android:id="@+id/usertype"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:background="@mipmap/minefragment_btn"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="尚未实名认证"
+                        android:text="　　　　"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -77,13 +76,12 @@
                             android:src="@mipmap/minefragment_message" />
 
                         <TextView
+                            android:id="@+id/tv_mine_unreadmsg"
                             android:layout_width="17dp"
                             android:layout_height="17dp"
                             android:layout_gravity="top|right"
                             android:background="@drawable/minefragment_message_count"
                             android:gravity="center"
-                            android:text="3"
-
                             android:textColor="@color/black"
                             android:textSize="12sp" />
                     </FrameLayout>
@@ -257,6 +255,7 @@
                         android:padding="5dp">
 
                         <TextView
+                            android:id="@+id/tv_mine_usemoney"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -336,6 +335,7 @@
                         android:textColor="@color/darker_gray"/>
 
                     <TextView
+                        android:id="@+id/tv_mine_total"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -377,6 +377,7 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/tv_mine_origin"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
@@ -407,6 +408,7 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/tv_mine_interest"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
