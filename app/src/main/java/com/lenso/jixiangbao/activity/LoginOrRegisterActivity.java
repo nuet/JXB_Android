@@ -32,6 +32,8 @@ public class LoginOrRegisterActivity extends BaseActivity {
 
     private Map args = new HashMap();
     private Intent intent = new Intent();
+//    private Intent getIntent;
+//    private boolean jsFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +41,16 @@ public class LoginOrRegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_login_register);
         ButterKnife.bind(this);
 
-        topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        getIntent = getIntent();
+//        jsFlag = getIntent.getBooleanExtra("jsFlag", false);
+//        if(!jsFlag){
+            topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+//        }
     }
 
     @OnClick(R.id.btn_login_register)
@@ -71,6 +77,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
                                         intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
                                         intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                     }
+//                                    intent.putExtra("jsFlag", jsFlag);
                                     startActivity(intent);
                                     finish();
                                 } else {

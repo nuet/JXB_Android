@@ -1,11 +1,12 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.util.DownTimer;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -21,15 +23,16 @@ import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Chung on 2016/5/20.
  */
-public class GestureUnlockActivity extends AppCompatActivity {
+public class GestureUnlockActivity extends BaseActivity {
     @Bind(R.id.top_menu_bar_gesture_unlock)
     TopMenuBar topMenuBarGestureUnlock;
-    private boolean jsFlag;
-    private boolean splashFlag;
+    //    private boolean jsFlag;
+//    private boolean splashFlag;
     private GestureLockViewGroup mGestureLockViewGroup;
     private TextView mTextView;
     private DownTimer timer;
@@ -53,8 +56,8 @@ public class GestureUnlockActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent0 = getIntent();
-        jsFlag = intent0.getBooleanExtra("jsFlag", false);
-        splashFlag = intent0.getBooleanExtra("splashFlag", false);
+//        jsFlag = intent0.getBooleanExtra("jsFlag", false);
+//        splashFlag = intent0.getBooleanExtra("splashFlag", false);
 
         topMenuBarGestureUnlock.setTitleText("输入手势密码");
         topMenuBarGestureUnlock.setOnBackClickListener(new View.OnClickListener() {
@@ -100,20 +103,20 @@ public class GestureUnlockActivity extends AppCompatActivity {
                 if (matched) {
                     mTextView.setText("手势密码正确");
                     mTextView.setTextColor(Color.parseColor("#008000"));
-                    if(jsFlag){
-                        Intent intent = new Intent();
-                        intent.putExtra("gestureTitle","修改手势密码");
-                        intent.putExtra("jsFlag",jsFlag);
-                        intent.setClass(GestureUnlockActivity.this, GestureSettingsActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    if(splashFlag){
-                        Intent intent = new Intent();
-                        intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+//                    if(jsFlag){
+//                        Intent intent = new Intent();
+//                        intent.putExtra("gestureTitle","修改手势密码");
+//                        intent.putExtra("jsFlag",jsFlag);
+//                        intent.setClass(GestureUnlockActivity.this, GestureSettingsActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                    if(splashFlag){
+                    Intent intent = new Intent();
+                    intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+//                    }
                 } else {
                     mTextView.setText("手势密码不正确");
                     mTextView.setTextColor(Color.parseColor("#FF0000"));
@@ -189,4 +192,26 @@ public class GestureUnlockActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @OnClick(R.id.btn_gesture_unlock_forget)
+    public void onClick() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        builder.setTitle("温馨提示");
+        builder.setMessage("忘记手势密码需要重新登录!");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intentForget = new Intent();
+                intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
+                intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
+                startActivity(intentForget);
+                finish();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.create().show();
+    }
 }
