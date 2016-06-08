@@ -2,6 +2,7 @@ package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -50,6 +51,8 @@ public class HomeActivity extends BaseActivity {
     JViewPager vpHome;
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
+
+    public static Activity HOMECONTEXT;
     private WebViewFragment moreFragment;
     private int currentItem;
     private boolean moreOpen = false;
@@ -62,6 +65,9 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.android_home);
         ButterKnife.bind(this);
+
+        HOMECONTEXT = HomeActivity.this;
+
         initViewPager();
     }
 
