@@ -268,7 +268,7 @@
                             android:layout_height="wrap_content"
                             android:text="可用余额(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -331,7 +331,7 @@
                         android:gravity="left"
                         android:padding="5dp"
                         android:text="待收总额:"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         android:textColor="@color/darker_gray"/>
 
                     <TextView
@@ -374,7 +374,7 @@
                             android:padding="5dp"
                             android:text="待收本金(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_mine_origin"
@@ -405,7 +405,7 @@
                             android:padding="5dp"
                             android:text="待收利息(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_mine_interest"
@@ -618,7 +618,8 @@
                         android:padding="5dp"
                         android:text="体验宝"
                         android:textColor="@color/black"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:visibility="gone"/>
 
                     <ImageView
                         android:layout_width="0dp"

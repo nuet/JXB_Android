@@ -9,5 +9,6 @@
         android:bottomRightRadius="5dp"/>
     <!-- 填充 -->
     <solid
-        android:color="@color/gray"/>
+        android:color="@android:color/transparent"/>
+    <stroke android:color="@color/blue" android:width="1px"/>
 </shape>

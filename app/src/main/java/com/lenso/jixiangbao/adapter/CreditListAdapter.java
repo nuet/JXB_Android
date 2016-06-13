@@ -79,24 +79,11 @@ public class CreditListAdapter extends BaseAdapter {
         else
             holder.pwListItem.setText(context.getString(R.string.buy));
         holder.pwListItem.setProgress((int) progress);
-        holder.pwListItem.setOnClickListener(new BuyOnClickListener(data.getId()));
+        holder.pwListItem.setOnClickListener(new BuyOnClickListener(context,data.getId(),data.getName()));
         return view;
     }
 
-    class BuyOnClickListener implements View.OnClickListener{
-        private final String id;
 
-        public  BuyOnClickListener(String id){
-            this.id=id;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent=new Intent(context, WebViewActivity.class);
-            intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?id="+id);
-            context.startActivity(intent);
-        }
-    }
     static class ViewHolder {
         @Bind(R.id.tv_list_item_title)
         TextView tvListItemTitle;
@@ -126,5 +113,23 @@ public class CreditListAdapter extends BaseAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+}
+class BuyOnClickListener implements View.OnClickListener{
+    private final String id;
+    private final String name;
+    private final Context context;
+
+    public  BuyOnClickListener(Context context,String id,String name){
+        this.id=id;
+        this.name=name;
+        this.context=context;
+    }
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(context, WebViewActivity.class);
+        intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?id="+id);
+        intent.putExtra(JSInterface.H5_TITLE, name);
+        context.startActivity(intent);
     }
 }

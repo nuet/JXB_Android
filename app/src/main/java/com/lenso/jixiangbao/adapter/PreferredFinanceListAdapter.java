@@ -133,6 +133,7 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
         else
             holder.pwListItem.setText(context.getString(R.string.buy));
         holder.pwListItem.setProgress((int) progress);
+        holder.pwListItem.setOnClickListener(new BuyOnClickListener(context,data.getId(),data.getName()));
     }
     static class ViewHolder {
         @Bind(R.id.tv_list_item_title)
