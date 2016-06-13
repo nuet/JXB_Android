@@ -66,6 +66,7 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void open(String title, String url) {
+        Log.d("jgm","---"+title+url);
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(H5_URL, url);
         intent.putExtra(H5_TITLE, title);
