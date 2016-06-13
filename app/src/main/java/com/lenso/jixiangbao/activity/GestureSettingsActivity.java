@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Chung on 2016/5/20.
  */
-public class GestureSettingsActivity extends AppCompatActivity {
+public class GestureSettingsActivity extends BaseActivity {
     @Bind(R.id.id_textView)
     TextView idTextView;
     @Bind(R.id.id_gestureLockDisplayViews)
@@ -48,7 +48,7 @@ public class GestureSettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Intent intent0 = getIntent();
         String gestureTitle = intent0.getStringExtra("gestureTitle");
-        jsFlag = intent0.getBooleanExtra("jsFlag", true);
+        jsFlag = intent0.getBooleanExtra("jsFlag", false);
 
         topMenuBarGesture.setTitleText(gestureTitle);
         topMenuBarGesture.setOnBackClickListener(new View.OnClickListener() {

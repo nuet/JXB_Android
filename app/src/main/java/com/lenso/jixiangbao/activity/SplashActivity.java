@@ -60,8 +60,13 @@ public class SplashActivity extends BaseActivity {
             intent.setClass(this, LaunchActivity.class);
             Config.getInstance(SplashActivity.this).putConfig("isFirstOpen","0");
         } else {
-            intent.setClass(this, GestureUnlockActivity.class);
-            intent.putExtra("splashFlag", true);
+            String app_key = Config.getInstance(SplashActivity.this).getConfig("app_key");
+            if(app_key == null || app_key.equals("")){
+                intent.setClass(this, HomeActivity.class);
+            }else{
+                intent.setClass(this, GestureUnlockActivity.class);
+//                intent.putExtra("splashFlag", true);
+            }
         }
         startActivity(intent);
         finish();

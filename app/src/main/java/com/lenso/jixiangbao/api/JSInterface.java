@@ -2,7 +2,9 @@ package com.lenso.jixiangbao.api;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -26,7 +28,9 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.GestureSettingsActivity;
 import com.lenso.jixiangbao.activity.GestureUnlockActivity;
 import com.lenso.jixiangbao.activity.HomeActivity;
+import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
+import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
@@ -35,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -98,19 +103,10 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void gestureLock() {
-        Log.i("JSInterface", "getstureLock() executed!");
-        SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-        String password = sp.getString("GestureLock", "");
         Intent intent = new Intent();
-        if (TextUtils.isEmpty(password)) {
-            intent.putExtra("gestureTitle", "设置手势密码");
-            intent.putExtra("jsFlag", true);
-            intent.setClass(context, GestureSettingsActivity.class);
-        } else {
-            intent.putExtra("gestureTitle", "输入手势密码");
-            intent.putExtra("jsFlag", true);
-            intent.setClass(context, GestureUnlockActivity.class);
-        }
+        intent.putExtra("gestureTitle", "设置手势密码");
+        intent.putExtra("jsFlag", true);
+        intent.setClass(context, VerifyActivity.class);
         context.startActivity(intent);
     }
 
@@ -202,12 +198,35 @@ public class JSInterface {
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGOUT, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
-                if(isConnectSuccess){
+                if (isConnectSuccess) {
                     try {
                         JSONObject jsonObject = new JSONObject(json);
-                        if(jsonObject.getString("status").equals("1")){
-//                            showToast("退出成功");
-                        }else{
+                        if (jsonObject.getString("status").equals("1")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                            builder.setTitle("温馨提示");
+                            builder.setMessage("您确定要注销登录？");
+                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sp.edit();
+                                    editor.putString("GestureLock", "");
+                                    editor.commit();
+                                    Intent intentLogout = new Intent();
+                                    intentLogout.setClass(context, LoginOrRegisterActivity.class);
+                                    intentLogout.putExtra("jsFlag", true);
+                                    context.startActivity(intentLogout);
+                                    activity.finish();
+                                    HomeActivity.HOMECONTEXT.finish();
+                                }
+                            });
+                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                            builder.create().show();
+                        } else {
                             showToast(jsonObject.getString("rsmsg"));
                         }
                     } catch (JSONException e) {
@@ -216,11 +235,6 @@ public class JSInterface {
                 }
             }
         }, map);
-        Intent intentLogout = new Intent();
-        intentLogout.setClass(context, LoginOrRegisterActivity.class);
-//        intentLogout.setFlags(intentLogout.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intentLogout);
-        activity.finish();
     }
 
     /**
@@ -235,29 +249,32 @@ public class JSInterface {
 
     /**
      * 打印日志
+     *
      * @param log 日志
      */
     @JavascriptInterface
-    public void log(String log){
+    public void log(String log) {
         Log.i("h5", log);
     }
 
     /**
      * 存储数据
-     * @param key 键
+     *
+     * @param key   键
      * @param value 值
      */
     @JavascriptInterface
-    public void putConfig(String key, String value){
+    public void putConfig(String key, String value) {
         Config.getInstance(context).putConfig(key, value);
     }
 
     /**
      * 获取数据
+     *
      * @param key 键
      */
     @JavascriptInterface
-    public void getConfig(String key){
+    public void getConfig(String key) {
         Config.getInstance(context).getConfig(key);
     }
 
@@ -265,7 +282,7 @@ public class JSInterface {
      * 返回
      */
     @JavascriptInterface
-    public void back(){
+    public void back() {
         activity.finish();
     }
 }
