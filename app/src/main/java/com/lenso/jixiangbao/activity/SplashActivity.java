@@ -37,6 +37,8 @@ public class SplashActivity extends BaseActivity {
                 }else{
                     showToast(getString(R.string.no_internet));
                 }
+                if(!isConnectSuccess)
+                    showToast(getString(R.string.no_internet));
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {

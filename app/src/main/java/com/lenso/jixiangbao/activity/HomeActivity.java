@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
@@ -148,7 +149,7 @@ public class HomeActivity extends BaseActivity {
         if (hasFocus && isFirst) {
             isFirst = false;
             initSlidingMenu();
-            moreFragment.webViewLoader("http://app.pongyoo.com/appdemo/more.html");
+            moreFragment.webViewLoader(HTMLInterface.GD);
         }
         super.onWindowFocusChanged(hasFocus);
     }
@@ -201,7 +202,7 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
-                intent.putExtra(JSInterface.H5_URL, "http://app.pongyoo.com/appdemo/borrowdetail.html");
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.JI_CHE_DAI);
                 intent.putExtra("intent", JSInterface.JI_CHE_DAI);
                 startActivity(intent);
             }

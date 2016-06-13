@@ -58,8 +58,8 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void initView(LayoutInflater inflater) {
-        lvCreditList.setAdapter(new CreditListAdapter(getActivity(), App.BASE_BEAN.getBorrowList()));
         lvCreditList.addFooterView(inflater.inflate(R.layout.item_safe_footer, null));
+        lvCreditList.setAdapter(new CreditListAdapter(getActivity(), App.BASE_BEAN.getBorrowList()));
         unselected();
         buttonDefault.setSelected(true);
     }

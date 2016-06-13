@@ -1,6 +1,7 @@
 package com.lenso.jixiangbao.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.api.HTMLInterface;
+import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.bean.ChoiceList;
 import com.lenso.jixiangbao.view.ProgressWheel;
 
@@ -75,15 +79,27 @@ public class CreditListAdapter extends BaseAdapter {
         else
             holder.pwListItem.setText(context.getString(R.string.buy));
         holder.pwListItem.setProgress((int) progress);
+        holder.pwListItem.setOnClickListener(new BuyOnClickListener(data.getId()));
         return view;
     }
 
+    class BuyOnClickListener implements View.OnClickListener{
+        private final String id;
 
+        public  BuyOnClickListener(String id){
+            this.id=id;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context, WebViewActivity.class);
+            intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?id="+id);
+            context.startActivity(intent);
+        }
+    }
     static class ViewHolder {
         @Bind(R.id.tv_list_item_title)
         TextView tvListItemTitle;
-        @Bind(R.id.iv_list_item_type)
-        ImageView ivListItemType;
         @Bind(R.id.tv_list_item_text_one)
         TextView tvListItemTextOne;
         @Bind(R.id.tv_list_item_content_one)

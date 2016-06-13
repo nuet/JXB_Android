@@ -56,7 +56,7 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return dataList.size();
     }
 
     @Override
@@ -137,8 +137,6 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
     static class ViewHolder {
         @Bind(R.id.tv_list_item_title)
         TextView tvListItemTitle;
-        @Bind(R.id.iv_list_item_type)
-        ImageView ivListItemType;
         @Bind(R.id.tv_list_item_text_one)
         TextView tvListItemTextOne;
         @Bind(R.id.tv_list_item_content_one)

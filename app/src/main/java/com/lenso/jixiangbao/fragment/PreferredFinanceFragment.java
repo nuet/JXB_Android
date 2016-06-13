@@ -31,10 +31,10 @@ public class PreferredFinanceFragment extends BaseFragment {
     }
 
     private void initView(LayoutInflater inflater) {
-        PreferredFinanceListAdapter adapter=new PreferredFinanceListAdapter(getActivity(), App.BASE_BEAN);
-        lvFragmentPreferredFinance.setAdapter(adapter);
         View footer=inflater.inflate(R.layout.item_safe_footer,null);
         lvFragmentPreferredFinance.addFooterView(footer);
+        PreferredFinanceListAdapter adapter=new PreferredFinanceListAdapter(getActivity(), App.BASE_BEAN);
+        lvFragmentPreferredFinance.setAdapter(adapter);
     }
 
     @Override

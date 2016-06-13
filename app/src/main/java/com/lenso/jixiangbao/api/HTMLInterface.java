@@ -36,4 +36,7 @@ public class HTMLInterface {
     public static final String WDJK = DOMAIN + "member/loan-record.html";
     public static final String ZHXX = DOMAIN + "member/account.html";
     public static final String GD = DOMAIN + "more.html";
+
+    public static final String JI_CHE_DAI=DOMAIN+"borrowdetail.html";
+    public static final String DETAIL=DOMAIN+"detail.html";
 }

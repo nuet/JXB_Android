@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
-import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
@@ -41,6 +41,8 @@ public class ChoiceFragment extends BaseFragment {
     LoopViewPager lvpBanner;
     @Bind(R.id.ll_dot)
     LinearLayout llDot;
+    @Bind(R.id.rl_info)
+    RelativeLayout rlInfo;
     private List<ImageView> dots;
 
     @Nullable
@@ -54,9 +56,13 @@ public class ChoiceFragment extends BaseFragment {
 
     private void initView() {
         int padding = (int) getResources().getDimension(R.dimen.dp_5);
-        ArrayList<String> pics=new ArrayList<>();
-        for(AppScrollPic pic:App.BASE_BEAN.getAppScrollPic()){
-            pics.add(App.HOST+pic.getPic());
+        if (App.BASE_BEAN.getStatistic_display().equals("0"))
+            rlInfo.setVisibility(View.GONE);
+        else
+            rlInfo.setVisibility(View.VISIBLE);
+        ArrayList<String> pics = new ArrayList<>();
+        for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
+            pics.add(App.HOST + pic.getPic());
         }
         lvpBanner.addLoopImageUrl(pics);
         lvpBanner.setLoopTimer(3000);
@@ -75,24 +81,25 @@ public class ChoiceFragment extends BaseFragment {
             public void onPageScrollStateChanged(int state) {
 
             }
-            private void selected(int position){
-                for(ImageView imageView:dots){
+
+            private void selected(int position) {
+                for (ImageView imageView : dots) {
                     imageView.setSelected(false);
                 }
                 dots.get(position).setSelected(true);
             }
         });
-        dots=new ArrayList<>();
-        for(int i=0;i<pics.size();i++) {
+        dots = new ArrayList<>();
+        for (int i = 0; i < pics.size(); i++) {
             ImageView imageView = new ImageView(getActivity());
             imageView.setImageResource(R.drawable.selector_dot);
             dots.add(imageView);
             llDot.addView(imageView);
-            imageView.setPadding(padding,padding,padding,padding);
+            imageView.setPadding(padding, padding, padding, padding);
         }
         dots.get(0).setSelected(true);
         vpChoice.setDisplayMode(JViewPager.DisplayMode.DISPLAY_BY_EVERY_ONE);
-        vpChoice.setAdapter(new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(),new ChoiceActionFragment(),new ChoiceActionFragment(),new ChoiceActionFragment()));
+        vpChoice.setAdapter(new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment()));
     }
 
     @Override
