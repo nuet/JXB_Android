@@ -15,6 +15,7 @@ import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.bean.ChoiceList;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 
 import java.util.List;
@@ -128,7 +129,7 @@ class BuyOnClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Intent intent=new Intent(context, WebViewActivity.class);
-        intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?id="+id);
+        intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?id="+id+"&uid="+ Config.getInstance(context.getApplicationContext()).getConfig("uid"));
         intent.putExtra(JSInterface.H5_TITLE, name);
         context.startActivity(intent);
     }
