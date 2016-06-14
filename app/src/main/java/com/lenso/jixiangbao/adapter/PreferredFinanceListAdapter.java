@@ -185,7 +185,7 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
         public void onClick(View v) {
             Intent intent=new Intent(context, WebViewActivity.class);
             Log.i("H5:", "URL:"+ HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
-            intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
+            intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
             intent.putExtra(JSInterface.H5_TITLE, name);
             context.startActivity(intent);
         }
