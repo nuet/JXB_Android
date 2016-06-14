@@ -50,6 +50,7 @@ public class JSInterface {
     public static final String H5_TITLE = "h5_title";
     public static final int JI_CHE_DAI = 0;
     public static final int CALCULATOR = 1;
+    public static final int DETAIL = 2;
     private final Context context;
     private final Activity activity;
 

@@ -131,6 +131,7 @@ public class CreditListAdapter extends BaseAdapter {
             Log.i("H5:", "URL:"+HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
             intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
             intent.putExtra(JSInterface.H5_TITLE, name);
+            intent.putExtra("intent",JSInterface.DETAIL);
             context.startActivity(intent);
         }
     }

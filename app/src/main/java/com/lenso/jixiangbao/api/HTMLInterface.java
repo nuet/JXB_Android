@@ -37,5 +37,6 @@ public class HTMLInterface {
     public static final String JI_CHE_DAI=DOMAIN+"borrowdetail.html";
     public static final String DETAIL=DOMAIN+"detail.html";
     public static final String CALCULATOR=DOMAIN+"borrow_calculator.html";
+    public static final String CALCULATOR2=DOMAIN+"calculator.html";
     public static final String RIGHT_DETAIL=DOMAIN+"rightdetail.html";
 }
