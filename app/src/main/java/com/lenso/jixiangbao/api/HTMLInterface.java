@@ -6,18 +6,15 @@ package com.lenso.jixiangbao.api;
 public class HTMLInterface {
     public static final String H5_URL = "h5_url";
     public static final String H5_TITLE = "h5_title";
-    public static final String DOMAIN = "http://app.pongyoo.com/appdemo/";
-
+    public static final String DOMAIN = "http://app.pongyoo.com/appweb/";
     /**
      * 用户协议API
      */
     public static final String YHXY = DOMAIN + "article.html?type=protocol";
-
     /**
      * LoanFragment HTML 5 API
      */
     public static final String LOAN = DOMAIN + "borrowdetail.html";
-
     /**
      * MineFragment HTML 5 API
      */
@@ -35,8 +32,10 @@ public class HTMLInterface {
     public static final String TYB = DOMAIN + "member/experience-detail.html";
     public static final String WDJK = DOMAIN + "member/loan-record.html";
     public static final String ZHXX = DOMAIN + "member/account.html";
-    public static final String GD = DOMAIN + "more.html";
+    public static final String GD = DOMAIN + "desc_more.html";
 
     public static final String JI_CHE_DAI=DOMAIN+"borrowdetail.html";
     public static final String DETAIL=DOMAIN+"detail.html";
+    public static final String CALCULATOR=DOMAIN+"borrow_calculator.html";
+    public static final String RIGHT_DETAIL=DETAIL+"rightdetail.html";
 }

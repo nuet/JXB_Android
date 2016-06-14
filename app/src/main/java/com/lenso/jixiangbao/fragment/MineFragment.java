@@ -135,15 +135,10 @@ public class MineFragment extends BaseFragment {
                 if (isConnectSuccess) {
                     Gson gson = new Gson();
                     userInfo = gson.fromJson(json, UserInfo.class);
+                    initUI();
                 } else {
                     showToast("请检查网络设置");
                 }
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        initUI();
-                    }
-                });
             }
 
         }, args);

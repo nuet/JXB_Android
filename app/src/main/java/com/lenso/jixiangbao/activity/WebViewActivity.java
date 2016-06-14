@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -88,7 +89,7 @@ public class WebViewActivity extends WebBaseActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(WebViewActivity.this,WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE,"计算器");
-                intent.putExtra(JSInterface.H5_URL,"http://app.pongyoo.com/appdemo/borrow-calculator.html");
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
                 intent.putExtra("intent",JSInterface.CALCULATOR);
                 startActivity(intent);
             }
