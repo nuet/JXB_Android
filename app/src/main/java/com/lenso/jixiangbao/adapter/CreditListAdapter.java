@@ -115,22 +115,23 @@ public class CreditListAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
-}
-class BuyOnClickListener implements View.OnClickListener{
-    private final String id;
-    private final String name;
-    private final Context context;
+    class BuyOnClickListener implements View.OnClickListener{
+        private final String id;
+        private final String name;
+        private final Context context;
 
-    public  BuyOnClickListener(Context context,String id,String name){
-        this.id=id;
-        this.name=name;
-        this.context=context;
-    }
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(context, WebViewActivity.class);
-        intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&uid="+ Config.getInstance(context.getApplicationContext()).getConfig("uid"));
-        intent.putExtra(JSInterface.H5_TITLE, name);
-        context.startActivity(intent);
+        public  BuyOnClickListener(Context context,String id,String name){
+            this.id=id;
+            this.name=name;
+            this.context=context;
+        }
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context, WebViewActivity.class);
+            Log.i("H5:", "URL:"+HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
+            intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
+            intent.putExtra(JSInterface.H5_TITLE, name);
+            context.startActivity(intent);
+        }
     }
 }

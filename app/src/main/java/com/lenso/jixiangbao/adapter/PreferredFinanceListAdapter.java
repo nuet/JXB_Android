@@ -1,7 +1,9 @@
 package com.lenso.jixiangbao.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.api.HTMLInterface;
+import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.ChoiceList;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 
 import java.util.ArrayList;
@@ -163,6 +169,25 @@ public class PreferredFinanceListAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
+        }
+    }
+    class BuyOnClickListener implements View.OnClickListener{
+        private final String id;
+        private final String name;
+        private final Context context;
+
+        public  BuyOnClickListener(Context context,String id,String name){
+            this.id=id;
+            this.name=name;
+            this.context=context;
+        }
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context, WebViewActivity.class);
+            Log.i("H5:", "URL:"+ HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
+            intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
+            intent.putExtra(JSInterface.H5_TITLE, name);
+            context.startActivity(intent);
         }
     }
 }
