@@ -129,7 +129,7 @@ class BuyOnClickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         Intent intent=new Intent(context, WebViewActivity.class);
-        intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?id="+id+"&uid="+ Config.getInstance(context.getApplicationContext()).getConfig("uid"));
+        intent.putExtra(JSInterface.H5_URL, HTMLInterface.RIGHT_DETAIL+"?borrowid="+id+"&uid="+ Config.getInstance(context.getApplicationContext()).getConfig("uid"));
         intent.putExtra(JSInterface.H5_TITLE, name);
         context.startActivity(intent);
     }
