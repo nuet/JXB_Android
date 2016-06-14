@@ -20,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="2"
+        android:singleLine="true"
+        android:ellipsize="marquee"
         android:gravity="center"/>
 
     <ImageView

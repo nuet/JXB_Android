@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,8 +27,8 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/12.
  */
 public class FinancingFragment extends BaseFragment {
-    @Bind(R.id.tv_menu_preferred_finance)
-    TextView tvMenuPreferredFinance;
+//    @Bind(R.id.tv_menu_preferred_finance)
+//    TextView tvMenuPreferredFinance;
     @Bind(R.id.tv_menu_credit_list)
     TextView tvMenuCreditList;
     @Bind(R.id.tv_menu_transfer_zone)
@@ -35,7 +36,7 @@ public class FinancingFragment extends BaseFragment {
     @Bind(R.id.jvp_finance)
     JViewPager jvpFinance;
     @Bind(R.id.view_line)
-    View viewLine;
+    ImageView viewLine;
     private FragmentViewPageAdapter adapter;
     private int width;
 
@@ -51,19 +52,19 @@ public class FinancingFragment extends BaseFragment {
     private void initView() {
         Point outSize = new Point();
         getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
-        width = outSize.x / 3;
+        width = outSize.x / 2;
         ViewGroup.LayoutParams lp = viewLine.getLayoutParams();
         lp.width = width;
         viewLine.setLayoutParams(lp);
         if (adapter == null) {
             List<Fragment> fragmentList = new ArrayList<>();
-            fragmentList.add(new PreferredFinanceFragment());
+//            fragmentList.add(new PreferredFinanceFragment());
             fragmentList.add(new CreditListFragment());
             fragmentList.add(new CreditListFragment());
             adapter = new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         }
         jvpFinance.setAdapter(adapter);
-        tvMenuPreferredFinance.setSelected(true);
+        tvMenuCreditList.setSelected(true);
         jvpFinance.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -77,13 +78,13 @@ public class FinancingFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 unSelected();
                 switch (position) {
+//                    case 0:
+//                        tvMenuPreferredFinance.setSelected(true);
+//                        break;
                     case 0:
-                        tvMenuPreferredFinance.setSelected(true);
-                        break;
-                    case 1:
                         tvMenuCreditList.setSelected(true);
                         break;
-                    case 2:
+                    case 1:
                         tvMenuTransferZone.setSelected(true);
                         break;
                 }
@@ -104,22 +105,22 @@ public class FinancingFragment extends BaseFragment {
 
     private void unSelected() {
         tvMenuCreditList.setSelected(false);
-        tvMenuPreferredFinance.setSelected(false);
+//        tvMenuPreferredFinance.setSelected(false);
         tvMenuTransferZone.setSelected(false);
     }
 
-    @OnClick({R.id.tv_menu_preferred_finance, R.id.tv_menu_credit_list, R.id.tv_menu_transfer_zone})
+    @OnClick({ R.id.tv_menu_credit_list, R.id.tv_menu_transfer_zone})
     public void onClick(View view) {
         int position = 0;
         switch (view.getId()) {
-            case R.id.tv_menu_preferred_finance:
+//            case R.id.tv_menu_preferred_finance:
+//                position = 0;
+//                break;
+            case R.id.tv_menu_credit_list:
                 position = 0;
                 break;
-            case R.id.tv_menu_credit_list:
-                position = 1;
-                break;
             case R.id.tv_menu_transfer_zone:
-                position = 2;
+                position = 1;
                 break;
         }
         jvpFinance.setCurrentItem(position);
