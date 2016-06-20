@@ -204,8 +204,8 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                 startActivity(intent);
                 userInfo.setUnreadmsg(0);
-//                tvMineUnreadmsg.setText("");
-//                tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
+                tvMineUnreadmsg.setText("");
+                tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case R.id.ll_tjyj:
             case R.id.ib_tjyj:

@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:background="@color/lighter_gray">
 
-    <!--此fragment已废弃-->
     <!--<ListView-->
         <!--android:id="@+id/lv_loanfragment"-->
         <!--android:layout_width="match_parent"-->

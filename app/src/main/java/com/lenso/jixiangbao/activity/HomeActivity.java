@@ -19,6 +19,7 @@ import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
+import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
 import com.lenso.jixiangbao.fragment.WebViewFragment;
@@ -54,7 +55,7 @@ public class HomeActivity extends BaseActivity {
     TopMenuBar topMenuBar;
 
     public static Activity HOMECONTEXT;
-    private WebViewFragment moreFragment;
+//    private WebViewFragment moreFragment;
     private int currentItem;
     private boolean moreOpen = false;
     private SlidingMenu menu;
@@ -77,7 +78,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void select(int index) {
-        if (index != 2) {
+        if (index != 4) {
             moreOpen = false;
             menuItem1.setSelected(false);
             menuItem2.setSelected(false);
@@ -95,6 +96,7 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setVisibility(View.VISIBLE);
                 topMenuBar.setBackVisibility(View.INVISIBLE);
                 topMenuBar.setMenuVisibility(View.VISIBLE);
+                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
                 break;
             case 1:
                 menuItem2.setSelected(true);
@@ -102,27 +104,29 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setVisibility(View.VISIBLE);
                 topMenuBar.setBackVisibility(View.INVISIBLE);
                 topMenuBar.setMenuVisibility(View.VISIBLE);
+                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
                 break;
             case 2:
-//                menuItem3.setSelected(true);
-//                topMenuBar.setTitleText(res.getString(R.string.loan));
-//                topMenuBar.setVisibility(View.VISIBLE);
-//                topMenuBar.setBackVisibility(View.INVISIBLE);
-//                topMenuBar.setMenuVisibility(View.VISIBLE);
-                topMenuBar.setTitleText(res.getString(R.string.more));
+                menuItem3.setSelected(true);
+                topMenuBar.setTitleText(res.getString(R.string.loan));
                 topMenuBar.setVisibility(View.VISIBLE);
-                topMenuBar.setBackVisibility(View.VISIBLE);
-                topMenuBar.setMenuVisibility(View.INVISIBLE);
+                topMenuBar.setBackVisibility(View.INVISIBLE);
+                topMenuBar.setMenuVisibility(View.VISIBLE);
+                topMenuBar.setMenuSrc(R.mipmap.calculator);
+//                topMenuBar.setTitleText(res.getString(R.string.more));
+//                topMenuBar.setVisibility(View.VISIBLE);
+//                topMenuBar.setBackVisibility(View.VISIBLE);
+//                topMenuBar.setMenuVisibility(View.INVISIBLE);
                 break;
             case 3:
                 menuItem4.setSelected(true);
                 topMenuBar.setVisibility(View.GONE);
                 break;
             case 4:
-//                topMenuBar.setTitleText(res.getString(R.string.more));
-//                topMenuBar.setVisibility(View.VISIBLE);
-//                topMenuBar.setBackVisibility(View.VISIBLE);
-//                topMenuBar.setMenuVisibility(View.INVISIBLE);
+                topMenuBar.setTitleText(res.getString(R.string.more));
+                topMenuBar.setVisibility(View.VISIBLE);
+                topMenuBar.setBackVisibility(View.VISIBLE);
+                topMenuBar.setMenuVisibility(View.INVISIBLE);
                 break;
         }
     }
@@ -155,7 +159,7 @@ public class HomeActivity extends BaseActivity {
         if (hasFocus && isFirst) {
             isFirst = false;
             initSlidingMenu();
-            moreFragment.webViewLoader(HTMLInterface.GD);
+//            moreFragment.webViewLoader(HTMLInterface.GD);
         }
         super.onWindowFocusChanged(hasFocus);
     }
@@ -163,10 +167,10 @@ public class HomeActivity extends BaseActivity {
 
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-        moreFragment = new WebViewFragment();
+//        moreFragment = new WebViewFragment();
         fragments.add(new ChoiceFragment());
         fragments.add(new FinancingFragment());
-        fragments.add(moreFragment);
+        fragments.add(new LoanFragment());
         mineFragment = new MineFragment();
         fragments.add(mineFragment);
 
@@ -206,11 +210,12 @@ public class HomeActivity extends BaseActivity {
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
-                intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.JI_CHE_DAI);
-                intent.putExtra("intent", JSInterface.JI_CHE_DAI);
-                startActivity(intent);
+//                Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
+//                intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
+//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.JI_CHE_DAI);
+//                intent.putExtra("intent", JSInterface.JI_CHE_DAI);
+//                startActivity(intent);
+                vpHome.setCurrentItem(2);
             }
         });
         menuItem4.setMenuItemClickListener(new View.OnClickListener() {
@@ -236,26 +241,23 @@ public class HomeActivity extends BaseActivity {
                     });
                     builder.create().show();
                 } else {
-//                    if(mineFragment.userInfo == null)
-                        mineFragment.initData();
-//                    else
-//                        mineFragment.initUI();
+                    mineFragment.initData();
                     vpHome.setCurrentItem(3);
                 }
             }
         });
-        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vpHome.setCurrentItem(2);
-            }
-        });
-        topMenuBar.setOnBackClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vpHome.setCurrentItem(currentItem);
-            }
-        });
+//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                vpHome.setCurrentItem(4);
+//            }
+//        });
+//        topMenuBar.setOnBackClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                vpHome.setCurrentItem(currentItem);
+//            }
+//        });
     }
 
     @Override
