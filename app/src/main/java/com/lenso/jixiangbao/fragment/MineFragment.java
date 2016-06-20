@@ -3,13 +3,11 @@ package com.lenso.jixiangbao.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,16 +43,6 @@ public class MineFragment extends BaseFragment {
     TextView tvUsername;
     @Bind(R.id.usertype)
     TextView usertype;
-    @Bind(R.id.fl_message)
-    FrameLayout flMessage;
-    @Bind(R.id.tv_ljty1)
-    TextView tvLjty1;
-    @Bind(R.id.tv_ljty2)
-    TextView tvLjty2;
-    @Bind(R.id.btn_ljty)
-    Button btnLjty;
-    @Bind(R.id.ll_ljty)
-    LinearLayout llLjty;
     @Bind(R.id.ib_tjyj)
     ImageButton ibTjyj;
     @Bind(R.id.tv_tjyj)
@@ -87,10 +75,6 @@ public class MineFragment extends BaseFragment {
     LinearLayout llZqzr;
     @Bind(R.id.ll_wdjk)
     LinearLayout llWdjk;
-    @Bind(R.id.ll_tyb)
-    LinearLayout llTyb;
-    @Bind(R.id.ll_zhxx)
-    LinearLayout llZhxx;
     @Bind(R.id.ll_gd)
     LinearLayout llGd;
     @Bind(R.id.tv_mine_unreadmsg)
@@ -103,19 +87,14 @@ public class MineFragment extends BaseFragment {
     TextView tvMineOrigin;
     @Bind(R.id.tv_mine_interest)
     TextView tvMineInterest;
+    @Bind(R.id.iv_mine_message)
+    ImageView ivMineMessage;
+    @Bind(R.id.ll_zhxx)
+    LinearLayout llZhxx;
 
-    private UserInfo userInfo;
+    public static UserInfo userInfo;
     private Map args = new HashMap();
     private Map argsign = new HashMap();
-    //    private String username;
-//    private String userType;
-//    private String real_status;
-//    private int unreadmsg;
-//    private int signed;
-//    private double accountUseMoney;
-//    private double collectTotal;
-//    private double collectOrigin;
-//    private double collectInterest;
     private DecimalFormat df = new DecimalFormat("0.00");
 
     @Nullable
@@ -153,9 +132,10 @@ public class MineFragment extends BaseFragment {
         }
 
         if (userInfo.getUnreadmsg() == 0) {
+            tvMineUnreadmsg.setText("");
             tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
         } else {
-            tvMineUnreadmsg.setText(userInfo.getUnreadmsg());
+            tvMineUnreadmsg.setText(String.valueOf(userInfo.getUnreadmsg()));
             tvMineUnreadmsg.setBackgroundResource(R.drawable.minefragment_message_count);
         }
 
@@ -172,14 +152,11 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_headpic,
+    @OnClick({R.id.iv_mine_more,
+            R.id.iv_headpic,
             R.id.tv_username,
             R.id.usertype,
-            R.id.fl_message,
-            R.id.ll_ljty,
-            R.id.tv_ljty1,
-            R.id.tv_ljty2,
-            R.id.btn_ljty,
+            R.id.iv_mine_message,
             R.id.ll_tjyj,
             R.id.ib_tjyj,
             R.id.tv_tjyj,
@@ -196,45 +173,44 @@ public class MineFragment extends BaseFragment {
             R.id.ll_wdtz,
             R.id.ll_zqzr,
             R.id.ll_wdjk,
-            R.id.ll_tyb,
             R.id.ll_zhxx,
             R.id.ll_gd})
     public void onClick(View view) {
+        String app_key = Config.getInstance(getActivity()).getConfig("app_key");
+        String arg = "?app_key=" + app_key;
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
         switch (view.getId()) {
+            case R.id.iv_mine_more:
+                showToast("more");
+                break;
             case R.id.iv_headpic:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
                 break;
             case R.id.tv_username:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
                 break;
             case R.id.usertype:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
                 startActivity(intent);
                 break;
-            case R.id.fl_message:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE);
+            case R.id.iv_mine_message:
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                 startActivity(intent);
-                break;
-            case R.id.ll_ljty:
-            case R.id.tv_ljty1:
-            case R.id.tv_ljty2:
-            case R.id.btn_ljty:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.LJTY);
-                intent.putExtra(HTMLInterface.H5_TITLE, "体验宝");
-                startActivity(intent);
+                userInfo.setUnreadmsg(0);
+//                tvMineUnreadmsg.setText("");
+//                tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
                 break;
             case R.id.ll_tjyj:
             case R.id.ib_tjyj:
             case R.id.tv_tjyj:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "推荐有奖");
                 startActivity(intent);
                 break;
@@ -267,57 +243,52 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_jf:
             case R.id.ib_jf:
             case R.id.tv_jf:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "积分商城");
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                 startActivity(intent);
                 break;
             case R.id.btn_cz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                 startActivity(intent);
                 break;
             case R.id.ll_dsze:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
                 startActivity(intent);
                 break;
             case R.id.ll_zjgk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
                 startActivity(intent);
                 break;
             case R.id.ll_wdtz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "我的投资");
                 startActivity(intent);
                 break;
             case R.id.ll_zqzr:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "债权转让");
                 startActivity(intent);
                 break;
             case R.id.ll_wdjk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
                 startActivity(intent);
                 break;
-            case R.id.ll_tyb:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TYB);
-                intent.putExtra(HTMLInterface.H5_TITLE, "体验宝");
-                startActivity(intent);
-                break;
             case R.id.ll_zhxx:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
                 break;
             case R.id.ll_gd:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "更多");
                 startActivity(intent);
                 break;

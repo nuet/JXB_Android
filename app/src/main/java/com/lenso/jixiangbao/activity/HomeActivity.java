@@ -236,7 +236,10 @@ public class HomeActivity extends BaseActivity {
                     });
                     builder.create().show();
                 } else {
-                    mineFragment.initData();
+//                    if(mineFragment.userInfo == null)
+                        mineFragment.initData();
+//                    else
+//                        mineFragment.initUI();
                     vpHome.setCurrentItem(3);
                 }
             }
