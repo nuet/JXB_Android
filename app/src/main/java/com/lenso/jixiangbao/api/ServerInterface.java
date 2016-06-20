@@ -22,7 +22,9 @@ public class ServerInterface {
     public final static String SERVER_SETPSW = SERVER_DOMAIN + "getpwd.html";
 
     public static final String ALL_LIST = SERVER_DOMAIN+"getallsystemlist.html";
-    public final static String INVEST_LIST = SERVER_DOMAIN+"investlist.html";
+    public static final String INVEST_LIST = SERVER_DOMAIN+"investlist.html";
     public static final String ALL_DATA = SERVER_DOMAIN+"getallsystemdata.html";
+
+    public final static String LOAN_CONFIRM = SERVER_DOMAIN + "apply.html";
 
 }

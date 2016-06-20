@@ -1,14 +1,28 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.api.HTMLInterface;
+import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.Config;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,7 +36,14 @@ public class LoanFragment extends BaseFragment {
     ImageView ivLoanCar;
     @Bind(R.id.ll_loan_table)
     LinearLayout llLoanTable;
+    @Bind(R.id.et_loan_phone)
+    EditText etLoanPhone;
+    @Bind(R.id.et_loan_name)
+    EditText etLoanName;
+    @Bind(R.id.et_loan_money)
+    EditText etLoanMoney;
 
+    private Map args = new HashMap();
 
 //    @Bind(R.id.lv_loanfragment)
 //    ListView lvLoanfragment;
@@ -125,10 +146,37 @@ public class LoanFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_loan_cha:
-                showToast("详细");
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.LOAN_DETAILS);
+                intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
+                startActivity(intent);
                 break;
             case R.id.btn_loan_confirm:
-                showToast("申请");
+                args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+                args.put("loan_money", etLoanMoney.getText().toString().trim());
+                args.put("name", etLoanName.getText().toString().trim());
+                args.put("mobile", etLoanPhone.getText().toString().trim());
+                VolleyHttp.getInstance().postParamsJson(ServerInterface.LOAN_CONFIRM, new VolleyHttp.JsonResponseListener() {
+                    @Override
+                    public void getJson(String json, boolean isConnectSuccess) {
+                        if(isConnectSuccess){
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                if (jsonObject.getString("status").equals("1")){
+                                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                                    intent.putExtra(JSInterface.H5_URL, HTMLInterface.LOAN_CONFIRM);
+                                    intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
+                                    startActivity(intent);
+                                }else{
+                                    showToast(jsonObject.getString("rsmsg"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                }, args);
                 break;
         }
     }

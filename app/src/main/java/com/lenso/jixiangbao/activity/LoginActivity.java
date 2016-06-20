@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity {
     EditText etLoginPsw;
 
     private static String app_key;
-    private Map agrs = new HashMap();
+    private Map args = new HashMap();
     private Intent getIntent;
     private String mobile;
     private SharedPreferences sp;
@@ -84,9 +84,9 @@ public class LoginActivity extends BaseActivity {
 //                finish();
                 break;
             case R.id.btn_login_confirm:
-                agrs.put("username", mobile);
-                agrs.put("password", etLoginPsw.getText().toString().trim());
-                agrs.put("actionType", "login");
+                args.put("username", mobile);
+                args.put("password", etLoginPsw.getText().toString().trim());
+                args.put("actionType", "login");
                 VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGIN, new VolleyHttp.JsonResponseListener() {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity {
                             showToast("请检查网络设置");
                         }
                     }
-                }, agrs);
+                }, args);
                 break;
         }
     }
