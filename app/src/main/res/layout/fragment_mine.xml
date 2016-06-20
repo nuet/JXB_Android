@@ -51,7 +51,7 @@
                             android:layout_toRightOf="@id/iv_mine_message"
                             android:background="@drawable/minefragment_message_count"
                             android:gravity="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="12sp" />
                     </FrameLayout>
 
@@ -272,7 +272,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:orientation="vertical"
                         android:padding="5dp">
 
@@ -296,7 +296,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="7"
+                        android:layout_weight="6"
                         android:gravity="center_vertical|right"
                         android:orientation="horizontal">
 

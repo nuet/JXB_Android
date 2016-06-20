@@ -97,6 +97,18 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setBackVisibility(View.INVISIBLE);
                 topMenuBar.setMenuVisibility(View.VISIBLE);
                 topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
+                topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
+                        String arg = "?app_key=" + app_key;
+                        Intent intent = new Intent();
+                        intent.setClass(HomeActivity.this, WebViewActivity.class);
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + arg);
+                        intent.putExtra(HTMLInterface.H5_TITLE, "更多");
+                        startActivity(intent);
+                    }
+                });
                 break;
             case 1:
                 menuItem2.setSelected(true);
@@ -105,6 +117,18 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setBackVisibility(View.INVISIBLE);
                 topMenuBar.setMenuVisibility(View.VISIBLE);
                 topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
+                topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
+                        String arg = "?app_key=" + app_key;
+                        Intent intent = new Intent();
+                        intent.setClass(HomeActivity.this, WebViewActivity.class);
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + arg);
+                        intent.putExtra(HTMLInterface.H5_TITLE, "更多");
+                        startActivity(intent);
+                    }
+                });
                 break;
             case 2:
                 menuItem3.setSelected(true);
@@ -113,6 +137,19 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setBackVisibility(View.INVISIBLE);
                 topMenuBar.setMenuVisibility(View.VISIBLE);
                 topMenuBar.setMenuSrc(R.mipmap.calculator);
+                topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
+                        String arg = "?app_key=" + app_key;
+                        Intent intent = new Intent();
+                        intent.setClass(HomeActivity.this, WebViewActivity.class);
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CALCULATOR + arg);
+                        intent.putExtra(HTMLInterface.H5_TITLE, "计算器");
+                        intent.putExtra("calculator", true);
+                        startActivity(intent);
+                    }
+                });
 //                topMenuBar.setTitleText(res.getString(R.string.more));
 //                topMenuBar.setVisibility(View.VISIBLE);
 //                topMenuBar.setBackVisibility(View.VISIBLE);
@@ -122,12 +159,12 @@ public class HomeActivity extends BaseActivity {
                 menuItem4.setSelected(true);
                 topMenuBar.setVisibility(View.GONE);
                 break;
-            case 4:
-                topMenuBar.setTitleText(res.getString(R.string.more));
-                topMenuBar.setVisibility(View.VISIBLE);
-                topMenuBar.setBackVisibility(View.VISIBLE);
-                topMenuBar.setMenuVisibility(View.INVISIBLE);
-                break;
+//            case 4:
+//                topMenuBar.setTitleText(res.getString(R.string.more));
+//                topMenuBar.setVisibility(View.VISIBLE);
+//                topMenuBar.setBackVisibility(View.VISIBLE);
+//                topMenuBar.setMenuVisibility(View.INVISIBLE);
+//                break;
         }
     }
 
@@ -195,6 +232,7 @@ public class HomeActivity extends BaseActivity {
             }
         });
         select(0);
+
         menuItem1.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,18 +284,7 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                vpHome.setCurrentItem(4);
-//            }
-//        });
-//        topMenuBar.setOnBackClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                vpHome.setCurrentItem(currentItem);
-//            }
-//        });
+
     }
 
     @Override

@@ -1,28 +1,14 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.WebViewActivity;
-import com.lenso.jixiangbao.adapter.LoanFragmentListViewAdapter;
-import com.lenso.jixiangbao.api.HTMLInterface;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +18,12 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/11.
  */
 public class LoanFragment extends BaseFragment {
+    @Bind(R.id.iv_loan_car)
+    ImageView ivLoanCar;
+    @Bind(R.id.ll_loan_table)
+    LinearLayout llLoanTable;
+
+
 //    @Bind(R.id.lv_loanfragment)
 //    ListView lvLoanfragment;
 //
@@ -44,6 +36,8 @@ public class LoanFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loan, null);
         ButterKnife.bind(this, view);
+
+        llLoanTable.getBackground().setAlpha(80);
 
 //        data = new ArrayList<>();
 //        map = new HashMap<>();
@@ -121,4 +115,21 @@ public class LoanFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick({R.id.tv_loan_cha, R.id.btn_loan_confirm})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_loan_cha:
+                showToast("详细");
+                break;
+            case R.id.btn_loan_confirm:
+                showToast("申请");
+                break;
+        }
+    }
 }

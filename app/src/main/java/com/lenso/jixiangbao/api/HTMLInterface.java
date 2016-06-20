@@ -11,10 +11,15 @@ public class HTMLInterface {
      * 用户协议API
      */
     public static final String YHXY = DOMAIN + "article.html?type=protocol";
+
     /**
      * LoanFragment HTML 5 API
      */
     public static final String LOAN = DOMAIN + "borrowdetail.html";
+//    public static final String CALCULATOR = DOMAIN + "borrow_calculator.html";
+    public static final String LOAN_DETAILS = DOMAIN + "desc_borrowdescri.html";
+    public static final String LOAN_CONFIRM = DOMAIN + "borrowover.html";
+
     /**
      * MineFragment HTML 5 API
      */
@@ -34,9 +39,11 @@ public class HTMLInterface {
     public static final String ZHXX = DOMAIN + "member/account.html";
     public static final String GD = DOMAIN + "desc_more.html";
 
+
     public static final String JI_CHE_DAI=DOMAIN+"borrowdetail.html";
-    public static final String DETAIL=DOMAIN+"detail.html";
     public static final String CALCULATOR=DOMAIN+"borrow_calculator.html";
     public static final String CALCULATOR2=DOMAIN+"calculator.html";
+
+    public static final String DETAIL=DOMAIN+"detail.html";
     public static final String RIGHT_DETAIL=DOMAIN+"rightdetail.html";
 }

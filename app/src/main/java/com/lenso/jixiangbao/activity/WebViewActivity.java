@@ -35,6 +35,8 @@ public class WebViewActivity extends WebBaseActivity {
     FrameLayout flWeb;
 
     private File headPIC;
+    private static WebView webView;
+    private static boolean calculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class WebViewActivity extends WebBaseActivity {
         Intent intent = getIntent();
         String url = intent.getStringExtra(JSInterface.H5_URL);
         String title = intent.getStringExtra(JSInterface.H5_TITLE);
-        WebView webView = getWebView(url);
+        webView = getWebView(url);
         flWeb.addView(webView);
         webView.addJavascriptInterface(new JSInterface(this), "api");
         WebSettings webSettings = webView.getSettings();
@@ -61,61 +63,68 @@ public class WebViewActivity extends WebBaseActivity {
                 finish();
             }
         });
-        menuSet(intent);
-
+//        menuSet(intent);
+        calculator = intent.getBooleanExtra("calculator", false);
+        if(calculator){
+            topMenuBar.setBackSrc(R.mipmap.close);
+        }
 
         headPIC = new File(WebViewActivity.this.getFilesDir(), "head.png");
 
     }
 
-    private void menuSet(Intent intent) {
-        int i = intent.getIntExtra("intent", -1);
-        switch (i) {
-            case JSInterface.JI_CHE_DAI:
-                ji_che_dai();
-                break;
-            case JSInterface.CALCULATOR:
-                calculator();
-                break;
-            case JSInterface.DETAIL:
-                detail();
-                break;
-        }
+    public static void reload(){
+        webView.reload();
     }
 
-    private void detail() {
-        topMenuBar.setMenuSrc(R.mipmap.calculator);
-        topMenuBar.setMenuVisibility(View.VISIBLE);
-        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
-                intent.putExtra(JSInterface.H5_TITLE, "计算器");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2);
-                intent.putExtra("intent", JSInterface.CALCULATOR);
-                startActivity(intent);
-            }
-        });
-    }
+//    private void menuSet(Intent intent) {
+//        int i = intent.getIntExtra("intent", -1);
+//        switch (i) {
+//            case JSInterface.JI_CHE_DAI:
+//                ji_che_dai();
+//                break;
+//            case JSInterface.CALCULATOR:
+//                calculator();
+//                break;
+//            case JSInterface.DETAIL:
+//                detail();
+//                break;
+//        }
+//    }
 
-    private void calculator() {
-        topMenuBar.setBackSrc(R.mipmap.close);
-    }
+//    private void detail() {
+//        topMenuBar.setMenuSrc(R.mipmap.calculator);
+//        topMenuBar.setMenuVisibility(View.VISIBLE);
+//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+//                intent.putExtra(JSInterface.H5_TITLE, "计算器");
+//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2);
+//                intent.putExtra("intent", JSInterface.CALCULATOR);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
-    private void ji_che_dai() {
-        topMenuBar.setMenuSrc(R.mipmap.calculator);
-        topMenuBar.setMenuVisibility(View.VISIBLE);
-        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
-                intent.putExtra(JSInterface.H5_TITLE, "计算器");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
-                intent.putExtra("intent", JSInterface.CALCULATOR);
-                startActivity(intent);
-            }
-        });
-    }
+//    private void calculator() {
+//        topMenuBar.setBackSrc(R.mipmap.close);
+//    }
+
+//    private void ji_che_dai() {
+//        topMenuBar.setMenuSrc(R.mipmap.calculator);
+//        topMenuBar.setMenuVisibility(View.VISIBLE);
+//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+//                intent.putExtra(JSInterface.H5_TITLE, "计算器");
+//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
+//                intent.putExtra("intent", JSInterface.CALCULATOR);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 
     @Override

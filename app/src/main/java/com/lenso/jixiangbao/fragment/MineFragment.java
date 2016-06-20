@@ -181,9 +181,6 @@ public class MineFragment extends BaseFragment {
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
         switch (view.getId()) {
-            case R.id.iv_mine_more:
-                showToast("more");
-                break;
             case R.id.iv_headpic:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
@@ -217,7 +214,6 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_qd:
             case R.id.ib_qd:
             case R.id.tv_qd:
-
                 argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
                 VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
                     @Override
@@ -288,6 +284,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_gd:
+            case R.id.iv_mine_more:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + arg);
                 intent.putExtra(HTMLInterface.H5_TITLE, "更多");
                 startActivity(intent);
