@@ -27,17 +27,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:text="请绘制手势密码"
-        android:textSize="15sp"
-        android:textColor="@color/blue"/>
+        android:textColor="@color/blue"
+        android:textSize="15sp" />
 
-<!--    <TextView
-        android:id="@+id/id_textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="两次绘制的手势不一致"
-        android:textSize="15sp"
-        android:visibility="gone" />-->
+    <!--    <TextView
+            android:id="@+id/id_textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="两次绘制的手势不一致"
+            android:textSize="15sp"
+            android:visibility="gone" />-->
 
     <LinearLayout
         android:id="@+id/ll_show"
@@ -51,13 +51,13 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
+            app:color_no_select="#838383"
+            app:color_selected="#01A0E5"
+            app:display_view_count="3"
             app:stroke_width_finger_on_outer_circle="1"
             app:stroke_width_finger_up_match_outer_circle="1"
             app:stroke_width_finger_up_un_match_outer_circle="1"
             app:stroke_width_no_finger_outer_circle="1"
-            app:color_no_select="#838383"
-            app:color_selected="#01A0E5"
-            app:display_view_count="3"
             app:stroke_width_no_select="2dp"
             app:style_no_select="style_stroke"
             app:style_selected="style_fill">
@@ -69,9 +69,9 @@
             android:id="@+id/id_gestureLockViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_gravity="center"
             app:color_finger_on_inner_circle="#01A0E5"
             app:color_finger_on_outer_circle="#01A0E5"
             app:color_finger_on_outer_inner_circle="#ADD5E6"
@@ -105,18 +105,25 @@
             app:style_no_finger_outer_circle="style_stroke"
             app:tryTimes="5" />
 
-        <Button
-            android:id="@+id/id_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"
-            android:text="重 绘"
-            android:textColor="@color/blue"
-            android:background="@mipmap/ch"
-            android:visibility="invisible" />
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/id_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@mipmap/ch"
+                android:text="重 绘"
+                android:textColor="@color/blue"
+                android:visibility="invisible" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -24,16 +24,16 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:text="绘制手势密码"
-        android:textSize="15sp"
-        android:textColor="@color/blue"/>
+        android:textColor="@color/blue"
+        android:textSize="15sp" />
 
     <com.lenso.jixiangbao.view.GestureLockViewGroup
         android:id="@+id/id_gestureLockViewGroup_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_centerInParent="true"
         app:color_finger_on_inner_circle="#01A0E5"
         app:color_finger_on_outer_circle="#01A0E5"
         app:color_finger_on_outer_inner_circle="#ADD5E6"
@@ -67,17 +67,24 @@
         app:style_no_finger_outer_circle="style_stroke"
         app:tryTimes="5" />
 
-    <Button
-        android:id="@+id/btn_gesture_unlock_forget"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:gravity="bottom"
         android:layout_below="@id/id_gestureLockViewGroup_1"
-        android:layout_gravity="center_horizontal"
-        android:text="忘记密码?"
-        android:textColor="@color/blue"
-        android:background="@mipmap/ch"
-        android:visibility="visible" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_gesture_unlock_forget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@mipmap/ch"
+            android:text="忘记密码?"
+            android:textColor="@color/blue"
+            android:visibility="visible" />
+    </LinearLayout>
 </RelativeLayout>

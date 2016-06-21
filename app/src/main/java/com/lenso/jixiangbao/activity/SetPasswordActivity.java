@@ -56,6 +56,12 @@ public class SetPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.btn_set_confirm)
     public void onClick() {
+        if(etSetPsw.getText().toString().trim().length() < 8){
+            etSetPsw.setText("");
+            etSetAgain.setText("");
+            showToast("您的密码不足八位，请重新输入");
+            return;
+        }
         argsSet.put("password", etSetPsw.getText().toString().trim());
         argsSet.put("confirm_password", etSetAgain.getText().toString().trim());
         argsSet.put("type", "setpwd");
@@ -72,6 +78,7 @@ public class SetPasswordActivity extends BaseActivity {
                             Intent intent = new Intent();
                             intent.setClass(SetPasswordActivity.this, HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }else {
                             showToast(jsonObject.getString("rsmsg"));
                         }

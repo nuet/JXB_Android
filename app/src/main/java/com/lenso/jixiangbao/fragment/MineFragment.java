@@ -134,9 +134,11 @@ public class MineFragment extends BaseFragment {
         if (userInfo.getUnreadmsg() == 0) {
             tvMineUnreadmsg.setText("");
             tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
+            tvMineUnreadmsg.setVisibility(View.INVISIBLE);
         } else {
             tvMineUnreadmsg.setText(String.valueOf(userInfo.getUnreadmsg()));
             tvMineUnreadmsg.setBackgroundResource(R.drawable.minefragment_message_count);
+            tvMineUnreadmsg.setVisibility(View.VISIBLE);
         }
 
         if(userInfo.getSigned() == 0){
