@@ -139,6 +139,13 @@ public class MineFragment extends BaseFragment {
             tvMineUnreadmsg.setBackgroundResource(R.drawable.minefragment_message_count);
         }
 
+        if(userInfo.getSigned() == 0){
+            ibQd.setImageResource(R.mipmap.minefragment_qd);
+            ibQd.setClickable(true);
+        }else{
+            ibQd.setImageResource(R.mipmap.minefragment_yqd);
+            ibQd.setClickable(false);
+        }
         tvMineUsemoney.setText(String.valueOf(df.format(userInfo.getSummary().getAccountUseMoney())));
         tvMineTotal.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal())));
         tvMineInterest.setText(String.valueOf(df.format(userInfo.getSummary().getCollectInterest())));
@@ -214,27 +221,33 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_qd:
             case R.id.ib_qd:
             case R.id.tv_qd:
-                argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
-                VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
-                    @Override
-                    public void getJson(String json, boolean isConnectSuccess) {
-                        if (isConnectSuccess) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(json);
-                                if (jsonObject.getString("status").equals("1")) {
-                                    showToast("签到成功");
-                                } else {
-                                    showToast(jsonObject.getString("rsmsg"));
+                if(userInfo.getSigned() == 0){
+                    argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+                    VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
+                        @Override
+                        public void getJson(String json, boolean isConnectSuccess) {
+                            if (isConnectSuccess) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    if (jsonObject.getString("status").equals("1")) {
+                                        showToast("签到成功");
+                                        userInfo.setSigned(1);
+                                    } else {
+                                        showToast(jsonObject.getString("rsmsg"));
+                                    }
+                                } catch (JSONException e) {
+                                    logInfo("sign error!");
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                logInfo("sign error!");
-                                e.printStackTrace();
+                            } else {
+                                showToast("请检查网络设置！");
                             }
-                        } else {
-                            showToast("请检查网络设置！");
                         }
-                    }
-                }, argsign);
+                    }, argsign);
+                    ibQd.setImageResource(R.mipmap.minefragment_yqd);
+                }else{
+                    showToast("您今日已签到，明天再来吧！");
+                }
                 break;
             case R.id.ll_jf:
             case R.id.ib_jf:

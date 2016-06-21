@@ -135,6 +135,11 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_register_confirm:
+                if(etRegisterPsw.getText().toString().trim().length() < 8){
+                    etRegisterPsw.setText("");
+                    showToast("您的密码不足八位，请重新输入");
+                    break;
+                }
                 agrsRegister.put("phone", mobile);
                 agrsRegister.put("valicode", etRegisterCode.getText().toString().trim());
                 agrsRegister.put("password", etRegisterPsw.getText().toString().trim());

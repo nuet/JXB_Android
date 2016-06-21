@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/ll_show"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:text="请绘制手势密码"
         android:textSize="15sp"
         android:textColor="@color/blue"/>
@@ -43,8 +43,7 @@
         android:id="@+id/ll_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+
         android:orientation="vertical">
 
         <com.lenso.jixiangbao.view.GestureLockDisplayViews
@@ -52,6 +51,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
+            app:stroke_width_finger_on_outer_circle="1"
+            app:stroke_width_finger_up_match_outer_circle="1"
+            app:stroke_width_finger_up_un_match_outer_circle="1"
+            app:stroke_width_no_finger_outer_circle="1"
             app:color_no_select="#838383"
             app:color_selected="#01A0E5"
             app:display_view_count="3"
@@ -66,6 +69,8 @@
             android:id="@+id/id_gestureLockViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
             app:color_finger_on_inner_circle="#01A0E5"
             app:color_finger_on_outer_circle="#01A0E5"
@@ -89,10 +94,10 @@
             app:rate_finger_on_inner_circle="0.4"
             app:rate_finger_up_match_inner_circle="0.4"
             app:rate_finger_up_un_match_inner_circle="0.4"
-            app:stroke_width_finger_on_outer_circle="5"
-            app:stroke_width_finger_up_match_outer_circle="5"
-            app:stroke_width_finger_up_un_match_outer_circle="5"
-            app:stroke_width_no_finger_outer_circle="5"
+            app:stroke_width_finger_on_outer_circle="3"
+            app:stroke_width_finger_up_match_outer_circle="3"
+            app:stroke_width_finger_up_un_match_outer_circle="3"
+            app:stroke_width_no_finger_outer_circle="3"
             app:style_finger_on_outer_circle="style_stroke_and_fill"
             app:style_finger_up_match_inner_circle="style_fill"
             app:style_finger_up_match_outer_circle="style_stroke_and_fill"

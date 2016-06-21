@@ -22,10 +22,9 @@ import java.util.List;
  *
  * 整体包含n*n个GestureLockView,每个GestureLockView间间隔mMarginBetweenLockView，
  * 最外层的GestureLockView与容器存在mMarginBetweenLockView的外边距
- * <p>
  * 关于GestureLockView的边长（n*n）： n * mGestureLockViewWidth + ( n + 1 ) *
- * mMarginBetweenLockView = mWidth ; 得：mGestureLockViewWidth = 4 * mWidth / ( 5
- * * mCount + 1 ) 注：mMarginBetweenLockView = mGestureLockViewWidth * 0.25 ;
+ * mMarginBetweenLockView = mWidth ; 得：mGestureLockViewWidth = 2 * mWidth / ( 3
+ * n + 1 ) 注：mMarginBetweenLockView = mGestureLockViewWidth * 0.5 ;
  */
 public class GestureLockViewGroup extends RelativeLayout {
 
@@ -298,9 +297,9 @@ public class GestureLockViewGroup extends RelativeLayout {
         if (mGestureLockViews == null) {
             mGestureLockViews = new GestureLockView[mCount * mCount];
 
-            mGestureLockViewWidth = (int) (4 * mWidth * 1.0f / (5 * mCount + 1));//计算GestureLockView的宽度
+            mGestureLockViewWidth = (int) (2 * mWidth * 1.0f / (3 * mCount + 1));//计算GestureLockView的宽度
 
-            mMarginBetweenLockView = (int) (mGestureLockViewWidth * 0.25);//计算GestureLockView的间距
+            mMarginBetweenLockView = (int) (mGestureLockViewWidth * 0.5);//计算GestureLockView的间距
 
             mPaint.setStrokeWidth(mPathWidth);// 设置画笔的宽度为GestureLockView的内圆直径稍微小点（不喜欢的话，随便设）
 

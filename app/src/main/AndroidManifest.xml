@@ -44,7 +44,8 @@
             android:theme="@style/LaunchActivityTheme"/>
         <activity
             android:name=".activity.HomeActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".activity.WebViewActivity"/>
         <activity android:name=".activity.LoginOrRegisterActivity"/>

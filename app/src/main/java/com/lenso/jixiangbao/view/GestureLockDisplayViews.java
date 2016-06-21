@@ -24,7 +24,7 @@ public class GestureLockDisplayViews extends RelativeLayout {
     /**
      * 每个边上的GestureLockDisplayView的个数
      */
-    private int mCount = 4;
+    private int mCount = 3;
     /**
      * 存储答案
      */
@@ -32,11 +32,11 @@ public class GestureLockDisplayViews extends RelativeLayout {
 
     private Paint mPaint;
     /**
-     * 每个GestureLockDisplayView中间的间距 设置为：mGestureLockDisplayViewWidth * 25%
+     * 每个GestureLockDisplayView中间的间距 设置为：mGestureLockDisplayViewWidth * 50%
      */
     private int mMarginBetweenLockView = 30;
     /**
-     * GestureLockDisplayView的边长 4 * mWidth / ( 5 * mCount + 1 )
+     * GestureLockDisplayView的边长 2 * mWidth / ( 3 * mCount + 1 )
      */
     private int mGestureLockDisplayViewWidth;
 
@@ -107,9 +107,9 @@ public class GestureLockDisplayViews extends RelativeLayout {
         if (mGestureLockDisplayViews == null) {
             mGestureLockDisplayViews = new GestureLockDisplayView[mCount * mCount];
             // 计算每个GestureLockDisplayView的宽度
-            mGestureLockDisplayViewWidth = (int) (4 * mWidth * 1.0f / (5 * mCount + 1));
+            mGestureLockDisplayViewWidth = (int) (2 * mWidth * 1.0f / (3 * mCount + 1));
             //计算每个GestureLockDisplayView的间距
-            mMarginBetweenLockView = (int) (mGestureLockDisplayViewWidth * 0.25);
+            mMarginBetweenLockView = (int) (mGestureLockDisplayViewWidth * 0.5);
             // 设置画笔的宽度为GestureLockDisplayView的内圆直径稍微小点（不喜欢的话，随便设）
             mPaint.setStrokeWidth(mGestureLockDisplayViewWidth * 0.29f);
 
