@@ -15,6 +15,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CheckPassword;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -48,7 +49,7 @@ public class RegisterActivity extends BaseActivity {
     EditText etRegisterCode;
 
     private Map agrsCode = new HashMap();
-    private Map<String,String> agrsRegister = new HashMap();
+    private Map<String, String> agrsRegister = new HashMap();
     private Intent getIntent;
     private String mobile;
     private static boolean BOXCHECKED = true;//默认同意
@@ -81,7 +82,7 @@ public class RegisterActivity extends BaseActivity {
                 VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_GETPHONECODE, new VolleyHttp.JsonResponseListener() {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
-                        if(isConnectSuccess){
+                        if (isConnectSuccess) {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
@@ -91,7 +92,7 @@ public class RegisterActivity extends BaseActivity {
                                 logInfo("get phone code http error!");
                                 e.printStackTrace();
                             }
-                        }else {
+                        } else {
                             showToast("请检查网络设置");
                         }
                     }
@@ -135,44 +136,49 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_register_confirm:
-                if(etRegisterPsw.getText().toString().trim().length() < 8){
+//                if(etRegisterPsw.getText().toString().trim().length() < 8){
+//                    etRegisterPsw.setText("");
+//                    showToast("您的密码不足八位，请重新输入");
+//                    break;
+//                }
+                if (CheckPassword.check(etRegisterPsw.getText().toString().trim())) {
+                    agrsRegister.put("phone", mobile);
+                    agrsRegister.put("valicode", etRegisterCode.getText().toString().trim());
+                    agrsRegister.put("password", etRegisterPsw.getText().toString().trim());
+//                agrsRegister.put("invite_code", "");
+                    agrsRegister.put("actionType", "register");
+                    logInfo(agrsRegister.toString());
+                    VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_REGISTER, new VolleyHttp.JsonResponseListener() {
+                        @Override
+                        public void getJson(String json, boolean isConnectSuccess) {
+                            logInfo(json);
+                            if (isConnectSuccess) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    if (jsonObject.getString("status").equals("1")) {
+                                        app_key = jsonObject.getString("app_key");
+                                        Config.getInstance(RegisterActivity.this).putConfig("app_key", app_key);
+                                        Config.getInstance(RegisterActivity.this).putConfig("phone", mobile);
+                                        Intent intent = new Intent();
+                                        intent.setClass(RegisterActivity.this, IdentifyActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        showToast(jsonObject.getString("rsmsg"));
+                                    }
+                                } catch (JSONException e) {
+                                    logInfo("register failed");
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                showToast("请检查网络设置");
+                            }
+                        }
+                    }, agrsRegister);
+                } else {
                     etRegisterPsw.setText("");
                     showToast("您的密码不足八位，请重新输入");
-                    break;
                 }
-                agrsRegister.put("phone", mobile);
-                agrsRegister.put("valicode", etRegisterCode.getText().toString().trim());
-                agrsRegister.put("password", etRegisterPsw.getText().toString().trim());
-//                agrsRegister.put("invite_code", "");
-                agrsRegister.put("actionType", "register");
-                logInfo(agrsRegister.toString());
-                VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_REGISTER, new VolleyHttp.JsonResponseListener() {
-                    @Override
-                    public void getJson(String json, boolean isConnectSuccess) {
-                        logInfo(json);
-                        if(isConnectSuccess){
-                            try {
-                                JSONObject jsonObject = new JSONObject(json);
-                                if(jsonObject.getString("status").equals("1")){
-                                    app_key = jsonObject.getString("app_key");
-                                    Config.getInstance(RegisterActivity.this).putConfig("app_key",app_key);
-                                    Config.getInstance(RegisterActivity.this).putConfig("phone",mobile);
-                                    Intent intent = new Intent();
-                                    intent.setClass(RegisterActivity.this, IdentifyActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else {
-                                    showToast(jsonObject.getString("rsmsg"));
-                                }
-                            } catch (JSONException e) {
-                                logInfo("register failed");
-                                e.printStackTrace();
-                            }
-                        }else{
-                            showToast("请检查网络设置");
-                        }
-                    }
-                }, agrsRegister);
                 break;
             case R.id.tv_register_yhxy:
                 Intent intentYHXY = new Intent(RegisterActivity.this, WebViewActivity.class);

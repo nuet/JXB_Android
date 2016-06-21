@@ -276,8 +276,8 @@ public class JSInterface {
      * @param key 键
      */
     @JavascriptInterface
-    public void getConfig(String key) {
-        Config.getInstance(context).getConfig(key);
+    public String getConfig(String key) {
+        return Config.getInstance(context).getConfig(key);
     }
 
     /**
@@ -287,5 +287,70 @@ public class JSInterface {
     public void back() {
         activity.finish();
         WebViewActivity.reload();
+    }
+
+    /**
+     * 分享
+     */
+    @JavascriptInterface
+    public void share(){
+        /**
+         * 显示popupWindow
+         */
+        // 利用layoutInflater获得View
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.layout_popupwindow, null);
+        View parent = inflater.inflate(R.layout.activity_webview, null);
+
+        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+
+        final PopupWindow window = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window.setFocusable(true);
+
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        window.setBackgroundDrawable(dw);
+
+        // 设置popWindow的显示和消失动画
+        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+        // 在底部显示
+        window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
+
+        // 检验popWindow里的button是否可以点击
+        Button take = (Button) view.findViewById(R.id.pop_btn_take_photo);
+        take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showToast("拍照");
+                Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.png")));
+                ((Activity) context).startActivityForResult(intentFromCapture, 1);
+                window.dismiss();
+            }
+        });
+        Button choose = (Button) view.findViewById(R.id.pop_btn_choose_photo);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showToast("相册");
+                Intent intentFromGallery = new Intent();
+                intentFromGallery.setType("image/*"); // 设置文件类型
+                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                ((Activity) context).startActivityForResult(intentFromGallery, 2);
+                window.dismiss();
+            }
+        });
+        Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showToast("取消");
+                window.dismiss();
+            }
+        });
     }
 }
