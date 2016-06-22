@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -138,7 +139,7 @@ public class JSInterface {
         window.setFocusable(true);
 
         // 实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
         window.setBackgroundDrawable(dw);
 
         // 设置popWindow的显示和消失动画
@@ -299,7 +300,7 @@ public class JSInterface {
          */
         // 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.layout_popupwindow, null);
+        View view = inflater.inflate(R.layout.layout_popupwindow_share, null);
         View parent = inflater.inflate(R.layout.activity_webview, null);
 
         // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
@@ -312,7 +313,7 @@ public class JSInterface {
         window.setFocusable(true);
 
         // 实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
         window.setBackgroundDrawable(dw);
 
         // 设置popWindow的显示和消失动画
@@ -320,30 +321,7 @@ public class JSInterface {
         // 在底部显示
         window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
 
-        // 检验popWindow里的button是否可以点击
-        Button take = (Button) view.findViewById(R.id.pop_btn_take_photo);
-        take.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("拍照");
-                Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.png")));
-                ((Activity) context).startActivityForResult(intentFromCapture, 1);
-                window.dismiss();
-            }
-        });
-        Button choose = (Button) view.findViewById(R.id.pop_btn_choose_photo);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("相册");
-                Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*"); // 设置文件类型
-                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-                ((Activity) context).startActivityForResult(intentFromGallery, 2);
-                window.dismiss();
-            }
-        });
+
         Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

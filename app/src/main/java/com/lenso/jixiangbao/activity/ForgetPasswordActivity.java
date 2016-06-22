@@ -72,6 +72,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                     public void getJson(String json, boolean isConnectSuccess) {
                         if(isConnectSuccess){
                             try {
+                                logInfo(json);
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     logInfo("get phone code succeed!");

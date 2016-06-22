@@ -57,24 +57,16 @@ public class SetPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.btn_set_confirm)
     public void onClick() {
-//        if(etSetPsw.getText().toString().trim().length() < 8){
-//            etSetPsw.setText("");
-//            etSetAgain.setText("");
-//            showToast("您的密码不足八位，请重新输入");
-//            return;
-//        }
         if(CheckPassword.check(etSetPsw.getText().toString().trim())){
             argsSet.put("password", etSetPsw.getText().toString().trim());
             argsSet.put("confirm_password", etSetAgain.getText().toString().trim());
             argsSet.put("type", "setpwd");
             argsSet.put("id", id);
-            logInfo(argsSet.toString());
             VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_SETPSW, new VolleyHttp.JsonResponseListener() {
                 @Override
                 public void getJson(String json, boolean isConnectSuccess) {
                     if(isConnectSuccess){
                         try {
-                            logInfo(json);
                             JSONObject jsonObject = new JSONObject(json);
                             if(jsonObject.getString("status").equals("1")){
                                 Config.getInstance(SetPasswordActivity.this).putConfig("app_key", jsonObject.getString("app_key"));

@@ -84,6 +84,7 @@ public class RegisterActivity extends BaseActivity {
                     public void getJson(String json, boolean isConnectSuccess) {
                         if (isConnectSuccess) {
                             try {
+                                logInfo(json);
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     logInfo("get phone code succeed!");
@@ -136,11 +137,6 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_register_confirm:
-//                if(etRegisterPsw.getText().toString().trim().length() < 8){
-//                    etRegisterPsw.setText("");
-//                    showToast("您的密码不足八位，请重新输入");
-//                    break;
-//                }
                 if (CheckPassword.check(etRegisterPsw.getText().toString().trim())) {
                     agrsRegister.put("phone", mobile);
                     agrsRegister.put("valicode", etRegisterCode.getText().toString().trim());
@@ -151,7 +147,6 @@ public class RegisterActivity extends BaseActivity {
                     VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_REGISTER, new VolleyHttp.JsonResponseListener() {
                         @Override
                         public void getJson(String json, boolean isConnectSuccess) {
-                            logInfo(json);
                             if (isConnectSuccess) {
                                 try {
                                     JSONObject jsonObject = new JSONObject(json);
