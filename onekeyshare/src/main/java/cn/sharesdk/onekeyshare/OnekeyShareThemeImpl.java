@@ -138,7 +138,7 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		if (formateShareData(platform)) {
 			ShareParams sp = shareDataToShareParams(platform);
 			if (sp != null) {
-				toast("ssdk_oks_sharing");
+//				toast("ssdk_oks_sharing");
 				if (customizeCallback != null) {
 					customizeCallback.onShare(platform, sp);
 				}
@@ -367,10 +367,10 @@ public abstract class OnekeyShareThemeImpl implements PlatformActionListener, Ca
 		switch (msg.arg1) {
 			case 1: {
 				// 成功
-				int resId = R.getStringRes(context, "ssdk_oks_share_completed");
-				if (resId > 0) {
-					toast(context.getString(resId));
-				}
+//				int resId = R.getStringRes(context, "ssdk_oks_share_completed");
+//				if (resId > 0) {
+//					toast(context.getString(resId));
+//				}
 			} break;
 			case 2: {
 				// 失败

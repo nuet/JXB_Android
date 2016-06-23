@@ -32,7 +32,7 @@
         SortId="1"
         AppKey="3006699354"
         AppSecret="bf7aefd414a0ae71afed7a313a909dc4"
-        RedirectUrl="http://www.sharesdk.cn"
+        RedirectUrl="http://len.so.com"
         ShareByAppClient="true"
         Enable="true" />
 
@@ -68,7 +68,7 @@
         SortId="4"
         AppId="wx8d0ccd7976b0e909"
         AppSecret="a2ed97a816cd5bbf7af4321b4ae84e8c"
-        BypassApproval="false"
+        BypassApproval="true"
         Enable="true" />
     
     <WechatMoments
@@ -76,7 +76,7 @@
         SortId="5"
         AppId="wx8d0ccd7976b0e909"
         AppSecret="a2ed97a816cd5bbf7af4321b4ae84e8c"
-        BypassApproval="false"
+        BypassApproval="true"
         Enable="true" />
         
 	<WechatFavorite

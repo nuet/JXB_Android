@@ -189,7 +189,7 @@
 
         <!-- JPush . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="fb589f44674161a6e9ce31ff" /> <!-- </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="43afae061fe3960329d8b7f6" /> <!-- </>值来自开发者平台取得的AppKey-->
 
     </application>
 
