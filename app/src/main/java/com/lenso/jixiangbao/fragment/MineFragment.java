@@ -201,9 +201,11 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.usertype:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + arg);
-                intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
-                startActivity(intent);
+                if(userInfo.getDetailuser().getReal_status().equals("0")){
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + arg);
+                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                    startActivity(intent);
+                }
                 break;
             case R.id.iv_mine_message:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + arg);
