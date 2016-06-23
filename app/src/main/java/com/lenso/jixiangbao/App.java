@@ -7,6 +7,7 @@ import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.http.VolleyHttp;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.ShareSDK;
 
 /**
  * Created by king on 2016/5/19.

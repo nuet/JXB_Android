@@ -33,6 +33,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
 
 /**
@@ -69,6 +70,8 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         HOMECONTEXT = HomeActivity.this;
+
+        ShareSDK.initSDK(this);//初始化shareSDK
 
         initViewPager();
     }
@@ -297,4 +300,9 @@ public class HomeActivity extends BaseActivity {
         super.onBackPressed();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShareSDK.stopSDK(this);
+    }
 }

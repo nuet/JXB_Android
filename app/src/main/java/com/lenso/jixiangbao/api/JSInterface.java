@@ -43,6 +43,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 /**
  * Created by king on 2016/5/17.
  */
@@ -295,40 +298,67 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void share(){
-        /**
-         * 显示popupWindow
-         */
-        // 利用layoutInflater获得View
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.layout_popupwindow_share, null);
-        View parent = inflater.inflate(R.layout.activity_webview, null);
+        ShareSDK.initSDK(context);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
 
-        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+        // title标题：微信、QQ（新浪微博不需要标题）
+        oks.setTitle("我是分享标题");  //最多30个字符
 
-        final PopupWindow window = new PopupWindow(view,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
+        // text是分享文本：所有平台都需要这个字段
+        oks.setText("我是分享文本，啦啦啦~http://uestcbmi.com/");  //最多40个字符
 
-        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
-        window.setFocusable(true);
+        // imagePath是图片的本地路径：除Linked-In以外的平台都支持此参数
+        //oks.setImagePath(Environment.getExternalStorageDirectory() + "/meinv.jpg");//确保SDcard下面存在此张图片
 
-        // 实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
-        window.setBackgroundDrawable(dw);
+        //网络图片的url：所有平台
+        oks.setImageUrl("http://7sby7r.com1.z0.glb.clouddn.com/CYSJ_02.jpg");//网络图片rul
 
-        // 设置popWindow的显示和消失动画
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        // 在底部显示
-        window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
+        // url：仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");   //网友点进链接后，可以看到分享的详情
+
+        // Url：仅在QQ空间使用
+        oks.setTitleUrl("http://www.baidu.com");  //网友点进链接后，可以看到分享的详情
+
+        // 启动分享GUI
+        oks.show(context);
 
 
-        Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("取消");
-                window.dismiss();
-            }
-        });
+//        /**
+//         * 显示popupWindow
+//         */
+//        // 利用layoutInflater获得View
+//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = inflater.inflate(R.layout.layout_popupwindow_share, null);
+//        View parent = inflater.inflate(R.layout.activity_webview, null);
+//
+//        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
+//
+//        final PopupWindow window = new PopupWindow(view,
+//                WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.WRAP_CONTENT);
+//
+//        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+//        window.setFocusable(true);
+//
+//        // 实例化一个ColorDrawable颜色为半透明
+//        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
+//        window.setBackgroundDrawable(dw);
+//
+//        // 设置popWindow的显示和消失动画
+//        window.setAnimationStyle(R.style.mypopwindow_anim_style);
+//        // 在底部显示
+//        window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
+//
+//
+//        Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
+//        cancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                showToast("取消");
+//                window.dismiss();
+//            }
+//        });
     }
 }
