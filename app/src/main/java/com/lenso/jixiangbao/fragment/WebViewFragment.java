@@ -18,7 +18,7 @@ public class WebViewFragment extends WebBaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         WebView webView = getWebView(toString());
-        webView.addJavascriptInterface(new JSInterface(getActivity(), null), "api");
+        webView.addJavascriptInterface(new JSInterface(getActivity()), "api");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         setWebZoom(webSettings);

@@ -61,12 +61,10 @@ public class JSInterface {
     public static final int DETAIL = 2;
     private final Context context;
     private final Activity activity;
-    private final View flWeb;
 
-    public JSInterface(Context context, View flWeb) {
+    public JSInterface(Context context) {
         this.context = context;
         this.activity = (Activity) context;
-        this.flWeb = flWeb;
     }
 
     /**
@@ -363,21 +361,6 @@ public class JSInterface {
 //                window.dismiss();
 //            }
 //        });
-    }
-
-    /**
-     * 进度环
-     * @param able true显示   false关闭
-     */
-    @JavascriptInterface
-    public void progress(boolean able){
-        ProgressBar progressBar = (ProgressBar) flWeb.findViewById(R.id.pw_webviewactivity);
-        if(able){
-            progressBar.setVisibility(View.VISIBLE);
-            progressBar.setProgress(50);
-        }else{
-            progressBar.setVisibility(View.GONE);
-        }
     }
 
 }

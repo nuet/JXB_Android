@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,9 +13,11 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.io.File;
@@ -33,10 +36,6 @@ public class WebViewActivity extends WebBaseActivity {
     TopMenuBar topMenuBar;
     @Bind(R.id.fl_web)
     FrameLayout flWeb;
-    @Bind(R.id.wv_webviewacivity)
-    WebView wvWebviewacivity;
-    @Bind(R.id.pw_webviewactivity)
-    ProgressBar pwWebviewactivity;
 
     private File headPIC;
     private static WebView webView;
@@ -51,8 +50,8 @@ public class WebViewActivity extends WebBaseActivity {
         String url = intent.getStringExtra(JSInterface.H5_URL);
         String title = intent.getStringExtra(JSInterface.H5_TITLE);
         webView = getWebView(url);
-        wvWebviewacivity.addView(webView);
-        webView.addJavascriptInterface(new JSInterface(this, flWeb), "api");
+        flWeb.addView(webView);
+        webView.addJavascriptInterface(new JSInterface(this), "api");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
