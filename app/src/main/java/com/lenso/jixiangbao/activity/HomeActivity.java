@@ -22,7 +22,7 @@ import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
-import com.lenso.jixiangbao.fragment.WebViewFragment;
+//import com.lenso.jixiangbao.fragment.WebViewFragment;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;

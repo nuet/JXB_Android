@@ -2,7 +2,6 @@ package com.lenso.jixiangbao.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,9 +10,10 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -33,6 +33,10 @@ public class WebViewActivity extends WebBaseActivity {
     TopMenuBar topMenuBar;
     @Bind(R.id.fl_web)
     FrameLayout flWeb;
+    @Bind(R.id.wv_webviewacivity)
+    WebView wvWebviewacivity;
+    @Bind(R.id.pw_webviewactivity)
+    ProgressBar pwWebviewactivity;
 
     private File headPIC;
     private static WebView webView;
@@ -47,8 +51,8 @@ public class WebViewActivity extends WebBaseActivity {
         String url = intent.getStringExtra(JSInterface.H5_URL);
         String title = intent.getStringExtra(JSInterface.H5_TITLE);
         webView = getWebView(url);
-        flWeb.addView(webView);
-        webView.addJavascriptInterface(new JSInterface(this), "api");
+        wvWebviewacivity.addView(webView);
+        webView.addJavascriptInterface(new JSInterface(this, flWeb), "api");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
@@ -65,7 +69,7 @@ public class WebViewActivity extends WebBaseActivity {
         });
 //        menuSet(intent);
         calculator = intent.getBooleanExtra("calculator", false);
-        if(calculator){
+        if (calculator) {
             topMenuBar.setBackSrc(R.mipmap.close);
         }
 
@@ -73,7 +77,7 @@ public class WebViewActivity extends WebBaseActivity {
 
     }
 
-    public static void reload(){
+    public static void reload() {
         webView.reload();
     }
 

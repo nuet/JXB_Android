@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.lenso.jixiangbao.R;
@@ -35,6 +37,7 @@ import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.view.ProgressWheel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +45,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.jar.Attributes;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -57,10 +61,12 @@ public class JSInterface {
     public static final int DETAIL = 2;
     private final Context context;
     private final Activity activity;
+    private final View flWeb;
 
-    public JSInterface(Context context) {
+    public JSInterface(Context context, View flWeb) {
         this.context = context;
         this.activity = (Activity) context;
+        this.flWeb = flWeb;
     }
 
     /**
@@ -358,4 +364,20 @@ public class JSInterface {
 //            }
 //        });
     }
+
+    /**
+     * 进度环
+     * @param able true显示   false关闭
+     */
+    @JavascriptInterface
+    public void progress(boolean able){
+        ProgressBar progressBar = (ProgressBar) flWeb.findViewById(R.id.pw_webviewactivity);
+        if(able){
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setProgress(50);
+        }else{
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
 }
