@@ -28,7 +28,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/credit_list" />
+                android:text="@string/credit_list"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_menu_transfer_zone"
@@ -36,7 +37,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/transfer_zone" />
+                android:text="@string/transfer_zone"
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <ImageView

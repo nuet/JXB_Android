@@ -49,30 +49,28 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp" />
 
-                <TextView
-                    android:id="@+id/tv_info_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="5dp"
-                    android:text="累计投资：1000亿" />
 
                 <TextView
                     android:id="@+id/tv_info_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/tv_info_2"
+                    android:layout_toRightOf="@id/iv_info"
                     android:padding="5dp"
-                    android:text="累计投资2：1000亿" />
+                    android:text="累计投资:" />
+                <TextView
+                    android:id="@+id/tv_info_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_info_1"
+                    android:layout_centerVertical="true"
+                    android:padding="5dp"
+                    android:text="1000亿"
+                    android:textColor="@color/orange"/>
             </RelativeLayout>
 
             <com.lenso.jixiangbao.view.LoopViewPager
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="20dp"
+                android:layout_margin="10dp"
                 android:id="@+id/vp_choice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

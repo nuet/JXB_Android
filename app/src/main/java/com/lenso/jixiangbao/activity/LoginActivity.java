@@ -95,7 +95,7 @@ public class LoginActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     app_key = jsonObject.getString("app_key");
-                                    logInfo("login succeed!");
+                                    logInfo("login succeed:"+ app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("app_key",app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("phone",mobile);
                                     Intent intent = new Intent();

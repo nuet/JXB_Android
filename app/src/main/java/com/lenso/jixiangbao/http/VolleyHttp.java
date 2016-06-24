@@ -125,6 +125,8 @@ public class VolleyHttp {
                 Cache.Entry entry = null;
                 if (cache != null && (entry = cache.get(url)) != null) {
                     listener.getJson(new String(entry.data), false);
+                }else{
+                    listener.getJson(null, false);
                 }
             }
         }) {
