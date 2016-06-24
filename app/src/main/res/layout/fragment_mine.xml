@@ -27,7 +27,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="10dp">
+                    android:paddingTop="15dp">
 
                     <FrameLayout
                         android:layout_width="wrap_content"
@@ -282,6 +282,8 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="0.00"
+                            android:singleLine="true"
+                            android:ellipsize="end"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -379,6 +381,8 @@
                         android:gravity="right"
                         android:padding="5dp"
                         android:text="0.00元"
+                        android:singleLine="true"
+                        android:ellipsize="end"
                         android:textColor="@color/orange"
                         android:textSize="18sp" />
 
@@ -420,6 +424,8 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="0.00"
+                            android:singleLine="true"
+                            android:ellipsize="end"
                             android:textColor="@color/orange"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -451,6 +457,8 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:text="0.00"
+                            android:singleLine="true"
+                            android:ellipsize="end"
                             android:textColor="@color/orange"
                             android:textSize="18sp" />
                     </LinearLayout>
