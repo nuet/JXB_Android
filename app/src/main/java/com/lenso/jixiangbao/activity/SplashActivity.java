@@ -39,9 +39,8 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void load() {
+        logDebug("load...");
         loadValues();
-        loadPicList();
-        loadBorrowList();
     }
 
     private void loadPicList() {
@@ -55,7 +54,7 @@ public class SplashActivity extends BaseActivity {
                     showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
-                goHome();
+                loadBorrowList();
             }
         });
     }
@@ -77,16 +76,12 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void goHome() {
+        logDebug("home:"+loadCount);
         if (loadCount < 3)
             return;
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setBorrowList(borrowList);
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                init();
-            }
-        });
+        init();
     }
 
     private void loadValues() {
@@ -102,7 +97,7 @@ public class SplashActivity extends BaseActivity {
                     showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
-                goHome();
+                loadPicList();
             }
         });
     }
@@ -112,6 +107,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void init() {
+        logDebug("init...");
         Intent intent = new Intent();
         String isFirstOpen = Config.getInstance(SplashActivity.this).getConfig("isFirstOpen");
         if (isFirstOpen == null || isFirstOpen.equals("")) {
