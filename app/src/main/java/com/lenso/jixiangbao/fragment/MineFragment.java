@@ -185,30 +185,26 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zhxx,
             R.id.ll_gd})
     public void onClick(View view) {
-        String app_key = Config.getInstance(getActivity()).getConfig("app_key");
-        String arg = "?app_key=" + app_key;
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
         switch (view.getId()) {
+            case R.id.ll_zhxx:
             case R.id.iv_headpic:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
-                intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
-                startActivity(intent);
-                break;
             case R.id.tv_username:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
                 break;
             case R.id.usertype:
                 if(userInfo.getDetailuser().getReal_status().equals("0")){
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + arg);
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
                     startActivity(intent);
                 }
                 break;
             case R.id.iv_mine_message:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                 startActivity(intent);
                 userInfo.setUnreadmsg(0);
@@ -218,7 +214,7 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_tjyj:
             case R.id.ib_tjyj:
             case R.id.tv_tjyj:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "推荐有奖");
                 startActivity(intent);
                 break;
@@ -256,53 +252,44 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_jf:
             case R.id.ib_jf:
             case R.id.tv_jf:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "积分商城");
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                 startActivity(intent);
                 break;
             case R.id.btn_cz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                 startActivity(intent);
                 break;
             case R.id.ll_dsze:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + arg);
-                intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
-                startActivity(intent);
-                break;
             case R.id.ll_zjgk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
                 startActivity(intent);
                 break;
             case R.id.ll_wdtz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "我的投资");
                 startActivity(intent);
                 break;
             case R.id.ll_zqzr:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "债权转让");
                 startActivity(intent);
                 break;
             case R.id.ll_wdjk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
-                startActivity(intent);
-                break;
-            case R.id.ll_zhxx:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + arg);
-                intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
                 startActivity(intent);
                 break;
             case R.id.ll_gd:
             case R.id.iv_mine_more:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + arg);
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "更多");
                 startActivity(intent);
                 break;
