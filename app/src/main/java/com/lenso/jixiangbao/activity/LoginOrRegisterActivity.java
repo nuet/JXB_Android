@@ -20,6 +20,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.lenso.jixiangbao.util.CommonUtils.ShowKeyboard;
+
 /**
  * Created by Chung on 2016/5/19.
  */
@@ -40,6 +42,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         ButterKnife.bind(this);
+//        ShowKeyboard(etLoginRegister);
 
 //        getIntent = getIntent();
 //        jsFlag = getIntent.getBooleanExtra("jsFlag", false);

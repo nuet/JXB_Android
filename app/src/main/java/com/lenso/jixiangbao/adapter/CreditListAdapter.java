@@ -64,7 +64,7 @@ public class CreditListAdapter extends BaseAdapter {
         }
         ChoiceList data = dataList.get(i);
         holder.tvListItemTextOne.setText(data.getName());
-        holder.tvListItemContentOne.setText(new StringBuffer().append("总额：").append(Integer.parseInt(data.getAccount())/10000f).append("万"));
+        holder.tvListItemContentOne.setText(new StringBuffer().append(Integer.parseInt(data.getAccount())/10000f).append("万"));
         holder.tvListItemContent1.setText(data.getApr());
         if(data.getIsday().equals("0")) {
             holder.tvListItemContent2.setText(data.getTime_limit());
@@ -80,12 +80,14 @@ public class CreditListAdapter extends BaseAdapter {
         else
             holder.pwListItem.setText(context.getString(R.string.buy));
         holder.pwListItem.setProgress((int) progress);
-        holder.pwListItem.setOnClickListener(new BuyOnClickListener(context,data.getId(),data.getName()));
+        holder.llItemPreferredfinance.setOnClickListener(new BuyOnClickListener(context,data.getId(),data.getName()));
         return view;
     }
 
 
     static class ViewHolder {
+        @Bind(R.id.ll_item_preferredfinance)
+        LinearLayout llItemPreferredfinance;
         @Bind(R.id.tv_list_item_title)
         TextView tvListItemTitle;
         @Bind(R.id.tv_list_item_text_one)

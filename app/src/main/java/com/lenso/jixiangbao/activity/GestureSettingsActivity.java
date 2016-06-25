@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +32,7 @@ public class GestureSettingsActivity extends BaseActivity {
     @Bind(R.id.id_gestureLockViewGroup)
     GestureLockViewGroup idGestureLockViewGroup;
     @Bind(R.id.id_button)
-    Button idButton;
+    TextView idButton;
     @Bind(R.id.top_menu_bar_gesture)
     TopMenuBar topMenuBarGesture;
 

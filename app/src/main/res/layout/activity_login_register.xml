@@ -45,7 +45,7 @@
                 android:layout_weight="7"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:hint="请输入手机号码进行注册或登录"
+                android:hint="请输入手机号码"
                 android:textSize="15sp"
                 android:singleLine="true"
                 android:inputType="phone"

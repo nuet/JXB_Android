@@ -66,25 +66,37 @@
         app:style_finger_up_un_match_outer_circle="style_stroke_and_fill"
         app:style_no_finger_outer_circle="style_stroke"
         app:tryTimes="5" />
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/btn_gesture_unlock_forget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:gravity="bottom"
-        android:layout_below="@id/id_gestureLockViewGroup_1"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="忘记密码?"
+        android:textColor="@color/blue"
+        android:visibility="visible" />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:gravity="bottom"-->
+        <!--android:layout_below="@id/id_gestureLockViewGroup_1"-->
+        <!--android:orientation="vertical">-->
 
-        <Button
-            android:id="@+id/btn_gesture_unlock_forget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@mipmap/ch"
-            android:text="忘记密码?"
-            android:textColor="@color/blue"
-            android:visibility="visible" />
-    </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/btn_gesture_unlock_forget"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal|bottom"-->
+            <!--android:layout_marginLeft="30dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:background="@mipmap/ch"-->
+            <!--android:text="忘记密码?"-->
+            <!--android:textColor="@color/blue"-->
+            <!--android:visibility="visible" />-->
+    <!--</LinearLayout>-->
 </RelativeLayout>

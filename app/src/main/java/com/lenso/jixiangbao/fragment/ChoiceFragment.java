@@ -55,7 +55,7 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        int padding = (int) getResources().getDimension(R.dimen.dp_5);
+        int padding = (int) getResources().getDimension(R.dimen.dp_2);
         if (App.BASE_BEAN.getStatistic_display().equals("0"))
             rlInfo.setVisibility(View.GONE);
         else

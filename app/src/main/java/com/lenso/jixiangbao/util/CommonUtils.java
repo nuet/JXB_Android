@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 
 import com.lenso.jixiangbao.R;
 
@@ -72,6 +73,15 @@ public class CommonUtils {
             intArray[i] = Integer.parseInt(strings[i]);
         }
         return intArray;
+    }
+
+    public static void ShowKeyboard(View v)
+    {
+        v.setFocusable(true);
+        v.setFocusableInTouchMode(true);
+        v.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(v, 0);
     }
 
 }

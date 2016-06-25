@@ -18,8 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
-                android:orientation="vertical"
-                android:paddingTop="5dp">
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -32,14 +31,14 @@
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true">
+                        android:layout_alignParentTop="true">
 
                         <ImageView
                             android:id="@+id/iv_mine_message"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left|top"
                             android:layout_marginTop="5dp"
+                            android:layout_gravity="left|top"
                             android:src="@mipmap/minefragment_message" />
 
                         <TextView
@@ -53,13 +52,13 @@
                             android:gravity="center"
                             android:textColor="@color/white"
                             android:textSize="12sp"
-                            android:visibility="invisible"/>
+                            android:visibility="invisible" />
                     </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentTop="true"
                         android:gravity="end"
                         android:orientation="horizontal">
 
@@ -67,16 +66,18 @@
                             android:id="@+id/iv_mine_more"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:src="@mipmap/top_menu_more" />
                     </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iv_headpic"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@mipmap/minefragment_tx" />
                 </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/iv_headpic"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/minefragment_tx" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,11 +95,11 @@
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
-                    <ImageView
-                        android:layout_width="1dp"
+                    <View
+                        android:layout_width="1px"
                         android:layout_height="30dp"
                         android:layout_marginLeft="5dp"
-                        android:background="@color/minedivider" />
+                        android:background="@color/white" />
 
                     <TextView
                         android:id="@+id/usertype"
@@ -112,46 +113,6 @@
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <!--<LinearLayout-->
-                <!--android:id="@+id/ll_ljty"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:layout_marginBottom="15dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tv_ljty1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:text="10%"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="30sp" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/tv_ljty2"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:padding="5dp"-->
-                <!--android:text="新用户专享超高收益"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="15sp" />-->
-
-                <!--<Button-->
-                <!--android:id="@+id/btn_ljty"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:background="@mipmap/minefragment_btn"-->
-                <!--android:padding="5dp"-->
-                <!--android:text="立即体验"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="15sp" />-->
-                <!--</LinearLayout>-->
 
 
                 <LinearLayout
@@ -186,12 +147,12 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="1dp"
+                    <View
+                        android:layout_width="1px"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:background="@color/minedivider" />
+                        android:background="@color/white" />
 
                     <LinearLayout
                         android:id="@+id/ll_qd"
@@ -219,12 +180,12 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="1dp"
+                    <View
+                        android:layout_width="1px"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:background="@color/minedivider" />
+                        android:background="@color/white" />
 
                     <LinearLayout
                         android:id="@+id/ll_jf"
@@ -280,10 +241,10 @@
                             android:id="@+id/tv_mine_usemoney"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="0.00"
-                            android:singleLine="true"
                             android:ellipsize="end"
+                            android:padding="5dp"
+                            android:singleLine="true"
+                            android:text="0.00"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
@@ -292,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:text="可用余额(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="14sp" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -308,15 +269,16 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/btn_tx"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/shape_circle_btn_gray"
-                                android:paddingBottom="10dp"
+                                android:paddingBottom="5dp"
                                 android:paddingLeft="20dp"
                                 android:paddingRight="20dp"
-                                android:paddingTop="10dp"
+                                android:paddingTop="5dp"
                                 android:text="提现"
                                 android:textColor="@color/blue"
                                 android:textSize="15sp" />
@@ -328,20 +290,20 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/btn_cz"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/shape_circle_btn_orange"
-                                android:paddingBottom="10dp"
+                                android:paddingBottom="5dp"
                                 android:paddingLeft="20dp"
                                 android:paddingRight="20dp"
-                                android:paddingTop="10dp"
+                                android:paddingTop="5dp"
                                 android:text="充值"
                                 android:textColor="@color/white"
                                 android:textSize="15sp" />
                         </LinearLayout>
-
 
 
                     </LinearLayout>
@@ -353,11 +315,14 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/minedivider"/>
                 <LinearLayout
                     android:id="@+id/ll_dsze"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -371,18 +336,18 @@
                         android:padding="5dp"
                         android:text="待收总额:"
                         android:textColor="@color/darker_gray"
-                        android:textSize="14sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_mine_total"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
+                        android:ellipsize="end"
                         android:gravity="right"
                         android:padding="5dp"
-                        android:text="0.00元"
                         android:singleLine="true"
-                        android:ellipsize="end"
+                        android:text="0.00元"
                         android:textColor="@color/orange"
                         android:textSize="18sp" />
 
@@ -392,11 +357,13 @@
                         android:layout_weight="1"
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/minedivider"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -415,23 +382,23 @@
                             android:padding="5dp"
                             android:text="待收本金(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="14sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/tv_mine_origin"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:ellipsize="end"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="0.00"
                             android:singleLine="true"
-                            android:ellipsize="end"
+                            android:text="0.00"
                             android:textColor="@color/orange"
                             android:textSize="18sp" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="1dp"
+                    <View
+                        android:layout_width="1px"
                         android:layout_height="match_parent"
                         android:background="@color/minedivider" />
 
@@ -448,48 +415,56 @@
                             android:padding="5dp"
                             android:text="待收利息(元)"
                             android:textColor="@color/darker_gray"
-                            android:textSize="14sp" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/tv_mine_interest"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:ellipsize="end"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="0.00"
                             android:singleLine="true"
-                            android:ellipsize="end"
+                            android:text="0.00"
                             android:textColor="@color/orange"
                             android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/minedivider"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
+                    android:showDividers="end"
+                    android:divider="@android:color/white"
                     android:id="@+id/ll_zjgk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_zjgk" />
 
                     <TextView
@@ -508,27 +483,30 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="50dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
+                    android:showDividers="end"
+                    android:divider="@android:color/white"
                     android:id="@+id/ll_wdtz"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_wdtz" />
 
                     <TextView
@@ -547,11 +525,10 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="50dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
@@ -561,13 +538,15 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_zqzr" />
 
                     <TextView
@@ -586,15 +565,15 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
                     android:background="@color/minedivider" />
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="15dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
@@ -604,13 +583,15 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_wdjk" />
 
                     <TextView
@@ -629,58 +610,15 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
                     android:background="@color/minedivider" />
 
-                <!--<ImageView-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="@color/minedivider" />-->
-
-                <!--<LinearLayout-->
-                <!--android:id="@+id/ll_tyb"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@color/white"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:padding="5dp">-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:padding="5dp"-->
-                <!--android:src="@mipmap/minefragment_tyb" />-->
-
-                <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="8"-->
-                <!--android:padding="5dp"-->
-                <!--android:text="体验宝"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="15sp"/>-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:src="@mipmap/loanfragment_rightarrow" />-->
-                <!--</LinearLayout>-->
-
-                <!--<ImageView-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@color/minedivider" />-->
-
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="15dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
@@ -690,13 +628,15 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_zhxx" />
 
                     <TextView
@@ -715,15 +655,15 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
                     android:background="@color/minedivider" />
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="15dp"
                     android:background="@color/minedivider" />
 
                 <LinearLayout
@@ -733,13 +673,15 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:padding="5dp"
                         android:src="@mipmap/minefragment_gd" />
 
                     <TextView
@@ -758,9 +700,9 @@
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
                     android:background="@color/minedivider" />
 
             </LinearLayout>
