@@ -84,7 +84,7 @@ public class RegisterActivity extends BaseActivity {
                     public void getJson(String json, boolean isConnectSuccess) {
                         if (isConnectSuccess) {
                             try {
-                                logInfo(json);
+                                logInfo("getcode"+json);
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     logInfo("get phone code succeed!");

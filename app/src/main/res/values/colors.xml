@@ -18,7 +18,9 @@
     <!--<color name="black">#ff000000</color> &lt;!&ndash; 黑色 &ndash;&gt;-->
     <color name="black">#2D2D2D</color> <!-- 黑色 -->
 
-    <color name="blue">#669EFF</color> <!-- 天蓝色 -->
+    <color name="blue">#3072e4</color> <!-- 主题蓝色 -->
+
+    <color name="skyblue">#669EFF</color> <!-- 天蓝色 -->
 
     <color name="red">#CC0000</color> <!-- 红色 -->
 
