@@ -1,11 +1,16 @@
 package com.lenso.jixiangbao.view;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 
+import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
+import com.lenso.jixiangbao.adapter.LoopFragmentPagerAdapter;
 import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -131,5 +136,12 @@ public class LoopViewPager extends JViewPager {
                     changeListener.onPageScrollStateChanged(index(i));
             }
         });
+    }
+
+    public void addLoopFragment(Fragment...fragments) {
+        count=fragments.length-2;
+        setAdapter(new FragmentViewPageAdapter(((FragmentActivity)getContext()).getSupportFragmentManager(),fragments));
+        super.setOffscreenPageLimit(count);
+        pagerChangeListener();
     }
 }

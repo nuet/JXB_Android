@@ -25,6 +25,8 @@ public class WebBaseActivity extends BaseActivity {
         if (webViews.containsKey(tag))
             return webViews.get(tag);
         WebView webView = new WebView(this);
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
         webViews.put(tag, webView);
         return webView;
     }

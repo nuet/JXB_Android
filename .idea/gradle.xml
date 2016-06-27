@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/androidPullToRefreshlibrary" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/onekeyshare" />
             <option value="$PROJECT_DIR$/sharesdk" />
@@ -18,6 +19,7 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/androidPullToRefreshlibrary" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/onekeyshare" />
             <option value="$PROJECT_DIR$/sharesdk" />

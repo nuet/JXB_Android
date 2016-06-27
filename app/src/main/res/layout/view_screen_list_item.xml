@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <RelativeLayout
+        android:id="@+id/rl_title"
         android:padding="15dp"
         android:background="@drawable/shape_screen_item_frame"
         android:layout_width="match_parent"

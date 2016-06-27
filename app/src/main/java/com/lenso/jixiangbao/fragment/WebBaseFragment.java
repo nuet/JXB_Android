@@ -1,6 +1,5 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.content.Context;
 import android.os.Environment;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -14,6 +13,7 @@ import java.util.Map;
 
 /**
  * Created by king on 2016/5/17.
+ *
  */
 public class WebBaseFragment extends BaseFragment {
     private Map<String, WebView> webViews;

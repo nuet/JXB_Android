@@ -1,7 +1,7 @@
 <resources>
     <style name="topMenu" >
         <item name="tmb_paddingTop">10dp</item>
-        <item name="tmb_padding">3dp</item>
+        <item name="tmb_padding">5dp</item>
         <item name="tmb_textSize">18sp</item>
         <item name="tmb_textColor">@android:color/white</item>
         <item name="tmb_backgroundColor">@color/blue</item>

@@ -12,13 +12,10 @@ import android.view.ViewGroup;
  */
 public class LoopFragmentPagerAdapter extends FragmentPagerAdapter {
     private final Fragment[] fragments;
-    private final ViewPager pager;
-    private int preItem=-1;
 
-    public LoopFragmentPagerAdapter(FragmentManager fm, ViewPager pager, Fragment... fragments) {
+    public LoopFragmentPagerAdapter(FragmentManager fm, Fragment... fragments) {
         super(fm);
         this.fragments = fragments;
-        this.pager=pager;
     }
 
     @Override
@@ -35,7 +32,6 @@ public class LoopFragmentPagerAdapter extends FragmentPagerAdapter {
             position = 0;
         else
             position--;
-        Log.d("jgm","position2:"+position+" "+pager.getCurrentItem());
         if(getItem(position).isAdded())
             return getItem(position);
         return super.instantiateItem(container, position);

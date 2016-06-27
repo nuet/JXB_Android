@@ -44,4 +44,5 @@ dependencies {
     compile files('libs/Native_Libs2.jar')
     compile 'com.google.code.gson:gson:2.6.2'
     compile project(':onekeyshare')
+    compile project(':androidPullToRefreshlibrary')
 }

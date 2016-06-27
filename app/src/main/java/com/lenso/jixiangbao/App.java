@@ -11,6 +11,7 @@ import cn.sharesdk.framework.ShareSDK;
 
 /**
  * Created by king on 2016/5/19.
+ *
  */
 public class App extends Application {
     public static BaseBean BASE_BEAN;

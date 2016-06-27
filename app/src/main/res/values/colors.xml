@@ -30,7 +30,8 @@
 
     <color name="minedivider">#CDCCD1</color> <!-- 我的底部菜单 -->
 
-    <color name="minemid">#FF6490ED</color> <!-- 我的中部菜单 -->
+    <color name="minemid">#FF6490ED</color>
+    <color name="gray1">#e3e3e3</color> <!-- 我的中部菜单 -->
 
 
 </resources>

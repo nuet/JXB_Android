@@ -64,26 +64,28 @@ public class CreditListAdapter extends BaseAdapter {
         }
         ChoiceList data = dataList.get(i);
         holder.tvListItemTextOne.setText(data.getName());
-        holder.tvListItemContentOne.setText(new StringBuffer().append(Integer.parseInt(data.getAccount())/10000f).append("万"));
+        holder.tvListItemContentOne.setText(new StringBuffer().append(Integer.parseInt(data.getAccount()) / 10000f).append("万"));
         holder.tvListItemContent1.setText(data.getApr());
-        if(data.getIsday().equals("0")) {
+        if (data.getIsday().equals("0")) {
             holder.tvListItemContent2.setText(data.getTime_limit());
             holder.tvListItemContent2Day.setText(R.string.month);
         }
-        if(data.getIsday().equals("1")){
+        if (data.getIsday().equals("1")) {
             holder.tvListItemContent2.setText(data.getTime_limit_day());
             holder.tvListItemContent2Day.setText(R.string.day);
         }
-        float progress=(1-Float.parseFloat(data.getAccount_yes())/Float.parseFloat(data.getAccount()))*360;
-        if(progress==360)
-            holder.pwListItem.setText(context.getString(R.string.sell_out));
-        else
+        float progress = (1 - Float.parseFloat(data.getAccount_yes()) / Float.parseFloat(data.getAccount())) * 360;
+        if (progress == 360)
             holder.pwListItem.setText(context.getString(R.string.buy));
+        else
+            holder.pwListItem.setText(context.getString(R.string.sell_out));
         holder.pwListItem.setProgress((int) progress);
-        holder.llItemPreferredfinance.setOnClickListener(new BuyOnClickListener(context,data.getId(),data.getName()));
         return view;
     }
 
+    public ChoiceList getListItem(int position) {
+        return dataList.get(position);
+    }
 
     static class ViewHolder {
         @Bind(R.id.ll_item_preferredfinance)
@@ -115,26 +117,6 @@ public class CreditListAdapter extends BaseAdapter {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
-        }
-    }
-    class BuyOnClickListener implements View.OnClickListener{
-        private final String id;
-        private final String name;
-        private final Context context;
-
-        public  BuyOnClickListener(Context context,String id,String name){
-            this.id=id;
-            this.name=name;
-            this.context=context;
-        }
-        @Override
-        public void onClick(View v) {
-            Intent intent=new Intent(context, WebViewActivity.class);
-            Log.i("H5:", "URL:"+HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
-            intent.putExtra(JSInterface.H5_URL, HTMLInterface.DETAIL+"?borrowid="+id+"&app_key="+ Config.getInstance(context.getApplicationContext()).getConfig("app_key"));
-            intent.putExtra(JSInterface.H5_TITLE, name);
-            intent.putExtra("intent",JSInterface.DETAIL);
-            context.startActivity(intent);
         }
     }
 }
