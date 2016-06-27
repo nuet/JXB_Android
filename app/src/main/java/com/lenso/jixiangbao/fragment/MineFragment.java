@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -91,7 +92,8 @@ public class MineFragment extends BaseFragment {
     ImageView ivMineMessage;
     @Bind(R.id.ll_zhxx)
     LinearLayout llZhxx;
-
+    @Bind(R.id.rl_mine_top)
+    RelativeLayout rlMineTop;
     public static UserInfo userInfo;
     private Map args = new HashMap();
     private Map argsign = new HashMap();
@@ -102,7 +104,7 @@ public class MineFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
-
+        rlMineTop.setPadding(10,Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")),10,0);
         return view;
     }
 
@@ -141,10 +143,10 @@ public class MineFragment extends BaseFragment {
             tvMineUnreadmsg.setVisibility(View.VISIBLE);
         }
 
-        if(userInfo.getSigned() == 0){
+        if (userInfo.getSigned() == 0) {
             ibQd.setImageResource(R.mipmap.minefragment_qd);
             ibQd.setClickable(true);
-        }else{
+        } else {
             ibQd.setImageResource(R.mipmap.minefragment_yqd);
             ibQd.setClickable(false);
         }
@@ -197,7 +199,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.usertype:
-                if(userInfo.getDetailuser().getReal_status().equals("0")){
+                if (userInfo.getDetailuser().getReal_status().equals("0")) {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
                     startActivity(intent);
@@ -221,7 +223,7 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_qd:
             case R.id.ib_qd:
             case R.id.tv_qd:
-                if(userInfo.getSigned() == 0){
+                if (userInfo.getSigned() == 0) {
                     argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
                     VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
                         @Override
@@ -245,7 +247,7 @@ public class MineFragment extends BaseFragment {
                         }
                     }, argsign);
                     ibQd.setImageResource(R.mipmap.minefragment_yqd);
-                }else{
+                } else {
                     showToast("您今日已签到，明天再来吧！");
                 }
                 break;

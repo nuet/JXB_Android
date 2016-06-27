@@ -12,6 +12,7 @@ import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.ChoiceList;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 
 import java.util.List;

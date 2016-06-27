@@ -23,6 +23,7 @@ import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
 //import com.lenso.jixiangbao.fragment.WebViewFragment;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
@@ -74,6 +75,8 @@ public class HomeActivity extends BaseActivity {
         ShareSDK.initSDK(this);//初始化shareSDK
 
         initViewPager();
+
+        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
     }
 
     public SlidingMenu getSlidingMenu() {

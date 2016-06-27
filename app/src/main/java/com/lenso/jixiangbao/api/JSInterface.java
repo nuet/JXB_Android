@@ -38,6 +38,7 @@ import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
+import com.lenso.jixiangbao.view.iOSActionSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +76,7 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void open(String title, String url) {
-        Log.d("open","---"+title+url);
+        Log.d("open", "---" + title + url);
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(H5_URL, url);
         intent.putExtra(H5_TITLE, title);
@@ -126,74 +127,11 @@ public class JSInterface {
     @JavascriptInterface
     public void changeHeadPic() {
 
-//        showToast("修改头像");
-
-        /**
-         * 显示popupWindow
-         */
-        // 利用layoutInflater获得View
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.layout_popupwindow, null);
-        View parent = inflater.inflate(R.layout.activity_webview, null);
-
-        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-
-        final PopupWindow window = new PopupWindow(view,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT);
-
-        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
-        window.setFocusable(true);
-
-        // 实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
-        window.setBackgroundDrawable(dw);
-
-        // 设置popWindow的显示和消失动画
-        window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        // 在底部显示
-        window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
-
-        // 检验popWindow里的button是否可以点击
-        Button take = (Button) view.findViewById(R.id.pop_btn_take_photo);
-        take.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("拍照");
-                Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.png")));
-                ((Activity) context).startActivityForResult(intentFromCapture, 1);
-                window.dismiss();
-            }
-        });
-        Button choose = (Button) view.findViewById(R.id.pop_btn_choose_photo);
-        choose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("相册");
-                Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*"); // 设置文件类型
-                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-                ((Activity) context).startActivityForResult(intentFromGallery, 2);
-                window.dismiss();
-            }
-        });
-        Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                showToast("取消");
-                window.dismiss();
-            }
-        });
-
-//        //popWindow消失监听方法
-//        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                showToast("popWindow消失");
-//            }
-//        });
+        iOSActionSheetDialog dialog = new iOSActionSheetDialog(context);
+        dialog.builder()
+                .setCancelable(true)
+                .setCanceledOnTouchOutside(true)
+                .show();
 
     }
 
@@ -301,7 +239,7 @@ public class JSInterface {
      * 分享
      */
     @JavascriptInterface
-    public void share(){
+    public void share() {
         ShareSDK.initSDK(context);
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
