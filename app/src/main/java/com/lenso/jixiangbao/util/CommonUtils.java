@@ -2,7 +2,6 @@ package com.lenso.jixiangbao.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -79,13 +78,13 @@ public class CommonUtils {
         return intArray;
     }
 
-    public static void ShowKeyboard(View v)
+    public static void ShowKeyboard(View view)
     {
-        v.setFocusable(true);
-        v.setFocusableInTouchMode(true);
-        v.requestFocus();
-        InputMethodManager inputManager = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.showSoftInput(v, 0);
+//        view.setFocusable(true);
+//        view.setFocusableInTouchMode(true);
+//        view.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
 

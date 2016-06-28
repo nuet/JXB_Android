@@ -50,6 +50,8 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        topMenuBarLogin.setMenuTopPadding(statusHeight);
+
         sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
         gesturePsw = sp.getString("GestureLock", "");
         getIntent = getIntent();

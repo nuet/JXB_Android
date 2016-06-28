@@ -1,14 +1,18 @@
 [
     {
-        "merged": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
     },
     {
-        "merged": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
-        "source": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     },
     {
-        "merged": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "D:\\Users\\king\\AndroidStudioProjects\\Git\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
+        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\safe.png",
+        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\safe.png"
     }
 ]

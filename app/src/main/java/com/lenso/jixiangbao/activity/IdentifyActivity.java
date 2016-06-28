@@ -40,6 +40,8 @@ public class IdentifyActivity extends BaseActivity {
         setContentView(R.layout.activity_identify);
         ButterKnife.bind(this);
 
+        topMenuBarIdentify.setMenuTopPadding(statusHeight);
+
         topMenuBarIdentify.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

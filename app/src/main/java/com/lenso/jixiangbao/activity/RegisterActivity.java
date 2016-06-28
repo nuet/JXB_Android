@@ -62,6 +62,8 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
+        topMenuBarRegister.setMenuTopPadding(statusHeight);
+
         getIntent = getIntent();
         mobile = getIntent.getStringExtra("mobile");
 

@@ -47,6 +47,8 @@ public class GestureSettingsActivity extends BaseActivity {
         String gestureTitle = intent0.getStringExtra("gestureTitle");
         jsFlag = intent0.getBooleanExtra("jsFlag", false);
 
+        topMenuBarGesture.setMenuTopPadding(statusHeight);
+
         topMenuBarGesture.setTitleText(gestureTitle);
         topMenuBarGesture.setOnBackClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +106,7 @@ public class GestureSettingsActivity extends BaseActivity {
                 idGestureLockViewGroup.reDraw();
                 idGestureLockDisplayViews.clearSelect();
                 idTextView.setText("请绘制手势密码");
-                idTextView.setTextColor(Color.parseColor("#669EFF"));
+                idTextView.setTextColor(Color.parseColor("#ffffffff"));
                 startErrorAnim(false);
             }
         });

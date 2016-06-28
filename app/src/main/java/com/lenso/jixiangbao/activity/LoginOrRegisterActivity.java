@@ -1,8 +1,10 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.lenso.jixiangbao.R;
@@ -20,17 +22,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.lenso.jixiangbao.util.CommonUtils.ShowKeyboard;
-
 /**
  * Created by Chung on 2016/5/19.
  */
 public class LoginOrRegisterActivity extends BaseActivity {
 
-    @Bind(R.id.top_menu_bar_login_register)
-    TopMenuBar topMenuBarLoginRegister;
     @Bind(R.id.et_login_register)
     EditText etLoginRegister;
+    @Bind(R.id.top_menu_bar_login_register)
+    TopMenuBar topMenuBarLoginRegister;
 
     private Map args = new HashMap();
     private Intent intent = new Intent();
@@ -42,17 +42,25 @@ public class LoginOrRegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         ButterKnife.bind(this);
+
+        topMenuBarLoginRegister.setMenuTopPadding(statusHeight);
+
 //        ShowKeyboard(etLoginRegister);
+        etLoginRegister.setFocusable(true);
+        etLoginRegister.setFocusableInTouchMode(true);
+        etLoginRegister.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(etLoginRegister, InputMethodManager.SHOW_FORCED);
 
 //        getIntent = getIntent();
 //        jsFlag = getIntent.getBooleanExtra("jsFlag", false);
 //        if(!jsFlag){
-            topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+        topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 //        }
     }
 

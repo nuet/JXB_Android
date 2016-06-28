@@ -36,6 +36,9 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         gson = new Gson();
         App.BASE_BEAN=new BaseBean();
+
+        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
+
         load();
     }
 

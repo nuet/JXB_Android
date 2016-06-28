@@ -49,6 +49,8 @@ public class ForgetPasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_forget_password);
         ButterKnife.bind(this);
 
+        topMenuBarForget.setMenuTopPadding(statusHeight);
+
         Intent getIntent = getIntent();
         mobile = getIntent.getStringExtra("mobile");
 

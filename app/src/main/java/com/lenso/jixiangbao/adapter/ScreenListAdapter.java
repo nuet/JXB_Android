@@ -32,17 +32,17 @@ public class ScreenListAdapter extends BaseAdapter {
         this.keyList = new ArrayList<>();
         Set<String> keys = data.keySet();
         for (String key : keys) {
-            map.put(key, data.get(key).get(0) + ".true");
+            map.put(key, data.get(key).get(0) + ".1");
             keyList.add(key);
         }
     }
 
     public void resetScreenList() {
         for (String key : keyList) {
-            if (map.get(key).indexOf("true")!=-1)
-                map.put(key, data.get(key).get(0) + ".true");
+            if (map.get(key).endsWith(".1"))
+                map.put(key, data.get(key).get(0) + ".1");
             else
-                map.put(key, data.get(key).get(0) + ".false");
+                map.put(key, data.get(key).get(0) + ".0");
         }
         notifyDataSetChanged();
     }
@@ -73,7 +73,7 @@ public class ScreenListAdapter extends BaseAdapter {
         String info = map.get(keyList.get(position));
         String text = info.substring(0, info.lastIndexOf("."));
         boolean isUp;
-        if (info.indexOf("true")!=-1)
+        if (info.endsWith(".1"))
             isUp = true;
         else
             isUp = false;
@@ -84,7 +84,11 @@ public class ScreenListAdapter extends BaseAdapter {
     private ScreenItemView.OnScreenItemListener listener = new ScreenItemView.OnScreenItemListener() {
         @Override
         public void onScreenItem(int position, String text, boolean isUp) {
-            map.put(keyList.get(position), text + "." + isUp);
+            if (isUp) {
+                map.put(keyList.get(position), text + ".1");
+            } else {
+                map.put(keyList.get(position), text + ".0");
+            }
         }
     };
 }

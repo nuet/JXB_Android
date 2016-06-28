@@ -45,6 +45,8 @@ public class SetPasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_set_password);
         ButterKnife.bind(this);
 
+        topMenuBarSet.setMenuTopPadding(statusHeight);
+
         Intent intentGet = getIntent();
         id = intentGet.getStringExtra("id");
         topMenuBarSet.setOnBackClickListener(new View.OnClickListener() {

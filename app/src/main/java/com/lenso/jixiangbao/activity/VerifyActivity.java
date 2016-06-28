@@ -47,6 +47,8 @@ public class VerifyActivity extends BaseActivity {
         setContentView(R.layout.activity_verify);
         ButterKnife.bind(this);
 
+        topMenuBarVerify.setMenuTopPadding(statusHeight);
+
         topMenuBarVerify.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

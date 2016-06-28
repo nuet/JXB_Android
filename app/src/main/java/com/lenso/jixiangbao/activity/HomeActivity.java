@@ -76,7 +76,7 @@ public class HomeActivity extends BaseActivity {
 
         initViewPager();
 
-        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
+//        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
     }
 
     public SlidingMenu getSlidingMenu() {

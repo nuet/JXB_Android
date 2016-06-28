@@ -55,6 +55,8 @@ public class GestureUnlockActivity extends BaseActivity {
         setContentView(R.layout.activity_gesture_unlock);
         ButterKnife.bind(this);
 
+        topMenuBarGestureUnlock.setMenuTopPadding(statusHeight);
+
         Intent intent0 = getIntent();
 //        jsFlag = intent0.getBooleanExtra("jsFlag", false);
 //        splashFlag = intent0.getBooleanExtra("splashFlag", false);
@@ -157,7 +159,7 @@ public class GestureUnlockActivity extends BaseActivity {
             public void onFinish() {
                 mGestureLockViewGroup.setTouchable(true);
                 mTextView.setText("绘制手势密码");
-                mTextView.setTextColor(Color.parseColor("#959595"));
+                mTextView.setTextColor(Color.parseColor("#ffffffff"));
                 mGestureLockViewGroup.setUnMatchExceedBoundary(5);
                 mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
             }

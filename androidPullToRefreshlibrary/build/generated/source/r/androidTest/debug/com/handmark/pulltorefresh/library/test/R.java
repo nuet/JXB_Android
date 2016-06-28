@@ -139,6 +139,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int indicator_arrow=0x7f020002;
         public static final int indicator_bg_bottom=0x7f020003;
         public static final int indicator_bg_top=0x7f020004;
+        public static final int safe=0x7f020005;
     }
     public static final class id {
         public static final int both=0x7f070003;
