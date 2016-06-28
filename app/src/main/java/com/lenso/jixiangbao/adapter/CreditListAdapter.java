@@ -18,6 +18,7 @@ import com.lenso.jixiangbao.bean.ChoiceList;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -32,7 +33,10 @@ public class CreditListAdapter extends BaseAdapter {
 
     public CreditListAdapter(Context context, List<ChoiceList> dataList) {
         this.context = context;
-        this.dataList = dataList;
+        if (dataList == null)
+            this.dataList = new ArrayList<>();
+        else
+            this.dataList = dataList;
     }
 
     @Override

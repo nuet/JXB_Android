@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.lenso.jixiangbao.util.CommonUtils;
+
 /**
  * Created by king on 2016/5/10.
  */
 public class BaseActivity extends FragmentActivity{
     private String TAG = getClass().getSimpleName();
+    protected int statusHeight=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class BaseActivity extends FragmentActivity{
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            statusHeight=CommonUtils.getStatusHeight(this);
         }
     }
     protected void showToast(String text){

@@ -56,7 +56,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/iv_info"
                 android:padding="5dp"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:text="累计投资:" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:text="100亿"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/orange" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tv_info_2"
                 android:padding="5dp"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:text="交易人次:" />
 
             <TextView
@@ -90,16 +90,16 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:text="100万"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textColor="@color/orange" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp">
 
             <com.lenso.jixiangbao.view.LoopViewPager
                 android:id="@+id/vp_choice"
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:paddingBottom="20dp">
+                android:paddingBottom="25dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -159,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 

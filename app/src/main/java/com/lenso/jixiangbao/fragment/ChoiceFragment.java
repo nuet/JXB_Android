@@ -17,7 +17,6 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.bean.AppScrollPic;
-import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
 import com.lenso.jixiangbao.view.SpeakerView;
 
@@ -67,7 +66,7 @@ public class ChoiceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choice, null);
         ButterKnife.bind(this, view);
-        dp_200=getResources().getDimension(R.dimen.dp_280);
+        dp_200=getResources().getDimension(R.dimen.dp_300);
         initRefreshList();
         initView();
         return view;

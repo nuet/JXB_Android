@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
  */
 public class TopMenuBar extends LinearLayout {
 
+    private final View view;
     @Bind(R.id.back)
     ImageView back;
     @Bind(R.id.title)
@@ -39,7 +40,7 @@ public class TopMenuBar extends LinearLayout {
 
     public TopMenuBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        View view = View.inflate(context, R.layout.view_top_menu_bar, null);
+        view = View.inflate(context, R.layout.view_top_menu_bar, null);
         this.addView(view);
         ViewGroup.LayoutParams viewParams = view.getLayoutParams();
         viewParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -58,6 +59,7 @@ public class TopMenuBar extends LinearLayout {
             boolean textVisibility = typedArray.getBoolean(R.styleable.TopMenuBar_tmb_textVisibility, true);
             int padding = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_padding, 0);
             int paddingTop = (int) typedArray.getDimension(R.styleable.TopMenuBar_tmb_paddingTop, 0);
+            typedArray.recycle();
             view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + padding + paddingTop, view.getPaddingRight(), view.getPaddingBottom() + padding);
             back.setImageResource(backSrc);
             title.setText(text);
@@ -108,7 +110,9 @@ public class TopMenuBar extends LinearLayout {
         if (back != null)
             back.setImageResource(resId);
     }
-
+    public void setMenuTopPadding(int padding){
+        view.setPadding(view.getPaddingLeft(),view.getPaddingTop()+padding,view.getPaddingRight(),view.getPaddingBottom());
+    }
     public void setBackSrc(Drawable drawable) {
         if (back != null)
             back.setImageDrawable(drawable);
