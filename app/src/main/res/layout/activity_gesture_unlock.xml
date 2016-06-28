@@ -8,21 +8,51 @@
     android:background="@mipmap/lockback"
     tools:context="com.lenso.jixiangbao.activity.GestureUnlockActivity">
 
-    <com.lenso.jixiangbao.view.TopMenuBar
-        android:id="@+id/top_menu_bar_gesture_unlock"
-        style="@style/topMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        top_menu:tmb_menuVisibility="false"
-        top_menu:tmb_text="GestureLock" />
+    <!--<com.lenso.jixiangbao.view.TopMenuBar-->
+        <!--android:id="@+id/top_menu_bar_gesture_unlock"-->
+        <!--style="@style/topMenu"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--top_menu:tmb_menuVisibility="false"-->
+        <!--top_menu:tmb_text="GestureLock" />-->
 
     <TextView
         android:id="@+id/id_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/id_unlock_gestureLockDisplayViews"
+        android:layout_centerHorizontal="true"
+        android:text="请输入手势密码"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+    <com.lenso.jixiangbao.view.GestureLockDisplayViews
+        android:id="@+id/id_unlock_gestureLockDisplayViews"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/id_textView3"
+        android:layout_centerHorizontal="true"
+        app:color_no_select="#838383"
+        app:color_selected="#01A0E5"
+        app:display_view_count="3"
+        app:stroke_width_finger_on_outer_circle="1"
+        app:stroke_width_finger_up_match_outer_circle="1"
+        app:stroke_width_finger_up_un_match_outer_circle="1"
+        app:stroke_width_no_finger_outer_circle="1"
+        app:stroke_width_no_select="2dp"
+        app:style_no_select="style_stroke"
+        app:style_selected="style_fill">
+
+    </com.lenso.jixiangbao.view.GestureLockDisplayViews>
+
+    <TextView
+        android:id="@+id/id_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_above="@+id/id_gestureLockViewGroup_1"
         android:layout_centerHorizontal="true"
-        android:text="绘制手势密码"
+        android:text="绘制解锁图案"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -71,9 +101,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:text="忘记密码?"
+        android:textColor="@color/white"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
         android:layout_marginBottom="20dp"
         android:background="@mipmap/wjmm"
         android:visibility="visible" />

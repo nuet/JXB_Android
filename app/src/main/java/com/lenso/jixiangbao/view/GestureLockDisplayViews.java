@@ -67,14 +67,12 @@ public class GestureLockDisplayViews extends RelativeLayout {
         this(context, attrs, 0);
     }
 
-    public GestureLockDisplayViews(Context context, AttributeSet attrs,
-                                   int defStyle) {
+    public GestureLockDisplayViews(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         /**
          * 获得所有自定义的参数的值
          */
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
-                R.styleable.GestureLockDisplayViews, defStyle, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.GestureLockDisplayViews, defStyle, 0);
         mNoSelectCircleColor = a.getColor(R.styleable.GestureLockDisplayViews_color_no_select, mNoSelectCircleColor);
         mSelectedCircleColor = a.getColor(R.styleable.GestureLockDisplayViews_color_selected, mSelectedCircleColor);
         mNoSelectStyle = a.getInt(R.styleable.GestureLockDisplayViews_style_no_select, mNoSelectStyle);

@@ -193,14 +193,15 @@
                     android:id="@+id/pw_list_item"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    progress:pwBarColor="@color/orange"
-                    progress:pwContourColor="@color/lighter_gray"
-                    progress:pwRimColor="@color/lighter_gray"
+                    progress:pwBarColor="@color/gray"
+                    progress:pwContourColor="@color/lighter_orange"
+                    progress:pwRimColor="@color/lighter_orange"
                     progress:pwBarWidth="5dp"
                     progress:pwContourSize="1dp"
                     progress:pwRimWidth="4dp"
                     progress:pwText="OK"
-                    progress:pwTextColor="@color/blue"
+                    progress:pwTextColor="@color/white"
+                    progress:pwCircleColor="@color/orange"
                     progress:pwTextSize="@dimen/pw_list_item_text_size"/>
             </LinearLayout>
 

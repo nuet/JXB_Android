@@ -88,7 +88,6 @@ public class GestureSettingsActivity extends BaseActivity {
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("GestureLock", Arrays.toString(secondAnswer));
                 editor.commit();
-//                Toast.makeText(GestureSettingsActivity.this, Arrays.toString(secondAnswer), Toast.LENGTH_SHORT).show();
                 if(jsFlag){
                     finish();
                 }else{
@@ -105,7 +104,7 @@ public class GestureSettingsActivity extends BaseActivity {
             public void onClick(View v) {
                 idGestureLockViewGroup.reDraw();
                 idGestureLockDisplayViews.clearSelect();
-                idTextView.setText("请绘制手势密码");
+                idTextView.setText("请绘制手势密码图案");
                 idTextView.setTextColor(Color.parseColor("#ffffffff"));
                 startErrorAnim(false);
             }
@@ -118,6 +117,8 @@ public class GestureSettingsActivity extends BaseActivity {
             idTextView.setText("两次绘制的图形不一致");
             idTextView.setTextColor(Color.parseColor("#FF0000"));
             CommonUtils.startShakeAnim(GestureSettingsActivity.this, idTextView);
+            CommonUtils.startShakeAnim(GestureSettingsActivity.this, idGestureLockDisplayViews);
+            CommonUtils.startShakeAnim(GestureSettingsActivity.this, idGestureLockViewGroup);
             idButton.setVisibility(View.VISIBLE);
         } else {
             idButton.setVisibility(View.GONE);

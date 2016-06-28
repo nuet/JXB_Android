@@ -26,6 +26,7 @@
     <color name="red">#CC0000</color> <!-- 红色 -->
 
     <color name="orange">#FF6600</color> <!-- 橙色 -->
+    <color name="lighter_orange">#FFAD76</color> <!-- 橙色 -->
 
     <color name="loanbottom">#495C6D</color> <!-- 借款底部菜单 -->
 

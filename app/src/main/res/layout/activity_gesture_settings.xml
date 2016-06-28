@@ -23,24 +23,19 @@
         android:id="@+id/id_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/top_menu_bar_gesture"
+        android:layout_above="@+id/id_gestureLockDisplayViews"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
-        android:text="请绘制手势密码"
+        android:text="请绘制手势密码图案"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/ll_show"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
 
         <com.lenso.jixiangbao.view.GestureLockDisplayViews
             android:id="@+id/id_gestureLockDisplayViews"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_below="@id/id_textView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/id_gestureLockViewGroup"
             android:layout_centerHorizontal="true"
             app:color_no_select="#838383"
             app:color_selected="#01A0E5"
@@ -60,7 +55,7 @@
             android:id="@+id/id_gestureLockViewGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/id_gestureLockDisplayViews"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:color_finger_on_inner_circle="#01A0E5"
@@ -103,30 +98,14 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:gravity="center_horizontal"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp"
-            android:background="@mipmap/ch"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="重　　绘"
+            android:textColor="@color/white"
+            android:background="@mipmap/wjmm"
             android:visibility="invisible" />
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="bottom"-->
-        <!--android:paddingBottom="10dp"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<Button-->
-        <!--android:id="@+id/id_button"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal|bottom"-->
-        <!--android:layout_marginLeft="30dp"-->
-        <!--android:layout_marginRight="30dp"-->
-        <!--android:background="@mipmap/ch"-->
-        <!--android:text="重 绘"-->
-        <!--android:textColor="@color/blue"-->
-        <!--android:visibility="invisible" />-->
-        <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
 
 </RelativeLayout>

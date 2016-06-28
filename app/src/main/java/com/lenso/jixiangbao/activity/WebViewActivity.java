@@ -47,6 +47,9 @@ public class WebViewActivity extends WebBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
+
+        topMenuBar.setMenuTopPadding(statusHeight);
+
         Intent intent = getIntent();
         String url = intent.getStringExtra(JSInterface.H5_URL);
         String title = intent.getStringExtra(JSInterface.H5_TITLE);

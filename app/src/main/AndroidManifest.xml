@@ -97,7 +97,7 @@
         <activity android:name=".activity.GestureSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".activity.GestureUnlockActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/LaunchActivityTheme"/>
 
 
 

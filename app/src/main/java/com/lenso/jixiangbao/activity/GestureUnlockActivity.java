@@ -9,15 +9,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.util.DownTimer;
+import com.lenso.jixiangbao.view.GestureLockDisplayViews;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
-import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.util.Arrays;
 
@@ -29,10 +28,10 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/20.
  */
 public class GestureUnlockActivity extends BaseActivity {
-    @Bind(R.id.top_menu_bar_gesture_unlock)
-    TopMenuBar topMenuBarGestureUnlock;
-    //    private boolean jsFlag;
-//    private boolean splashFlag;
+    @Bind(R.id.id_unlock_gestureLockDisplayViews)
+    GestureLockDisplayViews idUnlockGestureLockDisplayViews;
+    @Bind(R.id.id_textView3)
+    TextView idTextView3;
     private GestureLockViewGroup mGestureLockViewGroup;
     private TextView mTextView;
     private DownTimer timer;
@@ -55,22 +54,21 @@ public class GestureUnlockActivity extends BaseActivity {
         setContentView(R.layout.activity_gesture_unlock);
         ButterKnife.bind(this);
 
-        topMenuBarGestureUnlock.setMenuTopPadding(statusHeight);
-
-        Intent intent0 = getIntent();
+//        topMenuBarGestureUnlock.setMenuTopPadding(statusHeight);
+//        Intent intent0 = getIntent();
 //        jsFlag = intent0.getBooleanExtra("jsFlag", false);
 //        splashFlag = intent0.getBooleanExtra("splashFlag", false);
-
-        topMenuBarGestureUnlock.setTitleText("输入手势密码");
-        topMenuBarGestureUnlock.setOnBackClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        topMenuBarGestureUnlock.setTitleText("输入手势密码");
+//        topMenuBarGestureUnlock.setOnBackClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
         mGestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.id_gestureLockViewGroup_1);
         mTextView = (TextView) findViewById(R.id.id_textView2);
+
         timer = new DownTimer();//实例化
         SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
         String password = sp.getString("GestureLock", "");
@@ -85,11 +83,9 @@ public class GestureUnlockActivity extends BaseActivity {
         mGestureLockViewListener = new GestureLockViewGroup.OnGestureLockViewListener() {
             @Override
             public void onUnmatchedExceedBoundary() {
-//                        Toast.makeText(MainActivity.this, "错误5次...",
-//                                Toast.LENGTH_SHORT).show();
 //                        mGestureLockViewGroup.setUnMatchExceedBoundary(5);
                 saveTime(System.currentTimeMillis());
-                mTextView.setText("30s后再试");
+                mTextView.setText("请30s后再试");
                 CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
                 mGestureLockViewGroup.setTouchable(false);
                 //TODO 倒计时
@@ -100,29 +96,21 @@ public class GestureUnlockActivity extends BaseActivity {
             @Override
             public void onGestureEvent(boolean matched, int tryTimes) {
                 postClearRunnable();
-//                        Toast.makeText(MainActivity.this, matched + "",
-//                                Toast.LENGTH_SHORT).show();
                 if (matched) {
-                    mTextView.setText("手势密码正确");
+                    mTextView.setText("解锁成功");
                     mTextView.setTextColor(Color.parseColor("#008000"));
-//                    if(jsFlag){
-//                        Intent intent = new Intent();
-//                        intent.putExtra("gestureTitle","修改手势密码");
-//                        intent.putExtra("jsFlag",jsFlag);
-//                        intent.setClass(GestureUnlockActivity.this, GestureSettingsActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                    if(splashFlag){
+
                     Intent intent = new Intent();
                     intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
-//                    }
                 } else {
-                    mTextView.setText("手势密码不正确");
+                    mTextView.setText("手势密码错误，请重试");
                     mTextView.setTextColor(Color.parseColor("#FF0000"));
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
+                    CommonUtils.startShakeAnim(GestureUnlockActivity.this, idTextView3);
+                    CommonUtils.startShakeAnim(GestureUnlockActivity.this, idUnlockGestureLockDisplayViews);
+                    CommonUtils.startShakeAnim(GestureUnlockActivity.this, mGestureLockViewGroup);
                 }
                 isFirstSelect = true;
             }
@@ -141,8 +129,7 @@ public class GestureUnlockActivity extends BaseActivity {
             mGestureLockViewGroup.setTouchable(true);
             mGestureLockViewGroup.setUnMatchExceedBoundary(5);
             saveTime(-1);
-            mGestureLockViewGroup
-                    .setOnGestureLockViewListener(mGestureLockViewListener);
+            mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
         } else {
             mGestureLockViewGroup.setTouchable(false);
             setTimer(30000 - (System.currentTimeMillis() - time));
@@ -158,7 +145,7 @@ public class GestureUnlockActivity extends BaseActivity {
             @Override
             public void onFinish() {
                 mGestureLockViewGroup.setTouchable(true);
-                mTextView.setText("绘制手势密码");
+                mTextView.setText("请输入手势密码");
                 mTextView.setTextColor(Color.parseColor("#ffffffff"));
                 mGestureLockViewGroup.setUnMatchExceedBoundary(5);
                 mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
@@ -198,7 +185,7 @@ public class GestureUnlockActivity extends BaseActivity {
     public void onClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         builder.setTitle("温馨提示");
-        builder.setMessage("忘记手势密码需要重新登录!");
+        builder.setMessage("忘记手势密码需要重新登录!点击确定跳转到登陆界面");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
