@@ -10,15 +10,17 @@ public class UserInfo {
     private int signed;
     private Detailuser detailuser;
     private Summary summary;
+    private Account account;
 
     public UserInfo() {
     }
 
-    public UserInfo(int unreadmsg, int signed, UserInfo.Detailuser detailuser, UserInfo.Summary summary) {
+    public UserInfo(int unreadmsg, int signed, UserInfo.Detailuser detailuser, UserInfo.Summary summary, UserInfo.Account account) {
         this.unreadmsg = unreadmsg;
         this.signed = signed;
         this.detailuser = detailuser;
         this.summary = summary;
+        this.account = account;
     }
 
     public String getRsmsg() {
@@ -69,6 +71,14 @@ public class UserInfo {
         this.summary = summary;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public static class Detailuser{
         private String username;
         private String typename;
@@ -106,23 +116,23 @@ public class UserInfo {
     }
 
     public static class Summary{
-        private double accountUseMoney;
+//        private double accountUseMoney;
         private double collectTotal;
         private double collectInterest;
 
-        public Summary(double accountUseMoney, double collectTotal, double collectInterest) {
-            this.accountUseMoney = accountUseMoney;
+        public Summary(double collectTotal, double collectInterest) {
+//            this.accountUseMoney = accountUseMoney;
             this.collectTotal = collectTotal;
             this.collectInterest = collectInterest;
         }
 
-        public double getAccountUseMoney() {
-            return accountUseMoney;
-        }
-
-        public void setAccountUseMoney(double accountUseMoney) {
-            this.accountUseMoney = accountUseMoney;
-        }
+//        public double getAccountUseMoney() {
+//            return accountUseMoney;
+//        }
+//
+//        public void setAccountUseMoney(double accountUseMoney) {
+//            this.accountUseMoney = accountUseMoney;
+//        }
 
         public double getCollectTotal() {
             return collectTotal;
@@ -138,6 +148,22 @@ public class UserInfo {
 
         public void setCollectInterest(double collectInterest) {
             this.collectInterest = collectInterest;
+        }
+    }
+
+    public static class Account{
+        private double use_money;
+
+        public Account(double use_money){
+            this.use_money = use_money;
+        }
+
+        public double getUse_money() {
+            return use_money;
+        }
+
+        public void setUse_money(double use_money) {
+            this.use_money = use_money;
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
@@ -112,11 +115,34 @@ public class MineFragment extends BaseFragment {
         args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERINFO, new VolleyHttp.JsonResponseListener() {
             @Override
-            public void getJson(String json, boolean isConnectSuccess) {
+            public void getJson(String json, boolean isConnectSuccess){
                 if (isConnectSuccess) {
-                    Gson gson = new Gson();
-                    userInfo = gson.fromJson(json, UserInfo.class);
-                    initUI();
+                    try {
+                        Gson gson = new Gson();
+                        userInfo = gson.fromJson(json, UserInfo.class);
+                        initUI();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        logInfo("GSon解析出错");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                        builder.setTitle("温馨提示");
+                        builder.setMessage("您的账号已被迫离线，是否重新登录？");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.setClass(getActivity(), LoginOrRegisterActivity.class);
+                                startActivity(intent);
+//                                getActivity().finish();
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        builder.create().show();
+                    }
                 } else {
                     showToast("请检查网络设置");
                 }
@@ -150,7 +176,7 @@ public class MineFragment extends BaseFragment {
             ibQd.setImageResource(R.mipmap.minefragment_yqd);
             ibQd.setClickable(false);
         }
-        tvMineUsemoney.setText(String.valueOf(df.format(userInfo.getSummary().getAccountUseMoney())));
+        tvMineUsemoney.setText(String.valueOf(df.format(userInfo.getAccount().getUse_money())));
         tvMineTotal.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal())));
         tvMineInterest.setText(String.valueOf(df.format(userInfo.getSummary().getCollectInterest())));
         tvMineOrigin.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal() - userInfo.getSummary().getCollectInterest())));

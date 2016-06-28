@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -57,12 +58,14 @@ public class HomeActivity extends BaseActivity {
     TopMenuBar topMenuBar;
 
     public static Activity HOMECONTEXT;
-//    private WebViewFragment moreFragment;
+    //    private WebViewFragment moreFragment;
     private int currentItem;
     private boolean moreOpen = false;
     private SlidingMenu menu;
     private boolean isFirst = true;
     private MineFragment mineFragment;
+
+    private long backTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,9 +276,9 @@ public class HomeActivity extends BaseActivity {
 //                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 //                        @Override
 //                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intentLogin = new Intent();
-                            intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
-                            startActivity(intentLogin);
+                    Intent intentLogin = new Intent();
+                    intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
+                    startActivity(intentLogin);
 //                        }
 //                    });
 //                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -307,5 +310,21 @@ public class HomeActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         ShareSDK.stopSDK(this);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long exitTime = System.currentTimeMillis();
+            if (exitTime - backTime > 800) {//如果两次按键时间间隔大于800毫秒，则不退出
+                showToast("再按一次退出程序");
+                backTime = exitTime;//更新firstTime
+                return true;
+            } else {//否则退出程序
+                backTime = 0;
+                System.exit(0);
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

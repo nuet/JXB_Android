@@ -96,6 +96,7 @@ public class GestureSettingsActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 }
+                showToast("手势密码设置成功");
             }
         });
 
