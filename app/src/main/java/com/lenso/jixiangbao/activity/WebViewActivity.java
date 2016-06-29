@@ -42,6 +42,9 @@ public class WebViewActivity extends WebBaseActivity {
     private File headPIC;
     private static WebView webView;
     private static boolean calculator;
+    private String url;
+    private String title;
+    private String apr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +55,9 @@ public class WebViewActivity extends WebBaseActivity {
         topMenuBar.setMenuTopPadding(statusHeight);
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra(JSInterface.H5_URL);
-        String title = intent.getStringExtra(JSInterface.H5_TITLE);
+        url = intent.getStringExtra(JSInterface.H5_URL);
+        title = intent.getStringExtra(JSInterface.H5_TITLE);
+        apr = intent.getStringExtra("apr");
         webView = getWebView(url);
         flWeb.addView(webView);
         webView.addJavascriptInterface(new JSInterface(this), "api");
@@ -108,7 +112,7 @@ public class WebViewActivity extends WebBaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE, "计算器");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2 + "?app_key=" + Config.getInstance(WebViewActivity.this).getConfig("app_key"));
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2 + "?apr=" + apr);
                 intent.putExtra("intent", JSInterface.CALCULATOR);
                 startActivity(intent);
             }

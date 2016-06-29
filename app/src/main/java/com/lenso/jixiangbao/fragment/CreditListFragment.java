@@ -95,6 +95,7 @@ public class CreditListFragment extends BaseFragment {
                 Log.i("H5:", "URL:"+url);
                 intent.putExtra(JSInterface.H5_URL, url);
                 intent.putExtra(JSInterface.H5_TITLE, item.getName());
+                intent.putExtra("apr", item.getApr());
                 intent.putExtra("intent",JSInterface.DETAIL);
                 getActivity().startActivity(intent);
             }
