@@ -159,7 +159,7 @@ public class RegisterActivity extends BaseActivity {
                                         Intent intent = new Intent();
                                         intent.setClass(RegisterActivity.this, IdentifyActivity.class);
                                         startActivity(intent);
-                                        finish();
+//                                        finish();
                                     } else {
                                         showToast(jsonObject.getString("rsmsg"));
                                     }

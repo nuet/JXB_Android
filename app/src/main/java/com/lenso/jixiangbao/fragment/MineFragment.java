@@ -309,10 +309,9 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_zdtb:
-//                intent.putExtra(HTMLInterface.H5_URL,  + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-//                intent.putExtra(HTMLInterface.H5_TITLE, "自动投标");
-//                startActivity(intent);
-                showToast("自动投标");
+                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZDTB + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                intent.putExtra(HTMLInterface.H5_TITLE, "自动投标");
+                startActivity(intent);
                 break;
             case R.id.ll_zqzr:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));

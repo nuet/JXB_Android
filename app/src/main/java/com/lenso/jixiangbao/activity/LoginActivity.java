@@ -83,7 +83,7 @@ public class LoginActivity extends BaseActivity {
                 intentForget.putExtra("mobile", mobile);
                 intentForget.setClass(LoginActivity.this, ForgetPasswordActivity.class);
                 startActivity(intentForget);
-                finish();
+//                finish();
                 break;
             case R.id.btn_login_confirm:
                 args.put("username", mobile);
@@ -109,7 +109,7 @@ public class LoginActivity extends BaseActivity {
                                         intent.setClass(LoginActivity.this, HomeActivity.class);
                                     }
                                     startActivity(intent);
-                                    finish();
+//                                    finish();
                                 }else{
                                     showToast(jsonObject.getString("rsmsg"));
                                 }

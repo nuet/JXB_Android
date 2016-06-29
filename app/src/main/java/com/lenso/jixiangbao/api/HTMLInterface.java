@@ -33,6 +33,7 @@ public class HTMLInterface {
 
     public static final String ZJGK = DOMAIN + "member/income.html";
     public static final String WDTZ = DOMAIN + "member/investment.html";
+    public static final String ZDTB = DOMAIN + "member/setauto.html";
     public static final String ZQZR = DOMAIN + "member/transfer.html";
     public static final String TYB = DOMAIN + "member/experience-detail.html";
     public static final String WDJK = DOMAIN + "member/loan-record.html";

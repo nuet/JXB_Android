@@ -86,16 +86,33 @@
             android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".activity.WebViewActivity"/>
-        <activity android:name=".activity.LoginOrRegisterActivity"/>
-        <activity android:name=".activity.LoginActivity"/>
-        <activity android:name=".activity.RegisterActivity"/>
-        <activity android:name=".activity.IdentifyActivity"/>
+
+        <activity android:name=".activity.LoginOrRegisterActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.IdentifyActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.VerifyActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.ForgetPasswordActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <activity android:name=".activity.SetPasswordActivity"
+            android:windowSoftInputMode="stateVisible"/>
+
         <activity android:name=".activity.BindCardActivity"/>
-        <activity android:name=".activity.VerifyActivity"/>
-        <activity android:name=".activity.ForgetPasswordActivity"/>
-        <activity android:name=".activity.SetPasswordActivity"/>
+
         <activity android:name=".activity.GestureSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
         <activity android:name=".activity.GestureUnlockActivity"
             android:theme="@style/LaunchActivityTheme"/>
 

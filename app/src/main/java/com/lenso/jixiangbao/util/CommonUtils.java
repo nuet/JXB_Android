@@ -78,14 +78,6 @@ public class CommonUtils {
         return intArray;
     }
 
-    public static void ShowKeyboard(View view)
-    {
-//        view.setFocusable(true);
-//        view.setFocusableInTouchMode(true);
-//        view.requestFocus();
-        InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-    }
 
 
     //获取系统状态栏高度

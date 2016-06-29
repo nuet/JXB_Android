@@ -75,7 +75,7 @@ public class SetPasswordActivity extends BaseActivity {
                                 Intent intent = new Intent();
                                 intent.setClass(SetPasswordActivity.this, HomeActivity.class);
                                 startActivity(intent);
-                                finish();
+//                                finish();
                             }else {
                                 showToast(jsonObject.getString("rsmsg"));
                             }

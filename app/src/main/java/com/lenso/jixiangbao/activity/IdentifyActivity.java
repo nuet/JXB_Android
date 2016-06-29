@@ -77,7 +77,7 @@ public class IdentifyActivity extends BaseActivity {
                             Intent intent = new Intent();
                             intent.setClass(IdentifyActivity.this, BindCardActivity.class);
                             startActivity(intent);
-                            finish();
+//                            finish();
                         } else {
                             showToast(jsonObject.getString("rsmsg"));
                         }

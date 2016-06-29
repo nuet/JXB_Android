@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -34,8 +35,6 @@ public class LoginOrRegisterActivity extends BaseActivity {
 
     private Map args = new HashMap();
     private Intent intent = new Intent();
-//    private Intent getIntent;
-//    private boolean jsFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,32 +44,23 @@ public class LoginOrRegisterActivity extends BaseActivity {
 
         topMenuBarLoginRegister.setMenuTopPadding(statusHeight);
 
-//        ShowKeyboard(etLoginRegister);
         etLoginRegister.setFocusable(true);
         etLoginRegister.setFocusableInTouchMode(true);
         etLoginRegister.requestFocus();
         InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(etLoginRegister, InputMethodManager.SHOW_FORCED);
 
-//        getIntent = getIntent();
-//        jsFlag = getIntent.getBooleanExtra("jsFlag", false);
-//        if(!jsFlag){
         topMenuBarLoginRegister.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-//        }
     }
 
     @OnClick(R.id.btn_login_register)
     public void onClick(View view) {
         args.put("phone", etLoginRegister.getText().toString().trim());
-        next();
-    }
-
-    private void next() {
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_ISPHONEREGISTER, new VolleyHttp.JsonResponseListener() {
                     @Override
                     public void getJson(String json, boolean isConnectSuccess) {
@@ -80,17 +70,14 @@ public class LoginOrRegisterActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     if (jsonObject.getString("reged").equals("1")) {
-//                                        intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
-//                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                         intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
                                         intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                     } else {
                                         intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
                                         intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
                                     }
-//                                    intent.putExtra("jsFlag", jsFlag);
                                     startActivity(intent);
-                                    finish();
+//                                    finish();
                                 } else {
                                     showToast(jsonObject.getString("rsmsg"));
                                 }

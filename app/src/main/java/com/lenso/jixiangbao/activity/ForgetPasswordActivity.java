@@ -119,7 +119,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                                     intent.putExtra("id", jsonObject.getString("id"));
 //                                    logInfo(jsonObject.getString("id"));
                                     startActivity(intent);
-                                    finish();
+//                                    finish();
                                     logInfo("verify succeed");
                                 }else {
                                     showToast(jsonObject.getString("rsmsg"));

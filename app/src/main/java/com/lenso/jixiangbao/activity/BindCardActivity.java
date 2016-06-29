@@ -144,7 +144,7 @@ public class BindCardActivity extends BaseActivity {
                                 intent.putExtra("gestureTitle", "设置手势密码");
                                 intent.putExtra("jsFlag", false);
                                 startActivity(intent);
-                                finish();
+//                                finish();
                             } else {
                                 showToast(jsonObject.getString("rsmsg"));
                             }
