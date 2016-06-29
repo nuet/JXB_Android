@@ -98,7 +98,7 @@ public class GestureUnlockActivity extends BaseActivity {
                 postClearRunnable();
                 if (matched) {
                     mTextView.setText("解锁成功");
-                    mTextView.setTextColor(Color.parseColor("#008000"));
+                    mTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
                     Intent intent = new Intent();
                     intent.setClass(GestureUnlockActivity.this, HomeActivity.class);

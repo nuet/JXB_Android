@@ -44,8 +44,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -73,8 +72,8 @@
 
         <LinearLayout
             android:id="@+id/circle"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_gravity="center"
             android:background="@drawable/shape_choice_text_circle"
             android:gravity="center_horizontal"
@@ -83,9 +82,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1.4"
                 android:divider="@drawable/shape_list_item_line"
-                android:gravity="center"
+                android:gravity="center_horizontal|bottom"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -95,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16%"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_gravity="center"
                     android:textColor="@android:color/white"
                     android:textSize="40sp" />
 
@@ -112,11 +111,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:paddingBottom="12dp"
                 android:text="立即抢购"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>
