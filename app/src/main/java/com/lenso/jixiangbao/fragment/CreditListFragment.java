@@ -89,7 +89,7 @@ public class CreditListFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ChoiceList item = adapter.getListItem(position);
+                ChoiceList item = adapter.getListItem(position - 1);
                 Intent intent=new Intent(getActivity(), WebViewActivity.class);
                 String url = HTMLInterface.DETAIL + "?borrowid=" + item.getId() + "&app_key=" + Config.getInstance(getActivity().getApplicationContext()).getConfig("app_key");
                 Log.i("H5:", "URL:"+url);

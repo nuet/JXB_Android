@@ -44,7 +44,8 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -82,9 +83,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.4"
+                android:layout_weight="2"
                 android:divider="@drawable/shape_list_item_line"
-                android:gravity="center_horizontal|bottom"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -94,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16%"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@android:color/white"
                     android:textSize="40sp" />
 
@@ -111,12 +112,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:paddingBottom="12dp"
                 android:text="立即抢购"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
