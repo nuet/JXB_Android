@@ -107,11 +107,11 @@ public class ScreenItemView extends LinearLayout {
             setContentVisible(contentVisible);
         }
         if (itemTextColor == null)
-            itemTextColor = getResources().getColorStateList(R.color.selector_screen_item_text);
+            itemTextColor = getResources().getColorStateList(R.color.choose_item);
         if (itemTextBackground == 0)
             itemTextBackground = R.drawable.selector_screen_item_background;
         if (itemTextSize == 0)
-            itemTextSize = getResources().getDimension(R.dimen.sp_18);
+            itemTextSize = getResources().getDimension(R.dimen.sp_10);
 
         rlTitle.setOnClickListener(new OnClickListener() {
             @Override

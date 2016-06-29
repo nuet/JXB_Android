@@ -43,44 +43,36 @@ public class ScreenFragment extends BaseFragment {
         List<String> texts2 = new ArrayList<>();
         List<String> texts3 = new ArrayList<>();
         List<String> texts4 = new ArrayList<>();
-        List<String> texts5 = new ArrayList<>();
-        List<String> texts6 = new ArrayList<>();
-        texts1.add("hello1");
-        texts1.add("hello2");
-        texts1.add("hello3");
-        texts1.add("hello4");
-        texts1.add("hello5");
-        texts2.add("hello1");
-        texts2.add("hello2");
-        texts2.add("hello3");
-        texts2.add("hello4");
-        texts2.add("hello5");
-        texts3.add("hello1");
-        texts3.add("hello2");
-        texts4.add("hello3");
-        texts4.add("hello4");
-        texts4.add("hello5");
-        texts4.add("hello1");
-        texts4.add("hello2");
-        texts4.add("hello3");
-        texts4.add("hello4");
-        texts4.add("hello5");
-        texts5.add("hello1");
-        texts5.add("hello2");
-        texts5.add("hello3");
-        texts5.add("hello4");
-        texts5.add("hello5");
-        texts5.add("hello1");
-        texts6.add("hello2");
-        texts6.add("hello3");
-        texts6.add("hello4");
-        texts6.add("hello5");
-        data.put("hello", texts1);
-        data.put("hello_ooo", texts2);
-        data.put("hello_da", texts3);
-        data.put("hello_cs", texts4);
-        data.put("hello_ud", texts5);
-        data.put("hello_dd", texts6);
+        texts1.add("全部");
+        texts1.add("招标中");
+        texts1.add("还款中");
+        texts1.add("待审核");
+        texts1.add("已成功");
+
+        texts2.add("不限");
+        texts2.add("等额本息");
+        texts2.add("一次性还本付息");
+        texts2.add("每月还息到期还本");
+
+        texts3.add("不限");
+        texts3.add("1个月以下");
+        texts3.add("1-2个月");
+        texts3.add("3-4个月");
+        texts3.add("5-6个月");
+        texts3.add("6个月以上");
+
+        texts4.add("不限");
+        texts4.add("5万以下");
+        texts4.add("5-10万");
+        texts4.add("10-30万");
+        texts4.add("30-50万");
+        texts4.add("50万以上");
+
+        data.put("借款状态", texts1);
+        data.put("还款方式", texts2);
+        data.put("借款期限", texts3);
+        data.put("借款金额", texts4);
+
         adapter = new ScreenListAdapter(getContext(), data);
         lvScreen.setAdapter(adapter);
     }

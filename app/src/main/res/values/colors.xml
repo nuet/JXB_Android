@@ -10,6 +10,8 @@
 
     <color name="darker_gray">#aaa</color> <!-- 暗灰色 -->
 
+    <color name="choose_item">#666666</color> <!-- 理财item -->
+
     <color name="light_gray">#F0F0F0</color> <!-- 亮灰色 -->
 
     <color name="lighter_gray">#F3F3F3</color> <!-- 亮灰色 -->

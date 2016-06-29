@@ -25,7 +25,7 @@
             android:layout_toRightOf="@id/tv_title"
             android:visibility="invisible"
             android:text="content"
-            />
+            android:textColor="@color/darker_gray"/>
         <ImageView
             android:id="@+id/iv_screen_arrow"
             android:layout_centerVertical="true"
@@ -38,7 +38,7 @@
         android:id="@+id/ll_screen_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="-1px"
         android:orientation="horizontal">
         <LinearLayout
             android:id="@+id/ll_screen_item_1"

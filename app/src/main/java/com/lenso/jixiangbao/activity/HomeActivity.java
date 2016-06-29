@@ -187,7 +187,7 @@ public class HomeActivity extends BaseActivity {
         Point outSize = new Point();
         getWindowManager().getDefaultDisplay().getSize(outSize);
         // 设置滑动菜单视图的宽度
-        menu.setBehindOffset(outSize.x / 4);
+        menu.setBehindOffset(outSize.x / 6);
         // 设置渐入渐出效果的值
         menu.setFadeDegree(0.35f);
         /**
