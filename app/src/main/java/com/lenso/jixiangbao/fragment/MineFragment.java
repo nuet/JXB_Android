@@ -98,6 +98,8 @@ public class MineFragment extends BaseFragment {
     @Bind(R.id.rl_mine_top)
     RelativeLayout rlMineTop;
     public static UserInfo userInfo;
+    @Bind(R.id.ll_zdtb)
+    LinearLayout llZdtb;
     private Map args = new HashMap();
     private Map argsign = new HashMap();
     private DecimalFormat df = new DecimalFormat("0.00");
@@ -107,7 +109,7 @@ public class MineFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
-        rlMineTop.setPadding(10,Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")),10,0);
+        rlMineTop.setPadding(10, Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")), 10, 0);
         return view;
     }
 
@@ -115,7 +117,7 @@ public class MineFragment extends BaseFragment {
         args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERINFO, new VolleyHttp.JsonResponseListener() {
             @Override
-            public void getJson(String json, boolean isConnectSuccess){
+            public void getJson(String json, boolean isConnectSuccess) {
                 if (isConnectSuccess) {
                     try {
                         Gson gson = new Gson();
@@ -208,6 +210,7 @@ public class MineFragment extends BaseFragment {
             R.id.ll_dsze,
             R.id.ll_zjgk,
             R.id.ll_wdtz,
+            R.id.ll_zdtb,
             R.id.ll_zqzr,
             R.id.ll_wdjk,
             R.id.ll_zhxx,
@@ -304,6 +307,12 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "我的投资");
                 startActivity(intent);
+                break;
+            case R.id.ll_zdtb:
+//                intent.putExtra(HTMLInterface.H5_URL,  + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+//                intent.putExtra(HTMLInterface.H5_TITLE, "自动投标");
+//                startActivity(intent);
+                showToast("自动投标");
                 break;
             case R.id.ll_zqzr:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));

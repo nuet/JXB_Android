@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="默认用户"
+                        android:text="　　　　"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -105,7 +105,7 @@
                         android:background="@mipmap/minefragment_btn"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="尚未实名认证"
+                        android:text="　　　　　　"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -519,6 +519,46 @@
                             android:layout_weight="8"
                             android:padding="5dp"
                             android:text="我的投资"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@mipmap/loanfragment_rightarrow" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginLeft="48dp"
+                        android:background="@color/minedivider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_zdtb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:src="@mipmap/minefragment_zdtb" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:padding="5dp"
+                            android:text="自动投标"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 

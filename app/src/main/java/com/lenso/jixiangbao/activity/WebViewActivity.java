@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -87,9 +88,9 @@ public class WebViewActivity extends WebBaseActivity {
     private void menuSet(Intent intent) {
         int i = intent.getIntExtra("intent", -1);
         switch (i) {
-            case JSInterface.JI_CHE_DAI:
-                ji_che_dai();
-                break;
+//            case JSInterface.JI_CHE_DAI:
+//                ji_che_dai();
+//                break;
             case JSInterface.CALCULATOR:
                 calculator();
                 break;
@@ -107,7 +108,7 @@ public class WebViewActivity extends WebBaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE, "计算器");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2);
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR2 + "?app_key=" + Config.getInstance(WebViewActivity.this).getConfig("app_key"));
                 intent.putExtra("intent", JSInterface.CALCULATOR);
                 startActivity(intent);
             }
@@ -118,20 +119,20 @@ public class WebViewActivity extends WebBaseActivity {
         topMenuBar.setBackSrc(R.mipmap.close);
     }
 
-    private void ji_che_dai() {
-        topMenuBar.setMenuSrc(R.mipmap.calculator);
-        topMenuBar.setMenuVisibility(View.VISIBLE);
-        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
-                intent.putExtra(JSInterface.H5_TITLE, "计算器");
-                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
-                intent.putExtra("intent", JSInterface.CALCULATOR);
-                startActivity(intent);
-            }
-        });
-    }
+//    private void ji_che_dai() {
+//        topMenuBar.setMenuSrc(R.mipmap.calculator);
+//        topMenuBar.setMenuVisibility(View.VISIBLE);
+//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+//                intent.putExtra(JSInterface.H5_TITLE, "计算器");
+//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
+//                intent.putExtra("intent", JSInterface.CALCULATOR);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
 
     @Override
