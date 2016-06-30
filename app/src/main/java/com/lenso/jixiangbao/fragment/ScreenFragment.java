@@ -3,6 +3,7 @@ package com.lenso.jixiangbao.fragment;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,10 @@ import com.lenso.jixiangbao.http.VolleyHttp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +33,11 @@ public class ScreenFragment extends BaseFragment {
     @Bind(R.id.lv_screen)
     ListView lvScreen;
     private ScreenListAdapter adapter;
+    private Map<String, List<String>> data;
+//    private List<String> keyList= new ArrayList<>();
+//    private List<String> sortArg = new ArrayList<>();
+    private Map args = new HashMap();
+    private int i = 0;
 
     @Nullable
     @Override
@@ -41,26 +49,9 @@ public class ScreenFragment extends BaseFragment {
     }
 
     private void initView() {
-        Map<String, List<String>> data = new HashMap<>();
+        data = new LinkedHashMap<>();
+
         List<String> texts = new ArrayList<>();
-        texts.add("不限");
-        texts.add("5万以下");
-        texts.add("5-10万");
-        texts.add("10-30万");
-        texts.add("30-50万");
-        texts.add("50万以上");
-        data.put("借款金额", texts);
-
-        texts = new ArrayList<>();
-        texts.add("不限");
-        texts.add("1个月以下");
-        texts.add("1-2个月");
-        texts.add("3-4个月");
-        texts.add("5-6个月");
-        texts.add("6个月以上");
-        data.put("借款期限", texts);
-
-        texts = new ArrayList<>();
         texts.add("全部");
         texts.add("招标中");
         texts.add("还款中");
@@ -74,6 +65,24 @@ public class ScreenFragment extends BaseFragment {
         texts.add("一次性还本付息");
         texts.add("每月还息到期还本");
         data.put("还款方式", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("1个月以下");
+        texts.add("1-2个月");
+        texts.add("3-4个月");
+        texts.add("5-6个月");
+        texts.add("6个月以上");
+        data.put("借款期限", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("5万以下");
+        texts.add("5-10万");
+        texts.add("10-30万");
+        texts.add("30-50万");
+        texts.add("50万以上");
+        data.put("借款金额", texts);
 
         adapter = new ScreenListAdapter(getContext(), data);
         lvScreen.setAdapter(adapter);
@@ -97,17 +106,30 @@ public class ScreenFragment extends BaseFragment {
             case R.id.tv_screen_ok:
                 cancelShowMenu();
 
-                Map args = new HashMap();
-                args.put("s_status","");
-                args.put("s_repay_way","");
-                args.put("s_time_limit","");
-                args.put("s_account","");
+                logInfo(data.toString());
+
+//                Set<String> keys = adapter.getArgs().keySet();
+//                for (String key : keys) {
+//                    keyList.add(key);
+//                    i=0;
+//                    for(;i<adapter.getArgs().get(key).size();i++){
+//                        if(adapter.getArgs().get(key).get(i).endsWith(".1")){
+//                            break;
+//                        }
+//                    }
+//                    sortArg.add(String.valueOf(i));
+//                }
+
+                args.put("s_status", adapter.getArgs().get(0));
+                args.put("s_repay_way",adapter.getArgs().get(1));
+                args.put("s_time_limit",adapter.getArgs().get(2));
+                args.put("s_account",adapter.getArgs().get(3));
                 args.put("order",FinancingFragment.order);
                 args.put("s_type",FinancingFragment.s_type);
 
-//                CreditListFragment.progressDialog.show();
-//                CreditListFragment.reLoadBorrowList(args);
+                logInfo("ScreenFragment" + args.toString());
 
+                ((HomeActivity)getActivity()).test();
                 break;
         }
     }

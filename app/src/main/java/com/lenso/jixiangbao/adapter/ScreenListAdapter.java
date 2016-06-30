@@ -12,6 +12,7 @@ import com.lenso.jixiangbao.view.ScreenItemView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,10 +26,11 @@ public class ScreenListAdapter extends BaseAdapter {
     private final Map<String, String> map;
     private final Map<String, List<String>> data;
     private final List<String> keyList;
+    private Map<Integer, Integer> args = new LinkedHashMap<>();
 
     public ScreenListAdapter(Context context, Map<String, List<String>> data) {
         this.context = context;
-        this.map = new HashMap<>();
+        this.map = new LinkedHashMap<>();
         this.data = data;
         this.keyList = new ArrayList<>();
 
@@ -89,12 +91,18 @@ public class ScreenListAdapter extends BaseAdapter {
 
     private ScreenItemView.OnScreenItemListener listener = new ScreenItemView.OnScreenItemListener() {
         @Override
-        public void onScreenItem(int position, String text, boolean isUp) {
+        public void onScreenItem(int position, String text, boolean isUp, int pos) {
             if (isUp) {
                 map.put(keyList.get(position), text + ".1");
+                args.put(position,pos);
             } else {
                 map.put(keyList.get(position), text + ".0");
             }
         }
     };
+
+
+    public Map<Integer, Integer> getArgs() {
+        return args;
+    }
 }

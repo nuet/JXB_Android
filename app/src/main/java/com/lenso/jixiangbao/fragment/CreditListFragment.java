@@ -77,16 +77,6 @@ public class CreditListFragment extends BaseFragment {
     public static ProgressDialog progressDialog;
     private static Context context;
 
-//    public Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            if(msg.what == 1){
-//                progressDialog.show();
-//                reLoadBorrowList((Map) msg.obj);
-//            }
-//        }
-//    };
 
     @Nullable
     @Override

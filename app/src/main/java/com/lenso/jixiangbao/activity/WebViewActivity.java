@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -157,7 +158,7 @@ public class WebViewActivity extends WebBaseActivity {
                     break;
                 case 0:
                     if (data != null) {
-                        setImageToView(data);
+                        saveImage(data);
                     }
                     break;
             }
@@ -194,17 +195,19 @@ public class WebViewActivity extends WebBaseActivity {
      *
      * @param data pic data
      */
-    private void setImageToView(Intent data) {
+    private void saveImage(Intent data) {
         Bundle extras = data.getExtras();
         if (extras != null) {
             Bitmap photo = extras.getParcelable("data");
-
             try {
                 FileOutputStream out = new FileOutputStream(headPIC);
                 photo.compress(Bitmap.CompressFormat.PNG, 100, out);
                 out.flush();
                 out.close();
                 Log.i("headPIC", "SAVED");
+
+
+
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
                 Log.i("headPIC", "UNSAVED1");

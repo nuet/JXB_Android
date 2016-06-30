@@ -152,12 +152,22 @@ public class UserInfo {
     }
 
     public static class Account{
+        private String user_id;
         private double total;
         private double use_money;
 
-        public Account(double total, double use_money){
+        public Account(String user_id, double total, double use_money){
+            this.user_id = user_id;
             this.total = total;
             this.use_money = use_money;
+        }
+
+        public String getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(String user_id) {
+            this.user_id = user_id;
         }
 
         public double getTotal() {

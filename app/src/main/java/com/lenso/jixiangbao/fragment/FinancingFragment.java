@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.view.JViewPager;
 
@@ -131,5 +132,9 @@ public class FinancingFragment extends BaseFragment {
         jvpFinance.setCurrentItem(position);
         unSelected();
         view.setSelected(true);
+    }
+
+    public void test(){
+        showToast("2");
     }
 }

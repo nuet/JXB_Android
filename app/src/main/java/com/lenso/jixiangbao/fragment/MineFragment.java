@@ -41,8 +41,6 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/11.
  */
 public class MineFragment extends BaseFragment {
-
-
     @Bind(R.id.iv_headpic)
     ImageView ivHeadpic;
     @Bind(R.id.tv_username)

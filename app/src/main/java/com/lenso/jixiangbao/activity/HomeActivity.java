@@ -72,6 +72,9 @@ public class HomeActivity extends BaseActivity {
     private boolean moreOpen = false;
     private SlidingMenu menu;
     private boolean isFirst = true;
+    private ChoiceFragment choiceFragment;
+    private FinancingFragment financingFragment;
+    private LoanFragment loanFragment;
     private MineFragment mineFragment;
 
     private long backTime = 0;
@@ -217,10 +220,13 @@ public class HomeActivity extends BaseActivity {
 
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new ChoiceFragment());
-        fragments.add(new FinancingFragment());
-        fragments.add(new LoanFragment());
+        choiceFragment = new ChoiceFragment();
+        financingFragment = new FinancingFragment();
+        loanFragment = new LoanFragment();
         mineFragment = new MineFragment();
+        fragments.add(choiceFragment);
+        fragments.add(financingFragment);
+        fragments.add(loanFragment);
         fragments.add(mineFragment);
 
         FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
@@ -389,5 +395,9 @@ public class HomeActivity extends BaseActivity {
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    public void test(){
+        financingFragment.test();
     }
 }

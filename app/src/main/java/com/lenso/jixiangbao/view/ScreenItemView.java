@@ -170,8 +170,9 @@ public class ScreenItemView extends LinearLayout {
         llScreenItem1.removeAllViews();
         llScreenItem2.removeAllViews();
         this.t = t;
+        int i=0;
         for (String text : texts) {
-            addItemView(text);
+            addItemView(text, i++);
             if (t.equals(text)) {
                 itemTexts.get(itemTexts.size() - 1).setSelected(true);
             }
@@ -197,11 +198,12 @@ public class ScreenItemView extends LinearLayout {
     }
 
     public interface OnScreenItemListener {
-        void onScreenItem(int position, String text, boolean isUp);
+        void onScreenItem(int position, String text, boolean isUp, int pos);
     }
 
-    private TextView addItemView(String text) {
+    private TextView addItemView(String text,int pos) {
         TextView textView = new TextView(getContext());
+        textView.setTag(pos);
         textView.setText(text);
         textView.setTextColor(itemTextColor);
 //        textView.setTextSize(itemTextSize);
@@ -228,7 +230,7 @@ public class ScreenItemView extends LinearLayout {
                 unSelected();
                 v.setSelected(true);
                 t = ((TextView) v).getText().toString();
-                listener.onScreenItem(position, t, isUp);
+                listener.onScreenItem(position, t, isUp, (Integer) v.getTag());
             }
         });
         return textView;
@@ -245,7 +247,7 @@ public class ScreenItemView extends LinearLayout {
             llScreenItemHeight = llScreenItem.getHeight();
         setArrowRotation(v, isUp);
         itemAnimator(isUp);
-        listener.onScreenItem(position, t, isUp);
+        listener.onScreenItem(position, t, isUp, (Integer) v.getTag());
     }
 
     private void setArrowRotation(View v, boolean is) {
