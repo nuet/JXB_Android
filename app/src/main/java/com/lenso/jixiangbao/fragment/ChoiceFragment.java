@@ -59,14 +59,14 @@ public class ChoiceFragment extends BaseFragment {
     @Bind(R.id.text3)
     TextView text3;
     private List<ImageView> dots;
-    private float dp_250;
+    private float dp_280;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choice, null);
         ButterKnife.bind(this, view);
-        dp_250=getResources().getDimension(R.dimen.dp_250);
+        dp_280=getResources().getDimension(R.dimen.dp_280);
         initRefreshList();
         initView();
         return view;
@@ -128,7 +128,7 @@ public class ChoiceFragment extends BaseFragment {
         dots.get(0).setSelected(true);
         Point outSize=new Point();
         getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
-        RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y-dp_250));
+        RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y-dp_280));
         vpChoice.setLayoutParams(lp);
         vpChoice.addLoopFragment(new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment());
         vpChoice.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {

@@ -35,4 +35,5 @@
     <string name="san_list_title">散标专区</string>
     <string name="buy">抢购</string>
     <string name="sell_out">售罄</string>
+    <string name="test" />
 </resources>

@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import king.dominic.slidingmenu.SlidingMenu;
 
 /**
  * Created by Chung on 2016/5/12.
@@ -39,6 +40,10 @@ public class FinancingFragment extends BaseFragment {
     ImageView viewLine;
     private FragmentViewPageAdapter adapter;
     private int width;
+
+    public static String order = "0";
+    public static String s_type = "115";
+    public static String pageStart = "1";
 
     @Nullable
     @Override
@@ -66,7 +71,6 @@ public class FinancingFragment extends BaseFragment {
         jvpFinance.setAdapter(adapter);
         tvMenuCreditList.setSelected(true);
         jvpFinance.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) viewLine.getLayoutParams();
@@ -95,6 +99,7 @@ public class FinancingFragment extends BaseFragment {
                 logDebug(state + "++");
             }
         });
+
     }
 
     @Override

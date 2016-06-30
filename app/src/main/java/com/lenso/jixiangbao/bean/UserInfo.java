@@ -116,23 +116,23 @@ public class UserInfo {
     }
 
     public static class Summary{
-//        private double accountUseMoney;
         private double collectTotal;
         private double collectInterest;
+        private double total_income;
 
-        public Summary(double collectTotal, double collectInterest) {
-//            this.accountUseMoney = accountUseMoney;
+        public Summary(double collectTotal, double collectInterest, double total_income) {
             this.collectTotal = collectTotal;
             this.collectInterest = collectInterest;
+            this.total_income = total_income;
         }
 
-//        public double getAccountUseMoney() {
-//            return accountUseMoney;
-//        }
-//
-//        public void setAccountUseMoney(double accountUseMoney) {
-//            this.accountUseMoney = accountUseMoney;
-//        }
+        public double getTotal_income() {
+            return total_income;
+        }
+
+        public void setTotal_income(double total_income) {
+            this.total_income = total_income;
+        }
 
         public double getCollectTotal() {
             return collectTotal;
@@ -152,10 +152,20 @@ public class UserInfo {
     }
 
     public static class Account{
+        private double total;
         private double use_money;
 
-        public Account(double use_money){
+        public Account(double total, double use_money){
+            this.total = total;
             this.use_money = use_money;
+        }
+
+        public double getTotal() {
+            return total;
+        }
+
+        public void setTotal(double total) {
+            this.total = total;
         }
 
         public double getUse_money() {

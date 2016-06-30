@@ -11,6 +11,7 @@ import com.lenso.jixiangbao.view.ScreenItemView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,11 +31,16 @@ public class ScreenListAdapter extends BaseAdapter {
         this.map = new HashMap<>();
         this.data = data;
         this.keyList = new ArrayList<>();
+
+        Log.i("ScreenListAdapter", data.toString());
+
         Set<String> keys = data.keySet();
         for (String key : keys) {
             map.put(key, data.get(key).get(0) + ".1");
+            Log.i("ScreenListAdapter", key);
             keyList.add(key);
         }
+
     }
 
     public void resetScreenList() {

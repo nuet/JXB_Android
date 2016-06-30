@@ -25,86 +25,88 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class SplashActivity extends BaseActivity {
 
-    private Gson gson;
-    private List<AppScrollPic> picList;
-    private int loadCount = 0;
-    private List<ChoiceList> borrowList;
+//    private Gson gson;
+//    private List<AppScrollPic> picList;
+//    private int loadCount = 0;
+//    private List<ChoiceList> borrowList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        gson = new Gson();
-        App.BASE_BEAN=new BaseBean();
+//        gson = new Gson();
+//        App.BASE_BEAN=new BaseBean();
 
         Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
 
-        load();
-    }
-
-    private void load() {
-        logDebug("load...");
-        loadValues();
-    }
-
-    private void loadPicList() {
-        VolleyHttp.getInstance().getJson(ServerInterface.ALL_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    picList = bean.getAppScrollPic();
-                } else {
-                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadBorrowList();
-            }
-        });
-    }
-
-    private void loadBorrowList() {
-        VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    borrowList = bean.getBorrowList();
-                } else {
-                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                goHome();
-            }
-        });
-    }
-
-    private void goHome() {
-        logDebug("home:"+loadCount);
-        if (loadCount < 3)
-            return;
-        App.BASE_BEAN.setAppScrollPic(picList);
-        App.BASE_BEAN.setBorrowList(borrowList);
         init();
+
+//        load();
     }
 
-    private void loadValues() {
-        VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());
-                    App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());
-                    App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());
-                } else {
-                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadPicList();
-            }
-        });
-    }
+//    private void load() {
+//        logDebug("load...");
+//        loadValues();
+//    }
+//
+//    private void loadValues() {
+//        VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
+//            @Override
+//            public void getJson(String json, boolean isConnectSuccess) {
+//                if (json != null && !json.equals("") && !json.equals("null")) {
+//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+//                    App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());
+//                    App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());
+//                    App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());
+//                } else {
+//                    showToast(getString(R.string.no_internet));
+//                }
+//                loadCount++;
+//                loadPicList();
+//            }
+//        });
+//    }
+//
+//    private void loadPicList() {
+//        VolleyHttp.getInstance().getJson(ServerInterface.ALL_LIST, new VolleyHttp.JsonResponseListener() {
+//            @Override
+//            public void getJson(String json, boolean isConnectSuccess) {
+//                if (json != null && !json.equals("") && !json.equals("null")) {
+//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+//                    picList = bean.getAppScrollPic();
+//                } else {
+//                    showToast(getString(R.string.no_internet));
+//                }
+//                loadCount++;
+//                loadBorrowList();
+//            }
+//        });
+//    }
+//
+//    private void loadBorrowList() {
+//        VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
+//            @Override
+//            public void getJson(String json, boolean isConnectSuccess) {
+//                if (json != null && !json.equals("") && !json.equals("null")) {
+//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+//                    borrowList = bean.getBorrowList();
+//                } else {
+//                    showToast(getString(R.string.no_internet));
+//                }
+//                loadCount++;
+//                goHome();
+//            }
+//        });
+//    }
+//    private void goHome() {
+//        logDebug("home:"+loadCount);
+//        if (loadCount < 3)
+//            return;
+//        App.BASE_BEAN.setAppScrollPic(picList);
+//        App.BASE_BEAN.setBorrowList(borrowList);
+//        init();
+//    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -123,7 +125,6 @@ public class SplashActivity extends BaseActivity {
                 intent.setClass(this, HomeActivity.class);
             } else {
                 intent.setClass(this, GestureUnlockActivity.class);
-//                intent.putExtra("splashFlag", true);
             }
         }
         startActivity(intent);

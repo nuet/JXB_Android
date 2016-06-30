@@ -2,28 +2,38 @@ package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.bean.AppScrollPic;
+import com.lenso.jixiangbao.bean.BaseBean;
+import com.lenso.jixiangbao.bean.ChoiceList;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
+import com.lenso.jixiangbao.fragment.CreditListFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
 //import com.lenso.jixiangbao.fragment.WebViewFragment;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
@@ -58,7 +68,6 @@ public class HomeActivity extends BaseActivity {
     TopMenuBar topMenuBar;
 
     public static Activity HOMECONTEXT;
-    //    private WebViewFragment moreFragment;
     private int currentItem;
     private boolean moreOpen = false;
     private SlidingMenu menu;
@@ -66,6 +75,13 @@ public class HomeActivity extends BaseActivity {
     private MineFragment mineFragment;
 
     private long backTime = 0;
+
+    private Gson gson = new Gson();
+    private List<AppScrollPic> picList;
+    private int loadCount = 0;
+    private List<ChoiceList> borrowList;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +93,8 @@ public class HomeActivity extends BaseActivity {
 
         ShareSDK.initSDK(this);//初始化shareSDK
 
-        initViewPager();
+        load();
 
-//        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
     }
 
     public SlidingMenu getSlidingMenu() {
@@ -159,21 +174,11 @@ public class HomeActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 });
-//                topMenuBar.setTitleText(res.getString(R.string.more));
-//                topMenuBar.setVisibility(View.VISIBLE);
-//                topMenuBar.setBackVisibility(View.VISIBLE);
-//                topMenuBar.setMenuVisibility(View.INVISIBLE);
                 break;
             case 3:
                 menuItem4.setSelected(true);
                 topMenuBar.setVisibility(View.GONE);
                 break;
-//            case 4:
-//                topMenuBar.setTitleText(res.getString(R.string.more));
-//                topMenuBar.setVisibility(View.VISIBLE);
-//                topMenuBar.setBackVisibility(View.VISIBLE);
-//                topMenuBar.setMenuVisibility(View.INVISIBLE);
-//                break;
         }
     }
 
@@ -205,7 +210,6 @@ public class HomeActivity extends BaseActivity {
         if (hasFocus && isFirst) {
             isFirst = false;
             initSlidingMenu();
-//            moreFragment.webViewLoader(HTMLInterface.GD);
         }
         super.onWindowFocusChanged(hasFocus);
     }
@@ -213,7 +217,6 @@ public class HomeActivity extends BaseActivity {
 
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-//        moreFragment = new WebViewFragment();
         fragments.add(new ChoiceFragment());
         fragments.add(new FinancingFragment());
         fragments.add(new LoanFragment());
@@ -257,11 +260,6 @@ public class HomeActivity extends BaseActivity {
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(HomeActivity.this, WebViewActivity.class);
-//                intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
-//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.JI_CHE_DAI);
-//                intent.putExtra("intent", JSInterface.JI_CHE_DAI);
-//                startActivity(intent);
                 vpHome.setCurrentItem(2);
             }
         });
@@ -270,29 +268,94 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View view) {
                 String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
                 if (app_key == null || app_key.equals("")) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//                    builder.setTitle("温馨提示");
-//                    builder.setMessage("系统检测到您尚未登录，是否前往登录页进行登录？");
-//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
                     Intent intentLogin = new Intent();
                     intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
                     startActivity(intentLogin);
-//                        }
-//                    });
-//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                        }
-//                    });
-//                    builder.create().show();
                 } else {
                     mineFragment.initData();
                     vpHome.setCurrentItem(3);
                 }
             }
         });
+
+    }
+
+    private void load() {
+        logDebug("load...");
+        App.BASE_BEAN=new BaseBean();
+
+        progressDialog = new ProgressDialog(this); // 获取对象
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+        progressDialog.setIcon(R.mipmap.b);
+        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
+        progressDialog.setMessage("正在加载数据..."); // 设置进度条的提示信息
+        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
+        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+        progressDialog.show();
+
+        loadValues();
+    }
+
+    private void loadValues() {
+        VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (json != null && !json.equals("") && !json.equals("null")) {
+                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());
+                    App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());
+                    App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());
+                } else {
+                    showToast(getString(R.string.no_internet));
+                }
+                loadCount++;
+                loadPicList();
+            }
+        });
+    }
+
+    private void loadPicList() {
+        VolleyHttp.getInstance().getJson(ServerInterface.ALL_LIST, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (json != null && !json.equals("") && !json.equals("null")) {
+                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    picList = bean.getAppScrollPic();
+                } else {
+                    showToast(getString(R.string.no_internet));
+                }
+                loadCount++;
+                loadBorrowList();
+            }
+        });
+    }
+
+    private void loadBorrowList() {
+        VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (json != null && !json.equals("") && !json.equals("null")) {
+                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    borrowList = bean.getBorrowList();
+                } else {
+                    showToast(getString(R.string.no_internet));
+                }
+                loadCount++;
+                setData();
+            }
+        });
+    }
+
+    private void setData() {
+        logDebug("home:"+loadCount);
+        if (loadCount < 3)
+            return;
+        App.BASE_BEAN.setAppScrollPic(picList);
+        App.BASE_BEAN.setBorrowList(borrowList);
+
+        progressDialog.dismiss();
+
+        initViewPager();
 
     }
 

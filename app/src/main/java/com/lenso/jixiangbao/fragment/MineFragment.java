@@ -41,12 +41,26 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/11.
  */
 public class MineFragment extends BaseFragment {
+
+
     @Bind(R.id.iv_headpic)
     ImageView ivHeadpic;
     @Bind(R.id.tv_username)
     TextView tvUsername;
     @Bind(R.id.usertype)
     TextView usertype;
+    @Bind(R.id.iv_mine_message)
+    ImageView ivMineMessage;
+    @Bind(R.id.tv_mine_unreadmsg)
+    TextView tvMineUnreadmsg;
+    @Bind(R.id.rl_mine_top)
+    RelativeLayout rlMineTop;
+    @Bind(R.id.tv_zcze1)
+    TextView tvZcze1;
+    @Bind(R.id.tv_zcze2)
+    TextView tvZcze2;
+    @Bind(R.id.ll_zcze)
+    LinearLayout llZcze;
     @Bind(R.id.ib_tjyj)
     ImageButton ibTjyj;
     @Bind(R.id.tv_tjyj)
@@ -65,41 +79,32 @@ public class MineFragment extends BaseFragment {
     TextView tvJf;
     @Bind(R.id.ll_jf)
     LinearLayout llJf;
+    @Bind(R.id.tv_mine_usemoney)
+    TextView tvMineUsemoney;
     @Bind(R.id.btn_tx)
     Button btnTx;
     @Bind(R.id.btn_cz)
     Button btnCz;
-    @Bind(R.id.ll_dsze)
-    LinearLayout llDsze;
+    @Bind(R.id.tv_mine_ljsy)
+    TextView tvMineLjsy;
+    @Bind(R.id.ll_ljsy)
+    LinearLayout llLjsy;
     @Bind(R.id.ll_zjgk)
     LinearLayout llZjgk;
     @Bind(R.id.ll_wdtz)
     LinearLayout llWdtz;
+    @Bind(R.id.ll_zdtb)
+    LinearLayout llZdtb;
     @Bind(R.id.ll_zqzr)
     LinearLayout llZqzr;
     @Bind(R.id.ll_wdjk)
     LinearLayout llWdjk;
-    @Bind(R.id.ll_gd)
-    LinearLayout llGd;
-    @Bind(R.id.tv_mine_unreadmsg)
-    TextView tvMineUnreadmsg;
-    @Bind(R.id.tv_mine_usemoney)
-    TextView tvMineUsemoney;
-    @Bind(R.id.tv_mine_total)
-    TextView tvMineTotal;
-    @Bind(R.id.tv_mine_origin)
-    TextView tvMineOrigin;
-    @Bind(R.id.tv_mine_interest)
-    TextView tvMineInterest;
-    @Bind(R.id.iv_mine_message)
-    ImageView ivMineMessage;
     @Bind(R.id.ll_zhxx)
     LinearLayout llZhxx;
-    @Bind(R.id.rl_mine_top)
-    RelativeLayout rlMineTop;
+    @Bind(R.id.ll_gd)
+    LinearLayout llGd;
+
     public static UserInfo userInfo;
-    @Bind(R.id.ll_zdtb)
-    LinearLayout llZdtb;
     private Map args = new HashMap();
     private Map argsign = new HashMap();
     private DecimalFormat df = new DecimalFormat("0.00");
@@ -135,7 +140,6 @@ public class MineFragment extends BaseFragment {
                                 Intent intent = new Intent();
                                 intent.setClass(getActivity(), LoginOrRegisterActivity.class);
                                 startActivity(intent);
-//                                getActivity().finish();
                             }
                         });
                         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -171,6 +175,8 @@ public class MineFragment extends BaseFragment {
             tvMineUnreadmsg.setVisibility(View.VISIBLE);
         }
 
+        tvZcze1.setText(String.valueOf(df.format(userInfo.getAccount().getTotal())));
+
         if (userInfo.getSigned() == 0) {
             ibQd.setImageResource(R.mipmap.minefragment_qd);
             ibQd.setClickable(true);
@@ -178,10 +184,10 @@ public class MineFragment extends BaseFragment {
             ibQd.setImageResource(R.mipmap.minefragment_yqd);
             ibQd.setClickable(false);
         }
+
         tvMineUsemoney.setText(String.valueOf(df.format(userInfo.getAccount().getUse_money())));
-        tvMineTotal.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal())));
-        tvMineInterest.setText(String.valueOf(df.format(userInfo.getSummary().getCollectInterest())));
-        tvMineOrigin.setText(String.valueOf(df.format(userInfo.getSummary().getCollectTotal() - userInfo.getSummary().getCollectInterest())));
+
+        tvMineLjsy.setText(String.valueOf(df.format(userInfo.getSummary().getTotal_income())));
     }
 
     @Override
@@ -191,7 +197,8 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_mine_more,
+    @OnClick({R.id.ll_ljsy,
+            R.id.ll_zcze,
             R.id.iv_headpic,
             R.id.tv_username,
             R.id.usertype,
@@ -207,7 +214,6 @@ public class MineFragment extends BaseFragment {
             R.id.tv_jf,
             R.id.btn_tx,
             R.id.btn_cz,
-            R.id.ll_dsze,
             R.id.ll_zjgk,
             R.id.ll_wdtz,
             R.id.ll_zdtb,
@@ -297,7 +303,8 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                 startActivity(intent);
                 break;
-            case R.id.ll_dsze:
+            case R.id.ll_ljsy:
+            case R.id.ll_zcze:
             case R.id.ll_zjgk:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
@@ -324,7 +331,6 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_gd:
-            case R.id.iv_mine_more:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "更多");
                 startActivity(intent);

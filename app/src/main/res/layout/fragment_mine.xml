@@ -25,14 +25,59 @@
                     android:id="@+id/rl_mine_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_headpic"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:src="@mipmap/minefragment_tx" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@id/iv_headpic"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="　　　　"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <View
+                            android:layout_width="1px"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/white" />
+
+                        <TextView
+                            android:id="@+id/usertype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:background="@mipmap/minefragment_btn"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="　　　　　　"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true">
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true">
 
                         <ImageView
                             android:id="@+id/iv_mine_message"
@@ -56,60 +101,44 @@
                             android:visibility="invisible" />
                     </FrameLayout>
 
-
-
-                        <ImageView
-                            android:id="@+id/iv_mine_more"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@mipmap/top_menu_more" />
-                    <ImageView
-                        android:id="@+id/iv_headpic"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@mipmap/minefragment_tx" />
+                    <!--<ImageView-->
+                    <!--android:id="@+id/iv_mine_more"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:src="@mipmap/top_menu_more" />-->
                 </RelativeLayout>
 
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_zcze"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_username"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_zcze1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="　　　　"
+                        android:text="0.00"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="5dp"
-                        android:background="@color/white" />
+                        android:textSize="30sp" />
 
                     <TextView
-                        android:id="@+id/usertype"
+                        android:id="@+id/tv_zcze2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:background="@mipmap/minefragment_btn"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="　　　　　　"
+                        android:text="资产总额"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        android:textSize="15sp" />
 
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -305,13 +334,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-
                     </LinearLayout>
-
-                    <!--<View-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1" />-->
 
                 </LinearLayout>
 
@@ -320,7 +343,7 @@
                     android:layout_height="1px"
                     android:background="@color/minedivider"/>
                 <LinearLayout
-                    android:id="@+id/ll_dsze"
+                    android:id="@+id/ll_ljsy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -336,12 +359,12 @@
                         android:layout_weight="5"
                         android:gravity="left"
                         android:padding="5dp"
-                        android:text="待收总额:"
+                        android:text="累计收益:"
                         android:textColor="@color/darker_gray"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_mine_total"
+                        android:id="@+id/tv_mine_ljsy"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -363,79 +386,72 @@
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/minedivider"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:text="待收本金(元)"
-                            android:textColor="@color/darker_gray"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/tv_mine_origin"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ellipsize="end"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:singleLine="true"
-                            android:text="0.00"
-                            android:textColor="@color/orange"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="1px"
-                        android:layout_height="match_parent"
-                        android:background="@color/minedivider" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:text="待收利息(元)"
-                            android:textColor="@color/darker_gray"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/tv_mine_interest"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ellipsize="end"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:singleLine="true"
-                            android:text="0.00"
-                            android:textColor="@color/orange"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/minedivider"/>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:padding="5dp">-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:text="待收本金(元)"-->
+                            <!--android:textColor="@color/darker_gray"-->
+                            <!--android:textSize="15sp" />-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/tv_mine_origin"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:singleLine="true"-->
+                            <!--android:text="0.00"-->
+                            <!--android:textColor="@color/orange"-->
+                            <!--android:textSize="18sp" />-->
+                    <!--</LinearLayout>-->
+                    <!--<View-->
+                        <!--android:layout_width="1px"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@color/minedivider" />-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:text="待收利息(元)"-->
+                            <!--android:textColor="@color/darker_gray"-->
+                            <!--android:textSize="15sp" />-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/tv_mine_interest"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:ellipsize="end"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:singleLine="true"-->
+                            <!--android:text="0.00"-->
+                            <!--android:textColor="@color/orange"-->
+                            <!--android:textSize="18sp" />-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1px"-->
+                    <!--android:background="@color/minedivider"/>-->
             </LinearLayout>
 
             <LinearLayout
@@ -756,9 +772,7 @@
 
             </LinearLayout>
 
-            <include layout="@layout/item_safe_footer">
-
-            </include>
+            <include layout="@layout/item_safe_footer"/>
 
         </LinearLayout>
     </ScrollView>
