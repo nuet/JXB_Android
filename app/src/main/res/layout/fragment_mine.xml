@@ -28,13 +28,12 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp">
 
-                    <ImageView
+                    <com.lenso.jixiangbao.view.CircleImageView
                         android:id="@+id/iv_headpic"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:src="@mipmap/minefragment_tx" />
+                        android:layout_alignParentTop="true"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"

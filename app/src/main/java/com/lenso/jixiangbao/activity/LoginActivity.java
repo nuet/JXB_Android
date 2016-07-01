@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -73,6 +74,9 @@ public class LoginActivity extends BaseActivity {
                 finish();
             }
         });
+
+//        etLoginPsw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        etLoginPsw.setSelection(etLoginPsw.getText().length());
     }
 
     @OnClick({R.id.tv_login_forget, R.id.btn_login_confirm})

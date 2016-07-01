@@ -1,9 +1,11 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.UploadUtil;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
@@ -27,6 +31,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +52,8 @@ public class WebViewActivity extends WebBaseActivity {
     private String url;
     private String title;
     private String apr;
+    private Context context;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,15 @@ public class WebViewActivity extends WebBaseActivity {
 
         headPIC = new File(WebViewActivity.this.getFilesDir(), "head.png");
 
+        context = WebViewActivity.this;
+
+        progressDialog = new ProgressDialog(context); // 获取对象
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+        progressDialog.setIcon(R.mipmap.b);
+        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
+        progressDialog.setMessage("正在上传头像..."); // 设置进度条的提示信息
+        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
+        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
     }
 
     public static void reload() {
@@ -205,8 +222,12 @@ public class WebViewActivity extends WebBaseActivity {
                 out.flush();
                 out.close();
                 Log.i("headPIC", "SAVED");
+                Log.i("headPIC--path", headPIC.getPath());
 
+                progressDialog.show();
 
+                MyAsyncTask myTask = new MyAsyncTask();
+                myTask.execute();
 
             } catch (FileNotFoundException e) {
                 // TODO Auto-generated catch block
@@ -218,7 +239,6 @@ public class WebViewActivity extends WebBaseActivity {
                 e.printStackTrace();
             }
 
-            Log.i("headPIC--path", headPIC.getPath());
 
         }
     }
@@ -228,6 +248,35 @@ public class WebViewActivity extends WebBaseActivity {
      */
     public static boolean hasSDCard() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
+
+    public class MyAsyncTask extends AsyncTask<Integer,Integer,String> {
+        @Override
+        protected String doInBackground(Integer... params) {
+            Map<String,String> agrs = new HashMap<String,String>();
+            agrs.put("app_key", Config.getInstance(context).getConfig("app_key"));
+            Map<String, File> files = new HashMap<String, File>();
+            files.put("upload", headPIC);
+            UploadUtil.post(ServerInterface.SET_HEAD_PIC, agrs, files);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            webView.reload();
+            progressDialog.dismiss();
+            setResult(1, null);
+            super.onPostExecute(s);
+        }
+
+        public MyAsyncTask() {
+            super();
+        }
     }
 
 }

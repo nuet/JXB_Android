@@ -1,11 +1,13 @@
 package com.lenso.jixiangbao.fragment;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,6 +158,9 @@ public class MineFragment extends BaseFragment {
     }
 
     public void initUI() {
+        String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle";
+        VolleyHttp.getInstance().imageLoader(url, ivHeadpic, null);
+
         tvUsername.setText(userInfo.getDetailuser().getUsername());
         if (userInfo.getDetailuser().getReal_status().equals("0")) {
             usertype.setText("尚未实名认证");
@@ -229,7 +234,7 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
             case R.id.usertype:
                 if (userInfo.getDetailuser().getReal_status().equals("0")) {
@@ -336,4 +341,22 @@ public class MineFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        logInfo("MineFragment onActivityResult0");
+        if(resultCode == 1){
+            switch (requestCode) {
+                case 1:
+                    logInfo("MineFragment onActivityResult1");
+                    Time time = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
+                    time.setToNow(); // 取得系统时间。
+                    String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle&time=" + time.toString();
+                    ivHeadpic.setImageBitmap(null);
+                    VolleyHttp.getInstance().imageLoader(url, ivHeadpic, null);
+                    break;
+            }
+        }
+
+    }
 }

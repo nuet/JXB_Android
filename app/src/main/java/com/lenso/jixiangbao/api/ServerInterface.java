@@ -5,6 +5,7 @@ package com.lenso.jixiangbao.api;
  */
 public class ServerInterface {
 
+    public final static String SERVER = "http://app.pongyoo.com/";
     public final static String SERVER_DOMAIN = "http://app.pongyoo.com/app/";
 
     public final static String SERVER_ISPHONEREGISTER = SERVER_DOMAIN + "isphonereged.html";
@@ -26,5 +27,9 @@ public class ServerInterface {
     public static final String ALL_DATA = SERVER_DOMAIN+"getallsystemdata.html";
 
     public final static String LOAN_CONFIRM = SERVER_DOMAIN + "apply.html";
+
+    public final static String SET_HEAD_PIC = SERVER_DOMAIN + "setavatar.html";
+    public final static String GET_HEAD_PIC = SERVER + "imgurl.html";
+
 
 }
