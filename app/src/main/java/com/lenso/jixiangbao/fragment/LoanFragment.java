@@ -1,5 +1,7 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
@@ -167,6 +170,24 @@ public class LoanFragment extends BaseFragment {
                                     intent.putExtra(JSInterface.H5_URL, HTMLInterface.LOAN_CONFIRM);
                                     intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
                                     startActivity(intent);
+                                }else if(jsonObject.getString("status").equals("-1")){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                                    builder.setTitle("温馨提示");
+                                    builder.setMessage("系统检测到您尚未登陆，请登录后再使用此功能，是否登录?");
+                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getActivity(), LoginOrRegisterActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                                    builder.create().show();
                                 }else{
                                     showToast(jsonObject.getString("rsmsg"));
                                 }
