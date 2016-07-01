@@ -2,6 +2,7 @@ package com.lenso.jixiangbao.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -100,5 +101,12 @@ public class CommonUtils {
             e1.printStackTrace();
             return 75;
         }
+    }
+
+    public static void clearGesturePassword(Context context){
+        SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("GestureLock", "");
+        editor.commit();
     }
 }

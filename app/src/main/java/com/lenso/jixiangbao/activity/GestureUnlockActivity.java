@@ -189,6 +189,7 @@ public class GestureUnlockActivity extends BaseActivity {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
                 Intent intentForget = new Intent();
                 intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
                 intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));

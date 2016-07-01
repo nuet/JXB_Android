@@ -36,6 +36,7 @@ import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.iOSActionSheetDialog;
@@ -156,10 +157,11 @@ public class JSInterface {
                             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sp.edit();
-                                    editor.putString("GestureLock", "");
-                                    editor.commit();
+//                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+//                                    SharedPreferences.Editor editor = sp.edit();
+//                                    editor.putString("GestureLock", "");
+//                                    editor.commit();
+                                    CommonUtils.clearGesturePassword(context);
                                     Intent intentLogout = new Intent();
                                     intentLogout.setClass(context, LoginOrRegisterActivity.class);
                                     intentLogout.putExtra("jsFlag", true);

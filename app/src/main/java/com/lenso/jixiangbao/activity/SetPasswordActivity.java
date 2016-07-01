@@ -73,7 +73,8 @@ public class SetPasswordActivity extends BaseActivity {
                             if(jsonObject.getString("status").equals("1")){
                                 Config.getInstance(SetPasswordActivity.this).putConfig("app_key", jsonObject.getString("app_key"));
                                 Intent intent = new Intent();
-                                intent.setClass(SetPasswordActivity.this, HomeActivity.class);
+                                intent.setClass(SetPasswordActivity.this, GestureSettingsActivity.class);
+                                intent.putExtra("gestureTitle", "设置手势密码");
                                 startActivity(intent);
 //                                finish();
                             }else {

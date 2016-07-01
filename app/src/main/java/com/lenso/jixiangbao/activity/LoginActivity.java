@@ -75,8 +75,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-//        etLoginPsw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-//        etLoginPsw.setSelection(etLoginPsw.getText().length());
     }
 
     @OnClick({R.id.tv_login_forget, R.id.btn_login_confirm})
