@@ -301,4 +301,10 @@ public class JSInterface {
 //        });
     }
 
+
+    @JavascriptInterface
+    public void toLoginOrRegister(){
+        Intent intent = new Intent(context, LoginOrRegisterActivity.class);
+        context.startActivity(intent);
+    }
 }

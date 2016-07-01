@@ -349,8 +349,8 @@ public class MineFragment extends BaseFragment {
             switch (requestCode) {
                 case 1:
                     logInfo("MineFragment onActivityResult1");
-                    Time time = new Time(); // or Time t=new Time("GMT+8"); 加上Time Zone资料
-                    time.setToNow(); // 取得系统时间。
+                    Time time = new Time();
+                    time.setToNow(); // 取得系统时间
                     String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle&time=" + time.toString();
                     ivHeadpic.setImageBitmap(null);
                     VolleyHttp.getInstance().imageLoader(url, ivHeadpic, null);

@@ -19,6 +19,7 @@ import com.lenso.jixiangbao.view.JViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,6 +43,10 @@ public class FinancingFragment extends BaseFragment {
     private FragmentViewPageAdapter adapter;
     private int width;
 
+//    private PreferredFinanceFragment preferredFinanceFragment;
+    private CreditListFragment creditListFragment1;
+    private CreditListFragment creditListFragment2;
+
     public static String order = "0";
     public static String s_type = "115";
     public static String pageStart = "1";
@@ -62,11 +67,16 @@ public class FinancingFragment extends BaseFragment {
         ViewGroup.LayoutParams lp = viewLine.getLayoutParams();
         lp.width = width;
         viewLine.setLayoutParams(lp);
+
+//        preferredFinanceFragment = new PreferredFinanceFragment();
+        creditListFragment1 = new CreditListFragment();
+        creditListFragment2 = new CreditListFragment();
+
         if (adapter == null) {
             List<Fragment> fragmentList = new ArrayList<>();
-//            fragmentList.add(new PreferredFinanceFragment());
-            fragmentList.add(new CreditListFragment());
-            fragmentList.add(new CreditListFragment());
+//            fragmentList.add(preferredFinanceFragment);
+            fragmentList.add(creditListFragment1);
+            fragmentList.add(creditListFragment2);
             adapter = new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         }
         jvpFinance.setAdapter(adapter);
@@ -134,7 +144,7 @@ public class FinancingFragment extends BaseFragment {
         view.setSelected(true);
     }
 
-    public void test(){
-        showToast("2");
+    public void sortBorrowList(Map params){
+        creditListFragment1.reLoadBorrowList(params);
     }
 }

@@ -45,6 +45,7 @@ import com.lenso.jixiangbao.view.TopMenuBar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -400,7 +401,7 @@ public class HomeActivity extends BaseActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-    public void test(){
-        financingFragment.test();
+    public void sortBorrowList(Map params){
+        financingFragment.sortBorrowList(params);
     }
 }

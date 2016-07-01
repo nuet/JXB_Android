@@ -36,7 +36,7 @@ public class ScreenFragment extends BaseFragment {
     private Map<String, List<String>> data;
 //    private List<String> keyList= new ArrayList<>();
 //    private List<String> sortArg = new ArrayList<>();
-    private Map args = new HashMap();
+    private Map<String,String> args = new HashMap<String,String>();
     private int i = 0;
 
     @Nullable
@@ -106,30 +106,16 @@ public class ScreenFragment extends BaseFragment {
             case R.id.tv_screen_ok:
                 cancelShowMenu();
 
-                logInfo(data.toString());
-
-//                Set<String> keys = adapter.getArgs().keySet();
-//                for (String key : keys) {
-//                    keyList.add(key);
-//                    i=0;
-//                    for(;i<adapter.getArgs().get(key).size();i++){
-//                        if(adapter.getArgs().get(key).get(i).endsWith(".1")){
-//                            break;
-//                        }
-//                    }
-//                    sortArg.add(String.valueOf(i));
-//                }
-
-                args.put("s_status", adapter.getArgs().get(0));
-                args.put("s_repay_way",adapter.getArgs().get(1));
-                args.put("s_time_limit",adapter.getArgs().get(2));
-                args.put("s_account",adapter.getArgs().get(3));
+                args.put("s_status", String.valueOf(adapter.getArgs().get(0)));
+                args.put("s_repay_way",String.valueOf(adapter.getArgs().get(1)));
+                args.put("s_time_limit",String.valueOf(adapter.getArgs().get(2)));
+                args.put("s_account",String.valueOf(adapter.getArgs().get(3)));
                 args.put("order",FinancingFragment.order);
                 args.put("s_type",FinancingFragment.s_type);
 
                 logInfo("ScreenFragment" + args.toString());
 
-                ((HomeActivity)getActivity()).test();
+                ((HomeActivity)getActivity()).sortBorrowList(args);
                 break;
         }
     }
