@@ -83,7 +83,6 @@ public class ScreenItemView extends LinearLayout {
         itemLayoutMargin = (int) getResources().getDimension(R.dimen.dp_5);
 
         if (attrs != null) {
-
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ScreenItemView);
             int arrowResId = typedArray.getResourceId(R.styleable.ScreenItemView_sv_arrowSrc, 0);
             String title = typedArray.getString(R.styleable.ScreenItemView_sv_title);
@@ -92,7 +91,7 @@ public class ScreenItemView extends LinearLayout {
             float contentSize = typedArray.getDimension(R.styleable.ScreenItemView_sv_contentSize, tvContent.getTextSize());
             int titleColor = typedArray.getColor(R.styleable.ScreenItemView_sv_titleColor, Color.BLACK);
             int contentColor = typedArray.getColor(R.styleable.ScreenItemView_sv_contentColor, Color.BLACK);
-            itemTextSize = typedArray.getDimension(R.styleable.ScreenItemView_sv_itemTextSize, 100);
+            itemTextSize = typedArray.getDimension(R.styleable.ScreenItemView_sv_itemTextSize, 0);
             itemTextColor = typedArray.getColorStateList(R.styleable.ScreenItemView_sv_itemTextColor);
             itemTextBackground = typedArray.getResourceId(R.styleable.ScreenItemView_sv_itemTextBackground, 0);
             contentVisible = typedArray.getInt(R.styleable.ScreenItemView_sv_contentVisibility, View.VISIBLE);
@@ -206,7 +205,7 @@ public class ScreenItemView extends LinearLayout {
         textView.setTag(pos);
         textView.setText(text);
         textView.setTextColor(itemTextColor);
-//        textView.setTextSize(itemTextSize);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,itemTextSize);
         textView.setBackgroundResource(itemTextBackground);
         textView.setPadding(itemPaddingL_R, itemPaddingT_B, itemPaddingL_R, itemPaddingT_B);
         itemTexts.add(textView);
@@ -247,7 +246,6 @@ public class ScreenItemView extends LinearLayout {
             llScreenItemHeight = llScreenItem.getHeight();
         setArrowRotation(v, isUp);
         itemAnimator(isUp);
-        listener.onScreenItem(position, t, isUp, (Integer) v.getTag());
     }
 
     private void setArrowRotation(View v, boolean is) {

@@ -8,11 +8,11 @@
         "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     },
     {
-        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\safe.png",
-        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\safe.png"
-    },
-    {
         "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
         "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+    },
+    {
+        "merged": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\safe.png",
+        "source": "F:\\AS\\code\\jixiangbao\\androidPullToRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\safe.png"
     }
 ]
