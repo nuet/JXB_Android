@@ -16,7 +16,7 @@ public class GestureLockView extends View {
     private static final String TAG = "GestureLockView";
 
     /**
-     * GestureLockView的三种状态
+     * GestureLockView的状态
      */
     enum Mode {
         STATUS_NO_FINGER, STATUS_FINGER_ON, STATUS_FINGER_UP_UN_MATH, STATUS_FINGER_UP_MATCH
@@ -64,7 +64,7 @@ public class GestureLockView extends View {
 
     private static final int STYLE_FILL = 0;
     private static final int STYLE_STROKE = 1;
-    private static final int STYLE_STOKE_AND_FILL = 2;
+    private static final int STYLE_STROKE_AND_FILL = 2;
     /**
      * 自定义的属性，在GestureLockViewGroup中传入
      */
@@ -197,7 +197,7 @@ public class GestureLockView extends View {
         switch (mCurrentStatus) {
             case STATUS_FINGER_ON:
                 //绘制外圆
-                if (mStyleFingerOnOuter == STYLE_STOKE_AND_FILL) {
+                if (mStyleFingerOnOuter == STYLE_STROKE_AND_FILL) {
                     mPaint.setStyle(Paint.Style.STROKE);
                     mPaint.setStrokeWidth(mStrokeWidthFingerOnOuter);
                     mPaint.setColor(mColorFingerOnOuter);
@@ -231,7 +231,7 @@ public class GestureLockView extends View {
                 break;
             case STATUS_FINGER_UP_MATCH:
                 //绘制外圆
-                if (mStyleFingerUpMatchOuter == STYLE_STOKE_AND_FILL) {
+                if (mStyleFingerUpMatchOuter == STYLE_STROKE_AND_FILL) {
                     mPaint.setStyle(Paint.Style.STROKE);
                     mPaint.setStrokeWidth(mStrokeWidthFingerUpMatchOuter);
                     mPaint.setColor(mColorFingerUpMatchOuter);
@@ -267,7 +267,7 @@ public class GestureLockView extends View {
             case STATUS_FINGER_UP_UN_MATH:
 
                 //绘制外圆
-                if (mStyleFingerUpUnMatchOuter == STYLE_STOKE_AND_FILL) {
+                if (mStyleFingerUpUnMatchOuter == STYLE_STROKE_AND_FILL) {
                     mPaint.setStyle(Paint.Style.STROKE);
                     mPaint.setStrokeWidth(mStrokeWidthFingerUpUnMatchOuter);
                     mPaint.setColor(mColorFingerUpUnMatchOuter);
@@ -302,7 +302,7 @@ public class GestureLockView extends View {
                 break;
             case STATUS_NO_FINGER:
                 //绘制外圆
-                if (mStyleNoFingerOuter == STYLE_STOKE_AND_FILL) {
+                if (mStyleNoFingerOuter == STYLE_STROKE_AND_FILL) {
                     mPaint.setStyle(Paint.Style.STROKE);
                     mPaint.setStrokeWidth(mStrokeWidthNoFingerOuter);
                     mPaint.setColor(mColorNoFingerOuter);

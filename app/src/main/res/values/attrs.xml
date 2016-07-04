@@ -168,6 +168,7 @@
         <attr name="style_no_select" format="enum">
             <enum name="style_fill" value="0" />
             <enum name="style_stroke" value="1" />
+            <enum name="style_stroke_and_fill" value="2"/>
         </attr>
         <attr name="style_selected" format="enum">
             <enum name="style_fill" value="0" />

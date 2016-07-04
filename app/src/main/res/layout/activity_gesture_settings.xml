@@ -37,15 +37,15 @@
             android:layout_height="60dp"
             android:layout_below="@id/id_textView"
             android:layout_centerHorizontal="true"
-            app:color_no_select="#838383"
-            app:color_selected="#01A0E5"
+            app:color_no_select="#669EFF"
+            app:color_selected="#FFAD76"
             app:display_view_count="3"
             app:stroke_width_finger_on_outer_circle="1"
             app:stroke_width_finger_up_match_outer_circle="1"
             app:stroke_width_finger_up_un_match_outer_circle="1"
             app:stroke_width_no_finger_outer_circle="1"
-            app:stroke_width_no_select="2dp"
-            app:style_no_select="style_stroke"
+            app:stroke_width_no_select="1dp"
+            app:style_no_select="style_stroke_and_fill"
             app:style_selected="style_fill">
 
         </com.lenso.jixiangbao.view.GestureLockDisplayViews>
@@ -58,8 +58,8 @@
             android:layout_below="@id/id_gestureLockDisplayViews"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            app:color_finger_on_inner_circle="#01A0E5"
-            app:color_finger_on_outer_circle="#01A0E5"
+            app:color_finger_on_inner_circle="#FFAD76"
+            app:color_finger_on_outer_circle="#FFAD76"
             app:color_finger_on_outer_inner_circle="#ADD5E6"
             app:color_finger_up_match_inner_circle="#01A0E5"
             app:color_finger_up_match_outer_circle="#838383"
@@ -68,9 +68,9 @@
             app:color_finger_up_un_match_outer_circle="#F7564A"
             app:color_finger_up_un_match_outer_inner_circle="#EDACA7"
             app:color_no_finger_inner_circle="#00FFFFFF"
-            app:color_no_finger_outer_circle="#838383"
+            app:color_no_finger_outer_circle="#669EFF"
             app:count="3"
-            app:finger_on_path_color="#01A0E5"
+            app:finger_on_path_color="#FFAD76"
             app:finger_up_match_path_color="#01A0E5"
             app:finger_up_un_match_path_color="#F7564A"
             app:isShowArrow="false"
@@ -88,7 +88,7 @@
             app:style_finger_up_match_inner_circle="style_fill"
             app:style_finger_up_match_outer_circle="style_stroke_and_fill"
             app:style_finger_up_un_match_outer_circle="style_stroke_and_fill"
-            app:style_no_finger_outer_circle="style_stroke"
+            app:style_no_finger_outer_circle="style_stroke_and_fill"
             app:tryTimes="5" />
 
         <TextView

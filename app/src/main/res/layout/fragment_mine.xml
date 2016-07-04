@@ -120,10 +120,10 @@
 
                     <TextView
                         android:id="@+id/tv_zcze1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:text="0.00"
+                        android:layout_gravity="center_horizontal"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -131,7 +131,7 @@
                         android:id="@+id/tv_zcze2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
                         android:padding="5dp"
                         android:text="资产总额"
                         android:textColor="@color/white"

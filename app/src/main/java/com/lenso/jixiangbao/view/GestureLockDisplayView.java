@@ -13,6 +13,9 @@ public class GestureLockDisplayView extends View {
 
     private static final int STYLE_FILL = 0;
     private static final int STYLE_STROKE = 1;
+    private static final int STYLE_STROKE_AND_FILL = 2;
+    private int mNoFingerOuterCircleColor = 0xFFE0DBDB;
+    private int mNoFingerOuterCircleInnerColor = 0xFFE0DBDB;
 
     /**
      * GestureLockView的三种状态
@@ -96,7 +99,16 @@ public class GestureLockDisplayView extends View {
                     mPaint.setStyle(Paint.Style.STROKE);
                     mPaint.setStrokeWidth(mNoSelectStrokeWidth);
                     canvas.drawCircle(mCenterX, mCenterY, mRadius - mNoSelectStrokeWidth / 2, mPaint);
-                } else {
+                }else if (mNoSelectStyle == STYLE_STROKE_AND_FILL) {
+                    mPaint.setStyle(Paint.Style.STROKE);
+                    mPaint.setStrokeWidth(mNoSelectStrokeWidth);
+                    mPaint.setColor(mNoFingerOuterCircleColor);
+                    canvas.drawCircle(mCenterX, mCenterY, mRadius - mNoSelectStrokeWidth / 2, mPaint);
+                    mPaint.setStyle(Paint.Style.FILL);
+                    mPaint.setColor(mNoFingerOuterCircleInnerColor);
+                    canvas.drawCircle(mCenterX, mCenterY, mRadius - mNoSelectStrokeWidth, mPaint);
+                }
+                else {
                     mPaint.setStyle(Paint.Style.FILL);
                     canvas.drawCircle(mCenterX, mCenterY, mRadius, mPaint);
                 }
