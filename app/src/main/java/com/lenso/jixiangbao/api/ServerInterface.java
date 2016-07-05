@@ -31,5 +31,6 @@ public class ServerInterface {
     public final static String SET_HEAD_PIC = SERVER_DOMAIN + "setavatar.html";
     public final static String GET_HEAD_PIC = SERVER + "imgurl.html";
 
+    public final static String RECHARGE = SERVER + "appweb/member/newrecharge.html";
 
 }

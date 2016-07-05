@@ -45,4 +45,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6.2'
     compile project(':onekeyshare')
     compile project(':androidPullToRefreshlibrary')
+    compile files('libs/baofoosdk.jar')
 }

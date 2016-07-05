@@ -110,7 +110,7 @@ public class ScreenItemView extends LinearLayout {
         if (itemTextBackground == 0)
             itemTextBackground = R.drawable.selector_screen_item_background;
         if (itemTextSize == 0)
-            itemTextSize = getResources().getDimension(R.dimen.sp_10);
+            itemTextSize = getResources().getDimension(R.dimen.sp_12);
 
         rlTitle.setOnClickListener(new OnClickListener() {
             @Override

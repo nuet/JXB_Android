@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.lenso.jixiangbao.util.Config;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Iterator;
@@ -25,6 +28,7 @@ public class JPushReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         Bundle bundle = intent.getExtras();
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
@@ -35,7 +39,7 @@ public class JPushReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            processCustomMessage(context, bundle);
+//            processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
@@ -62,6 +66,7 @@ public class JPushReceiver extends BroadcastReceiver {
         } else {
             Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
+
     }
 
     // 打印所有的 intent extra 数据
@@ -99,7 +104,7 @@ public class JPushReceiver extends BroadcastReceiver {
     }
 
     //send msg to MainActivity
-    private void processCustomMessage(Context context, Bundle bundle) {
+//    private void processCustomMessage(Context context, Bundle bundle) {
 //        if (MainActivity.isForeground) {
 //            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 //            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
@@ -118,5 +123,6 @@ public class JPushReceiver extends BroadcastReceiver {
 //            }
 //            context.sendBroadcast(msgIntent);
 //        }
-    }
+//    }
+
 }

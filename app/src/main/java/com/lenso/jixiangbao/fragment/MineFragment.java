@@ -1,7 +1,6 @@
 package com.lenso.jixiangbao.fragment;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
@@ -33,11 +33,14 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Chung on 2016/5/11.
@@ -297,14 +300,27 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "提现");
-                startActivity(intent);
+                Set<Integer> days = new HashSet<Integer>();
+                for(int i=0;i<7;i++){
+                    days.add(i);
+                }
+                JPushInterface.setPushTime(getActivity(), days, 8, 22);
+                showToast(days.toString());
+//                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+//                intent.putExtra(HTMLInterface.H5_TITLE, "提现");
+//                startActivity(intent);
                 break;
             case R.id.btn_cz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "充值");
-                startActivity(intent);
+//                Intent payintent = new Intent(getActivity(), BaofooPayActivity.class);
+//                // 通过业务流水请求报文获得的交易号
+//                payintent.putExtra(BaofooPayActivity.PAY_TOKEN, "");//tradeNo
+//                // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
+//                payintent.putExtra(BaofooPayActivity. PAY_BUSINESS,false);
+//                startActivityForResult(payintent, OrderService.REQUEST_CODE_BAOFOO_SDK);
+
+//                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+//                intent.putExtra(HTMLInterface.H5_TITLE, "充值");
+//                startActivity(intent);
                 break;
             case R.id.ll_ljsy:
             case R.id.ll_zcze:

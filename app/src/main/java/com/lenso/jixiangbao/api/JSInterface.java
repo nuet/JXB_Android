@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -47,8 +48,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.jar.Attributes;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -303,10 +307,29 @@ public class JSInterface {
 //        });
     }
 
-
+    /**
+     * 跳转至注册登录页
+     */
     @JavascriptInterface
     public void toLoginOrRegister(){
         Intent intent = new Intent(context, LoginOrRegisterActivity.class);
         context.startActivity(intent);
     }
+
+    /**
+     * 设置免打扰时段
+     */
+    @JavascriptInterface
+    public void noBother(boolean isSelected){
+        if(isSelected){
+            Set<Integer> days = new HashSet<Integer>();
+            for(int i=0;i<7;i++){
+                days.add(i);
+            }
+            JPushInterface.setPushTime(context, days, 8, 22);
+        }else{
+            JPushInterface.setPushTime(context, null, 0, 23);
+        }
+    }
+
 }

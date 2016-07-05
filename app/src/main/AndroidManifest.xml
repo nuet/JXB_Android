@@ -117,6 +117,13 @@
             android:theme="@style/LaunchActivityTheme"/>
 
 
+        <!-- 宝付 -->
+        <activity
+            android:name="com.baofoo.sdk.vip.BaofooPayActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+        <!--end-->
 
         <!-- JPush SDK核心功能-->
         <activity
@@ -206,7 +213,7 @@
 
         <!-- JPush . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="43afae061fe3960329d8b7f6" /> <!-- </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="43afae061fe3960329d8b7f6" /> <!-- 值来自开发者平台取得的AppKey-->
 
     </application>
 
