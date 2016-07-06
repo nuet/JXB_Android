@@ -28,6 +28,7 @@ import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.ChoiceList;
+import com.lenso.jixiangbao.bean.InvestList;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.CreditListFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
@@ -86,7 +87,7 @@ public class HomeActivity extends BaseActivity {
     private Gson gson = new Gson();
     private List<AppScrollPic> picList;
     private int loadCount = 0;
-    private List<ChoiceList> borrowList;
+    private InvestList investList;
 
     private ProgressDialog progressDialog;
 
@@ -292,7 +293,7 @@ public class HomeActivity extends BaseActivity {
 
     private void load() {
         logDebug("load...");
-        App.BASE_BEAN=new BaseBean();
+        App.BASE_BEAN = new BaseBean();
 
         progressDialog = new ProgressDialog(this); // 获取对象
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
@@ -335,18 +336,17 @@ public class HomeActivity extends BaseActivity {
                     showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
-                loadBorrowList();
+                loadInvestList();
             }
         });
     }
 
-    private void loadBorrowList() {
+    private void loadInvestList() {
         VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    borrowList = bean.getBorrowList();
+                    investList = gson.fromJson(json, InvestList.class);
                 } else {
                     showToast(getString(R.string.no_internet));
                 }
@@ -357,12 +357,12 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void setData() {
-        logDebug("home:"+loadCount);
+        logDebug("home:" + loadCount);
         if (loadCount < 3)
             return;
         App.BASE_BEAN.setAppScrollPic(picList);
-        App.BASE_BEAN.setBorrowList(borrowList);
-
+        App.BASE_BEAN.setInvestList(investList);
+        logInfo("getBorrowList" + investList.getBorrowList().toString());
         progressDialog.dismiss();
 
         initViewPager();
@@ -401,7 +401,7 @@ public class HomeActivity extends BaseActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-    public void sortBorrowList(Map params){
-        financingFragment.sortBorrowList(params);
+    public void sortBorrowList() {
+        financingFragment.sortBorrowList();
     }
 }

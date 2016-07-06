@@ -300,17 +300,13 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                Set<Integer> days = new HashSet<Integer>();
-                for(int i=0;i<7;i++){
-                    days.add(i);
-                }
-                JPushInterface.setPushTime(getActivity(), days, 8, 22);
-                showToast(days.toString());
+                showToast("提现");
 //                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
 //                intent.putExtra(HTMLInterface.H5_TITLE, "提现");
 //                startActivity(intent);
                 break;
             case R.id.btn_cz:
+                showToast("充值");
 //                Intent payintent = new Intent(getActivity(), BaofooPayActivity.class);
 //                // 通过业务流水请求报文获得的交易号
 //                payintent.putExtra(BaofooPayActivity.PAY_TOKEN, "");//tradeNo

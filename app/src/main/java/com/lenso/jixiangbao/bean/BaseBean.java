@@ -9,7 +9,7 @@ public class BaseBean {
     private List<AppScrollPic> appScrollPic;
     private List<ChoiceList> xinList;
     private List<ChoiceList> sanList;
-    private List<ChoiceList> borrowList;
+    private InvestList investList;
     private String statistic_display;
     private String new_experience_apr;
     private String new_experience_valid_time;
@@ -38,12 +38,12 @@ public class BaseBean {
         this.new_experience_valid_time = new_experience_valid_time;
     }
 
-    public List<ChoiceList> getBorrowList() {
-        return borrowList;
+    public InvestList getInvestList() {
+        return investList;
     }
 
-    public void setBorrowList(List<ChoiceList> borrowList) {
-        this.borrowList = borrowList;
+    public void setInvestList(InvestList investList) {
+        this.investList = investList;
     }
 
     public List<AppScrollPic> getAppScrollPic() {

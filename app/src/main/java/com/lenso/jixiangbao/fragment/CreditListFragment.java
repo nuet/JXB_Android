@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
@@ -32,6 +33,7 @@ import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.ChoiceList;
+import com.lenso.jixiangbao.bean.InvestList;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 
@@ -45,7 +47,6 @@ import king.dominic.slidingmenu.SlidingMenu;
 
 /**
  * Created by king on 2016/5/19.
- *
  */
 public class CreditListFragment extends BaseFragment {
     @Bind(R.id.button_default)
@@ -69,11 +70,11 @@ public class CreditListFragment extends BaseFragment {
     private SlidingMenu menu;
     private CreditListAdapter adapter;
 
-    private ListView listView;
+//    private ListView listView;
     private boolean LIMIT_ASC = true; //第一次点击为升序排列
     private boolean RATE_ASC = true; //第一次点击为升序排列
     private Gson gson = new Gson();
-    private Map args = new HashMap();
+    private Map<String, String> args = new HashMap<String, String>();
     public static ProgressDialog progressDialog;
     private static Context context;
 
@@ -91,7 +92,7 @@ public class CreditListFragment extends BaseFragment {
         return view;
     }
 
-    private void initRefreshList(){
+    private void initRefreshList() {
         LoadingLayoutProxy top = (LoadingLayoutProxy) lvCreditList.getLoadingLayoutProxy(true, false);
         top.setPullLabel("下拉即可刷新...");
         top.setRefreshingLabel("刷新中...");
@@ -105,25 +106,67 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void initView() {
-        listView = lvCreditList.getRefreshableView();
-        adapter=new CreditListAdapter(getActivity(), App.BASE_BEAN.getBorrowList());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+//        listView = lvCreditList.getRefreshableView();
+        adapter = new CreditListAdapter(getActivity(), App.BASE_BEAN.getInvestList().getBorrowList());
+//        listView.setAdapter(adapter);
+        lvCreditList.getRefreshableView().setAdapter(adapter);
+
+        lvCreditList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                FinancingFragment.page = String.valueOf(Integer.valueOf(FinancingFragment.page) - 1);
+                if (Integer.valueOf(FinancingFragment.page) < 1 || Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+                    if(Integer.valueOf(FinancingFragment.page) < 1){
+                        FinancingFragment.page = "1";
+                    }
+                    lvCreditList.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            lvCreditList.onRefreshComplete();
+                            showToast("当前已是第一页");
+                        }
+                    }, 500);
+                }else{
+                    reLoadBorrowList();
+                }
+            }
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                FinancingFragment.page = String.valueOf(Integer.valueOf(FinancingFragment.page) + 1);
+                if (Integer.valueOf(FinancingFragment.page) < 1 || Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+                    if(Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()){
+                        FinancingFragment.page = String.valueOf(App.BASE_BEAN.getInvestList().getP().getPages());
+                    }
+                    lvCreditList.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            lvCreditList.onRefreshComplete();
+                            showToast("当前已是最后一页");
+                        }
+                    }, 500);
+                }else{
+                    reLoadBorrowList();
+                }
+            }
+        });
+
+        lvCreditList.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ChoiceList item = adapter.getListItem(position - 1);
-                Intent intent=new Intent(getActivity(), WebViewActivity.class);
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 String url = HTMLInterface.DETAIL + "?borrowid=" + item.getId() + "&app_key=" + Config.getInstance(getActivity().getApplicationContext()).getConfig("app_key");
-                Log.i("H5:", "URL:"+url);
+                Log.i("H5:", "URL:" + url);
                 intent.putExtra(JSInterface.H5_URL, url);
                 intent.putExtra(JSInterface.H5_TITLE, item.getName());
                 intent.putExtra("apr", item.getApr());
-                intent.putExtra("intent",JSInterface.DETAIL);
+                intent.putExtra("intent", JSInterface.DETAIL);
                 getActivity().startActivity(intent);
             }
         });
+
         unselected();
-        args.put("s_type",FinancingFragment.s_type);
         buttonDefault.setSelected(true);
         progressDialog = new ProgressDialog(getActivity()); // 获取对象
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
@@ -169,9 +212,9 @@ public class CreditListFragment extends BaseFragment {
                 sortRate(RATE_ASC);
                 break;
             case R.id.button_screen:
-                if(menu==null){
-                    menu=((HomeActivity)getActivity()).getSlidingMenu();
-                    if(menu!=null){
+                if (menu == null) {
+                    menu = ((HomeActivity) getActivity()).getSlidingMenu();
+                    if (menu != null) {
                         menu.getContent();
                     }
                 }
@@ -184,23 +227,20 @@ public class CreditListFragment extends BaseFragment {
     private void sortDefault() {
         progressDialog.show();
         FinancingFragment.order = "0";
-        args.put("order",FinancingFragment.order);
-        reLoadBorrowList(args);
+        reLoadBorrowList();
     }
 
     private void sortLimit(boolean ASC) {
         progressDialog.show();
-        if(ASC){
+        if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
             FinancingFragment.order = "26";
-            args.put("order",FinancingFragment.order);
-            reLoadBorrowList(args);
+            reLoadBorrowList();
             LIMIT_ASC = false;
-        }else{
+        } else {
             ivTimeLimit.setImageResource(R.mipmap.sx2);
             FinancingFragment.order = "-26";
-            args.put("order",FinancingFragment.order);
-            reLoadBorrowList(args);
+            reLoadBorrowList();
             LIMIT_ASC = true;
         }
         RATE_ASC = true;
@@ -208,39 +248,51 @@ public class CreditListFragment extends BaseFragment {
 
     private void sortRate(boolean ASC) {
         progressDialog.show();
-        if(ASC){
+        if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
             FinancingFragment.order = "2";
-            args.put("order",FinancingFragment.order);
-            reLoadBorrowList(args);
+            reLoadBorrowList();
             RATE_ASC = false;
-        }else{
+        } else {
             ivAnnualRate.setImageResource(R.mipmap.sx2);
             FinancingFragment.order = "-2";
-            args.put("order",FinancingFragment.order);
-            reLoadBorrowList(args);
+            reLoadBorrowList();
             RATE_ASC = true;
         }
         LIMIT_ASC = true;
     }
 
-    public void reLoadBorrowList(Map params) {
+    public void reLoadBorrowList() {
+        args.put("s_status", FinancingFragment.s_status);
+        args.put("s_repay_way", FinancingFragment.s_repay_way);
+        args.put("s_time_limit", FinancingFragment.s_time_limit);
+        args.put("s_account", FinancingFragment.s_account);
+        args.put("order", FinancingFragment.order);
+        args.put("s_type", FinancingFragment.s_type);
+        args.put("page", FinancingFragment.page);
+
         VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    App.BASE_BEAN=new BaseBean();
-                    App.BASE_BEAN.setBorrowList(bean.getBorrowList());
-//                    adapter.notifyDataSetChanged();
-                    adapter = new CreditListAdapter(context, App.BASE_BEAN.getBorrowList());
-                    listView.setAdapter(adapter);
+                    InvestList investList = gson.fromJson(json, InvestList.class);
+                    App.BASE_BEAN.setInvestList(investList);
+                    adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
+                    lvCreditList.getRefreshableView().setAdapter(adapter);
+                    if(lvCreditList.isRefreshing()){
+                        lvCreditList.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                lvCreditList.onRefreshComplete();
+                            }
+                        }, 500);
+                    }
                     progressDialog.dismiss();
                 } else {
                     Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
                 }
             }
-        }, params);
+        }, args);
 
     }
 

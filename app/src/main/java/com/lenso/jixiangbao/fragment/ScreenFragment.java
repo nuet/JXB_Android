@@ -34,9 +34,7 @@ public class ScreenFragment extends BaseFragment {
     ListView lvScreen;
     private ScreenListAdapter adapter;
     private Map<String, List<String>> data;
-//    private List<String> keyList= new ArrayList<>();
-//    private List<String> sortArg = new ArrayList<>();
-    private Map<String,String> args = new HashMap<String,String>();
+//    private Map<String,String> args = new HashMap<String,String>();
     private int i = 0;
 
     @Nullable
@@ -106,16 +104,12 @@ public class ScreenFragment extends BaseFragment {
             case R.id.tv_screen_ok:
                 cancelShowMenu();
 
-                args.put("s_status", String.valueOf(adapter.getArgs().get(0)));
-                args.put("s_repay_way",String.valueOf(adapter.getArgs().get(1)));
-                args.put("s_time_limit",String.valueOf(adapter.getArgs().get(2)));
-                args.put("s_account",String.valueOf(adapter.getArgs().get(3)));
-                args.put("order",FinancingFragment.order);
-                args.put("s_type",FinancingFragment.s_type);
+                FinancingFragment.s_status = String.valueOf(adapter.getArgs().get(0));
+                FinancingFragment.s_repay_way = String.valueOf(adapter.getArgs().get(1));
+                FinancingFragment.s_time_limit = String.valueOf(adapter.getArgs().get(2));
+                FinancingFragment.s_account = String.valueOf(adapter.getArgs().get(3));
 
-                logInfo("ScreenFragment" + args.toString());
-
-                ((HomeActivity)getActivity()).sortBorrowList(args);
+                ((HomeActivity)getActivity()).sortBorrowList();
                 break;
         }
     }

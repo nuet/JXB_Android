@@ -30,7 +30,7 @@ import king.dominic.slidingmenu.SlidingMenu;
  * Created by Chung on 2016/5/12.
  */
 public class FinancingFragment extends BaseFragment {
-//    @Bind(R.id.tv_menu_preferred_finance)
+    //    @Bind(R.id.tv_menu_preferred_finance)
 //    TextView tvMenuPreferredFinance;
     @Bind(R.id.tv_menu_credit_list)
     TextView tvMenuCreditList;
@@ -42,14 +42,18 @@ public class FinancingFragment extends BaseFragment {
     ImageView viewLine;
     private FragmentViewPageAdapter adapter;
     private int width;
-
 //    private PreferredFinanceFragment preferredFinanceFragment;
     private CreditListFragment creditListFragment1;
-    private CreditListFragment creditListFragment2;
 
+    private CreditListFragment creditListFragment2;
+    public static String s_status = "0";
+
+    public static String s_repay_way = "0";
+    public static String s_time_limit = "0";
+    public static String s_account = "0";
     public static String order = "0";
     public static String s_type = "115";
-    public static String pageStart = "1";
+    public static String page = "1";
 
     @Nullable
     @Override
@@ -144,7 +148,7 @@ public class FinancingFragment extends BaseFragment {
         view.setSelected(true);
     }
 
-    public void sortBorrowList(Map params){
-        creditListFragment1.reLoadBorrowList(params);
+    public void sortBorrowList(){
+        creditListFragment1.reLoadBorrowList();
     }
 }

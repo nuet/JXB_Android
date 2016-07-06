@@ -318,6 +318,7 @@ public class JSInterface {
 
     /**
      * 设置免打扰时段
+     * @param isSelected 开关是否打开
      */
     @JavascriptInterface
     public void noBother(boolean isSelected){
@@ -329,6 +330,32 @@ public class JSInterface {
             JPushInterface.setPushTime(context, days, 8, 22);
         }else{
             JPushInterface.setPushTime(context, null, 0, 23);
+        }
+    }
+
+    /**
+     * 设置活动消息免打扰
+     * @param isSelected 开关是否打开
+     */
+    @JavascriptInterface
+    public void noActivityMSG(boolean isSelected){
+        if(isSelected){
+
+        }else{
+
+        }
+    }
+
+    /**
+     * 设置通知消息免打扰
+     * @param isSelected 开关是否打开
+     */
+    @JavascriptInterface
+    public void noNotificationMSG(boolean isSelected){
+        if(isSelected){
+
+        }else{
+
         }
     }
 
