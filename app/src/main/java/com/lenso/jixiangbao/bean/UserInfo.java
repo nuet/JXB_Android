@@ -80,10 +80,19 @@ public class UserInfo {
     }
 
     public static class Detailuser{
+        private String phone;
         private String realname;
         private String username;
         private String typename;
         private String real_status;
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
 
         public Detailuser(String username, String typename, String real_status) {
             this.username = username;

@@ -35,7 +35,7 @@ public class GestureUnlockActivity extends BaseActivity {
     private GestureLockViewGroup mGestureLockViewGroup;
     private GestureLockDisplayViews id_unlock_gestureLockDisplayViews;
     private TextView mTextView;
-    private DownTimer timer;
+//    private DownTimer timer;
     private GestureLockViewGroup.OnGestureLockViewListener mGestureLockViewListener;
     //    runnable去清除gestureLockView
     private final Runnable clearRunnable = new Runnable() {
@@ -73,13 +73,11 @@ public class GestureUnlockActivity extends BaseActivity {
 
         mGestureLockViewGroup.bindDisplayView(id_unlock_gestureLockDisplayViews);
 
-        timer = new DownTimer();//实例化
+//        timer = new DownTimer();//实例化
         SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
         String password = sp.getString("GestureLock", "");
         if (TextUtils.isEmpty(password)) {
-            Log.e("GestreUnlockActivity", "password  null!!!");
-//            mGestureLockViewGroup.setAnswer(new int[]{1, 2, 5, 8});
-//            mTextView.setText("默认密码是1，2，5，8");
+            Log.e("GestreUnlockActivity", "password  null");
         } else {
             Log.i("format", Arrays.toString(CommonUtils.toIntArray(password)));
             mGestureLockViewGroup.setAnswer(CommonUtils.toIntArray(password));
@@ -87,14 +85,17 @@ public class GestureUnlockActivity extends BaseActivity {
         mGestureLockViewListener = new GestureLockViewGroup.OnGestureLockViewListener() {
             @Override
             public void onUnmatchedExceedBoundary() {
-//                        mGestureLockViewGroup.setUnMatchExceedBoundary(5);
-                saveTime(System.currentTimeMillis());
-                mTextView.setText("请30s后再试");
-                CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
+                CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
+                mTextView.setText("当前用户已被锁定，请重新登录");
                 mGestureLockViewGroup.setTouchable(false);
-                //TODO 倒计时
-                setTimer(30 * 1000);
-                timer.start();
+                alertDialog("您已连续5次输入错误，手势密码已被清除，请重新登录");
+//                saveTime(System.currentTimeMillis());
+//                mTextView.setText("请30s后再试");
+//                CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
+//                mGestureLockViewGroup.setTouchable(false);
+//                //TODO 倒计时
+//                setTimer(30 * 1000);
+//                timer.start();
             }
 
             @Override
@@ -109,7 +110,7 @@ public class GestureUnlockActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    mTextView.setText("手势密码错误，请重试");
+                    mTextView.setText("输入有误，还可以输入"+String.valueOf(tryTimes)+"次");
                     mTextView.setTextColor(Color.parseColor("#FF0000"));
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, idTextView3);
@@ -128,48 +129,53 @@ public class GestureUnlockActivity extends BaseActivity {
                 }
             }
         };
-        SharedPreferences spTime = getSharedPreferences("Time", Activity.MODE_PRIVATE);
-        long time = spTime.getLong("tryOutTime", -1);
-        if (time == -1 || System.currentTimeMillis() - time > 30000) {
-            mGestureLockViewGroup.setTouchable(true);
-            mGestureLockViewGroup.setUnMatchExceedBoundary(5);
-            saveTime(-1);
-            mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
-        } else {
-            mGestureLockViewGroup.setTouchable(false);
-            setTimer(30000 - (System.currentTimeMillis() - time));
-            timer.start();
-        }
 
+        mGestureLockViewGroup.setUnMatchExceedBoundary(5);
+        mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
+
+//        SharedPreferences spTime = getSharedPreferences("Time", Activity.MODE_PRIVATE);
+//        long time = spTime.getLong("tryOutTime", -1);
+//        if (time == -1 || System.currentTimeMillis() - time > 30000) {
+//            mGestureLockViewGroup.setTouchable(true);
+//            mGestureLockViewGroup.setUnMatchExceedBoundary(5);
+//            saveTime(-1);
+//            mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
+//        } else {
+//            mGestureLockViewGroup.setTouchable(false);
+//            setTimer(30000 - (System.currentTimeMillis() - time));
+//            timer.start();
+//        }
+//
     }
 
-    private void setTimer(long time) {
-        timer.setTotalTime(time);//设置毫秒数
-        timer.setIntervalTime(1000);//设置间隔数
-        timer.setTimerLiener(new DownTimer.TimeListener() {
-            @Override
-            public void onFinish() {
-                mGestureLockViewGroup.setTouchable(true);
-                mTextView.setText("请输入手势密码");
-                mTextView.setTextColor(Color.parseColor("#ffffffff"));
-                mGestureLockViewGroup.setUnMatchExceedBoundary(5);
-                mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
-            }
 
-            @Override
-            public void onInterval(long remainTime) {
-                mTextView.setTextColor(Color.parseColor("#FF0000"));
-                mTextView.setText(remainTime / 1000 + "秒后继续");//剩余多少秒
-            }
-        });
-    }
-
-    private void saveTime(long time) {
-        SharedPreferences sp = getSharedPreferences("Time", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putLong("tryOutTime", time);
-        editor.commit();
-    }
+//    private void setTimer(long time) {
+//        timer.setTotalTime(time);//设置毫秒数
+//        timer.setIntervalTime(1000);//设置间隔数
+//        timer.setTimerLiener(new DownTimer.TimeListener() {
+//            @Override
+//            public void onFinish() {
+//                mGestureLockViewGroup.setTouchable(true);
+//                mTextView.setText("请输入手势密码");
+//                mTextView.setTextColor(Color.parseColor("#ffffffff"));
+//                mGestureLockViewGroup.setUnMatchExceedBoundary(5);
+//                mGestureLockViewGroup.setOnGestureLockViewListener(mGestureLockViewListener);
+//            }
+//
+//            @Override
+//            public void onInterval(long remainTime) {
+//                mTextView.setTextColor(Color.parseColor("#FF0000"));
+//                mTextView.setText(remainTime / 1000 + "秒后继续");//剩余多少秒
+//            }
+//        });
+//    }
+//
+//    private void saveTime(long time) {
+//        SharedPreferences sp = getSharedPreferences("Time", Activity.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putLong("tryOutTime", time);
+//        editor.commit();
+//    }
 
     public void postClearRunnable() {
         mGestureLockViewGroup.removeCallbacks(clearRunnable);
@@ -180,17 +186,21 @@ public class GestureUnlockActivity extends BaseActivity {
         mGestureLockViewGroup.removeCallbacks(clearRunnable);
     }
 
-    @Override
-    protected void onDestroy() {
-        timer.cancel();
-        super.onDestroy();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        timer.cancel();
+//        super.onDestroy();
+//    }
 
     @OnClick(R.id.btn_gesture_unlock_forget)
     public void onClick() {
+        alertDialog("忘记手势密码需要重新登录,点击确定跳转到登陆界面");
+    }
+
+    private void alertDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         builder.setTitle("温馨提示");
-        builder.setMessage("忘记手势密码需要重新登录!点击确定跳转到登陆界面");
+        builder.setMessage(msg);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -1,13 +1,17 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
@@ -64,8 +68,13 @@ public class SplashActivity extends BaseActivity {
                         Config.getInstance(SplashActivity.this).putConfig("isFirstOpen", "0");
                     } else {
                         String app_key = Config.getInstance(SplashActivity.this).getConfig("app_key");
+                        SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+                        String password = sp.getString("GestureLock", "");
                         if (app_key == null || app_key.equals("")) {
                             intent.setClass(context, HomeActivity.class);
+                        } else if(TextUtils.isEmpty(password)){
+                            intent.setClass(context, LoginActivity.class);
+                            intent.putExtra("mobile", Config.getInstance(context).getConfig("phone"));
                         } else {
                             intent.setClass(context, GestureUnlockActivity.class);
                         }
