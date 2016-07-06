@@ -29,7 +29,7 @@ public class GestureLockDisplayViews extends RelativeLayout {
     /**
      * 存储答案
      */
-    private int[] mAnswer = {0, 1, 2, 5, 8};
+//    private int[] mAnswer = {0, 1, 2, 5, 8};
 
     private Paint mPaint;
     /**
@@ -168,17 +168,15 @@ public class GestureLockDisplayViews extends RelativeLayout {
     }
 
     /**
-     * 检查用户绘制的手势是否正确
-     *
-     * @return
+     * 设置手势密码图案
      */
     private void setGesture(int[] answer) {
-        if (mAnswer.length != 0) {
+//        if (mAnswer.length != 0) {
             for (int i = 0; i < answer.length; i++) {
                 GestureLockDisplayView displayView = mGestureLockDisplayViews[answer[i] - 1];
                 displayView.setDisplayMode(GestureLockDisplayView.DisplayMode.STATUS_SELECTED);
             }
-        }
+//        }
     }
 
 
@@ -195,5 +193,16 @@ public class GestureLockDisplayViews extends RelativeLayout {
         reset();
     }
 
+    public void setSelectedSync(int answer){
+        setGestureSync(answer);
+    }
+
+    /**
+     * 设置手势密码图案
+     */
+    private void setGestureSync(int answer) {
+        GestureLockDisplayView displayView = mGestureLockDisplayViews[answer];
+        displayView.setDisplayMode(GestureLockDisplayView.DisplayMode.STATUS_SELECTED);
+    }
 
 }

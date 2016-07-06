@@ -33,6 +33,7 @@ public class GestureUnlockActivity extends BaseActivity {
     @Bind(R.id.id_textView3)
     TextView idTextView3;
     private GestureLockViewGroup mGestureLockViewGroup;
+    private GestureLockDisplayViews id_unlock_gestureLockDisplayViews;
     private TextView mTextView;
     private DownTimer timer;
     private GestureLockViewGroup.OnGestureLockViewListener mGestureLockViewListener;
@@ -66,8 +67,11 @@ public class GestureUnlockActivity extends BaseActivity {
 //            }
 //        });
 
+        id_unlock_gestureLockDisplayViews = (GestureLockDisplayViews) findViewById(R.id.id_unlock_gestureLockDisplayViews);
         mGestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.id_gestureLockViewGroup_1);
         mTextView = (TextView) findViewById(R.id.id_textView2);
+
+        mGestureLockViewGroup.bindDisplayView(id_unlock_gestureLockDisplayViews);
 
         timer = new DownTimer();//实例化
         SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
@@ -111,6 +115,7 @@ public class GestureUnlockActivity extends BaseActivity {
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, idTextView3);
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, idUnlockGestureLockDisplayViews);
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, mGestureLockViewGroup);
+                    id_unlock_gestureLockDisplayViews.clearSelect();
                 }
                 isFirstSelect = true;
             }

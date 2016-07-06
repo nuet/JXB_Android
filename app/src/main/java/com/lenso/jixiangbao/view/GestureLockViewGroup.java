@@ -206,13 +206,13 @@ public class GestureLockViewGroup extends RelativeLayout {
          */
         void onFirstGestureSuccess(int[] firstAnswer);
 
+
         /**
          * 第二次手势密码设置成功，设置手势密码成功
          *
          * @param secondAnswer
          */
         void onSecondGestureSuccess(int[] secondAnswer);
-
     }
 
 
@@ -387,6 +387,7 @@ public class GestureLockViewGroup extends RelativeLayout {
                         int touchId = touchChild.getId();
                         mChoose.add(touchId);
                         touchChild.setMode(GestureLockView.Mode.STATUS_FINGER_ON);
+                        gestureLockDisplayViews.setSelectedSync(touchId-1);/*88*/
                         // 设置指引线的起点
                         mLastPathX = touchChild.getLeft() / 2 + touchChild.getRight() / 2;
                         mLastPathY = touchChild.getTop() / 2 + touchChild.getBottom() / 2;
@@ -407,6 +408,7 @@ public class GestureLockViewGroup extends RelativeLayout {
                         if (!mChoose.contains(cId) || mChoose.size() == 1) {
                             if (!mChoose.contains(cId)) {
                                 mChoose.add(cId);
+                                gestureLockDisplayViews.setSelectedSync(cId-1);/*88*/
                                 child.setMode(GestureLockView.Mode.STATUS_FINGER_ON);
                             }
                             if (mOnGestureLockViewListener != null) {
@@ -752,5 +754,10 @@ public class GestureLockViewGroup extends RelativeLayout {
      */
     public void setTouchable(boolean touchable) {
         this.touchable = touchable;
+    }
+
+    private GestureLockDisplayViews gestureLockDisplayViews;
+    public void bindDisplayView(GestureLockDisplayViews gestureLockDisplayViews){
+        this.gestureLockDisplayViews = gestureLockDisplayViews;
     }
 }

@@ -57,6 +57,8 @@ public class GestureSettingsActivity extends BaseActivity {
             }
         });
 
+        idGestureLockViewGroup.bindDisplayView(idGestureLockDisplayViews);
+
         idGestureLockViewGroup.setInitMode(true);
         idGestureLockViewGroup.setLimitSelect(5);
 
@@ -77,7 +79,8 @@ public class GestureSettingsActivity extends BaseActivity {
 
             @Override
             public void onFirstGestureSuccess(int[] firstAnswer) {
-                idGestureLockDisplayViews.setSelected(firstAnswer);
+//                idGestureLockDisplayViews.setSelected(firstAnswer);
+                idGestureLockDisplayViews.clearSelect();
                 idTextView.setText("请再次绘制");
             }
 
@@ -98,6 +101,7 @@ public class GestureSettingsActivity extends BaseActivity {
                 }
                 showToast("手势密码设置成功");
             }
+
         });
 
         idButton.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +124,7 @@ public class GestureSettingsActivity extends BaseActivity {
             CommonUtils.startShakeAnim(GestureSettingsActivity.this, idTextView);
             CommonUtils.startShakeAnim(GestureSettingsActivity.this, idGestureLockDisplayViews);
             CommonUtils.startShakeAnim(GestureSettingsActivity.this, idGestureLockViewGroup);
+            idGestureLockViewGroup.clearGestureLockView();
             idButton.setVisibility(View.VISIBLE);
         } else {
             idButton.setVisibility(View.GONE);

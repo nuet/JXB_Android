@@ -14,11 +14,11 @@ public class GestureLockDisplayView extends View {
     private static final int STYLE_FILL = 0;
     private static final int STYLE_STROKE = 1;
 //    private static final int STYLE_STROKE_AND_FILL = 2;
-    private int mNoFingerOuterCircleColor = 0xFFE0DBDB;
-    private int mNoFingerOuterCircleInnerColor = 0xFFE0DBDB;
+//    private int mNoFingerOuterCircleColor = 0xFFE0DBDB;
+//    private int mNoFingerOuterCircleInnerColor = 0xFFE0DBDB;
 
     /**
-     * GestureLockView的三种状态
+     * GestureLockDisplayView的状态
      */
     public enum DisplayMode {
         STATUS_NO_SELECT, STATUS_SELECTED
