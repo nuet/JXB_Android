@@ -47,6 +47,8 @@ public class RegisterActivity extends BaseActivity {
     TextView tvRegisterTips;
     @Bind(R.id.et_register_code)
     EditText etRegisterCode;
+    @Bind(R.id.btn_register_eye)
+    Button btnRegisterEye;
 
     private Map agrsCode = new HashMap();
     private Map<String, String> agrsRegister = new HashMap();
@@ -86,7 +88,7 @@ public class RegisterActivity extends BaseActivity {
                     public void getJson(String json, boolean isConnectSuccess) {
                         if (isConnectSuccess) {
                             try {
-                                logInfo("getcode"+json);
+                                logInfo("getcode" + json);
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
                                     logInfo("get phone code succeed!");
@@ -131,10 +133,12 @@ public class RegisterActivity extends BaseActivity {
                 if (!EYECLICKED) {
                     etRegisterPsw.setInputType(InputType.TYPE_CLASS_TEXT);
                     etRegisterPsw.setSelection(etRegisterPsw.getText().length());
+                    btnRegisterEye.setBackgroundResource(R.mipmap.eye_show);
                     EYECLICKED = true;
                 } else {
                     etRegisterPsw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     etRegisterPsw.setSelection(etRegisterPsw.getText().length());
+                    btnRegisterEye.setBackgroundResource(R.mipmap.eye_hide);
                     EYECLICKED = false;
                 }
                 break;

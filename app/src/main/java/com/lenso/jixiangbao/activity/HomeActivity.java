@@ -32,10 +32,12 @@ import com.lenso.jixiangbao.bean.InvestList;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.CreditListFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
+import com.lenso.jixiangbao.fragment.FindFragment;
 import com.lenso.jixiangbao.fragment.LoanFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
 //import com.lenso.jixiangbao.fragment.WebViewFragment;
+import com.lenso.jixiangbao.fragment.WebViewFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
@@ -79,7 +81,8 @@ public class HomeActivity extends BaseActivity {
     private boolean isFirst = true;
     private ChoiceFragment choiceFragment;
     private FinancingFragment financingFragment;
-    private LoanFragment loanFragment;
+//    private LoanFragment loanFragment;
+    private FindFragment findFragment;
     private MineFragment mineFragment;
 
     private long backTime = 0;
@@ -127,8 +130,8 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setTitleText(res.getString(R.string.choice));
                 topMenuBar.setVisibility(View.VISIBLE);
                 topMenuBar.setBackVisibility(View.INVISIBLE);
-                topMenuBar.setMenuVisibility(View.VISIBLE);
-                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
+                topMenuBar.setMenuVisibility(View.INVISIBLE);
+//                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
                 topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -147,8 +150,8 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setTitleText(res.getString(R.string.financing));
                 topMenuBar.setVisibility(View.VISIBLE);
                 topMenuBar.setBackVisibility(View.INVISIBLE);
-                topMenuBar.setMenuVisibility(View.VISIBLE);
-                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
+                topMenuBar.setMenuVisibility(View.INVISIBLE);
+//                topMenuBar.setMenuSrc(R.mipmap.top_menu_more);
                 topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -167,8 +170,8 @@ public class HomeActivity extends BaseActivity {
                 topMenuBar.setTitleText(res.getString(R.string.loan));
                 topMenuBar.setVisibility(View.VISIBLE);
                 topMenuBar.setBackVisibility(View.INVISIBLE);
-                topMenuBar.setMenuVisibility(View.VISIBLE);
-                topMenuBar.setMenuSrc(R.mipmap.calculator);
+                topMenuBar.setMenuVisibility(View.INVISIBLE);
+//                topMenuBar.setMenuSrc(R.mipmap.calculator);
                 topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -227,11 +230,13 @@ public class HomeActivity extends BaseActivity {
         List<Fragment> fragments = new ArrayList<>();
         choiceFragment = new ChoiceFragment();
         financingFragment = new FinancingFragment();
-        loanFragment = new LoanFragment();
+//        loanFragment = new LoanFragment();
+        findFragment = new FindFragment();
         mineFragment = new MineFragment();
         fragments.add(choiceFragment);
         fragments.add(financingFragment);
-        fragments.add(loanFragment);
+//        fragments.add(loanFragment);
+        fragments.add(findFragment);
         fragments.add(mineFragment);
 
         FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);

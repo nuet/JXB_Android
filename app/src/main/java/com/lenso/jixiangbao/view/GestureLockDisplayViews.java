@@ -17,7 +17,7 @@ public class GestureLockDisplayViews extends RelativeLayout {
     private static final String TAG = "GestureLockDisplayViewGroup";
     private static final int STYLE_FILL = 0;
     private static final int STYLE_STROKE = 1;
-    private static final int STYLE_STROKE_AND_FILL = 2;
+//    private static final int STYLE_STROKE_AND_FILL = 2;
     /**
      * 保存所有的GestureLockDisplayView
      */
@@ -50,7 +50,7 @@ public class GestureLockDisplayViews extends RelativeLayout {
      */
     private int mSelectedCircleColor = 0xFFE0DBDB;
 
-    private int mNoSelectStyle = STYLE_STROKE_AND_FILL;
+    private int mNoSelectStyle = STYLE_STROKE;
     private int mSelectedStyle = STYLE_FILL;
 
     private int mNoSelectStrokeWidth = 3;
