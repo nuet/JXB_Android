@@ -164,11 +164,12 @@ public class MineFragment extends BaseFragment {
         String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle";
         VolleyHttp.getInstance().imageLoader(url, ivHeadpic, null);
 
-        tvUsername.setText(userInfo.getDetailuser().getUsername());
-        if (userInfo.getDetailuser().getReal_status().equals("0")) {
-            usertype.setText("尚未实名认证");
-        } else {
+        if (userInfo.getDetailuser().getReal_status().equals("1")) {
+            tvUsername.setText(userInfo.getDetailuser().getRealname());
             usertype.setText(userInfo.getDetailuser().getTypename());
+        } else {
+            usertype.setText("尚未实名认证");
+            tvUsername.setText(userInfo.getDetailuser().getUsername());
         }
 
         if (userInfo.getUnreadmsg() == 0) {
@@ -206,7 +207,7 @@ public class MineFragment extends BaseFragment {
     @OnClick({R.id.ll_ljsy,
             R.id.ll_zcze,
             R.id.iv_headpic,
-            R.id.tv_username,
+//            R.id.tv_username,
             R.id.usertype,
             R.id.iv_mine_message,
             R.id.ll_tjyj,
@@ -233,7 +234,7 @@ public class MineFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.ll_zhxx:
             case R.id.iv_headpic:
-            case R.id.tv_username:
+//            case R.id.tv_username:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");

@@ -1,22 +1,19 @@
 package com.lenso.jixiangbao.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
+import android.widget.ImageView;
 
-import com.google.gson.Gson;
-import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.bean.AppScrollPic;
-import com.lenso.jixiangbao.bean.BaseBean;
-import com.lenso.jixiangbao.bean.ChoiceList;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 
-import java.util.List;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import cn.jpush.android.api.JPushInterface;
 
 
@@ -24,6 +21,10 @@ import cn.jpush.android.api.JPushInterface;
  * Created by king on 2016/5/10.
  */
 public class SplashActivity extends BaseActivity {
+    @Bind(R.id.iv_activit_splash)
+    ImageView ivActivitSplash;
+
+    private Context context;
 
 //    private Gson gson;
 //    private List<AppScrollPic> picList;
@@ -34,14 +35,49 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ButterKnife.bind(this);
+
+        context = SplashActivity.this;
+
 //        gson = new Gson();
 //        App.BASE_BEAN=new BaseBean();
 
-        Config.getInstance(this).putConfig("statusHeight",String.valueOf(CommonUtils.getStatusHeight(this)));
+        Config.getInstance(this).putConfig("statusHeight", String.valueOf(CommonUtils.getStatusHeight(this)));
 
         init();
 
 //        load();
+    }
+
+    private void init() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+//                    VolleyHttp.getInstance().imageLoader(ServerInterface.GET_SPLASH_PIC, ivActivitSplash, null);
+                    Thread.sleep(3000);
+
+                    Intent intent = new Intent();
+                    String isFirstOpen = Config.getInstance(SplashActivity.this).getConfig("isFirstOpen");
+                    if (isFirstOpen == null || isFirstOpen.equals("")) {
+                        intent.setClass(context, LaunchActivity.class);
+                        Config.getInstance(SplashActivity.this).putConfig("isFirstOpen", "0");
+                    } else {
+                        String app_key = Config.getInstance(SplashActivity.this).getConfig("app_key");
+                        if (app_key == null || app_key.equals("")) {
+                            intent.setClass(context, HomeActivity.class);
+                        } else {
+                            intent.setClass(context, GestureUnlockActivity.class);
+                        }
+                    }
+                    startActivity(intent);
+                    finish();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 //    private void load() {
@@ -112,25 +148,6 @@ public class SplashActivity extends BaseActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
     }
 
-    private void init() {
-        logDebug("init...");
-        Intent intent = new Intent();
-        String isFirstOpen = Config.getInstance(SplashActivity.this).getConfig("isFirstOpen");
-        if (isFirstOpen == null || isFirstOpen.equals("")) {
-            intent.setClass(this, LaunchActivity.class);
-            Config.getInstance(SplashActivity.this).putConfig("isFirstOpen", "0");
-        } else {
-            String app_key = Config.getInstance(SplashActivity.this).getConfig("app_key");
-            if (app_key == null || app_key.equals("")) {
-                intent.setClass(this, HomeActivity.class);
-            } else {
-                intent.setClass(this, GestureUnlockActivity.class);
-            }
-        }
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -142,5 +159,6 @@ public class SplashActivity extends BaseActivity {
         super.onPause();
         JPushInterface.onPause(SplashActivity.this);
     }
+
 }
 

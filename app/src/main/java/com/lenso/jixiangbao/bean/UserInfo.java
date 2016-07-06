@@ -80,6 +80,7 @@ public class UserInfo {
     }
 
     public static class Detailuser{
+        private String realname;
         private String username;
         private String typename;
         private String real_status;
@@ -88,6 +89,14 @@ public class UserInfo {
             this.username = username;
             this.typename = typename;
             this.real_status = real_status;
+        }
+
+        public String getRealname() {
+            return realname;
+        }
+
+        public void setRealname(String realname) {
+            this.realname = realname;
         }
 
         public String getUsername() {
