@@ -1,9 +1,7 @@
 package com.lenso.jixiangbao.fragment;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +10,11 @@ import android.widget.ListView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.ScreenListAdapter;
-import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.http.VolleyHttp;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -13,18 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.view.JViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import king.dominic.slidingmenu.SlidingMenu;
 
 /**
  * Created by Chung on 2016/5/12.

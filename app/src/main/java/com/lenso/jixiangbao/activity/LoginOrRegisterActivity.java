@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
-import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;

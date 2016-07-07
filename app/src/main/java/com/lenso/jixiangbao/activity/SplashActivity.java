@@ -4,15 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.fragment.MineFragment;
-import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 

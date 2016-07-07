@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ScrollView;
+import android.widget.FrameLayout;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  */
 public class FindFragment extends WebBaseFragment {
     @Bind(R.id.sv_fragment_find)
-    ScrollView svFragmentFind;
+    FrameLayout svFragmentFind;
 
     private final String url = HTMLInterface.GD;
     private static WebView webView;
@@ -54,5 +54,13 @@ public class FindFragment extends WebBaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        if (webView != null) {
+//            ViewGroup parent = (ViewGroup) webView.getParent();
+//            if (parent != null) {
+//                parent.removeView(webView);
+//            }
+//            webView.removeAllViews();
+            webView.destroy();
+        }
     }
 }

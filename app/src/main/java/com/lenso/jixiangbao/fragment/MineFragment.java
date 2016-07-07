@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
@@ -35,14 +34,11 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by Chung on 2016/5/11.
@@ -305,16 +301,21 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                showToast("提现");
-//                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-//                intent.putExtra(HTMLInterface.H5_TITLE, "提现");
-//                startActivity(intent);
+                if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "提现");
+                    startActivity(intent);
+                }else {
+                    showToast("请先绑定银行卡");
+                }
                 break;
             case R.id.btn_cz:
                 if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                     startActivity(intent);
+                }else {
+                    showToast("请先绑定银行卡");
                 }
                 break;
             case R.id.ll_ljsy:

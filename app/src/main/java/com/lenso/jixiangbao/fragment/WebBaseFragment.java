@@ -26,6 +26,8 @@ public class WebBaseFragment extends BaseFragment {
         if (webViews.containsKey(tag))
             return webViews.get(tag);
         WebView webView = new WebView(getActivity());
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
         webViews.put(tag, webView);
         return webView;
     }

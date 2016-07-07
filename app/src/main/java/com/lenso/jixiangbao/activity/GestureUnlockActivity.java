@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
-import com.lenso.jixiangbao.util.DownTimer;
 import com.lenso.jixiangbao.view.GestureLockDisplayViews;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
 

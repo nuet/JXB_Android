@@ -1,6 +1,5 @@
 package com.lenso.jixiangbao.activity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +13,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.lenso.jixiangbao.R;
@@ -24,9 +20,7 @@ import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.UploadUtil;
-import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
-import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import java.io.File;
@@ -191,10 +185,11 @@ public class WebViewActivity extends WebBaseActivity {
                         result = data.getExtras().getString(BaofooPayActivity.PAY_RESULT);// -1:失败 0:取消 1:成功 10:处理中
                         msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
                     }
-                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
-                    };
-                    dialog.setMessage(msg);
-                    dialog.show();
+                    showToast(msg);
+//                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
+//                    };
+//                    dialog.setMessage(msg);
+//                    dialog.show();
                     break;
 //                case requestCodeBank:
 //                    if (data != null) {

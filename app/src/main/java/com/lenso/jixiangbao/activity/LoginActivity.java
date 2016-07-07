@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
