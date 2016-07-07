@@ -110,10 +110,14 @@ public class MineFragment extends BaseFragment {
     private Map argsign = new HashMap();
     private DecimalFormat df = new DecimalFormat("0.00");
 
+    public final static int ZHXX = 1;
+
+    private View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mine, null);
+        view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
         rlMineTop.setPadding(10, Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")), 10, 0);
         return view;
@@ -203,6 +207,16 @@ public class MineFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initData();
+            }
+        }, 500);
+    }
 
     @OnClick({R.id.ll_ljsy,
             R.id.ll_zcze,
@@ -238,7 +252,7 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                 intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, ZHXX);
                 break;
             case R.id.usertype:
                 if (userInfo.getDetailuser().getReal_status().equals("0")) {
@@ -304,7 +318,9 @@ public class MineFragment extends BaseFragment {
                 if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "提现");
+                    intent.putExtra("bao_foo", true);
                     startActivity(intent);
+//                    startActivityForResult(intent, TX);
                 }else {
                     showToast("请先绑定银行卡");
                 }
@@ -313,7 +329,9 @@ public class MineFragment extends BaseFragment {
                 if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "充值");
+                    intent.putExtra("bao_foo", true);
                     startActivity(intent);
+//                    startActivityForResult(intent, CZ);
                 }else {
                     showToast("请先绑定银行卡");
                 }
@@ -359,7 +377,7 @@ public class MineFragment extends BaseFragment {
         logInfo("MineFragment onActivityResult0");
         if(resultCode == 1){
             switch (requestCode) {
-                case 1:
+                case ZHXX:
                     logInfo("MineFragment onActivityResult1");
                     Time time = new Time();
                     time.setToNow(); // 取得系统时间

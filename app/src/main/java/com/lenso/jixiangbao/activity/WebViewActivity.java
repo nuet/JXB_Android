@@ -19,6 +19,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.http.UploadUtil;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -51,6 +52,7 @@ public class WebViewActivity extends WebBaseActivity {
     private Context context;
     private ProgressDialog progressDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,7 @@ public class WebViewActivity extends WebBaseActivity {
         url = intent.getStringExtra(JSInterface.H5_URL);
         title = intent.getStringExtra(JSInterface.H5_TITLE);
         apr = intent.getStringExtra("apr");
+
         webView = getWebView(url);
         flWeb.addView(webView);
         webView.addJavascriptInterface(new JSInterface(this), "api");
@@ -97,6 +100,7 @@ public class WebViewActivity extends WebBaseActivity {
         progressDialog.setMessage("正在上传头像..."); // 设置进度条的提示信息
         progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
         progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+
     }
 
     public static void reload() {
@@ -186,6 +190,7 @@ public class WebViewActivity extends WebBaseActivity {
                         msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
                     }
                     showToast(msg);
+
 //                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
 //                    };
 //                    dialog.setMessage(msg);
@@ -292,7 +297,7 @@ public class WebViewActivity extends WebBaseActivity {
         protected void onPostExecute(String s) {
             webView.reload();
             progressDialog.dismiss();
-            setResult(1, null);
+            setResult(MineFragment.ZHXX, null);
             super.onPostExecute(s);
         }
 
