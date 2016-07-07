@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
@@ -28,6 +29,7 @@ import com.lenso.jixiangbao.bean.UserInfo;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,23 +140,44 @@ public class MineFragment extends BaseFragment {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
                         CommonUtils.clearGesturePassword(getActivity());
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-                        builder.setTitle("温馨提示");
-                        builder.setMessage("您的账号已被迫离线，是否重新登录？");
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent();
-                                intent.setClass(getActivity(), LoginOrRegisterActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        builder.create().show();
+
+
+                        new iOSAlertDialog(getActivity()).builder()
+                                .setTitle("警告")
+                                .setMsg("您的账号已被迫离线，是否重新登录？")
+                                .setCancelable(false)
+                                .setPositiveButton("确认", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(getActivity(), LoginOrRegisterActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("取消", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                    }
+                                }).show();
+
+
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//                        builder.setTitle("温馨提示");
+//                        builder.setMessage("您的账号已被迫离线，是否重新登录？");
+//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent intent = new Intent();
+//                                intent.setClass(getActivity(), LoginOrRegisterActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
+//                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        });
+//                        builder.create().show();
                     }
                 } else {
                     showToast("请检查网络设置");

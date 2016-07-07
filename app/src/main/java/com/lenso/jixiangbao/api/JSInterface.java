@@ -10,12 +10,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
+import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
@@ -23,6 +25,7 @@ import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.iOSActionSheetDialog;
+import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -142,31 +145,55 @@ public class JSInterface {
                     try {
                         JSONObject jsonObject = new JSONObject(json);
                         if (jsonObject.getString("status").equals("1")) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-                            builder.setTitle("温馨提示");
-                            builder.setMessage("您确定要注销登录？");
-                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-//                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-//                                    SharedPreferences.Editor editor = sp.edit();
-//                                    editor.putString("GestureLock", "");
-//                                    editor.commit();
-                                    CommonUtils.clearGesturePassword(context);
-                                    Intent intentLogout = new Intent();
-                                    intentLogout.setClass(context, LoginOrRegisterActivity.class);
-                                    intentLogout.putExtra("jsFlag", true);
-                                    context.startActivity(intentLogout);
-                                    activity.finish();
-//                                    HomeActivity.HOMECONTEXT.finish();
-                                }
-                            });
-                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                            builder.create().show();
+
+
+                            new iOSAlertDialog(context).builder()
+                                    .setTitle("温馨提示")
+                                    .setMsg("您确定要注销登录吗？")
+                                    .setCancelable(false)
+                                    .setPositiveButton("确认", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            CommonUtils.clearGesturePassword(context);
+                                            Intent intentLogout = new Intent();
+                                            intentLogout.setClass(context, LoginOrRegisterActivity.class);
+                                            intentLogout.putExtra("jsFlag", true);
+                                            context.startActivity(intentLogout);
+                                            activity.finish();
+                                        }
+                                    })
+                                    .setNegativeButton("取消", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                        }
+                                    }).show();
+
+
+//                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//                            builder.setTitle("温馨提示");
+//                            builder.setMessage("您确定要注销登录吗？");
+//                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+////                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+////                                    SharedPreferences.Editor editor = sp.edit();
+////                                    editor.putString("GestureLock", "");
+////                                    editor.commit();
+//                                    CommonUtils.clearGesturePassword(context);
+//                                    Intent intentLogout = new Intent();
+//                                    intentLogout.setClass(context, LoginOrRegisterActivity.class);
+//                                    intentLogout.putExtra("jsFlag", true);
+//                                    context.startActivity(intentLogout);
+//                                    activity.finish();
+////                                    HomeActivity.HOMECONTEXT.finish();
+//                                }
+//                            });
+//                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                            });
+//                            builder.create().show();
                         } else {
                             showToast(jsonObject.getString("rsmsg"));
                         }

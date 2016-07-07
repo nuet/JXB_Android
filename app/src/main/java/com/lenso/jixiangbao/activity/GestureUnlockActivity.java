@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
@@ -16,6 +17,7 @@ import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.GestureLockDisplayViews;
 import com.lenso.jixiangbao.view.GestureLockViewGroup;
+import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.Arrays;
 
@@ -197,25 +199,46 @@ public class GestureUnlockActivity extends BaseActivity {
     }
 
     private void alertDialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        builder.setTitle("温馨提示");
-        builder.setMessage(msg);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
-                Intent intentForget = new Intent();
-                intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
-                intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
-                startActivity(intentForget);
-                finish();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        builder.create().show();
+        new iOSAlertDialog(GestureUnlockActivity.this).builder()
+                .setTitle("温馨提示")
+                .setMsg(msg)
+                .setCancelable(false)
+                .setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
+                        Intent intentForget = new Intent();
+                        intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
+                        intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
+                        startActivity(intentForget);
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }).show();
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, iOSAlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//        builder.setTitle("温馨提示");
+//        builder.setMessage(msg);
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
+//                Intent intentForget = new Intent();
+//                intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
+//                intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
+//                startActivity(intentForget);
+//                finish();
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//            }
+//        });
+//        builder.create().show();
     }
 }

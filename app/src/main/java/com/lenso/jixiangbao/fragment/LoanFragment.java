@@ -1,6 +1,6 @@
 //package com.lenso.jixiangbao.fragment;
 //
-//import android.app.AlertDialog;
+//import android.app.iOSAlertDialog;
 //import android.content.DialogInterface;
 //import android.content.Intent;
 //import android.os.Bundle;
@@ -171,7 +171,7 @@
 //                                    intent.putExtra(JSInterface.H5_TITLE, "吉车贷");
 //                                    startActivity(intent);
 //                                }else if(jsonObject.getString("status").equals("-1")){
-//                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//                                    iOSAlertDialog.Builder builder = new iOSAlertDialog.Builder(getActivity(), iOSAlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 //                                    builder.setTitle("温馨提示");
 //                                    builder.setMessage("系统检测到您尚未登陆，请登录后再使用此功能，是否登录?");
 //                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {

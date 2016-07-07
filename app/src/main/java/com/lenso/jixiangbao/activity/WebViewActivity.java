@@ -191,7 +191,7 @@ public class WebViewActivity extends WebBaseActivity {
                     }
 //                    showToast(msg);
 
-//                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
+//                    iOSAlertDialog dialog = new iOSAlertDialog(WebViewActivity.this) {
 //                    };
 //                    dialog.setMessage(msg);
 //                    dialog.show();
