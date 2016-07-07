@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
@@ -178,7 +180,32 @@ public class WebViewActivity extends WebBaseActivity {
                         saveImage(data);
                     }
                     break;
+
+                /*************宝付*********/
+                case JSInterface.REQUEST_CODE_BAOFOO_SDK:
+                    String result = "";
+                    String msg = "";
+                    if (data == null || data.getExtras() == null) {
+                        msg = "支付已被取消";
+                    } else {
+                        result = data.getExtras().getString(BaofooPayActivity.PAY_RESULT);// -1:失败 0:取消 1:成功 10:处理中
+                        msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
+                    }
+                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
+                    };
+                    dialog.setMessage(msg);
+                    dialog.show();
+                    break;
+//                case requestCodeBank:
+//                    if (data != null) {
+//                        TextView city_name = (TextView) findViewById(R.id.bank_name);
+//                        city_name.setText(data.getStringExtra("bank_name"));
+//                        onSaveCode(getActivity().getApplicationContext(), data.getStringExtra("bank_id"));
+//                    }
+//                    break;
+                /*************宝付*********/
             }
+
         }
     }
 

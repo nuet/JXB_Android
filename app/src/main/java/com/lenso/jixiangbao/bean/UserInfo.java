@@ -173,11 +173,20 @@ public class UserInfo {
         private String user_id;
         private double total;
         private double use_money;
+        private String bankaccount;
 
         public Account(String user_id, double total, double use_money){
             this.user_id = user_id;
             this.total = total;
             this.use_money = use_money;
+        }
+
+        public String getBankaccount() {
+            return bankaccount;
+        }
+
+        public void setBankaccount(String bankaccount) {
+            this.bankaccount = bankaccount;
         }
 
         public String getUser_id() {

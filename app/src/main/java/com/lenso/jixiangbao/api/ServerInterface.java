@@ -33,6 +33,6 @@ public class ServerInterface {
 
     public final static String GET_SPLASH_PIC = "";
 
-    public final static String RECHARGE = SERVER + "appweb/member/newrecharge.html";
+    public final static String RECHARGE = SERVER + "app/newrecharge.html";
 
 }

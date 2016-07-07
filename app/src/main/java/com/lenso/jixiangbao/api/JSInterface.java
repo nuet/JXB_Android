@@ -6,51 +6,31 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.text.format.Time;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
-import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.GestureSettingsActivity;
-import com.lenso.jixiangbao.activity.GestureUnlockActivity;
 import com.lenso.jixiangbao.activity.HomeActivity;
-import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
-import com.lenso.jixiangbao.view.ProgressWheel;
 import com.lenso.jixiangbao.view.iOSActionSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.jar.Attributes;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
@@ -67,6 +47,13 @@ public class JSInterface {
     public static final int DETAIL = 2;
     private final Context context;
     private final Activity activity;
+
+    /*******宝付*******/
+    private Map BAO_FOO = new HashMap();
+    private String tradeNo = "";
+    public final static int REQUEST_CODE_BAOFOO_SDK = 100;
+    /*******宝付*******/
+
 
     public JSInterface(Context context) {
         this.context = context;
@@ -268,43 +255,6 @@ public class JSInterface {
 
         // 启动分享GUI
         oks.show(context);
-
-
-//        /**
-//         * 显示popupWindow
-//         */
-//        // 利用layoutInflater获得View
-//        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View view = inflater.inflate(R.layout.layout_popupwindow_share, null);
-//        View parent = inflater.inflate(R.layout.activity_webview, null);
-//
-//        // 下面是两种方法得到宽度和高度 getWindow().getDecorView().getWidth()
-//
-//        final PopupWindow window = new PopupWindow(view,
-//                WindowManager.LayoutParams.MATCH_PARENT,
-//                WindowManager.LayoutParams.WRAP_CONTENT);
-//
-//        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
-//        window.setFocusable(true);
-//
-//        // 实例化一个ColorDrawable颜色为半透明
-//        ColorDrawable dw = new ColorDrawable(Color.TRANSPARENT);
-//        window.setBackgroundDrawable(dw);
-//
-//        // 设置popWindow的显示和消失动画
-//        window.setAnimationStyle(R.style.mypopwindow_anim_style);
-//        // 在底部显示
-//        window.showAtLocation(parent.findViewById(R.id.top_menu_bar), Gravity.BOTTOM, 0, 0);
-//
-//
-//        Button cancel = (Button) view.findViewById(R.id.pop_btn_cancel);
-//        cancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                showToast("取消");
-//                window.dismiss();
-//            }
-//        });
     }
 
     /**
@@ -357,6 +307,62 @@ public class JSInterface {
         }else{
 
         }
+    }
+
+    @JavascriptInterface
+    public void BAO_FOO_RECHARGE(String money){
+
+        Log.i("BAO_FOO", money);
+
+        /*************宝付*********/
+        BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
+        BAO_FOO.put("money", money);
+        BAO_FOO.put("type", "1");
+        BAO_FOO.put("payment1", "baofoo_vip_sdk_pay");
+        Log.i("BAO_FOO", BAO_FOO.toString());
+        VolleyHttp.getInstance().postParamsJson(ServerInterface.RECHARGE, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if(isConnectSuccess){
+                    try {
+                        JSONObject jsonObject = new JSONObject(json);
+                        if (jsonObject.getString("status").equals("1")){
+                            tradeNo = jsonObject.getString("tradeNo");
+                            Log.i("tradeNo", tradeNo);
+
+
+                            Log.i("tradeNo", "not null");
+                            Intent payintent = new Intent(context, BaofooPayActivity.class);
+                            // 通过业务流水请求报文获得的交易号
+                            payintent.putExtra(BaofooPayActivity.PAY_TOKEN, tradeNo);
+                            // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
+                            payintent.putExtra(BaofooPayActivity.PAY_BUSINESS, false);
+                            activity.startActivityForResult(payintent, REQUEST_CODE_BAOFOO_SDK);
+                            tradeNo = ""; //清空本次交易号
+                            BAO_FOO = new HashMap(); // 清空本次参数
+
+                        }else {
+                            showToast("交易失败");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    showToast("请检查网络设置");
+                }
+            }
+        }, BAO_FOO);
+//        if(!TextUtils.isEmpty(tradeNo)){
+//            Log.i("tradeNo", "not null");
+//            Intent payintent = new Intent(context, BaofooPayActivity.class);
+//            // 通过业务流水请求报文获得的交易号
+//            payintent.putExtra(BaofooPayActivity.PAY_TOKEN, tradeNo);
+//            // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
+//            payintent.putExtra(BaofooPayActivity.PAY_BUSINESS, false);
+//            activity.startActivityForResult(payintent, REQUEST_CODE_BAOFOO_SDK);
+//            tradeNo = ""; //清空本次交易号
+//        }
+        /*************宝付*********/
     }
 
 }

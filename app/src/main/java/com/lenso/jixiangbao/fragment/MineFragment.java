@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.UserInfo;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 
 import org.json.JSONException;
@@ -135,6 +137,7 @@ public class MineFragment extends BaseFragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
+                        CommonUtils.clearGesturePassword(getActivity());
                         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                         builder.setTitle("温馨提示");
                         builder.setMessage("您的账号已被迫离线，是否重新登录？");
@@ -308,17 +311,11 @@ public class MineFragment extends BaseFragment {
 //                startActivity(intent);
                 break;
             case R.id.btn_cz:
-                showToast("充值");
-//                Intent payintent = new Intent(getActivity(), BaofooPayActivity.class);
-//                // 通过业务流水请求报文获得的交易号
-//                payintent.putExtra(BaofooPayActivity.PAY_TOKEN, "");//tradeNo
-//                // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
-//                payintent.putExtra(BaofooPayActivity. PAY_BUSINESS,false);
-//                startActivityForResult(payintent, OrderService.REQUEST_CODE_BAOFOO_SDK);
-
-//                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-//                intent.putExtra(HTMLInterface.H5_TITLE, "充值");
-//                startActivity(intent);
+                if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "充值");
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_ljsy:
             case R.id.ll_zcze:
@@ -371,6 +368,5 @@ public class MineFragment extends BaseFragment {
                     break;
             }
         }
-
     }
 }
