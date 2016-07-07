@@ -31,8 +31,10 @@ public class ServerInterface {
     public final static String SET_HEAD_PIC = SERVER_DOMAIN + "setavatar.html";
     public final static String GET_HEAD_PIC = SERVER + "imgurl.html";
 
-    public final static String GET_SPLASH_PIC = "";
+    public final static String GET_SPLASH_PIC = SERVER + "themes/theme_default/app/images/startup.jpg";
 
     public final static String RECHARGE = SERVER + "app/newrecharge.html";
+
+    public final static String FINANCIAL_REPORTS = SERVER_DOMAIN + "getallsystemstatis.html";
 
 }

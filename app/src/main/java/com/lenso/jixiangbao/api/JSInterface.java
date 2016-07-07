@@ -158,7 +158,7 @@ public class JSInterface {
                                     intentLogout.putExtra("jsFlag", true);
                                     context.startActivity(intentLogout);
                                     activity.finish();
-                                    HomeActivity.HOMECONTEXT.finish();
+//                                    HomeActivity.HOMECONTEXT.finish();
                                 }
                             });
                             builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

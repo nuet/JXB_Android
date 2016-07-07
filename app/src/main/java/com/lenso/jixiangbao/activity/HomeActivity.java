@@ -310,6 +310,22 @@ public class HomeActivity extends BaseActivity {
                     showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
+                loadReports();
+            }
+        });
+    }
+
+    private void loadReports(){
+        VolleyHttp.getInstance().getJson(ServerInterface.FINANCIAL_REPORTS, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (json != null && !json.equals("") && !json.equals("null")) {
+                    BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    App.BASE_BEAN.setPlatformFinancialReport(bean.getPlatformFinancialReport());
+                } else {
+                    showToast(getString(R.string.no_internet));
+                }
+                loadCount++;
                 loadPicList();
             }
         });
@@ -348,7 +364,7 @@ public class HomeActivity extends BaseActivity {
 
     private void setData() {
         logDebug("home:" + loadCount);
-        if (loadCount < 3)
+        if (loadCount < 4)
             return;
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setInvestList(investList);

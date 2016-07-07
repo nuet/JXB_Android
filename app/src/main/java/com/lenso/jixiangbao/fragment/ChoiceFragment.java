@@ -34,8 +34,8 @@ public class ChoiceFragment extends BaseFragment {
     SpeakerView ivInfo;
     @Bind(R.id.tv_info_2)
     TextView tvInfo2;
-    @Bind(R.id.tv_info_1)
-    TextView tvInfo1;
+    @Bind(R.id.tv_info_4)
+    TextView tvInfo4;
     @Bind(R.id.vp_choice)
     LoopViewPager vpChoice;
     @Bind(R.id.lvp_banner)
@@ -84,10 +84,14 @@ public class ChoiceFragment extends BaseFragment {
         if (App.BASE_BEAN == null || App.BASE_BEAN.getStatistic_display()==null)
             return;
         int padding = (int) getResources().getDimension(R.dimen.dp_2);
-        if (App.BASE_BEAN.getStatistic_display().equals("0"))
+        if (App.BASE_BEAN.getStatistic_display().equals("0")){
             rlInfo.setVisibility(View.GONE);
-        else
+        }
+        else{
             rlInfo.setVisibility(View.VISIBLE);
+            tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
+            tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
+        }
         ArrayList<String> pics = new ArrayList<>();
         for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
             pics.add(App.HOST + pic.getPic());

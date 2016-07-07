@@ -318,9 +318,7 @@ public class MineFragment extends BaseFragment {
                 if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "提现");
-                    intent.putExtra("bao_foo", true);
                     startActivity(intent);
-//                    startActivityForResult(intent, TX);
                 }else {
                     showToast("请先绑定银行卡");
                 }
@@ -329,9 +327,7 @@ public class MineFragment extends BaseFragment {
                 if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "充值");
-                    intent.putExtra("bao_foo", true);
                     startActivity(intent);
-//                    startActivityForResult(intent, CZ);
                 }else {
                     showToast("请先绑定银行卡");
                 }

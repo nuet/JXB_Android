@@ -189,7 +189,7 @@ public class WebViewActivity extends WebBaseActivity {
                         result = data.getExtras().getString(BaofooPayActivity.PAY_RESULT);// -1:失败 0:取消 1:成功 10:处理中
                         msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
                     }
-                    showToast(msg);
+//                    showToast(msg);
 
 //                    AlertDialog dialog = new AlertDialog(WebViewActivity.this) {
 //                    };

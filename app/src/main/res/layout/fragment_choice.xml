@@ -59,7 +59,7 @@
                 android:layout_toRightOf="@id/iv_info"
                 android:padding="5dp"
                 android:textSize="13sp"
-                android:text="累计投资:" />
+                android:text="投资总额:" />
 
             <TextView
                 android:id="@+id/tv_info_2"
@@ -69,7 +69,7 @@
                 android:layout_toRightOf="@id/tv_info_1"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="100亿"
+                android:text=""
                 android:textSize="13sp"
                 android:textColor="@color/orange" />
 
@@ -81,7 +81,7 @@
                 android:layout_toRightOf="@id/tv_info_2"
                 android:padding="5dp"
                 android:textSize="13sp"
-                android:text="交易人次:" />
+                android:text="用户总数:" />
 
             <TextView
                 android:id="@+id/tv_info_4"
@@ -91,7 +91,7 @@
                 android:layout_toRightOf="@id/tv_info_3"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="100万"
+                android:text=""
                 android:textSize="13sp"
                 android:textColor="@color/orange" />
         </RelativeLayout>

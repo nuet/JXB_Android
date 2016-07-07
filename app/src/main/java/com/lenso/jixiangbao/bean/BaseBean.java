@@ -13,6 +13,7 @@ public class BaseBean {
     private String statistic_display;
     private String new_experience_apr;
     private String new_experience_valid_time;
+    private PlatformFinancialReport platformFinancialReport;
 
     public String getStatistic_display() {
         return statistic_display;
@@ -68,5 +69,79 @@ public class BaseBean {
 
     public void setSanList(List<ChoiceList> sanList) {
         this.sanList = sanList;
+    }
+
+    public static class PlatformFinancialReport{
+        private String recharge_total;
+        private String cash_total;
+        private String tender_total;
+        private String repay_total;
+        private String new_user_total;
+        private String interest_total;
+
+        public PlatformFinancialReport(String recharge_total, String cash_total, String tender_total, String repay_total, String new_user_total, String interest_total) {
+            this.recharge_total = recharge_total;
+            this.cash_total = cash_total;
+            this.tender_total = tender_total;
+            this.repay_total = repay_total;
+            this.new_user_total = new_user_total;
+            this.interest_total = interest_total;
+        }
+
+        public String getRecharge_total() {
+            return recharge_total;
+        }
+
+        public void setRecharge_total(String recharge_total) {
+            this.recharge_total = recharge_total;
+        }
+
+        public String getCash_total() {
+            return cash_total;
+        }
+
+        public void setCash_total(String cash_total) {
+            this.cash_total = cash_total;
+        }
+
+        public String getTender_total() {
+            return tender_total;
+        }
+
+        public void setTender_total(String tender_total) {
+            this.tender_total = tender_total;
+        }
+
+        public String getRepay_total() {
+            return repay_total;
+        }
+
+        public void setRepay_total(String repay_total) {
+            this.repay_total = repay_total;
+        }
+
+        public String getNew_user_total() {
+            return new_user_total;
+        }
+
+        public void setNew_user_total(String new_user_total) {
+            this.new_user_total = new_user_total;
+        }
+
+        public String getInterest_total() {
+            return interest_total;
+        }
+
+        public void setInterest_total(String interest_total) {
+            this.interest_total = interest_total;
+        }
+    }
+
+    public PlatformFinancialReport getPlatformFinancialReport() {
+        return platformFinancialReport;
+    }
+
+    public void setPlatformFinancialReport(PlatformFinancialReport platformFinancialReport) {
+        this.platformFinancialReport = platformFinancialReport;
     }
 }
