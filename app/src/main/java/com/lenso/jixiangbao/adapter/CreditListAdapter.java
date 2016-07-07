@@ -79,10 +79,11 @@ public class CreditListAdapter extends BaseAdapter {
             holder.tvListItemContent2Day.setText(R.string.day);
         }
         float progress = (1 - Float.parseFloat(data.getAccount_yes()) / Float.parseFloat(data.getAccount())) * 360;
-        if (progress == 360)
-            holder.pwListItem.setText(context.getString(R.string.buy));
-        else
+        if (data.getAccount_yes().equals(data.getAccount())){
             holder.pwListItem.setText(context.getString(R.string.sell_out));
+        } else {
+            holder.pwListItem.setText(context.getString(R.string.buy));
+        }
         holder.pwListItem.setProgress((int) progress);
         return view;
     }
