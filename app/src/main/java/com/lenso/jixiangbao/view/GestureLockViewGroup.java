@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -434,26 +435,14 @@ public class GestureLockViewGroup extends RelativeLayout {
                     mPaint.setColor(mFingerUpUnMatchPathColor);
                     mPaint.setAlpha(mPathAlpha);
                     if (isInitMode) {
-
                         if (mOnGestureLockViewInitModeListener != null) {
                             handleInitModeCallback();
                         } else {
                             changeItemMode(false);
                         }
                     } else {
-                        this.mTryTimes--;
                         if (mOnGestureLockViewListener != null && mChoose.size() > 0) {
-                            mOnGestureLockViewListener.onGestureEvent(checkAnswer(), mTryTimes);
-                            if (this.mTryTimes == 0) {
-                                mOnGestureLockViewListener.onUnmatchedExceedBoundary();
-                            }
-                            if (checkAnswer()) {
-                                mPaint.setColor(mFingerUpMatchPathColor);
-                                mPaint.setAlpha(mPathAlpha);
-                                changeItemMode(true);
-                            } else {
-                                changeItemMode(false);
-                            }
+                            handleCallback();
                         } else {
                             changeItemMode(false);
                         }
@@ -486,7 +475,6 @@ public class GestureLockViewGroup extends RelativeLayout {
                 mOnGestureLockViewInitModeListener.onLimitSelect(mLimitSelect, mChoose.size());
             } else {
                 mOnGestureLockViewInitModeListener.onInitModeGestureEvent(false);
-//                mOnGestureLockViewListener.onLimitSelect(mLimitSelect, mChoose.size());
             }
 
             changeItemMode(false);
@@ -513,6 +501,27 @@ public class GestureLockViewGroup extends RelativeLayout {
                 mOnGestureLockViewInitModeListener.onInitModeGestureEvent(checkInitModeAnswer(mFirstAnswer, mSecondAnswer));
             }
         }
+    }
+
+    private void handleCallback(){
+        if (mChoose.size() < mLimitSelect) {
+            mOnGestureLockViewListener.onLimitSelect(mLimitSelect, mChoose.size());
+        } else {
+            this.mTryTimes--;
+            mOnGestureLockViewListener.onGestureEvent(checkAnswer(), mTryTimes);
+            if (this.mTryTimes == 0) {
+                mOnGestureLockViewListener.onUnmatchedExceedBoundary();
+            }
+            if (checkAnswer()) {
+                mPaint.setColor(mFingerUpMatchPathColor);
+                mPaint.setAlpha(mPathAlpha);
+                changeItemMode(true);
+            } else {
+                changeItemMode(false);
+            }
+        }
+
+
     }
 
     /**

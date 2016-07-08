@@ -30,13 +30,11 @@ import butterknife.OnClick;
  * Created by Chung on 2016/5/20.
  */
 public class GestureUnlockActivity extends BaseActivity {
-    @Bind(R.id.id_unlock_gestureLockDisplayViews)
-    GestureLockDisplayViews idUnlockGestureLockDisplayViews;
-    @Bind(R.id.id_textView3)
-    TextView idTextView3;
+
     private GestureLockViewGroup mGestureLockViewGroup;
     private GestureLockDisplayViews id_unlock_gestureLockDisplayViews;
     private TextView mTextView;
+    private TextView idTextView3;
 //    private DownTimer timer;
     private GestureLockViewGroup.OnGestureLockViewListener mGestureLockViewListener;
     //    runnable去清除gestureLockView
@@ -72,7 +70,10 @@ public class GestureUnlockActivity extends BaseActivity {
         id_unlock_gestureLockDisplayViews = (GestureLockDisplayViews) findViewById(R.id.id_unlock_gestureLockDisplayViews);
         mGestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.id_gestureLockViewGroup_1);
         mTextView = (TextView) findViewById(R.id.id_textView2);
+        idTextView3 = (TextView) findViewById(R.id.id_textView3);
 
+        mGestureLockViewGroup.setInitMode(false);
+        mGestureLockViewGroup.setLimitSelect(4);
         mGestureLockViewGroup.bindDisplayView(id_unlock_gestureLockDisplayViews);
 
 //        timer = new DownTimer();//实例化
@@ -88,6 +89,8 @@ public class GestureUnlockActivity extends BaseActivity {
             @Override
             public void onLimitSelect(int limitSelect, int select) {
                 Toast.makeText(GestureUnlockActivity.this, "最少连接" + limitSelect + "个点", Toast.LENGTH_SHORT).show();
+                id_unlock_gestureLockDisplayViews.clearSelect();
+                mGestureLockViewGroup.clearGestureLockView();
             }
             @Override
             public void onUnmatchedExceedBoundary() {
@@ -126,7 +129,7 @@ public class GestureUnlockActivity extends BaseActivity {
                     mTextView.setTextColor(Color.parseColor("#FF0000"));
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, idTextView3);
-                    CommonUtils.startShakeAnim(GestureUnlockActivity.this, idUnlockGestureLockDisplayViews);
+                    CommonUtils.startShakeAnim(GestureUnlockActivity.this, id_unlock_gestureLockDisplayViews);
                     CommonUtils.startShakeAnim(GestureUnlockActivity.this, mGestureLockViewGroup);
                     id_unlock_gestureLockDisplayViews.clearSelect();
                 }
