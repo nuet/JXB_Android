@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,6 +38,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
 
@@ -66,7 +69,7 @@ public class HomeActivity extends BaseActivity {
     private boolean isFirst = true;
     private ChoiceFragment choiceFragment;
     private FinancingFragment financingFragment;
-//    private LoanFragment loanFragment;
+    //    private LoanFragment loanFragment;
     private FindFragment findFragment;
     private MineFragment mineFragment;
 
@@ -77,7 +80,8 @@ public class HomeActivity extends BaseActivity {
     private int loadCount = 0;
     private InvestList investList;
 
-    private ProgressDialog progressDialog;
+    //    private ProgressDialog progressDialog;
+    private static ACProgressFlower progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -285,13 +289,19 @@ public class HomeActivity extends BaseActivity {
         logDebug("load...");
         App.BASE_BEAN = new BaseBean();
 
-        progressDialog = new ProgressDialog(this); // 获取对象
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-        progressDialog.setIcon(R.mipmap.b);
-        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-        progressDialog.setMessage("正在加载数据..."); // 设置进度条的提示信息
-        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+        progressDialog = new ACProgressFlower.Builder(this)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .text("正在加载数据...")
+                .fadeColor(Color.DKGRAY).build();
+
+//        progressDialog = new ProgressDialog(this); // 获取对象
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+//        progressDialog.setIcon(R.mipmap.b);
+//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
+//        progressDialog.setMessage("正在加载数据..."); // 设置进度条的提示信息
+//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
+//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
         progressDialog.show();
 
         loadValues();
@@ -315,7 +325,7 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
-    private void loadReports(){
+    private void loadReports() {
         VolleyHttp.getInstance().getJson(ServerInterface.FINANCIAL_REPORTS, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {

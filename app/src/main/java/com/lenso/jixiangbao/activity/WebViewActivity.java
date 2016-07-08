@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by king on 2016/5/17.
@@ -50,7 +53,9 @@ public class WebViewActivity extends WebBaseActivity {
     private String title;
     private String apr;
     private Context context;
-    private ProgressDialog progressDialog;
+
+    private static ACProgressFlower progressDialog;
+//    private ProgressDialog progressDialog;
 
 
     @Override
@@ -93,13 +98,19 @@ public class WebViewActivity extends WebBaseActivity {
 
         context = WebViewActivity.this;
 
-        progressDialog = new ProgressDialog(context); // 获取对象
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-        progressDialog.setIcon(R.mipmap.b);
-        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-        progressDialog.setMessage("正在上传头像..."); // 设置进度条的提示信息
-        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+        progressDialog = new ACProgressFlower.Builder(WebViewActivity.this)
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .text("正在上传头像...")
+                .fadeColor(Color.DKGRAY).build();
+
+//        progressDialog = new ProgressDialog(context); // 获取对象
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+//        progressDialog.setIcon(R.mipmap.b);
+//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
+//        progressDialog.setMessage("正在上传头像..."); // 设置进度条的提示信息
+//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
+//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
 
     }
 

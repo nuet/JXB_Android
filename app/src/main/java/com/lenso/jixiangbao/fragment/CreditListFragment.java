@@ -3,6 +3,7 @@ package com.lenso.jixiangbao.fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -39,6 +40,8 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import king.dominic.slidingmenu.SlidingMenu;
 
 /**
@@ -66,12 +69,13 @@ public class CreditListFragment extends BaseFragment {
     private SlidingMenu menu;
     private CreditListAdapter adapter;
 
-//    private ListView listView;
+    //    private ListView listView;
     private boolean LIMIT_ASC = true; //第一次点击为升序排列
     private boolean RATE_ASC = true; //第一次点击为升序排列
     private Gson gson = new Gson();
     private Map<String, String> args = new HashMap<String, String>();
-    public static ProgressDialog progressDialog;
+    private static ACProgressFlower progressDialog;
+    //    public static ProgressDialog progressDialog;
     private static Context context;
 
 
@@ -113,7 +117,7 @@ public class CreditListFragment extends BaseFragment {
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 FinancingFragment.page = String.valueOf(Integer.valueOf(FinancingFragment.page) - 1);
                 if (Integer.valueOf(FinancingFragment.page) < 1 || Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if(Integer.valueOf(FinancingFragment.page) < 1){
+                    if (Integer.valueOf(FinancingFragment.page) < 1) {
                         FinancingFragment.page = "1";
                     }
                     lvCreditList.postDelayed(new Runnable() {
@@ -123,15 +127,16 @@ public class CreditListFragment extends BaseFragment {
                             showToast("当前已是第一页");
                         }
                     }, 500);
-                }else{
+                } else {
                     reLoadBorrowList();
                 }
             }
+
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 FinancingFragment.page = String.valueOf(Integer.valueOf(FinancingFragment.page) + 1);
                 if (Integer.valueOf(FinancingFragment.page) < 1 || Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if(Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()){
+                    if (Integer.valueOf(FinancingFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
                         FinancingFragment.page = String.valueOf(App.BASE_BEAN.getInvestList().getP().getPages());
                     }
                     lvCreditList.postDelayed(new Runnable() {
@@ -141,7 +146,7 @@ public class CreditListFragment extends BaseFragment {
                             showToast("当前已是最后一页");
                         }
                     }, 500);
-                }else{
+                } else {
                     reLoadBorrowList();
                 }
             }
@@ -164,13 +169,20 @@ public class CreditListFragment extends BaseFragment {
 
         unselected();
         buttonDefault.setSelected(true);
-        progressDialog = new ProgressDialog(getActivity()); // 获取对象
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-        progressDialog.setIcon(R.mipmap.b);
-        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-        progressDialog.setMessage("正在排序中..."); // 设置进度条的提示信息
-        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+
+        progressDialog = new ACProgressFlower.Builder(getActivity())
+                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                .themeColor(Color.WHITE)
+                .text("正在排序中...")
+                .fadeColor(Color.DKGRAY).build();
+
+//        progressDialog = new ProgressDialog(getActivity()); // 获取对象
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
+//        progressDialog.setIcon(R.mipmap.b);
+//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
+//        progressDialog.setMessage("正在排序中..."); // 设置进度条的提示信息
+//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
+//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
     }
 
     private void unselected() {
@@ -275,7 +287,7 @@ public class CreditListFragment extends BaseFragment {
                     App.BASE_BEAN.setInvestList(investList);
                     adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
                     lvCreditList.getRefreshableView().setAdapter(adapter);
-                    if(lvCreditList.isRefreshing()){
+                    if (lvCreditList.isRefreshing()) {
                         lvCreditList.postDelayed(new Runnable() {
                             @Override
                             public void run() {
