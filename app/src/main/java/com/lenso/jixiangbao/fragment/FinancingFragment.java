@@ -52,10 +52,13 @@ public class FinancingFragment extends BaseFragment {
     public static String s_type = "115";
     public static String page = "1";
 
+    private boolean firstHome = true;
+    private View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_financing, null);
+        view = inflater.inflate(R.layout.fragment_financing, null);
         ButterKnife.bind(this, view);
         initView();
         return view;
@@ -148,4 +151,19 @@ public class FinancingFragment extends BaseFragment {
     public void sortBorrowList(){
         creditListFragment1.reLoadBorrowList();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!firstHome){
+            view.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    sortBorrowList();
+                    firstHome = false;
+                }
+            }, 500);
+        }
+    }
+
 }

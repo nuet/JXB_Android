@@ -17,6 +17,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.bean.AppScrollPic;
+import com.lenso.jixiangbao.view.ChoiceLoopViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
 import com.lenso.jixiangbao.view.SpeakerView;
 
@@ -37,7 +38,7 @@ public class ChoiceFragment extends BaseFragment {
     @Bind(R.id.tv_info_4)
     TextView tvInfo4;
     @Bind(R.id.vp_choice)
-    LoopViewPager vpChoice;
+    ChoiceLoopViewPager vpChoice;
     @Bind(R.id.lvp_banner)
     LoopViewPager lvpBanner;
     @Bind(R.id.ll_dot)
@@ -61,6 +62,12 @@ public class ChoiceFragment extends BaseFragment {
     private List<ImageView> dots;
     private float dp_280;
 
+    private ChoiceActionFragment choiceActionFragment1 = new ChoiceActionFragment();
+    private ChoiceActionFragment choiceActionFragment2 = new ChoiceActionFragment();
+    private ChoiceActionFragment choiceActionFragment3 = new ChoiceActionFragment();
+    private ChoiceActionFragment choiceActionFragment4 = new ChoiceActionFragment();
+    private ChoiceActionFragment choiceActionFragment5 = new ChoiceActionFragment();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +88,28 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        if (App.BASE_BEAN == null || App.BASE_BEAN.getStatistic_display()==null)
+        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display()==null)
             return;
         int padding = (int) getResources().getDimension(R.dimen.dp_2);
+
+
+        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
+            text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit_day() + "天");
+        }else{
+            text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit() + "个月");
+        }
+        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
+            text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit_day() + "天");
+        }else{
+            text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit() + "个月");
+        }
+        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
+            text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit_day() + "天");
+        }else{
+            text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit() + "个月");
+        }
+
+
         if (App.BASE_BEAN.getStatistic_display().equals("0")){
             rlInfo.setVisibility(View.GONE);
         }
@@ -134,7 +160,20 @@ public class ChoiceFragment extends BaseFragment {
         getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
         RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y-dp_280));
         vpChoice.setLayoutParams(lp);
-        vpChoice.addLoopFragment(new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment(), new ChoiceActionFragment());
+
+        choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr());
+        choiceActionFragment1.setOnClickEvent(2);
+        choiceActionFragment2.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr());
+        choiceActionFragment2.setOnClickEvent(0);
+        choiceActionFragment3.setAPR(App.THREE_CHOICE.getThreeChoice().get(1).getApr());
+        choiceActionFragment3.setOnClickEvent(1);
+        choiceActionFragment4.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr());
+        choiceActionFragment4.setOnClickEvent(2);
+        choiceActionFragment5.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr());
+        choiceActionFragment5.setOnClickEvent(0);
+
+        vpChoice.addLoopFragment(choiceActionFragment1, choiceActionFragment2, choiceActionFragment3, choiceActionFragment4, choiceActionFragment5);
+
         vpChoice.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,6 +183,7 @@ public class ChoiceFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 selectImage(position);
+                showToast(String.valueOf(position));
             }
 
             @Override
@@ -151,6 +191,8 @@ public class ChoiceFragment extends BaseFragment {
 
             }
         });
+
+
         selectImage(0);
     }
 

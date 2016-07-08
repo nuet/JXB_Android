@@ -24,6 +24,7 @@ import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.InvestList;
+import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.FindFragment;
@@ -301,6 +302,7 @@ public class HomeActivity extends BaseActivity {
     private void load() {
         logDebug("load...");
         App.BASE_BEAN = new BaseBean();
+        App.THREE_CHOICE = new ThreeChoice();
 
         progressDialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
@@ -354,6 +356,7 @@ public class HomeActivity extends BaseActivity {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
                     picList = bean.getAppScrollPic();
+                    App.THREE_CHOICE.setThreeChoice(bean.getSanList());
                 } else {
                     showToast(getString(R.string.no_internet));
                 }

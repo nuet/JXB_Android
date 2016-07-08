@@ -103,12 +103,12 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp">
 
-            <com.lenso.jixiangbao.view.LoopViewPager
+            <com.lenso.jixiangbao.view.ChoiceLoopViewPager
                 android:id="@+id/vp_choice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            </com.lenso.jixiangbao.view.LoopViewPager>
+            </com.lenso.jixiangbao.view.ChoiceLoopViewPager>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="7天"
+                    android:text=""
                     android:textColor="@color/selector_financing_menu_text"
                     android:textSize="15sp" />
 
@@ -182,7 +182,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/selector_financing_menu_text"
-                    android:text="3天"
+                    android:text=""
                     android:textSize="15sp" />
 
                 <TextView
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/selector_financing_menu_text"
-                    android:text="1个月"
+                    android:text=""
                     android:textSize="15sp" />
             </LinearLayout>
         </RelativeLayout>

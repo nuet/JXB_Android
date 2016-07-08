@@ -192,6 +192,7 @@ public class CreditListFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
+
     @OnClick({R.id.button_default, R.id.button_time_limit, R.id.button_annual_rate, R.id.button_screen})
     public void onClick(View view) {
         switch (view.getId()) {

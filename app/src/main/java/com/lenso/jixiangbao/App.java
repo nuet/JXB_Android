@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lenso.jixiangbao.bean.BaseBean;
+import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.http.VolleyHttp;
 
 import cn.jpush.android.api.JPushInterface;
@@ -19,6 +20,7 @@ import cn.sharesdk.framework.ShareSDK;
  */
 public class App extends Application {
     public static BaseBean BASE_BEAN;
+    public static ThreeChoice THREE_CHOICE;
     public static final String HOST = "http://app.pongyoo.com/";
 
     @Override
