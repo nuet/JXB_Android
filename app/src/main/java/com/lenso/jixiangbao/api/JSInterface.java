@@ -135,48 +135,47 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void logout() {
-        HashMap map = new HashMap();
-        map.put("app_key", Config.getInstance(context).getConfig("app_key"));
-        Config.getInstance(context).putConfig("app_key", "");
-        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGOUT, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (isConnectSuccess) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(json);
-                        if (jsonObject.getString("status").equals("1")) {
-
-
-                            new iOSAlertDialog(context).builder()
-                                    .setTitle("温馨提示")
-                                    .setMsg("您确定要注销登录吗?")
-                                    .setCancelable(false)
-                                    .setPositiveButton("确认", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+        new iOSAlertDialog(context).builder()
+                .setTitle("温馨提示")
+                .setMsg("您确定要注销登录吗?")
+                .setCancelable(false)
+                .setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HashMap map = new HashMap();
+                        map.put("app_key", Config.getInstance(context).getConfig("app_key"));
+                        Config.getInstance(context).putConfig("app_key", "");
+                        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGOUT, new VolleyHttp.JsonResponseListener() {
+                            @Override
+                            public void getJson(String json, boolean isConnectSuccess) {
+                                if (isConnectSuccess) {
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(json);
+                                        if (jsonObject.getString("status").equals("1")) {
                                             CommonUtils.clearGesturePassword(context);
                                             Intent intentLogout = new Intent();
                                             intentLogout.setClass(context, LoginOrRegisterActivity.class);
                                             intentLogout.putExtra("jsFlag", true);
                                             context.startActivity(intentLogout);
                                             activity.finish();
+                                        } else {
+                                            showToast(jsonObject.getString("rsmsg"));
                                         }
-                                    })
-                                    .setNegativeButton("取消", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                        }
-                                    }).show();
-
-                        } else {
-                            showToast(jsonObject.getString("rsmsg"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }, map);
                     }
-                }
-            }
-        }, map);
+                })
+                .setNegativeButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                }).show();
+
+
     }
 
     /**

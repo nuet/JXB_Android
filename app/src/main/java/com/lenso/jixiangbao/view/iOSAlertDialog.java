@@ -27,15 +27,14 @@ public class iOSAlertDialog {
     private Button btn_pos;
     private View img_line;
     private Display display;
-    private boolean showTitle = false;
-    private boolean showMsg = false;
-    private boolean showPosBtn = false;
-    private boolean showNegBtn = false;
+    private boolean showTitle = true;
+    private boolean showMsg = true;
+    private boolean showPosBtn = true;
+    private boolean showNegBtn = true;
 
     public iOSAlertDialog(Context context) {
         this.context = context;
-        WindowManager windowManager = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         display = windowManager.getDefaultDisplay();
     }
 
@@ -61,14 +60,13 @@ public class iOSAlertDialog {
         dialog.setContentView(view);
 
         // 调整dialog背景大小
-        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display
-                .getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
+        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display.getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
 
         return this;
     }
 
     public iOSAlertDialog setTitle(String title) {
-        showTitle = true;
+//        showTitle = true;
         if ("".equals(title)) {
             txt_title.setText("标题");
         } else {
@@ -78,7 +76,7 @@ public class iOSAlertDialog {
     }
 
     public iOSAlertDialog setMsg(String msg) {
-        showMsg = true;
+//        showMsg = true;
         if ("".equals(msg)) {
             txt_msg.setText("内容");
         } else {
@@ -93,7 +91,7 @@ public class iOSAlertDialog {
     }
 
     public iOSAlertDialog setPositiveButton(String text, final OnClickListener listener) {
-        showPosBtn = true;
+//        showPosBtn = true;
         if ("".equals(text)) {
             btn_pos.setText("确定");
         } else {
@@ -110,7 +108,7 @@ public class iOSAlertDialog {
     }
 
     public iOSAlertDialog setNegativeButton(String text, final OnClickListener listener) {
-        showNegBtn = true;
+//        showNegBtn = true;
         if ("".equals(text)) {
             btn_neg.setText("取消");
         } else {
@@ -123,6 +121,26 @@ public class iOSAlertDialog {
                 listener.onClick(v);
             }
         });
+        return this;
+    }
+
+    public iOSAlertDialog setShowTitle(boolean showTitle) {
+        this.showTitle = showTitle;
+        return this;
+    }
+
+    public iOSAlertDialog setShowMsg(boolean showMsg) {
+        this.showMsg = showMsg;
+        return this;
+    }
+
+    public iOSAlertDialog setShowPosBtn(boolean showPosBtn) {
+        this.showPosBtn = showPosBtn;
+        return this;
+    }
+
+    public iOSAlertDialog setShowNegBtn(boolean showNegBtn) {
+        this.showNegBtn = showNegBtn;
         return this;
     }
 

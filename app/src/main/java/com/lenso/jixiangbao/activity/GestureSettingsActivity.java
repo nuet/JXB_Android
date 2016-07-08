@@ -60,12 +60,14 @@ public class GestureSettingsActivity extends BaseActivity {
         idGestureLockViewGroup.bindDisplayView(idGestureLockDisplayViews);
 
         idGestureLockViewGroup.setInitMode(true);
-        idGestureLockViewGroup.setLimitSelect(5);
+        idGestureLockViewGroup.setLimitSelect(4);
 
         idGestureLockViewGroup.setOnGestureLockViewInitModeListener(new GestureLockViewGroup.OnGestureLockViewInitModeListener() {
             @Override
             public void onLimitSelect(int limitSelect, int select) {
                 Toast.makeText(GestureSettingsActivity.this, "最少连接" + limitSelect + "个点", Toast.LENGTH_SHORT).show();
+                idGestureLockDisplayViews.clearSelect();
+                idGestureLockViewGroup.clearGestureLockView();
             }
 
             @Override

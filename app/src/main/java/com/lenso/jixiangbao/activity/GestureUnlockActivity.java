@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.util.CommonUtils;
@@ -85,11 +86,21 @@ public class GestureUnlockActivity extends BaseActivity {
         }
         mGestureLockViewListener = new GestureLockViewGroup.OnGestureLockViewListener() {
             @Override
+            public void onLimitSelect(int limitSelect, int select) {
+                Toast.makeText(GestureUnlockActivity.this, "最少连接" + limitSelect + "个点", Toast.LENGTH_SHORT).show();
+            }
+            @Override
             public void onUnmatchedExceedBoundary() {
                 CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
-                mTextView.setText("当前用户已被锁定，请重新登录");
+//                Config.getInstance(GestureUnlockActivity.this).putConfig("app_key","");
+                mTextView.setText("当前用户已被锁定，请重新登录!");
                 mGestureLockViewGroup.setTouchable(false);
-                alertDialog("您已连续5次输入错误,手势密码已被清除,请重新登录");
+                Intent intent = new Intent();
+                intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
+                intent.putExtra("trysOut", true);
+                startActivity(intent);
+                finish();
+//                alertDialog("您已连续5次输入错误,手势密码已被清除,请重新登录!");
 //                saveTime(System.currentTimeMillis());
 //                mTextView.setText("请30s后再试");
 //                CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
@@ -195,7 +206,7 @@ public class GestureUnlockActivity extends BaseActivity {
 
     @OnClick(R.id.btn_gesture_unlock_forget)
     public void onClick() {
-        alertDialog("忘记手势密码需要重新登录,点击确定跳转到登陆界面");
+        alertDialog("忘记手势密码需要重新登录!");
     }
 
     private void alertDialog(String msg) {
@@ -207,10 +218,10 @@ public class GestureUnlockActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
-                        Intent intentForget = new Intent();
-                        intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
-                        intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
-                        startActivity(intentForget);
+                        Intent intent = new Intent();
+                        intent.setClass(GestureUnlockActivity.this, LoginActivity.class);
+                        intent.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
+                        startActivity(intent);
                         finish();
                     }
                 })

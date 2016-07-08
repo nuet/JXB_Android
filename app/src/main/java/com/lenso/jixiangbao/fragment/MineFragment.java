@@ -141,7 +141,6 @@ public class MineFragment extends BaseFragment {
                         logInfo("GSon解析出错");
                         CommonUtils.clearGesturePassword(getActivity());
 
-
                         new iOSAlertDialog(getActivity()).builder()
                                 .setTitle("警告")
                                 .setMsg("您的账号已被迫离线，是否重新登录?")

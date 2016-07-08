@@ -173,16 +173,9 @@ public class CreditListFragment extends BaseFragment {
         progressDialog = new ACProgressFlower.Builder(getActivity())
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
-                .text("正在排序中...")
+                .text("加载中...")
                 .fadeColor(Color.DKGRAY).build();
 
-//        progressDialog = new ProgressDialog(getActivity()); // 获取对象
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-//        progressDialog.setIcon(R.mipmap.b);
-//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-//        progressDialog.setMessage("正在排序中..."); // 设置进度条的提示信息
-//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
     }
 
     private void unselected() {
@@ -233,13 +226,13 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void sortDefault() {
-        progressDialog.show();
+//        progressDialog.show();
         FinancingFragment.order = "0";
         reLoadBorrowList();
     }
 
     private void sortLimit(boolean ASC) {
-        progressDialog.show();
+//        progressDialog.show();
         if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
             FinancingFragment.order = "26";
@@ -255,7 +248,7 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void sortRate(boolean ASC) {
-        progressDialog.show();
+//        progressDialog.show();
         if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
             FinancingFragment.order = "2";
@@ -278,7 +271,7 @@ public class CreditListFragment extends BaseFragment {
         args.put("order", FinancingFragment.order);
         args.put("s_type", FinancingFragment.s_type);
         args.put("page", FinancingFragment.page);
-
+        progressDialog.show();
         VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {

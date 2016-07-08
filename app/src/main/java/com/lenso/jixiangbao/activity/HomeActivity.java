@@ -3,12 +3,14 @@ package com.lenso.jixiangbao.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -28,10 +30,12 @@ import com.lenso.jixiangbao.fragment.FindFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
 import com.lenso.jixiangbao.view.TopMenuBar;
+import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +84,9 @@ public class HomeActivity extends BaseActivity {
     private int loadCount = 0;
     private InvestList investList;
 
-    //    private ProgressDialog progressDialog;
     private static ACProgressFlower progressDialog;
+    private Intent getIntent;
+    private boolean trysOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +97,9 @@ public class HomeActivity extends BaseActivity {
         HOMECONTEXT = HomeActivity.this;
 
         ShareSDK.initSDK(this);//初始化shareSDK
+
+        getIntent = getIntent();
+        trysOut = getIntent.getBooleanExtra("trysOut", false);
 
         load();
 
@@ -272,7 +280,9 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
-                if (app_key == null || app_key.equals("")) {
+                SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+                String gesturePsw = sp.getString("GestureLock", "");
+                if (app_key == null || app_key.equals("") || TextUtils.isEmpty(gesturePsw)) {
                     Intent intentLogin = new Intent();
                     intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
                     startActivity(intentLogin);
@@ -283,6 +293,9 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        if(trysOut){
+            alertDialog("您已连续5次输入错误,请重新登录!");
+        }
     }
 
     private void load() {
@@ -292,16 +305,9 @@ public class HomeActivity extends BaseActivity {
         progressDialog = new ACProgressFlower.Builder(this)
                 .direction(ACProgressConstant.DIRECT_CLOCKWISE)
                 .themeColor(Color.WHITE)
-                .text("正在加载数据...")
+                .text("加载数据中...")
                 .fadeColor(Color.DKGRAY).build();
 
-//        progressDialog = new ProgressDialog(this); // 获取对象
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-//        progressDialog.setIcon(R.mipmap.b);
-//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-//        progressDialog.setMessage("正在加载数据..."); // 设置进度条的提示信息
-//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
         progressDialog.show();
 
         loadValues();
@@ -421,5 +427,30 @@ public class HomeActivity extends BaseActivity {
         financingFragment.sortBorrowList();
     }
 
+    private void alertDialog(String msg) {
+        new iOSAlertDialog(HomeActivity.this).builder()
+                .setTitle("温馨提示")
+                .setMsg(msg)
+                .setCancelable(false)
+                .setPositiveButton("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CommonUtils.clearGesturePassword(HomeActivity.this);
+                        Intent intent = new Intent();
+                        intent.setClass(HomeActivity.this, LoginActivity.class);
+                        intent.putExtra("mobile", Config.getInstance(HomeActivity.this).getConfig("phone"));
+                        startActivity(intent);
+//                        finish();
+                    }
+                })
+                .setShowNegBtn(false)
+//                .setNegativeButton("取消", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                    }
+//                })
+                .show();
+
+    }
 
 }

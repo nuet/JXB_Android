@@ -160,6 +160,7 @@ public class GestureLockViewGroup extends RelativeLayout {
     private OnGestureLockViewInitModeListener mOnGestureLockViewInitModeListener;
 
     public interface OnGestureLockViewListener {
+        void onLimitSelect(int limitSelect, int select);
 
         /**
          * 单独选中的id
@@ -485,6 +486,7 @@ public class GestureLockViewGroup extends RelativeLayout {
                 mOnGestureLockViewInitModeListener.onLimitSelect(mLimitSelect, mChoose.size());
             } else {
                 mOnGestureLockViewInitModeListener.onInitModeGestureEvent(false);
+//                mOnGestureLockViewListener.onLimitSelect(mLimitSelect, mChoose.size());
             }
 
             changeItemMode(false);
