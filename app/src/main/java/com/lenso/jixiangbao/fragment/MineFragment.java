@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment {
 
                         new iOSAlertDialog(getActivity()).builder()
                                 .setTitle("警告")
-                                .setMsg("您的账号已被迫离线，是否重新登录？")
+                                .setMsg("您的账号已被迫离线，是否重新登录?")
                                 .setCancelable(false)
                                 .setPositiveButton("确认", new View.OnClickListener() {
                                     @Override
@@ -160,24 +160,6 @@ public class MineFragment extends BaseFragment {
                                     }
                                 }).show();
 
-
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//                        builder.setTitle("温馨提示");
-//                        builder.setMessage("您的账号已被迫离线，是否重新登录？");
-//                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Intent intent = new Intent();
-//                                intent.setClass(getActivity(), LoginOrRegisterActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        });
-//                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                            }
-//                        });
-//                        builder.create().show();
                     }
                 } else {
                     showToast("请检查网络设置");

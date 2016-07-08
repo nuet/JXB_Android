@@ -149,7 +149,7 @@ public class JSInterface {
 
                             new iOSAlertDialog(context).builder()
                                     .setTitle("温馨提示")
-                                    .setMsg("您确定要注销登录吗？")
+                                    .setMsg("您确定要注销登录吗?")
                                     .setCancelable(false)
                                     .setPositiveButton("确认", new View.OnClickListener() {
                                         @Override
@@ -168,32 +168,6 @@ public class JSInterface {
                                         }
                                     }).show();
 
-
-//                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//                            builder.setTitle("温馨提示");
-//                            builder.setMessage("您确定要注销登录吗？");
-//                            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-////                                    SharedPreferences sp = context.getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-////                                    SharedPreferences.Editor editor = sp.edit();
-////                                    editor.putString("GestureLock", "");
-////                                    editor.commit();
-//                                    CommonUtils.clearGesturePassword(context);
-//                                    Intent intentLogout = new Intent();
-//                                    intentLogout.setClass(context, LoginOrRegisterActivity.class);
-//                                    intentLogout.putExtra("jsFlag", true);
-//                                    context.startActivity(intentLogout);
-//                                    activity.finish();
-////                                    HomeActivity.HOMECONTEXT.finish();
-//                                }
-//                            });
-//                            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                }
-//                            });
-//                            builder.create().show();
                         } else {
                             showToast(jsonObject.getString("rsmsg"));
                         }

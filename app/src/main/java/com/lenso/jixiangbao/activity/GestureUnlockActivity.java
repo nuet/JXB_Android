@@ -89,7 +89,7 @@ public class GestureUnlockActivity extends BaseActivity {
                 CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
                 mTextView.setText("当前用户已被锁定，请重新登录");
                 mGestureLockViewGroup.setTouchable(false);
-                alertDialog("您已连续5次输入错误，手势密码已被清除，请重新登录");
+                alertDialog("您已连续5次输入错误,手势密码已被清除,请重新登录");
 //                saveTime(System.currentTimeMillis());
 //                mTextView.setText("请30s后再试");
 //                CommonUtils.startShakeAnim(GestureUnlockActivity.this, mTextView);
@@ -146,7 +146,7 @@ public class GestureUnlockActivity extends BaseActivity {
 //            setTimer(30000 - (System.currentTimeMillis() - time));
 //            timer.start();
 //        }
-//
+
     }
 
 
@@ -220,25 +220,5 @@ public class GestureUnlockActivity extends BaseActivity {
                     }
                 }).show();
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(GestureUnlockActivity.this, iOSAlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//        builder.setTitle("温馨提示");
-//        builder.setMessage(msg);
-//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                CommonUtils.clearGesturePassword(GestureUnlockActivity.this);
-//                Intent intentForget = new Intent();
-//                intentForget.setClass(GestureUnlockActivity.this, LoginActivity.class);
-//                intentForget.putExtra("mobile", Config.getInstance(GestureUnlockActivity.this).getConfig("phone"));
-//                startActivity(intentForget);
-//                finish();
-//            }
-//        });
-//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//            }
-//        });
-//        builder.create().show();
     }
 }
