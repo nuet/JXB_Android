@@ -46,5 +46,6 @@ dependencies {
     compile project(':onekeyshare')
     compile project(':androidPullToRefreshlibrary')
     compile files('libs/baofoo.jar')
-    compile 'cc.cloudist.acplibrary:library:1.2.1'
+//    compile 'cc.cloudist.acplibrary:library:1.2.1'
+    compile 'com.kaopiz:kprogresshud:1.0.5'
 }

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
@@ -43,8 +44,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
 
@@ -85,7 +84,7 @@ public class HomeActivity extends BaseActivity {
     private int loadCount = 0;
     private InvestList investList;
 
-    private static ACProgressFlower progressDialog;
+        private static KProgressHUD progressDialog;
     private Intent getIntent;
     private boolean trysOut;
 
@@ -294,7 +293,7 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-        if(trysOut){
+        if (trysOut) {
             alertDialog("您已连续5次输入错误,请重新登录!");
         }
     }
@@ -304,13 +303,14 @@ public class HomeActivity extends BaseActivity {
         App.BASE_BEAN = new BaseBean();
         App.THREE_CHOICE = new ThreeChoice();
 
-        progressDialog = new ACProgressFlower.Builder(this)
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .text("加载数据中...")
-                .fadeColor(Color.DKGRAY).build();
+        progressDialog = KProgressHUD.create(HomeActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("加载数据中...")
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
 
-        progressDialog.show();
 
         loadValues();
     }

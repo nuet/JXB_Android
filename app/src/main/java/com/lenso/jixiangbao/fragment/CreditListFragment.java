@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
@@ -40,8 +41,6 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 import king.dominic.slidingmenu.SlidingMenu;
 
 /**
@@ -74,7 +73,7 @@ public class CreditListFragment extends BaseFragment {
     private boolean RATE_ASC = true; //第一次点击为升序排列
     private Gson gson = new Gson();
     private Map<String, String> args = new HashMap<String, String>();
-    private static ACProgressFlower progressDialog;
+    private static KProgressHUD progressDialog;
     //    public static ProgressDialog progressDialog;
     private static Context context;
 
@@ -170,11 +169,12 @@ public class CreditListFragment extends BaseFragment {
         unselected();
         buttonDefault.setSelected(true);
 
-        progressDialog = new ACProgressFlower.Builder(getActivity())
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .text("加载中...")
-                .fadeColor(Color.DKGRAY).build();
+        progressDialog = KProgressHUD.create(getActivity())
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("加载中...")
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
 
     }
 

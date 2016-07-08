@@ -11,12 +11,12 @@
         android:paddingRight="@dimen/header_footer_left_right_padding"
         android:paddingTop="@dimen/header_footer_top_bottom_padding" >
         <LinearLayout
+            android:id="@+id/safe_root"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"

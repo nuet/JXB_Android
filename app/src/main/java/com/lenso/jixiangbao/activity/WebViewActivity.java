@@ -16,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
@@ -34,8 +35,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cc.cloudist.acplibrary.ACProgressConstant;
-import cc.cloudist.acplibrary.ACProgressFlower;
 
 /**
  * Created by king on 2016/5/17.
@@ -54,8 +53,7 @@ public class WebViewActivity extends WebBaseActivity {
     private String apr;
     private Context context;
 
-    private static ACProgressFlower progressDialog;
-//    private ProgressDialog progressDialog;
+    private static KProgressHUD progressDialog;
 
 
     @Override
@@ -98,19 +96,12 @@ public class WebViewActivity extends WebBaseActivity {
 
         context = WebViewActivity.this;
 
-        progressDialog = new ACProgressFlower.Builder(WebViewActivity.this)
-                .direction(ACProgressConstant.DIRECT_CLOCKWISE)
-                .themeColor(Color.WHITE)
-                .text("正在上传头像...")
-                .fadeColor(Color.DKGRAY).build();
-
-//        progressDialog = new ProgressDialog(context); // 获取对象
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // 设置样式为圆形样式
-//        progressDialog.setIcon(R.mipmap.b);
-//        progressDialog.setTitle("Reminder"); // 设置进度条的标题信息
-//        progressDialog.setMessage("正在上传头像..."); // 设置进度条的提示信息
-//        progressDialog.setIndeterminate(false); // 设置进度条是否为不明确
-//        progressDialog.setCancelable(true); // 设置进度条是否按返回键取消
+        progressDialog = KProgressHUD.create(WebViewActivity.this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("正在上传头像...")
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f);
 
     }
 
