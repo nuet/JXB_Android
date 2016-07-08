@@ -98,7 +98,7 @@ public class WebViewActivity extends WebBaseActivity {
 
         progressDialog = KProgressHUD.create(WebViewActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("正在上传头像...")
+                .setLabel("上传头像中...")
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);

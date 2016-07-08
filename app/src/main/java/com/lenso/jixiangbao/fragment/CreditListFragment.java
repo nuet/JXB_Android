@@ -171,7 +171,7 @@ public class CreditListFragment extends BaseFragment {
 
         progressDialog = KProgressHUD.create(getActivity())
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("加载中...")
+                .setLabel("正在加载中...")
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
