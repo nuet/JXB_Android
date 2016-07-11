@@ -60,6 +60,9 @@ public class JSInterface {
     public final static int REQUEST_CODE_BAOFOO_SDK = 100;
 
     public static Handler handler;
+    private static String buy_money;
+    private static String paypassword;
+    private static String id;
     /*******宝付*******/
 
 
@@ -317,9 +320,10 @@ public class JSInterface {
     /**
      * 宝付充值接口
      * @param money 需要充值金额
+     * @param willBuy 是否是静默购买调用
      */
     @JavascriptInterface
-    public void BAO_FOO_RECHARGE(String money){
+    public void BAO_FOO_RECHARGE(String money, boolean willBuy){
         /*************宝付*********/
         BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
         BAO_FOO.put("money", money);
@@ -335,7 +339,6 @@ public class JSInterface {
                         if (jsonObject.getString("status").equals("1")){
                             tradeNo = jsonObject.getString("tradeNo");
                             Log.i("tradeNo", tradeNo);
-
                             Intent payintent = new Intent(context, BaofooPayActivity.class);
                             // 通过业务流水请求报文获得的交易号
                             payintent.putExtra(BaofooPayActivity.PAY_TOKEN, tradeNo);
@@ -356,7 +359,11 @@ public class JSInterface {
             }
         }, BAO_FOO);
 
-        initHandler("0", null, null);
+        if(willBuy){
+            initHandler(buy_money, paypassword, id);
+        }else{
+            initHandler("0", null, null);
+        }
         /*************宝付*********/
     }
 
@@ -369,45 +376,10 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id){
-        /*************宝付*********/
-        BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
-        BAO_FOO.put("money", recharge_money);
-        BAO_FOO.put("type", "1");
-        BAO_FOO.put("payment1", "baofoo_vip_sdk_pay");
-        Log.i("BAO_FOO", BAO_FOO.toString());
-        VolleyHttp.getInstance().postParamsJson(ServerInterface.RECHARGE, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if(isConnectSuccess){
-                    try {
-                        JSONObject jsonObject = new JSONObject(json);
-                        if (jsonObject.getString("status").equals("1")){
-                            tradeNo = jsonObject.getString("tradeNo");
-                            Log.i("tradeNo", tradeNo);
-
-                            Intent payintent = new Intent(context, BaofooPayActivity.class);
-                            // 通过业务流水请求报文获得的交易号
-                            payintent.putExtra(BaofooPayActivity.PAY_TOKEN, tradeNo);
-                            // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
-                            payintent.putExtra(BaofooPayActivity.PAY_BUSINESS, false);
-                            activity.startActivityForResult(payintent, REQUEST_CODE_BAOFOO_SDK);
-                            tradeNo = ""; //清空本次交易号
-                            BAO_FOO = new HashMap(); // 清空本次参数
-                        }else {
-                            showToast("交易失败");
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    showToast("请检查网络设置");
-                }
-            }
-        }, BAO_FOO);
-
-        initHandler(buy_money, paypassword, id);
-        /*************宝付*********/
-
+        this.buy_money = buy_money;
+        this.paypassword = paypassword;
+        this.id = id;
+        BAO_FOO_RECHARGE(recharge_money, true);
     }
 
     private void initHandler(String buy_money, String paypassword, String id){
@@ -439,7 +411,7 @@ public class JSInterface {
                                             if(jsonObject.getString("status").equals("1")){
                                                 showToast(jsonObject.getString("rsmsg"));
                                             }else{
-                                                showToast(jsonObject.getString("您已充值成功,但" + "rsmsg"));
+                                                showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
