@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -191,6 +192,11 @@ public class WebViewActivity extends WebBaseActivity {
                         result = data.getExtras().getString(BaofooPayActivity.PAY_RESULT);// -1:失败 0:取消 1:成功 10:处理中
                         msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
                     }
+                    Message message = new Message();
+                    message.what = Integer.valueOf(result);
+                    message.obj = msg;
+                    JSInterface.handler.sendMessage(message);
+
 //                    showToast(msg);
 
 //                    iOSAlertDialog dialog = new iOSAlertDialog(WebViewActivity.this) {

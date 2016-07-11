@@ -161,15 +161,15 @@ public class ChoiceFragment extends BaseFragment {
         RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y-dp_280));
         vpChoice.setLayoutParams(lp);
 
-        choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr());
+        choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
         choiceActionFragment1.setOnClickEvent(2);
-        choiceActionFragment2.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr());
+        choiceActionFragment2.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
         choiceActionFragment2.setOnClickEvent(0);
-        choiceActionFragment3.setAPR(App.THREE_CHOICE.getThreeChoice().get(1).getApr());
+        choiceActionFragment3.setAPR(App.THREE_CHOICE.getThreeChoice().get(1).getApr() + "%");
         choiceActionFragment3.setOnClickEvent(1);
-        choiceActionFragment4.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr());
+        choiceActionFragment4.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
         choiceActionFragment4.setOnClickEvent(2);
-        choiceActionFragment5.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr());
+        choiceActionFragment5.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
         choiceActionFragment5.setOnClickEvent(0);
 
         vpChoice.addLoopFragment(choiceActionFragment1, choiceActionFragment2, choiceActionFragment3, choiceActionFragment4, choiceActionFragment5);
@@ -183,7 +183,6 @@ public class ChoiceFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 selectImage(position);
-                showToast(String.valueOf(position));
             }
 
             @Override

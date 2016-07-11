@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -55,6 +57,8 @@ public class JSInterface {
     private Map BAO_FOO = new HashMap();
     private String tradeNo = "";
     public final static int REQUEST_CODE_BAOFOO_SDK = 100;
+
+    public static Handler handler;
     /*******宝付*******/
 
 
@@ -311,9 +315,6 @@ public class JSInterface {
 
     @JavascriptInterface
     public void BAO_FOO_RECHARGE(String money){
-
-        Log.i("BAO_FOO", money);
-
         /*************宝付*********/
         BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
         BAO_FOO.put("money", money);
@@ -350,6 +351,49 @@ public class JSInterface {
             }
         }, BAO_FOO);
         /*************宝付*********/
+    }
+
+    @JavascriptInterface
+    public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id){
+        final String MONEY = buy_money;
+        final String PAY_PASSWORD = paypassword;
+        final String ID = id;
+        BAO_FOO_RECHARGE(recharge_money);
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what){
+                    case -1:
+                    case 0:
+                    case 10:
+                        showToast((String) msg.obj);
+                        break;
+                    case 1:
+                        Map args = new HashMap();
+                        args.put("app_key", Config.getInstance(context).getConfig("app_key"));
+                        args.put("money", MONEY);
+                        args.put("paypassword", PAY_PASSWORD);
+                        args.put("id", ID);
+                        VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER, new VolleyHttp.JsonResponseListener() {
+                            @Override
+                            public void getJson(String json, boolean isConnectSuccess) {
+                                if(isConnectSuccess){
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(json);
+                                        if(jsonObject.getString("status").equals("1")){
+                                            showToast(jsonObject.getString("rsmsg"));
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }, args);
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
 
 }

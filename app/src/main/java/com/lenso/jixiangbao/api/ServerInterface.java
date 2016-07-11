@@ -33,8 +33,10 @@ public class ServerInterface {
 
     public final static String GET_SPLASH_PIC = SERVER + "themes/theme_default/app/images/startup.jpg";
 
+    public final static String FINANCIAL_REPORTS = SERVER_DOMAIN + "getallsystemstatis.html";
+
     public final static String RECHARGE = SERVER + "app/newrecharge.html";
 
-    public final static String FINANCIAL_REPORTS = SERVER_DOMAIN + "getallsystemstatis.html";
+    public final static String TENDER = SERVER_DOMAIN + "tender.html";
 
 }
