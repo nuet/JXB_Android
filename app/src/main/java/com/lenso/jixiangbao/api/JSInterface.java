@@ -383,7 +383,7 @@ public class JSInterface {
                                         if(jsonObject.getString("status").equals("1")){
                                             showToast(jsonObject.getString("rsmsg"));
                                         }else{
-                                            showToast(jsonObject.getString("rsmsg"));
+                                            showToast(jsonObject.getString("您已充值成功,但" + "rsmsg"));
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();

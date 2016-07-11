@@ -27,7 +27,8 @@ public class HTMLInterface {
     public static final String MESSAGE = DOMAIN + "member/message.html";
     public static final String LJTY = DOMAIN + "experiencedetail.html";
     public static final String TJYJ = DOMAIN + "member/recommend-list.html";
-    public static final String JF = DOMAIN + "member/mall.html";
+//    public static final String JF = DOMAIN + "member/mall.html";
+    public static final String JF = DOMAIN + "member/integral.html";
     public static final String TX = DOMAIN + "member/withdraw.html";
     public static final String CZ = DOMAIN + "member/recharge.html";
 

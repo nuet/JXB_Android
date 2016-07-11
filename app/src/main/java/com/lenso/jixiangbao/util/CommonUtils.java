@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.lenso.jixiangbao.R;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -109,4 +110,27 @@ public class CommonUtils {
         editor.putString("GestureLock", "");
         editor.commit();
     }
+
+    // clear the cache before time numDays
+    public static int clearCacheFolder(File dir, long numDays) {
+        int deletedFiles = 0;
+        if (dir!= null && dir.isDirectory()) {
+            try {
+                for (File child : dir.listFiles()) {
+                    if (child.isDirectory()) {
+                        deletedFiles += clearCacheFolder(child, numDays);
+                    }
+                    if (child.lastModified() < numDays) {
+                        if (child.delete()) {
+                            deletedFiles++;
+                        }
+                    }
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return deletedFiles;
+    }
+
 }

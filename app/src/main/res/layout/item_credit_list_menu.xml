@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_time_limit"
-                android:src="@mipmap/sx2"/>
+                android:src="@mipmap/sx2"
+                android:visibility="invisible"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/button_annual_rate"
@@ -63,7 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tv_annual_rate"
-                android:src="@mipmap/sx2"/>
+                android:src="@mipmap/sx2"
+                android:visibility="invisible"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/button_screen"

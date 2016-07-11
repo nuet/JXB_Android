@@ -387,7 +387,7 @@ public class HomeActivity extends BaseActivity {
             return;
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setInvestList(investList);
-        logInfo("getBorrowList" + investList.getBorrowList().toString());
+//        logInfo("getBorrowList" + investList.getBorrowList().toString());
         progressDialog.dismiss();
 
         initViewPager();

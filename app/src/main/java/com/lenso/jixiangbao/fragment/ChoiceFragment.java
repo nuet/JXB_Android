@@ -88,8 +88,9 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display()==null)
+        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display()==null){
             return;
+        }
         int padding = (int) getResources().getDimension(R.dimen.dp_2);
 
 

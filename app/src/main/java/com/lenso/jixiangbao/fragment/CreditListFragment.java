@@ -106,6 +106,10 @@ public class CreditListFragment extends BaseFragment {
 
     private void initView() {
 
+        if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
+            return;
+        }
+
 //        listView = lvCreditList.getRefreshableView();
         adapter = new CreditListAdapter(getActivity(), App.BASE_BEAN.getInvestList().getBorrowList());
 //        listView.setAdapter(adapter);
@@ -265,6 +269,9 @@ public class CreditListFragment extends BaseFragment {
     }
 
     public void reLoadBorrowList() {
+        if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
+            return;
+        }
         args.put("s_status", FinancingFragment.s_status);
         args.put("s_repay_way", FinancingFragment.s_repay_way);
         args.put("s_time_limit", FinancingFragment.s_time_limit);

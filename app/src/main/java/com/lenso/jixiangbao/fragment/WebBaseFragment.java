@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.app.Activity;
 import android.os.Environment;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -7,6 +8,7 @@ import android.webkit.WebView;
 
 import com.lenso.jixiangbao.util.CommonUtils;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +53,13 @@ public class WebBaseFragment extends BaseFragment {
     /**网络连接及缓存*/
     public void setNetworkCache(WebSettings webSettings){
         if (CommonUtils.isNetworkConnected(getActivity().getApplicationContext())) {
-            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+//            /*清除缓存*/
+//            File dir = getActivity().getCacheDir();
+//            long numDays = System.currentTimeMillis();
+//            CommonUtils.clearCacheFolder(dir, numDays);
+//            /********/
+//
+//            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
             logDebug("network connect!");
         }
         else {

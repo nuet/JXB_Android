@@ -315,7 +315,7 @@ public class MineFragment extends BaseFragment {
             case R.id.ib_jf:
             case R.id.tv_jf:
                 intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "积分商城");
+                intent.putExtra(HTMLInterface.H5_TITLE, "我的积分");
                 startActivity(intent);
                 break;
             case R.id.btn_tx:

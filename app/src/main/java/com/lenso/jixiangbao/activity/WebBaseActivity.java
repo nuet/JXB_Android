@@ -7,6 +7,7 @@ import android.webkit.WebView;
 
 import com.lenso.jixiangbao.util.CommonUtils;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,8 +32,10 @@ public class WebBaseActivity extends BaseActivity {
         return webView;
     }
 
-    /**缩放功能*/
-    public void setWebZoom(WebSettings webSettings){
+    /**
+     * 缩放功能
+     */
+    public void setWebZoom(WebSettings webSettings) {
         webSettings.setDisplayZoomControls(false);
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
@@ -41,36 +44,46 @@ public class WebBaseActivity extends BaseActivity {
 
     }
 
-    /**网络连接及缓存*/
-    public void setNetworkCache(WebSettings webSettings){
+    /**
+     * 网络连接及缓存
+     */
+    public void setNetworkCache(WebSettings webSettings) {
         if (CommonUtils.isNetworkConnected(getApplicationContext())) {
-            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+//            /*清除缓存*/
+//            File dir = getCacheDir();
+//            long numDays = System.currentTimeMillis();
+//            CommonUtils.clearCacheFolder(dir, numDays);
+//            /********/
+//
+//            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
             logDebug("network connect!");
-        }
-        else {
+        } else {
             webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
             logDebug("network not connect!");
         }
         webSettings.setAppCacheEnabled(true);
         webSettings.setAppCachePath(CACHE_PATH);
     }
-    protected void removeWebView(String tag){
+
+    protected void removeWebView(String tag) {
         if (!webViews.containsKey(tag))
             return;
         onDestroyWebView(webViews.get(tag));
         webViews.remove(tag);
     }
+
     protected void onDestroyWebView(WebView webView) {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.setVisibility(View.GONE);
         webView.removeAllViews();
         webView.destroy();
     }
+
     @Override
     protected void onDestroy() {
-        if(webViews!=null){
+        if (webViews != null) {
             Collection<WebView> ws = webViews.values();
-            for(WebView webView:ws){
+            for (WebView webView : ws) {
                 onDestroyWebView(webView);
             }
         }
