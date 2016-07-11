@@ -2,9 +2,7 @@ package com.lenso.jixiangbao.api;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -18,8 +16,6 @@ import android.widget.Toast;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.HomeActivity;
-import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.VerifyActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
@@ -412,6 +408,7 @@ public class JSInterface {
                                                 showToast(jsonObject.getString("rsmsg"));
                                             }else{
                                                 showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
+                                                WebViewActivity.reload();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();

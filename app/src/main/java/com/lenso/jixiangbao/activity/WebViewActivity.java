@@ -1,10 +1,8 @@
 package com.lenso.jixiangbao.activity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,8 +42,8 @@ import butterknife.ButterKnife;
 public class WebViewActivity extends WebBaseActivity {
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
-    @Bind(R.id.fl_web)
-    FrameLayout flWeb;
+    //    @Bind(R.id.fl_web)
+    private static FrameLayout flWeb;
 
     private File headPIC;
     private static WebView webView;
@@ -63,6 +61,8 @@ public class WebViewActivity extends WebBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
+
+        flWeb = (FrameLayout) findViewById(R.id.fl_web);
 
         topMenuBar.setMenuTopPadding(statusHeight);
 
@@ -211,7 +211,7 @@ public class WebViewActivity extends WebBaseActivity {
                         result = data.getExtras().getString(BaofooPayActivity.PAY_RESULT);// -1:失败 0:取消 1:成功 10:处理中
                         msg = data.getExtras().getString(BaofooPayActivity.PAY_MESSAGE);
                     }
-                    if((!TextUtils.isEmpty(result)) && (!TextUtils.isEmpty(msg))){
+                    if ((!TextUtils.isEmpty(result)) && (!TextUtils.isEmpty(msg))) {
                         Message message = new Message();
                         message.what = Integer.valueOf(result);
                         message.obj = msg;
@@ -304,10 +304,10 @@ public class WebViewActivity extends WebBaseActivity {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
-    public class MyAsyncTask extends AsyncTask<Integer,Integer,String> {
+    public class MyAsyncTask extends AsyncTask<Integer, Integer, String> {
         @Override
         protected String doInBackground(Integer... params) {
-            Map<String,String> agrs = new HashMap<String,String>();
+            Map<String, String> agrs = new HashMap<String, String>();
             agrs.put("app_key", Config.getInstance(context).getConfig("app_key"));
             Map<String, File> files = new HashMap<String, File>();
             files.put("upload", headPIC);

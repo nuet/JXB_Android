@@ -1,21 +1,14 @@
 package com.lenso.jixiangbao.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.WebViewActivity;
-import com.lenso.jixiangbao.api.HTMLInterface;
-import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.bean.ChoiceList;
-import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ProgressWheel;
 
 import java.util.ArrayList;

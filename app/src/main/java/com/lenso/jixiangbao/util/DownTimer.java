@@ -1,7 +1,5 @@
 package com.lenso.jixiangbao.util;
 
-
-
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;

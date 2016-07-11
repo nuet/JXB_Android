@@ -5,12 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Chung on 2016/7/8.

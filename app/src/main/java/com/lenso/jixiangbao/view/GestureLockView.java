@@ -1,12 +1,10 @@
 package com.lenso.jixiangbao.view;
 
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
-import com.lenso.jixiangbao.R;
 
 /**
  * Created by Chung on 2016/5/20.

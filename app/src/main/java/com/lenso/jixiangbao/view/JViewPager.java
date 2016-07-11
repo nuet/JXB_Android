@@ -2,15 +2,12 @@ package com.lenso.jixiangbao.view;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 
 /**
  * Created by king on 2016/5/12.

@@ -1,6 +1,5 @@
 package com.lenso.jixiangbao.view;
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
@@ -8,7 +7,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.RelativeLayout;
 import com.lenso.jixiangbao.R;
-
 
 /**
  * Created by Chung on 2016/5/20.

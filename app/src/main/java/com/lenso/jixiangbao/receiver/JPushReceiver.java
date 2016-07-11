@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.lenso.jixiangbao.util.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
