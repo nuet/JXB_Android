@@ -50,6 +50,7 @@ public class JSInterface {
     //    public static final int JI_CHE_DAI = 0;
     public static final int CALCULATOR = 1;
     public static final int DETAIL = 2;
+    public static final int HUA_JI_FEN = 3;
     private final Context context;
     private final Activity activity;
 
@@ -313,6 +314,10 @@ public class JSInterface {
         }
     }
 
+    /**
+     * 宝付充值接口
+     * @param money 需要充值金额
+     */
     @JavascriptInterface
     public void BAO_FOO_RECHARGE(String money){
         /*************宝付*********/
@@ -355,6 +360,13 @@ public class JSInterface {
         /*************宝付*********/
     }
 
+    /**
+     * 充值并静默购买接口
+     * @param buy_money 需要投标的总额
+     * @param recharge_money 需要充值的金额
+     * @param paypassword 支付密码
+     * @param id id
+     */
     @JavascriptInterface
     public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id){
         BAO_FOO_RECHARGE(recharge_money);
@@ -406,7 +418,18 @@ public class JSInterface {
         };
     }
 
+    /**
+     * 花积分接口
+     * @param title 标题
+     * @param url 网址
+     */
     @JavascriptInterface
-    public void HuaJiFen(){}
+    public void HuaJiFen(String title, String url){
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtra(H5_URL, url);
+        intent.putExtra(H5_TITLE, title);
+        intent.putExtra("intent", JSInterface.HUA_JI_FEN);
+        context.startActivity(intent);
+    }
 
 }

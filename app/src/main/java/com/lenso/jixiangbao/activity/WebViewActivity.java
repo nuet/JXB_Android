@@ -123,6 +123,9 @@ public class WebViewActivity extends WebBaseActivity {
             case JSInterface.DETAIL:
                 detail();
                 break;
+            case JSInterface.HUA_JI_FEN:
+                HUA_JI_FEN();
+                break;
         }
     }
 
@@ -143,6 +146,21 @@ public class WebViewActivity extends WebBaseActivity {
 
     private void calculator() {
         topMenuBar.setBackSrc(R.mipmap.close);
+    }
+
+    private void HUA_JI_FEN() {
+        topMenuBar.setMenuSrc(R.mipmap.guize);
+        topMenuBar.setMenuVisibility(View.VISIBLE);
+        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("规则");
+                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
+                intent.putExtra(JSInterface.H5_TITLE, "规则");
+                intent.putExtra(JSInterface.H5_URL, "");
+                startActivity(intent);
+            }
+        });
     }
 
 //    private void ji_che_dai() {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.Options;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
@@ -56,7 +57,7 @@ public class SplashActivity extends BaseActivity {
         Time time = new Time();
         time.setToNow(); // 取得系统时间
         String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
-        VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);
+        VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);//new Options().errImage(R.mipmap.lockback)
         new Thread(new Runnable() {
             @Override
             public void run() {
