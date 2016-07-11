@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 
@@ -50,11 +53,19 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void init() {
+        Time time = new Time();
+        time.setToNow(); // 取得系统时间
+        String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
+        VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-//                    VolleyHttp.getInstance().imageLoader(ServerInterface.GET_SPLASH_PIC, ivActivitSplash, null);
+//                    Time time = new Time();
+//                    time.setToNow(); // 取得系统时间
+//                    String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
+//                    VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);
+
                     Thread.sleep(3000);
 
                     Intent intent = new Intent();
