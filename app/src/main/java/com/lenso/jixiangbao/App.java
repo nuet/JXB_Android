@@ -33,29 +33,29 @@ public class App extends Application {
         Log.i("App->JPush", "initialed");
 
         //注册广播
-        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+//        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
 
     }
 
-    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
-        String SYSTEM_REASON = "reason";
-        String SYSTEM_HOME_KEY = "homekey";
-        String SYSTEM_HOME_KEY_LONG = "recentapps";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
-                String reason = intent.getStringExtra(SYSTEM_REASON);
-                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
-                    //表示按了home键,程序到了后台
-                    System.exit(0);
-                } else if (TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)) {
-                    //表示长按home键,显示最近使用的程序列表
-                    System.exit(0);
-                }
-            }
-        }
-    };
+//    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
+//        String SYSTEM_REASON = "reason";
+//        String SYSTEM_HOME_KEY = "homekey";
+//        String SYSTEM_HOME_KEY_LONG = "recentapps";
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+//                String reason = intent.getStringExtra(SYSTEM_REASON);
+//                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
+//                    //表示按了home键,程序到了后台
+//                    System.exit(0);
+//                } else if (TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)) {
+//                    //表示长按home键,显示最近使用的程序列表
+//                    System.exit(0);
+//                }
+//            }
+//        }
+//    };
 
 }

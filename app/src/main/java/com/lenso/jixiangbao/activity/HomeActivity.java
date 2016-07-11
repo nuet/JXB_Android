@@ -1,19 +1,24 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -41,11 +46,18 @@ import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
+
+import static cn.jpush.android.api.JPushInterface.setAlias;
 
 /**
  * Created by king on 2016/5/10.
@@ -88,6 +100,27 @@ public class HomeActivity extends BaseActivity {
     private Intent getIntent;
     private boolean trysOut;
 
+    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
+        String SYSTEM_REASON = "reason";
+        String SYSTEM_HOME_KEY = "homekey";
+        String SYSTEM_HOME_KEY_LONG = "recentapps";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+                String reason = intent.getStringExtra(SYSTEM_REASON);
+                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
+                    //表示按了home键,程序到了后台
+                    System.exit(0);
+                } else if (TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)) {
+                    //表示长按home键,显示最近使用的程序列表
+                    System.exit(0);
+                }
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +136,10 @@ public class HomeActivity extends BaseActivity {
 
         load();
 
+        setAlias();//设置JPush别名
+
+        //注册广播
+        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
     }
 
     public SlidingMenu getSlidingMenu() {
@@ -221,7 +258,6 @@ public class HomeActivity extends BaseActivity {
         }
         super.onWindowFocusChanged(hasFocus);
     }
-
 
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
@@ -455,5 +491,74 @@ public class HomeActivity extends BaseActivity {
                 .show();
 
     }
+
+
+
+    private void setAlias() {
+        String alias = Config.getInstance(HOMECONTEXT).getConfig("phone");
+        logInfo("JPush"+alias);
+        if (TextUtils.isEmpty(alias)) {
+            logError("JPush 别名设置失败，app_key为空");
+            return;
+        }
+        if (!isValidTagAndAlias(alias)) {
+            showToast("JPush alias 设置失败");
+            return;
+        }
+
+        // 调用 Handler 来异步设置别名
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
+    }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Log.i("JPush", logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i("JPush", logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e("JPush", logs);
+            }
+            showToast(logs);
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d("JPush", "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i("JPush", "Unhandled msg - " + msg.what);
+            }
+        }
+    };
+
+    // 校验Tag Alias 只能是数字,英文字母和中文
+    public static boolean isValidTagAndAlias(String s) {
+        Pattern p = Pattern.compile("^[\\u4E00-\\u9FA50-9a-zA-Z_@!#$&*+=.|￥¥]+$");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
 
 }
