@@ -382,6 +382,8 @@ public class JSInterface {
                                         JSONObject jsonObject = new JSONObject(json);
                                         if(jsonObject.getString("status").equals("1")){
                                             showToast(jsonObject.getString("rsmsg"));
+                                        }else{
+                                            showToast(jsonObject.getString("rsmsg"));
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
