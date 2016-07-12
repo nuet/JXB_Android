@@ -17,6 +17,7 @@ import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CheckPassword;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -160,6 +161,12 @@ public class RegisterActivity extends BaseActivity {
                                         app_key = jsonObject.getString("app_key");
                                         Config.getInstance(RegisterActivity.this).putConfig("app_key", app_key);
                                         Config.getInstance(RegisterActivity.this).putConfig("phone", mobile);
+
+                                        //设置JPush别名
+                                        JPushSettings jPushSettings = new JPushSettings(RegisterActivity.this);
+                                        String alias = Config.getInstance(RegisterActivity.this).getConfig("phone");
+                                        jPushSettings.setAlias(alias);
+
                                         Intent intent = new Intent();
                                         intent.setClass(RegisterActivity.this, IdentifyActivity.class);
                                         startActivity(intent);

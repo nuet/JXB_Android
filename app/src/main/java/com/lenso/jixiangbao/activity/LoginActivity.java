@@ -13,6 +13,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -100,6 +101,12 @@ public class LoginActivity extends BaseActivity {
                                     logInfo("login succeed:"+ app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("app_key",app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("phone",mobile);
+
+                                    //设置JPush别名
+                                    JPushSettings jPushSettings = new JPushSettings(LoginActivity.this);
+                                    String alias = Config.getInstance(LoginActivity.this).getConfig("phone");
+                                    jPushSettings.setAlias(alias);
+
                                     Intent intent = new Intent();
                                     if(TextUtils.isEmpty(gesturePsw)){
                                         intent.setClass(LoginActivity.this, GestureSettingsActivity.class);

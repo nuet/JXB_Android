@@ -22,6 +22,7 @@ import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.iOSActionSheetDialog;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
@@ -148,7 +149,7 @@ public class JSInterface {
                     public void onClick(View v) {
                         HashMap map = new HashMap();
                         map.put("app_key", Config.getInstance(context).getConfig("app_key"));
-                        Config.getInstance(context).putConfig("app_key", "");
+                        Config.getInstance(context).putConfig("app_key", "");//清空本地app_key
                         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_LOGOUT, new VolleyHttp.JsonResponseListener() {
                             @Override
                             public void getJson(String json, boolean isConnectSuccess) {
@@ -156,7 +157,11 @@ public class JSInterface {
                                     try {
                                         JSONObject jsonObject = new JSONObject(json);
                                         if (jsonObject.getString("status").equals("1")) {
-                                            CommonUtils.clearGesturePassword(context);
+                                            CommonUtils.clearGesturePassword(context);//清空手势密码
+
+                                            JPushSettings jPushSettings = new JPushSettings(context);
+                                            jPushSettings.setAlias("");//清空JPush别名
+
                                             Intent intentLogout = new Intent();
                                             intentLogout.setClass(context, LoginOrRegisterActivity.class);
                                             intentLogout.putExtra("jsFlag", true);

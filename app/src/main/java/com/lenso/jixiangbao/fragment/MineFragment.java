@@ -29,6 +29,7 @@ import com.lenso.jixiangbao.bean.UserInfo;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
+import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import org.json.JSONException;
@@ -139,7 +140,11 @@ public class MineFragment extends BaseFragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
-                        CommonUtils.clearGesturePassword(getActivity());
+                        CommonUtils.clearGesturePassword(getActivity());//清空手势密码
+
+                        //清空JPush别名
+                        JPushSettings jPushSettings = new JPushSettings(getActivity());
+                        jPushSettings.setAlias("");
 
                         new iOSAlertDialog(getActivity()).builder()
                                 .setTitle("警告")

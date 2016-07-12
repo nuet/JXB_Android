@@ -45,8 +45,10 @@
                     android:layout_weight="6"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+
                     android:singleLine="true"
-                    android:ellipsize="marquee"
+                    android:ellipsize="end"
+
                     android:text="Text2"
                     android:textColor="@color/black"
                     android:textSize="@dimen/financing_list_item_text_size" />
