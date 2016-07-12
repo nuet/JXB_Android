@@ -13,7 +13,25 @@ public class BaseBean {
     private String statistic_display;
     private String new_experience_apr;
     private String new_experience_valid_time;
+    private int versionCode;
+    private String android_url;
     private PlatformFinancialReport platformFinancialReport;
+
+    public int getVersionCode() {
+        return versionCode;
+    }
+
+    public void setVersionCode(int versionCode) {
+        this.versionCode = versionCode;
+    }
+
+    public String getAndroid_url() {
+        return android_url;
+    }
+
+    public void setAndroid_url(String android_url) {
+        this.android_url = android_url;
+    }
 
     public String getStatistic_display() {
         return statistic_display;

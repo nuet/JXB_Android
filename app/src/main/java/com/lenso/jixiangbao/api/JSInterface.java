@@ -235,7 +235,6 @@ public class JSInterface {
     public void back() {
         activity.finish();
         ((WebViewActivity) activity).reload();
-//        WebViewActivity.reload();
     }
 
     /**
@@ -294,11 +293,11 @@ public class JSInterface {
     }
 
     /**
-     * 设置活动消息免打扰
+     * 设置活动消息
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void noActivityMSG(boolean isSelected){
+    public void activityMSG(boolean isSelected){
         if(isSelected){
 
         }else{
@@ -307,11 +306,24 @@ public class JSInterface {
     }
 
     /**
-     * 设置通知消息免打扰
+     * 设置通知消息
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void noNotificationMSG(boolean isSelected){
+    public void notificationMSG(boolean isSelected){
+        if(isSelected){
+
+        }else{
+
+        }
+    }
+
+    /**
+     * 设置新标消息
+     * @param isSelected 开关是否打开
+     */
+    @JavascriptInterface
+    public void newTenderMSG(boolean isSelected){
         if(isSelected){
 
         }else{

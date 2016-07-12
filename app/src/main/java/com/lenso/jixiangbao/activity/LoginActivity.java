@@ -102,6 +102,12 @@ public class LoginActivity extends BaseActivity {
                                     Config.getInstance(LoginActivity.this).putConfig("app_key",app_key);
                                     Config.getInstance(LoginActivity.this).putConfig("phone",mobile);
 
+                                    //h5消息推送设置
+                                    Config.getInstance(LoginActivity.this).putConfig("noBother","0");
+                                    Config.getInstance(LoginActivity.this).putConfig("activityMSG","1");
+                                    Config.getInstance(LoginActivity.this).putConfig("notificationMSG","1");
+                                    Config.getInstance(LoginActivity.this).putConfig("newTenderMSG","1");
+
                                     //设置JPush别名
                                     JPushSettings jPushSettings = new JPushSettings(LoginActivity.this);
                                     String alias = Config.getInstance(LoginActivity.this).getConfig("phone");

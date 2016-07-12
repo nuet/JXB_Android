@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.http.Options;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
@@ -30,10 +29,6 @@ public class SplashActivity extends BaseActivity {
 
     private Context context;
 
-//    private Gson gson;
-//    private List<AppScrollPic> picList;
-//    private int loadCount = 0;
-//    private List<ChoiceList> borrowList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +38,10 @@ public class SplashActivity extends BaseActivity {
 
         context = SplashActivity.this;
 
-//        gson = new Gson();
-//        App.BASE_BEAN=new BaseBean();
-
         Config.getInstance(this).putConfig("statusHeight", String.valueOf(CommonUtils.getStatusHeight(this)));
 
         init();
 
-//        load();
     }
 
     private void init() {
@@ -62,11 +53,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-//                    Time time = new Time();
-//                    time.setToNow(); // 取得系统时间
-//                    String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
-//                    VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);
-
                     Thread.sleep(3000);
 
                     Intent intent = new Intent();
@@ -96,69 +82,6 @@ public class SplashActivity extends BaseActivity {
             }
         }).start();
     }
-
-//    private void load() {
-//        logDebug("load...");
-//        loadValues();
-//    }
-//
-//    private void loadValues() {
-//        VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
-//            @Override
-//            public void getJson(String json, boolean isConnectSuccess) {
-//                if (json != null && !json.equals("") && !json.equals("null")) {
-//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-//                    App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());
-//                    App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());
-//                    App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());
-//                } else {
-//                    showToast(getString(R.string.no_internet));
-//                }
-//                loadCount++;
-//                loadPicList();
-//            }
-//        });
-//    }
-//
-//    private void loadPicList() {
-//        VolleyHttp.getInstance().getJson(ServerInterface.ALL_LIST, new VolleyHttp.JsonResponseListener() {
-//            @Override
-//            public void getJson(String json, boolean isConnectSuccess) {
-//                if (json != null && !json.equals("") && !json.equals("null")) {
-//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-//                    picList = bean.getAppScrollPic();
-//                } else {
-//                    showToast(getString(R.string.no_internet));
-//                }
-//                loadCount++;
-//                loadBorrowList();
-//            }
-//        });
-//    }
-//
-//    private void loadBorrowList() {
-//        VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
-//            @Override
-//            public void getJson(String json, boolean isConnectSuccess) {
-//                if (json != null && !json.equals("") && !json.equals("null")) {
-//                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-//                    borrowList = bean.getBorrowList();
-//                } else {
-//                    showToast(getString(R.string.no_internet));
-//                }
-//                loadCount++;
-//                goHome();
-//            }
-//        });
-//    }
-//    private void goHome() {
-//        logDebug("home:"+loadCount);
-//        if (loadCount < 3)
-//            return;
-//        App.BASE_BEAN.setAppScrollPic(picList);
-//        App.BASE_BEAN.setBorrowList(borrowList);
-//        init();
-//    }
 
 
     @Override

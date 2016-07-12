@@ -3,14 +3,15 @@ package com.lenso.jixiangbao.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -34,7 +35,6 @@ import com.lenso.jixiangbao.fragment.ScreenFragment;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
-import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.JViewPager;
 import com.lenso.jixiangbao.view.MenuItemView;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -42,14 +42,9 @@ import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
 
@@ -94,7 +89,6 @@ public class HomeActivity extends BaseActivity {
     private static KProgressHUD progressDialog;
     private Intent getIntent;
     private boolean trysOut;
-//    private JPushSettings jPushSettings;
 
 
     @Override
@@ -111,8 +105,6 @@ public class HomeActivity extends BaseActivity {
         trysOut = getIntent.getBooleanExtra("trysOut", false);
 
         load();
-
-//        setAlias();//设置JPush别名
 
     }
 
@@ -305,6 +297,18 @@ public class HomeActivity extends BaseActivity {
 
         if (trysOut) {
             alertDialog("您已连续5次输入错误,请重新登录!");
+            return;
+        }
+
+        try {
+            PackageManager pm = HOMECONTEXT.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(HOMECONTEXT.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+
+            if(pi.versionCode < App.BASE_BEAN.getVersionCode()){ //如果小于和服务器的最新版本号
+                alertUpdateDialog("当前软件不是最新版本");
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -321,7 +325,6 @@ public class HomeActivity extends BaseActivity {
                 .setDimAmount(0.5f)
                 .show();
 
-
         loadValues();
     }
 
@@ -331,6 +334,8 @@ public class HomeActivity extends BaseActivity {
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    App.BASE_BEAN.setVersionCode(bean.getVersionCode());
+                    App.BASE_BEAN.setAndroid_url(bean.getAndroid_url());
                     App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());
                     App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());
                     App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());
@@ -453,88 +458,34 @@ public class HomeActivity extends BaseActivity {
                         intent.setClass(HomeActivity.this, LoginActivity.class);
                         intent.putExtra("mobile", Config.getInstance(HomeActivity.this).getConfig("phone"));
                         startActivity(intent);
-//                        finish();
                     }
                 })
                 .setShowNegBtn(false)
-//                .setNegativeButton("取消", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//                })
                 .show();
 
     }
 
+    private void alertUpdateDialog(String msg) {
+        new iOSAlertDialog(HomeActivity.this).builder()
+                .setTitle("温馨提示")
+                .setMsg(msg)
+                .setCancelable(false)
+                .setPositiveButton("去更新", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse(App.BASE_BEAN.getAndroid_url());//应用更新地址
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToast("请及时更新到最新版本，以防漏洞");
+                    }
+                })
+                .show();
 
-
-//    private void setAlias() {
-//        String alias = Config.getInstance(HOMECONTEXT).getConfig("phone");
-//        logInfo("JPush"+alias);
-//        if (TextUtils.isEmpty(alias)) {
-//            logError("JPush 别名设置失败，app_key为空");
-//            return;
-//        }
-//        if (!isValidTagAndAlias(alias)) {
-//            logError("JPush alias 设置失败");
-////            showToast("JPush alias 设置失败");
-//            return;
-//        }
-//
-//        // 调用 Handler 来异步设置别名
-//        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
-//    }
-//
-//    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-//        @Override
-//        public void gotResult(int code, String alias, Set<String> tags) {
-//            String logs ;
-//            switch (code) {
-//                case 0:
-//                    logs = "Set tag and alias success";
-//                    Log.i("JPush", logs);
-//                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-//                    break;
-//                case 6002:
-//                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-//                    Log.i("JPush", logs);
-//                    // 延迟 60 秒来调用 Handler 设置别名
-//                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-//                    break;
-//                default:
-//                    logs = "Failed with errorCode = " + code;
-//                    Log.e("JPush", logs);
-//            }
-//            logInfo(logs);
-////            showToast(logs);
-//        }
-//    };
-//    private static final int MSG_SET_ALIAS = 1001;
-//    private final Handler mHandler = new Handler() {
-//        @Override
-//        public void handleMessage(android.os.Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what) {
-//                case MSG_SET_ALIAS:
-//                    Log.d("JPush", "Set alias in handler.");
-//                    // 调用 JPush 接口来设置别名。
-//                    JPushInterface.setAliasAndTags(getApplicationContext(),
-//                            (String) msg.obj,
-//                            null,
-//                            mAliasCallback);
-//                    break;
-//                default:
-//                    Log.i("JPush", "Unhandled msg:" + msg.what);
-//            }
-//        }
-//    };
-//
-//    // 校验Tag Alias 只能是数字,英文字母和中文
-//    public static boolean isValidTagAndAlias(String s) {
-//        Pattern p = Pattern.compile("^[\\u4E00-\\u9FA50-9a-zA-Z_@!#$&*+=.|￥¥]+$");//汉字、数字、小写字母、大写字母、下划线、@!#$&*+=.|￥
-//        Matcher m = p.matcher(s);
-//        return m.matches();
-//    }
-
+    }
 
 }

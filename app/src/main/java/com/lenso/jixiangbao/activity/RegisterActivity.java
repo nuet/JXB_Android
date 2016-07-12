@@ -162,6 +162,12 @@ public class RegisterActivity extends BaseActivity {
                                         Config.getInstance(RegisterActivity.this).putConfig("app_key", app_key);
                                         Config.getInstance(RegisterActivity.this).putConfig("phone", mobile);
 
+                                        //h5消息推送设置
+                                        Config.getInstance(RegisterActivity.this).putConfig("noBother","0");
+                                        Config.getInstance(RegisterActivity.this).putConfig("activityMSG","1");
+                                        Config.getInstance(RegisterActivity.this).putConfig("notificationMSG","1");
+                                        Config.getInstance(RegisterActivity.this).putConfig("newTenderMSG","1");
+
                                         //设置JPush别名
                                         JPushSettings jPushSettings = new JPushSettings(RegisterActivity.this);
                                         String alias = Config.getInstance(RegisterActivity.this).getConfig("phone");
