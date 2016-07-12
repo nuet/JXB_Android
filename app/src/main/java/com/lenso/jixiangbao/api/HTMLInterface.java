@@ -7,10 +7,9 @@ public class HTMLInterface {
     public static final String H5_URL = "h5_url";
     public static final String H5_TITLE = "h5_title";
     public static final String DOMAIN = "http://app.pongyoo.com/appweb/";
-    /**
-     * 用户协议API
-     */
-    public static final String YHXY = DOMAIN + "article.html?type=protocol";
+
+    public static final String YHXY = DOMAIN + "desc_user_interface.html";//用户协议
+//    public static final String YHXY = DOMAIN + "article.html?type=protocol";
 
     /**
      * LoanFragment HTML 5 API
@@ -48,4 +47,6 @@ public class HTMLInterface {
 
     public static final String DETAIL=DOMAIN+"detail.html";
     public static final String RIGHT_DETAIL=DOMAIN+"rightdetail.html";
+
+    public final static String JFGZ = DOMAIN + "desc_integralrule.html";//积分规则
 }

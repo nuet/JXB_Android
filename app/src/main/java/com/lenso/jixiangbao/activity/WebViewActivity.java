@@ -157,7 +157,7 @@ public class WebViewActivity extends WebBaseActivity {
                 showToast("规则");
                 Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE, "规则");
-                intent.putExtra(JSInterface.H5_URL, "");
+                intent.putExtra(JSInterface.H5_URL, HTMLInterface.JFGZ);
                 startActivity(intent);
             }
         });
