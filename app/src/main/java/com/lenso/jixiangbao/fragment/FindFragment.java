@@ -24,7 +24,7 @@ public class FindFragment extends WebBaseFragment {
     FrameLayout svFragmentFind;
 
     private final String url = HTMLInterface.GD;
-    private static WebView webView;
+    private WebView webView;
 
     @Nullable
     @Override
@@ -46,21 +46,8 @@ public class FindFragment extends WebBaseFragment {
         return view;
     }
 
-    public static void reload() {
+    public void reload() {
         webView.reload();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-        if (webView != null) {
-//            ViewGroup parent = (ViewGroup) webView.getParent();
-//            if (parent != null) {
-//                parent.removeView(webView);
-//            }
-//            webView.removeAllViews();
-            webView.destroy();
-        }
-    }
 }

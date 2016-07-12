@@ -229,7 +229,8 @@ public class JSInterface {
     @JavascriptInterface
     public void back() {
         activity.finish();
-        WebViewActivity.reload();
+        ((WebViewActivity) activity).reload();
+//        WebViewActivity.reload();
     }
 
     /**
@@ -331,6 +332,7 @@ public class JSInterface {
             public void getJson(String json, boolean isConnectSuccess) {
                 if(isConnectSuccess){
                     try {
+//                        Log.i("BAOFOO", json);
                         JSONObject jsonObject = new JSONObject(json);
                         if (jsonObject.getString("status").equals("1")){
                             tradeNo = jsonObject.getString("tradeNo");
@@ -408,7 +410,8 @@ public class JSInterface {
                                                 showToast(jsonObject.getString("rsmsg"));
                                             }else{
                                                 showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
-                                                WebViewActivity.reload();
+                                                ((WebViewActivity) activity).reload();
+//                                                WebViewActivity.reload();
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();

@@ -16,6 +16,7 @@ import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.view.ChoiceLoopViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
@@ -121,7 +122,7 @@ public class ChoiceFragment extends BaseFragment {
         }
         ArrayList<String> pics = new ArrayList<>();
         for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
-            pics.add(App.HOST + pic.getPic());
+            pics.add(ServerInterface.SERVER + pic.getPic());
         }
         lvpBanner.addLoopImageUrl(pics);
         lvpBanner.setLoopTimer(3000);

@@ -43,17 +43,17 @@ public class WebViewActivity extends WebBaseActivity {
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
     //    @Bind(R.id.fl_web)
-    private static FrameLayout flWeb;
+    private FrameLayout flWeb;
 
     private File headPIC;
-    private static WebView webView;
-    private static boolean calculator;
+    private WebView webView;
+    private boolean calculator;
     private String url;
     private String title;
     private String apr;
     private Context context;
 
-    private static KProgressHUD progressDialog;
+    private KProgressHUD progressDialog;
 
 
     @Override
@@ -107,7 +107,7 @@ public class WebViewActivity extends WebBaseActivity {
 
     }
 
-    public static void reload() {
+    public void reload() {
         webView.reload();
     }
 
@@ -300,7 +300,7 @@ public class WebViewActivity extends WebBaseActivity {
     /**
      * 判断存储卡是否可用
      */
-    public static boolean hasSDCard() {
+    public boolean hasSDCard() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 

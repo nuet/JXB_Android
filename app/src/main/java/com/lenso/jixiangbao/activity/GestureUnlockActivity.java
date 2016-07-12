@@ -48,12 +48,16 @@ public class GestureUnlockActivity extends BaseActivity {
     private static final int CLEAR_MILLS = 1000;
 
     private boolean isFirstSelect = true;
+    private boolean timeOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gesture_unlock);
         ButterKnife.bind(this);
+
+        Intent getIntent = getIntent();
+        timeOut = getIntent.getBooleanExtra("timeOut", false);
 
 //        topMenuBarGestureUnlock.setMenuTopPadding(statusHeight);
 //        Intent intent0 = getIntent();
@@ -120,9 +124,11 @@ public class GestureUnlockActivity extends BaseActivity {
                     mTextView.setText("解锁成功");
                     mTextView.setTextColor(Color.parseColor("#FFFFFF"));
 
-                    Intent intent = new Intent();
-                    intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    if(!timeOut){
+                        Intent intent = new Intent();
+                        intent.setClass(GestureUnlockActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
                     finish();
                 } else {
                     mTextView.setText("输入有误，还可以输入"+String.valueOf(tryTimes)+"次");

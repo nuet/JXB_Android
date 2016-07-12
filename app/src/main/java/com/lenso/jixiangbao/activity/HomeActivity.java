@@ -1,10 +1,7 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -16,9 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -57,7 +52,6 @@ import cn.jpush.android.api.TagAliasCallback;
 import cn.sharesdk.framework.ShareSDK;
 import king.dominic.slidingmenu.SlidingMenu;
 
-import static cn.jpush.android.api.JPushInterface.setAlias;
 
 /**
  * Created by king on 2016/5/10.
@@ -96,30 +90,30 @@ public class HomeActivity extends BaseActivity {
     private int loadCount = 0;
     private InvestList investList;
 
-        private static KProgressHUD progressDialog;
+    private static KProgressHUD progressDialog;
     private Intent getIntent;
     private boolean trysOut;
 
-    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
-        String SYSTEM_REASON = "reason";
-        String SYSTEM_HOME_KEY = "homekey";
-        String SYSTEM_HOME_KEY_LONG = "recentapps";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
-                String reason = intent.getStringExtra(SYSTEM_REASON);
-                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
-                    //表示按了home键,程序到了后台
-                    System.exit(0);
-                } else if (TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)) {
-                    //表示长按home键,显示最近使用的程序列表
-                    System.exit(0);
-                }
-            }
-        }
-    };
+//    private BroadcastReceiver mHomeKeyEventReceiver = new BroadcastReceiver() {
+//        String SYSTEM_REASON = "reason";
+//        String SYSTEM_HOME_KEY = "homekey";
+//        String SYSTEM_HOME_KEY_LONG = "recentapps";
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+//                String reason = intent.getStringExtra(SYSTEM_REASON);
+//                if (TextUtils.equals(reason, SYSTEM_HOME_KEY)) {
+//                    //表示按了home键,程序到了后台
+//                    System.exit(0);
+//                } else if (TextUtils.equals(reason, SYSTEM_HOME_KEY_LONG)) {
+//                    //表示长按home键,显示最近使用的程序列表
+//                    System.exit(0);
+//                }
+//            }
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +133,7 @@ public class HomeActivity extends BaseActivity {
         setAlias();//设置JPush别名
 
         //注册广播
-        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+//        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
     }
 
     public SlidingMenu getSlidingMenu() {
@@ -502,7 +496,8 @@ public class HomeActivity extends BaseActivity {
             return;
         }
         if (!isValidTagAndAlias(alias)) {
-            showToast("JPush alias 设置失败");
+            logError("JPush alias 设置失败");
+//            showToast("JPush alias 设置失败");
             return;
         }
 
@@ -530,7 +525,8 @@ public class HomeActivity extends BaseActivity {
                     logs = "Failed with errorCode = " + code;
                     Log.e("JPush", logs);
             }
-            showToast(logs);
+            logInfo(logs);
+//            showToast(logs);
         }
     };
     private static final int MSG_SET_ALIAS = 1001;
@@ -548,14 +544,14 @@ public class HomeActivity extends BaseActivity {
                             mAliasCallback);
                     break;
                 default:
-                    Log.i("JPush", "Unhandled msg - " + msg.what);
+                    Log.i("JPush", "Unhandled msg:" + msg.what);
             }
         }
     };
 
     // 校验Tag Alias 只能是数字,英文字母和中文
     public static boolean isValidTagAndAlias(String s) {
-        Pattern p = Pattern.compile("^[\\u4E00-\\u9FA50-9a-zA-Z_@!#$&*+=.|￥¥]+$");
+        Pattern p = Pattern.compile("^[\\u4E00-\\u9FA50-9a-zA-Z_@!#$&*+=.|￥¥]+$");//汉字、数字、小写字母、大写字母、下划线、@!#$&*+=.|￥
         Matcher m = p.matcher(s);
         return m.matches();
     }

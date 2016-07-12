@@ -178,7 +178,7 @@ public class RegisterActivity extends BaseActivity {
                     }, agrsRegister);
                 } else {
                     etRegisterPsw.setText("");
-                    showToast("您的密码不足八位，请重新输入");
+                    showToast("您的密码不符合要求，请重新输入");
                 }
                 break;
             case R.id.tv_register_yhxy:

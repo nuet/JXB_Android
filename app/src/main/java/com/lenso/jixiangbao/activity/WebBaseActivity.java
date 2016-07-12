@@ -7,7 +7,6 @@ import android.webkit.WebView;
 
 import com.lenso.jixiangbao.util.CommonUtils;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

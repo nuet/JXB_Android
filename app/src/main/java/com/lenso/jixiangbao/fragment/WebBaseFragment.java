@@ -1,6 +1,5 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.app.Activity;
 import android.os.Environment;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -8,7 +7,6 @@ import android.webkit.WebView;
 
 import com.lenso.jixiangbao.util.CommonUtils;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

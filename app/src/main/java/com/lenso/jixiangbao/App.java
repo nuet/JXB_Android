@@ -1,16 +1,12 @@
 package com.lenso.jixiangbao;
 
 import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.http.VolleyHttp;
+
 
 import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
@@ -21,7 +17,7 @@ import cn.sharesdk.framework.ShareSDK;
 public class App extends Application {
     public static BaseBean BASE_BEAN;
     public static ThreeChoice THREE_CHOICE;
-    public static final String HOST = "http://app.pongyoo.com/";
+
 
     @Override
     public void onCreate() {
@@ -31,6 +27,8 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);//设置开启日志,发布时请关闭日志
         JPushInterface.init(this);// 初始化 JPush
         Log.i("App->JPush", "initialed");
+
+        ShareSDK.initSDK(this);
 
         //注册广播
 //        registerReceiver(mHomeKeyEventReceiver, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));

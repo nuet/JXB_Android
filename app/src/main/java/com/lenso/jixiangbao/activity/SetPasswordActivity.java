@@ -92,7 +92,7 @@ public class SetPasswordActivity extends BaseActivity {
         }else{
             etSetPsw.setText("");
             etSetAgain.setText("");
-            showToast("您的密码不足八位，请重新输入");
+            showToast("您的密码不符合要求，请重新输入");
         }
     }
 }
