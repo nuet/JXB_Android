@@ -15,7 +15,16 @@ public class BaseBean {
     private String new_experience_valid_time;
     private int versionCode;
     private String android_url;
+    private String share_desc;
     private PlatformFinancialReport platformFinancialReport;
+
+    public String getShare_desc() {
+        return share_desc;
+    }
+
+    public void setShare_desc(String share_desc) {
+        this.share_desc = share_desc;
+    }
 
     public int getVersionCode() {
         return versionCode;

@@ -15,6 +15,7 @@ import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.VerifyActivity;
@@ -248,19 +249,19 @@ public class JSInterface {
         oks.disableSSOWhenAuthorize();
 
         // title标题：微信、QQ（新浪微博不需要标题）
-        oks.setTitle("注册有奖");  //最多30个字符
+        oks.setTitle("分享给好友");  //最多30个字符
 
         // text是分享文本：所有平台都需要这个字段
-        oks.setText("分享文本分享文本分享文本分享文本分享文本分享文本分享文本分享文本分享文本分享文本分享文本分享文本");  //最多40个字符
+        oks.setText(App.BASE_BEAN.getShare_desc());  //最多40个字符
 
         //网络图片的url：所有平台
-        oks.setImageUrl("http://7sby7r.com1.z0.glb.clouddn.com/CYSJ_02.jpg");//网络图片rul
+        oks.setImageUrl(ServerInterface.SHARE_PIC);//网络图片rul
 
         // url：仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("https://jixiangbao.net/");   //网友点进链接后，可以看到分享的详情
+        oks.setUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));   //网友点进链接后，可以看到分享的详情
 
         // Url：仅在QQ空间使用
-        oks.setTitleUrl("https://jixiangbao.net/");  //网友点进链接后，可以看到分享的详情
+        oks.setTitleUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));  //网友点进链接后，可以看到分享的详情
 
         // 启动分享GUI
         oks.show(context);
@@ -287,8 +288,10 @@ public class JSInterface {
                 days.add(i);
             }
             JPushInterface.setPushTime(context, days, 8, 22);
+            Config.getInstance(context).putConfig("noBother", "1");
         }else{
             JPushInterface.setPushTime(context, null, 0, 23);
+            Config.getInstance(context).putConfig("noBother", "0");
         }
     }
 
@@ -299,9 +302,9 @@ public class JSInterface {
     @JavascriptInterface
     public void activityMSG(boolean isSelected){
         if(isSelected){
-
+            Config.getInstance(context).putConfig("activityMSG","1");
         }else{
-
+            Config.getInstance(context).putConfig("activityMSG","0");
         }
     }
 
@@ -312,9 +315,9 @@ public class JSInterface {
     @JavascriptInterface
     public void notificationMSG(boolean isSelected){
         if(isSelected){
-
+            Config.getInstance(context).putConfig("notificationMSG","1");
         }else{
-
+            Config.getInstance(context).putConfig("notificationMSG","0");
         }
     }
 
@@ -325,9 +328,9 @@ public class JSInterface {
     @JavascriptInterface
     public void newTenderMSG(boolean isSelected){
         if(isSelected){
-
+            Config.getInstance(context).putConfig("newTenderMSG","1");
         }else{
-
+            Config.getInstance(context).putConfig("newTenderMSG","0");
         }
     }
 

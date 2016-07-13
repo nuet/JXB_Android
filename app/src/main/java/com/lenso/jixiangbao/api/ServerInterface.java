@@ -32,6 +32,8 @@ public class ServerInterface {
     public final static String GET_HEAD_PIC = SERVER + "imgurl.html";
 
     public final static String GET_SPLASH_PIC = SERVER + "themes/theme_default/app/images/startup.jpg";
+    public final static String SHARE_PIC = SERVER + "themes/theme_default/app/images/share.jpg";
+    public final static String SHARE_LINK = SERVER + "mobile/register.html";
 
     public final static String FINANCIAL_REPORTS = SERVER_DOMAIN + "getallsystemstatis.html";
 

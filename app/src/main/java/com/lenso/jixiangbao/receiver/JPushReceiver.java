@@ -1,16 +1,29 @@
 package com.lenso.jixiangbao.receiver;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.format.Time;
 import android.util.Log;
 
 
+import com.lenso.jixiangbao.activity.BaseActivity;
+import com.lenso.jixiangbao.activity.GestureUnlockActivity;
+import com.lenso.jixiangbao.activity.HomeActivity;
+import com.lenso.jixiangbao.util.Config;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.data.JPushLocalNotification;
 
 /**
  * Created by Chung on 2016/5/24.
@@ -27,37 +40,27 @@ public class JPushReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         Bundle bundle = intent.getExtras();
-        Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
-        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-            String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
-            //send the Registration Id to your server...
-
-        } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+        if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-//            processCustomMessage(context, bundle);
+            processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+            Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
             //打开自定义的Activity
-//            Intent i = new Intent(context, TestActivity.class);
-//            i.putExtras(bundle);
-//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            context.startActivity(i);
-
-        } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
-            //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
+            Intent intentOpen = new Intent(context, GestureUnlockActivity.class);
+            intentOpen.putExtras(bundle);
+            intentOpen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intentOpen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intentOpen);
 
         } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
             boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
@@ -65,6 +68,83 @@ public class JPushReceiver extends BroadcastReceiver {
         } else {
             Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
+
+    }
+
+
+    //处理自定义消息
+    private void processCustomMessage(Context context, Bundle bundle) {
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        String title = bundle.getString(JPushInterface.EXTRA_TITLE);
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+
+        Time time = new Time();
+        time.setToNow(); // 取得系统时间
+        String flag =  String.valueOf(time.monthDay) + String.valueOf(time.hour) + String.valueOf(time.minute) + String.valueOf(time.second);
+        Log.i(TAG, flag);
+
+        String url = "";
+        String type = "";
+        if (!TextUtils.isEmpty(extras)) {
+            try {
+                JSONObject extraJson = new JSONObject(extras);
+                if (null != extraJson && extraJson.length() > 0) {
+                    url = extraJson.getString("url");
+                    type = extraJson.getString("type");
+                } else {
+                    return;
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "processCustomMessage: error");
+            }
+        }
+
+        JPushLocalNotification jPushLocalNotification = new JPushLocalNotification();
+        jPushLocalNotification.setContent(message);
+        jPushLocalNotification.setBuilderId(0);
+        jPushLocalNotification.setTitle(title);
+        jPushLocalNotification.setExtras(extras);
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("url", url);
+//        JSONObject json = new JSONObject(map);
+//        jPushLocalNotification.setExtras(json.toString());
+        jPushLocalNotification.setBroadcastTime(System.currentTimeMillis());
+
+        if (type.equals("activity")) {
+            if (Config.getInstance(context).getConfig("activityMSG").equals("1")) {
+                jPushLocalNotification.setNotificationId(Integer.valueOf("1" + flag));
+            }
+        } else if (type.equals("message")) {
+            if (Config.getInstance(context).getConfig("notificationMSG").equals("1")) {
+                jPushLocalNotification.setNotificationId(Integer.valueOf("2" + flag));
+            }
+        } else if (type.equals("newborrow")) {
+            if (Config.getInstance(context).getConfig("newTenderMSG").equals("1")) {
+                jPushLocalNotification.setNotificationId(Integer.valueOf("3" + flag));
+            }
+        } else {
+            jPushLocalNotification.setNotificationId(Integer.valueOf("4" + flag));/*****************调试语句，记得删掉*****************/
+//            return;
+        }
+        JPushInterface.addLocalNotification(context, jPushLocalNotification);
+
+//        if (BaseActivity.isAppBackground(HomeActivity.HOMECONTEXT)) {
+//            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+//            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+//            Intent msgIntent = new Intent();
+//            msgIntent.putExtra("KEY_MESSAGE", message);
+//            if (!TextUtils.isEmpty(extras)) {
+//                try {
+//                    JSONObject extraJson = new JSONObject(extras);
+//                    if (null != extraJson && extraJson.length() > 0) {
+//                        msgIntent.putExtra("KEY_EXTRAS", extras);
+//                    }
+//                } catch (JSONException e) {
+//                    Log.e(TAG, "processCustomMessage: error");
+//                }
+//            }
+//            context.sendBroadcast(msgIntent);
+//        }
 
     }
 
@@ -81,11 +161,9 @@ public class JPushReceiver extends BroadcastReceiver {
                     Log.i(TAG, "This message has no Extra data");
                     continue;
                 }
-
                 try {
                     JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
                     Iterator<String> it = json.keys();
-
                     while (it.hasNext()) {
                         String myKey = it.next().toString();
                         sb.append("\nkey:" + key + ", value: [" +
@@ -94,34 +172,11 @@ public class JPushReceiver extends BroadcastReceiver {
                 } catch (JSONException e) {
                     Log.e(TAG, "Get message extra JSON error!");
                 }
-
             } else {
                 sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
             }
         }
         return sb.toString();
     }
-
-    //send msg to MainActivity
-//    private void processCustomMessage(Context context, Bundle bundle) {
-//        if (MainActivity.isForeground) {
-//            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-//            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-//            Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
-//            msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
-//            if (!ExampleUtil.isEmpty(extras)) {
-//                try {
-//                    JSONObject extraJson = new JSONObject(extras);
-//                    if (null != extraJson && extraJson.length() > 0) {
-//                        msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
-//                    }
-//                } catch (JSONException e) {
-//
-//                }
-//
-//            }
-//            context.sendBroadcast(msgIntent);
-//        }
-//    }
 
 }
