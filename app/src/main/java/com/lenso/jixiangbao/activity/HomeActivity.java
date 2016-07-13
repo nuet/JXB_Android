@@ -41,6 +41,7 @@ import com.lenso.jixiangbao.view.TopMenuBar;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +92,8 @@ public class HomeActivity extends BaseActivity {
     private Intent getIntent;
     private boolean trysOut;
 
-    private ScreenFragment screenFragment;
+    public ScreenFragment screenFragment1;
+    public ScreenFragment screenFragment2;
 
 
     @Override
@@ -216,8 +218,8 @@ public class HomeActivity extends BaseActivity {
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.layout_sliding_menu);
-        screenFragment = new ScreenFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, screenFragment).commit();
+        setScreenFragmentOneData();
+        setScreenFragmentTwoData();
     }
 
     @Override
@@ -491,8 +493,82 @@ public class HomeActivity extends BaseActivity {
                 .show();
     }
 
-    public void setScreenFragmentData(Map<String, List<String>> data, int type){
-        screenFragment.initData(data, type);
+    public void setScreenFragmentOneData(){
+        screenFragment1 = new ScreenFragment();
+
+        Map<String, List<String>> data = new LinkedHashMap<>();
+        List<String> texts = new ArrayList<>();
+        texts.add("全部");
+        texts.add("招标中");
+        texts.add("还款中");
+        texts.add("待审核");
+        texts.add("已成功");
+        data.put("借款状态", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("等额本息");
+        texts.add("一次性还本付息");
+        texts.add("每月还息到期还本");
+        data.put("还款方式", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("1个月以下");
+        texts.add("1-2个月");
+        texts.add("3-4个月");
+        texts.add("5-6个月");
+        texts.add("6个月以上");
+        data.put("借款期限", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("5万以下");
+        texts.add("5-10万");
+        texts.add("10-30万");
+        texts.add("30-50万");
+        texts.add("50万以上");
+        data.put("借款金额", texts);
+
+        screenFragment1.initData(data, 1);
+    }
+
+    public void setScreenFragmentTwoData(){
+        screenFragment2 = new ScreenFragment();
+
+        Map<String, List<String>> data = new LinkedHashMap<>();
+        List<String> texts = new ArrayList<>();
+        texts.add("全部");
+        texts.add("有折扣");
+        texts.add("无折扣");
+        data.put("转让折扣", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("等额本息");
+        texts.add("一次性还本付息");
+        texts.add("每月还息到期还本");
+        data.put("还款方式", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("1个月以下");
+        texts.add("1-2个月");
+        texts.add("3-4个月");
+        texts.add("5-6个月");
+        texts.add("6个月以上");
+        data.put("借款期限", texts);
+
+        texts = new ArrayList<>();
+        texts.add("不限");
+        texts.add("5万以下");
+        texts.add("5-10万");
+        texts.add("10-30万");
+        texts.add("30-50万");
+        texts.add("50万以上");
+        data.put("借款金额", texts);
+
+        screenFragment2.initData(data, 2);
     }
 
 }

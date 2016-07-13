@@ -85,7 +85,6 @@ public class TransferListFragment extends BaseFragment {
     private Map<String, String> args = new HashMap<String, String>();
     private static KProgressHUD progressDialog;
     private static Context context;
-    private Map<String, List<String>> data;
 
     @Nullable
     @Override
@@ -230,41 +229,9 @@ public class TransferListFragment extends BaseFragment {
                     }
                 }
                 if (menu != null){
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, ((HomeActivity) getActivity()).screenFragment2).commit();
                     menu.showMenu();
                 }
-                data = new LinkedHashMap<>();
-
-                List<String> texts = new ArrayList<>();
-                texts.add("全部");
-                texts.add("有折扣");
-                texts.add("无折扣");
-                data.put("转让折扣", texts);
-
-                texts = new ArrayList<>();
-                texts.add("不限");
-                texts.add("等额本息");
-                texts.add("一次性还本付息");
-                texts.add("每月还息到期还本");
-                data.put("还款方式", texts);
-
-                texts = new ArrayList<>();
-                texts.add("不限");
-                texts.add("1个月以下");
-                texts.add("1-2个月");
-                texts.add("3-4个月");
-                texts.add("5-6个月");
-                texts.add("6个月以上");
-                data.put("借款期限", texts);
-
-                texts = new ArrayList<>();
-                texts.add("不限");
-                texts.add("5万以下");
-                texts.add("5-10万");
-                texts.add("10-30万");
-                texts.add("30-50万");
-                texts.add("50万以上");
-                data.put("借款金额", texts);
-                ((HomeActivity) getActivity()).setScreenFragmentData(data, 2);
                 break;
         }
     }

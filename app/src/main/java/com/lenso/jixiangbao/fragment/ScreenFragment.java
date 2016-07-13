@@ -26,6 +26,7 @@ import butterknife.OnClick;
 public class ScreenFragment extends BaseFragment {
     @Bind(R.id.lv_screen)
     ListView lvScreen;
+
     private ScreenListAdapter adapter;
     private int i = 0;
     private Map<String, List<String>> data;
@@ -36,11 +37,14 @@ public class ScreenFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_screen, null);
         ButterKnife.bind(this, view);
+        initView();
         return view;
     }
 
     private void initView() {
-        adapter = new ScreenListAdapter(getContext(), data);
+        if(adapter == null){
+            adapter = new ScreenListAdapter(getContext(), data);
+        }
         lvScreen.setAdapter(adapter);
     }
 
@@ -87,6 +91,5 @@ public class ScreenFragment extends BaseFragment {
     public void initData(Map<String, List<String>> data,int type) {
         this.data = data;
         this.type = type;
-        initView();
     }
 }
