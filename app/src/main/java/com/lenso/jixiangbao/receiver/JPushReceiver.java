@@ -8,10 +8,6 @@ import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 
-
-import com.lenso.jixiangbao.activity.BaseActivity;
-import com.lenso.jixiangbao.activity.GestureUnlockActivity;
-import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.util.Config;
@@ -19,10 +15,7 @@ import com.lenso.jixiangbao.util.Config;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.data.JPushLocalNotification;
@@ -59,12 +52,14 @@ public class JPushReceiver extends BroadcastReceiver {
             String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
             String url = "";
             String type = "";
+            String title = "";
             if (!TextUtils.isEmpty(extras)) {
                 try {
                     JSONObject extraJson = new JSONObject(extras);
                     if (null != extraJson && extraJson.length() > 0) {
                         url = extraJson.getString("url");
                         type = extraJson.getString("type");
+                        title = extraJson.getString("title");
                     } else {
                         return;
                     }
@@ -76,21 +71,20 @@ public class JPushReceiver extends BroadcastReceiver {
             //打开自定义的Activity
             Intent intentOpen = new Intent();
             intentOpen.putExtras(bundle);
-            intentOpen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intentOpen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intentOpen.setClass(context, WebViewActivity.class);
 
             if (type.equals("activity")) {
                 intentOpen.putExtra(HTMLInterface.H5_URL, url + "?app_key=" + Config.getInstance(context).getConfig("app_key"));
-                intentOpen.putExtra(HTMLInterface.H5_TITLE, "消息通知");
+                intentOpen.putExtra(HTMLInterface.H5_TITLE, title);
                 context.startActivity(intentOpen);
             } else if (type.equals("message")) {
                 intentOpen.putExtra(HTMLInterface.H5_URL, url + "?app_key=" + Config.getInstance(context).getConfig("app_key"));
-                intentOpen.putExtra(HTMLInterface.H5_TITLE, "消息通知");
+                intentOpen.putExtra(HTMLInterface.H5_TITLE, title);
                 context.startActivity(intentOpen);
             } else if (type.equals("newborrow")) {
                 intentOpen.putExtra(HTMLInterface.H5_URL, url + "&app_key=" + Config.getInstance(context).getConfig("app_key"));
-                intentOpen.putExtra(HTMLInterface.H5_TITLE, "消息通知");
+                intentOpen.putExtra(HTMLInterface.H5_TITLE, title);
                 context.startActivity(intentOpen);
             } else {
 //                intentOpen.setClass(context, GestureUnlockActivity.class);/*****************调试语句，记得删掉*****************/

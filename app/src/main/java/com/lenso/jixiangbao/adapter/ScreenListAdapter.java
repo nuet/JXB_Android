@@ -32,8 +32,6 @@ public class ScreenListAdapter extends BaseAdapter {
         this.data = data;
         this.keyList = new ArrayList<>();
 
-        Log.i("ScreenListAdapter", data.toString());
-
         Set<String> keys = data.keySet();
         for (String key : keys) {
             map.put(key, data.get(key).get(0) + ".1");

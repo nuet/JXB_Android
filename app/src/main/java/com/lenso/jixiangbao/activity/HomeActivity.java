@@ -42,6 +42,7 @@ import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -89,6 +90,8 @@ public class HomeActivity extends BaseActivity {
     private static KProgressHUD progressDialog;
     private Intent getIntent;
     private boolean trysOut;
+
+    private ScreenFragment screenFragment;
 
 
     @Override
@@ -213,7 +216,8 @@ public class HomeActivity extends BaseActivity {
         menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         //为侧滑菜单设置布局
         menu.setMenu(R.layout.layout_sliding_menu);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, new ScreenFragment()).commit();
+        screenFragment = new ScreenFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, screenFragment).commit();
     }
 
     @Override
@@ -229,12 +233,10 @@ public class HomeActivity extends BaseActivity {
         List<Fragment> fragments = new ArrayList<>();
         choiceFragment = new ChoiceFragment();
         financingFragment = new FinancingFragment();
-//        loanFragment = new LoanFragment();
         findFragment = new FindFragment();
         mineFragment = new MineFragment();
         fragments.add(choiceFragment);
         fragments.add(financingFragment);
-//        fragments.add(loanFragment);
         fragments.add(findFragment);
         fragments.add(mineFragment);
 
@@ -403,7 +405,6 @@ public class HomeActivity extends BaseActivity {
             return;
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setInvestList(investList);
-//        logInfo("getBorrowList" + investList.getBorrowList().toString());
         progressDialog.dismiss();
 
         initViewPager();
@@ -445,6 +446,9 @@ public class HomeActivity extends BaseActivity {
     public void sortBorrowList() {
         financingFragment.sortBorrowList();
     }
+    public void sortTransferList() {
+        financingFragment.sortTransferList();
+    }
 
     private void alertDialog(String msg) {
         new iOSAlertDialog(HomeActivity.this).builder()
@@ -463,7 +467,6 @@ public class HomeActivity extends BaseActivity {
                 })
                 .setShowNegBtn(false)
                 .show();
-
     }
 
     private void alertUpdateDialog(String msg) {
@@ -486,7 +489,10 @@ public class HomeActivity extends BaseActivity {
                     }
                 })
                 .show();
+    }
 
+    public void setScreenFragmentData(Map<String, List<String>> data, int type){
+        screenFragment.initData(data, type);
     }
 
 }

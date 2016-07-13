@@ -27,55 +27,19 @@ public class ScreenFragment extends BaseFragment {
     @Bind(R.id.lv_screen)
     ListView lvScreen;
     private ScreenListAdapter adapter;
-    private Map<String, List<String>> data;
-//    private Map<String,String> args = new HashMap<String,String>();
     private int i = 0;
+    private Map<String, List<String>> data;
+    private int type = 0;//列表类型  1为债权列表  2为转让专区
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_screen, null);
         ButterKnife.bind(this, view);
-        initView();
         return view;
     }
 
     private void initView() {
-        data = new LinkedHashMap<>();
-
-        List<String> texts = new ArrayList<>();
-        texts.add("全部");
-        texts.add("招标中");
-        texts.add("还款中");
-        texts.add("待审核");
-        texts.add("已成功");
-        data.put("借款状态", texts);
-
-        texts = new ArrayList<>();
-        texts.add("不限");
-        texts.add("等额本息");
-        texts.add("一次性还本付息");
-        texts.add("每月还息到期还本");
-        data.put("还款方式", texts);
-
-        texts = new ArrayList<>();
-        texts.add("不限");
-        texts.add("1个月以下");
-        texts.add("1-2个月");
-        texts.add("3-4个月");
-        texts.add("5-6个月");
-        texts.add("6个月以上");
-        data.put("借款期限", texts);
-
-        texts = new ArrayList<>();
-        texts.add("不限");
-        texts.add("5万以下");
-        texts.add("5-10万");
-        texts.add("10-30万");
-        texts.add("30-50万");
-        texts.add("50万以上");
-        data.put("借款金额", texts);
-
         adapter = new ScreenListAdapter(getContext(), data);
         lvScreen.setAdapter(adapter);
     }
@@ -98,12 +62,20 @@ public class ScreenFragment extends BaseFragment {
             case R.id.tv_screen_ok:
                 cancelShowMenu();
 
-                FinancingFragment.s_status = String.valueOf(adapter.getArgs().get(0));
-                FinancingFragment.s_repay_way = String.valueOf(adapter.getArgs().get(1));
-                FinancingFragment.s_time_limit = String.valueOf(adapter.getArgs().get(2));
-                FinancingFragment.s_account = String.valueOf(adapter.getArgs().get(3));
-
-                ((HomeActivity)getActivity()).sortBorrowList();
+                if(type == 1){
+                    CreditListFragment.s_status = String.valueOf(adapter.getArgs().get(0));
+                    CreditListFragment.s_repay_way = String.valueOf(adapter.getArgs().get(1));
+                    CreditListFragment.s_time_limit = String.valueOf(adapter.getArgs().get(2));
+                    CreditListFragment.s_account = String.valueOf(adapter.getArgs().get(3));
+                    ((HomeActivity)getActivity()).sortBorrowList();
+                }
+                if(type == 2){
+                    TransferListFragment.s_status = String.valueOf(adapter.getArgs().get(0));
+                    TransferListFragment.s_repay_way = String.valueOf(adapter.getArgs().get(1));
+                    TransferListFragment.s_time_limit = String.valueOf(adapter.getArgs().get(2));
+                    TransferListFragment.s_account = String.valueOf(adapter.getArgs().get(3));
+                    ((HomeActivity)getActivity()).sortTransferList();
+                }
                 break;
         }
     }
@@ -112,4 +84,9 @@ public class ScreenFragment extends BaseFragment {
         ((HomeActivity) getActivity()).getSlidingMenu().showContent();
     }
 
+    public void initData(Map<String, List<String>> data,int type) {
+        this.data = data;
+        this.type = type;
+        initView();
+    }
 }

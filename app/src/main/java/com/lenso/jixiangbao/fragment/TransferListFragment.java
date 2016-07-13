@@ -45,9 +45,10 @@ import butterknife.OnClick;
 import king.dominic.slidingmenu.SlidingMenu;
 
 /**
- * Created by king on 2016/5/19.
+ * Created by Chung on 2016/7/13.
  */
-public class CreditListFragment extends BaseFragment {
+
+public class TransferListFragment extends BaseFragment {
     @Bind(R.id.button_default)
     TextView buttonDefault;
     @Bind(R.id.tv_time_limit)
@@ -64,8 +65,8 @@ public class CreditListFragment extends BaseFragment {
     RelativeLayout buttonAnnualRate;
     @Bind(R.id.button_screen)
     ImageView buttonScreen;
-    @Bind(R.id.lv_credit_list)
-    PullToRefreshListView lvCreditList;
+    @Bind(R.id.lv_transfer_list)
+    PullToRefreshListView lvTransferList;
 
     public static String s_status = "0";
     public static String s_repay_way = "0";
@@ -89,7 +90,7 @@ public class CreditListFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_creditlist, null);
+        View view = inflater.inflate(R.layout.fragment_transferlist, null);
         ButterKnife.bind(this, view);
         initRefreshList();
 
@@ -100,12 +101,12 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void initRefreshList() {
-        LoadingLayoutProxy top = (LoadingLayoutProxy) lvCreditList.getLoadingLayoutProxy(true, false);
+        LoadingLayoutProxy top = (LoadingLayoutProxy) lvTransferList.getLoadingLayoutProxy(true, false);
         top.setPullLabel("下拉即可刷新...");
         top.setRefreshingLabel("刷新中...");
         top.setReleaseLabel("释放即可刷新...");
         top.setLoadingDrawable(getActivity().getResources().getDrawable(R.mipmap.sx2));
-        LoadingLayoutProxy bottom = (LoadingLayoutProxy) lvCreditList.getLoadingLayoutProxy(false, true);
+        LoadingLayoutProxy bottom = (LoadingLayoutProxy) lvTransferList.getLoadingLayoutProxy(false, true);
         bottom.setPullLabel("上拉即可加载...");
         bottom.setRefreshingLabel("加载中...");
         bottom.setReleaseLabel("释放即可加载...");
@@ -113,55 +114,54 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void initView() {
-
         if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
             return;
         }
 
         adapter = new CreditListAdapter(getActivity(), App.BASE_BEAN.getInvestList().getBorrowList());
-        lvCreditList.getRefreshableView().setAdapter(adapter);
+        lvTransferList.getRefreshableView().setAdapter(adapter);
 
-        lvCreditList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        lvTransferList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                CreditListFragment.page = String.valueOf(Integer.valueOf(CreditListFragment.page) - 1);
-                if (Integer.valueOf(CreditListFragment.page) < 1 || Integer.valueOf(CreditListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if (Integer.valueOf(CreditListFragment.page) < 1) {
-                        CreditListFragment.page = "1";
+                TransferListFragment.page = String.valueOf(Integer.valueOf(TransferListFragment.page) - 1);
+                if (Integer.valueOf(TransferListFragment.page) < 1 || Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+                    if (Integer.valueOf(TransferListFragment.page) < 1) {
+                        TransferListFragment.page = "1";
                     }
-                    lvCreditList.postDelayed(new Runnable() {
+                    lvTransferList.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            lvCreditList.onRefreshComplete();
+                            lvTransferList.onRefreshComplete();
                             showToast("当前已是第一页");
                         }
                     }, 500);
                 } else {
-                    reLoadBorrowList();
+                    reLoadTransferList();
                 }
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                CreditListFragment.page = String.valueOf(Integer.valueOf(CreditListFragment.page) + 1);
-                if (Integer.valueOf(CreditListFragment.page) < 1 || Integer.valueOf(CreditListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if (Integer.valueOf(CreditListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                        CreditListFragment.page = String.valueOf(App.BASE_BEAN.getInvestList().getP().getPages());
+                TransferListFragment.page = String.valueOf(Integer.valueOf(TransferListFragment.page) + 1);
+                if (Integer.valueOf(TransferListFragment.page) < 1 || Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+                    if (Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+                        TransferListFragment.page = String.valueOf(App.BASE_BEAN.getInvestList().getP().getPages());
                     }
-                    lvCreditList.postDelayed(new Runnable() {
+                    lvTransferList.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            lvCreditList.onRefreshComplete();
+                            lvTransferList.onRefreshComplete();
                             showToast("当前已是最后一页");
                         }
                     }, 500);
                 } else {
-                    reLoadBorrowList();
+                    reLoadTransferList();
                 }
             }
         });
 
-        lvCreditList.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvTransferList.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ChoiceList item = adapter.getListItem(position - 1);
@@ -185,7 +185,6 @@ public class CreditListFragment extends BaseFragment {
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
-
     }
 
     private void unselected() {
@@ -237,11 +236,9 @@ public class CreditListFragment extends BaseFragment {
 
                 List<String> texts = new ArrayList<>();
                 texts.add("全部");
-                texts.add("招标中");
-                texts.add("还款中");
-                texts.add("待审核");
-                texts.add("已成功");
-                data.put("借款状态", texts);
+                texts.add("有折扣");
+                texts.add("无折扣");
+                data.put("转让折扣", texts);
 
                 texts = new ArrayList<>();
                 texts.add("不限");
@@ -267,26 +264,26 @@ public class CreditListFragment extends BaseFragment {
                 texts.add("30-50万");
                 texts.add("50万以上");
                 data.put("借款金额", texts);
-                ((HomeActivity) getActivity()).setScreenFragmentData(data, 1);
+                ((HomeActivity) getActivity()).setScreenFragmentData(data, 2);
                 break;
         }
     }
 
     private void sortDefault() {
-        CreditListFragment.order = "0";
-        reLoadBorrowList();
+        TransferListFragment.order = "0";
+        reLoadTransferList();
     }
 
     private void sortLimit(boolean ASC) {
         if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
-            CreditListFragment.order = "26";
-            reLoadBorrowList();
+            TransferListFragment.order = "26";
+            reLoadTransferList();
             LIMIT_ASC = false;
         } else {
             ivTimeLimit.setImageResource(R.mipmap.sx2);
-            CreditListFragment.order = "-26";
-            reLoadBorrowList();
+            TransferListFragment.order = "-26";
+            reLoadTransferList();
             LIMIT_ASC = true;
         }
         RATE_ASC = true;
@@ -295,29 +292,29 @@ public class CreditListFragment extends BaseFragment {
     private void sortRate(boolean ASC) {
         if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
-            CreditListFragment.order = "2";
-            reLoadBorrowList();
+            TransferListFragment.order = "2";
+            reLoadTransferList();
             RATE_ASC = false;
         } else {
             ivAnnualRate.setImageResource(R.mipmap.sx2);
-            CreditListFragment.order = "-2";
-            reLoadBorrowList();
+            TransferListFragment.order = "-2";
+            reLoadTransferList();
             RATE_ASC = true;
         }
         LIMIT_ASC = true;
     }
 
-    public void reLoadBorrowList() {
+    public void reLoadTransferList() {
         if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
             return;
         }
-        args.put("s_status", CreditListFragment.s_status);
-        args.put("s_repay_way", CreditListFragment.s_repay_way);
-        args.put("s_time_limit", CreditListFragment.s_time_limit);
-        args.put("s_account", CreditListFragment.s_account);
-        args.put("order", CreditListFragment.order);
-        args.put("s_type", CreditListFragment.s_type);
-        args.put("page", CreditListFragment.page);
+        args.put("s_status", TransferListFragment.s_status);
+        args.put("s_repay_way", TransferListFragment.s_repay_way);
+        args.put("s_time_limit", TransferListFragment.s_time_limit);
+        args.put("s_account", TransferListFragment.s_account);
+        args.put("order", TransferListFragment.order);
+        args.put("s_type", TransferListFragment.s_type);
+        args.put("page", TransferListFragment.page);
         progressDialog.show();
         VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
             @Override
@@ -326,12 +323,12 @@ public class CreditListFragment extends BaseFragment {
                     InvestList investList = gson.fromJson(json, InvestList.class);
                     App.BASE_BEAN.setInvestList(investList);
                     adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
-                    lvCreditList.getRefreshableView().setAdapter(adapter);
-                    if (lvCreditList.isRefreshing()) {
-                        lvCreditList.postDelayed(new Runnable() {
+                    lvTransferList.getRefreshableView().setAdapter(adapter);
+                    if (lvTransferList.isRefreshing()) {
+                        lvTransferList.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                lvCreditList.onRefreshComplete();
+                                lvTransferList.onRefreshComplete();
                             }
                         }, 500);
                     }

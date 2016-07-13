@@ -40,17 +40,8 @@ public class FinancingFragment extends BaseFragment {
     private FragmentViewPageAdapter adapter;
     private int width;
 //    private PreferredFinanceFragment preferredFinanceFragment;
-    private CreditListFragment creditListFragment1;
-
-    private CreditListFragment creditListFragment2;
-    public static String s_status = "0";
-
-    public static String s_repay_way = "0";
-    public static String s_time_limit = "0";
-    public static String s_account = "0";
-    public static String order = "0";
-    public static String s_type = "115";
-    public static String page = "1";
+    private CreditListFragment creditListFragment;
+    private TransferListFragment transferListFragment;
 
     private boolean firstHome = true;
     private View view;
@@ -73,14 +64,14 @@ public class FinancingFragment extends BaseFragment {
         viewLine.setLayoutParams(lp);
 
 //        preferredFinanceFragment = new PreferredFinanceFragment();
-        creditListFragment1 = new CreditListFragment();
-        creditListFragment2 = new CreditListFragment();
+        creditListFragment = new CreditListFragment();
+        transferListFragment = new TransferListFragment();
 
         if (adapter == null) {
             List<Fragment> fragmentList = new ArrayList<>();
 //            fragmentList.add(preferredFinanceFragment);
-            fragmentList.add(creditListFragment1);
-            fragmentList.add(creditListFragment2);
+            fragmentList.add(creditListFragment);
+            fragmentList.add(transferListFragment);
             adapter = new FragmentViewPageAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         }
         jvpFinance.setAdapter(adapter);
@@ -149,7 +140,11 @@ public class FinancingFragment extends BaseFragment {
     }
 
     public void sortBorrowList(){
-        creditListFragment1.reLoadBorrowList();
+        creditListFragment.reLoadBorrowList();
+    }
+
+    public void sortTransferList(){
+        transferListFragment.reLoadTransferList();
     }
 
     @Override

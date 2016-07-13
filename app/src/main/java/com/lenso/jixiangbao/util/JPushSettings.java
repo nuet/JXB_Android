@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.lenso.jixiangbao.activity.HomeActivity;
-
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
