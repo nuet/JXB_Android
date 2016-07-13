@@ -153,6 +153,10 @@ public class TopMenuBar extends LinearLayout {
             title.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
+    public void setTitleSecected(boolean flag){
+        title.setSelected(flag);
+    }
+
     public void setOnBackClickListener(OnClickListener backClickListener) {
         this.backClickListener = backClickListener;
     }

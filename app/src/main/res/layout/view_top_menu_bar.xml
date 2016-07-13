@@ -27,7 +27,7 @@
         android:scrollHorizontally="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
-        android:textIsSelectable="true"
+
 
         android:textSize="15dp"/>
 

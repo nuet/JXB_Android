@@ -89,7 +89,7 @@ public class JPushReceiver extends BroadcastReceiver {
                 intentOpen.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                 context.startActivity(intentOpen);
             } else if (type.equals("newborrow")) {
-                intentOpen.putExtra(HTMLInterface.H5_URL, url + "?app_key=" + Config.getInstance(context).getConfig("app_key"));
+                intentOpen.putExtra(HTMLInterface.H5_URL, url + "&app_key=" + Config.getInstance(context).getConfig("app_key"));
                 intentOpen.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                 context.startActivity(intentOpen);
             } else {

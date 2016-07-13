@@ -82,6 +82,7 @@ public class WebViewActivity extends WebBaseActivity {
 
         webView.loadUrl(url);
         topMenuBar.setTitleText(title);
+        topMenuBar.setTitleSecected(true);
         topMenuBar.setOnBackClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
