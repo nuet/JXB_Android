@@ -44,7 +44,8 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -93,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:text="16%"
+                    android:text="12%"
                     android:gravity="center"
                     android:textColor="@android:color/white"
                     android:textSize="40sp" />
@@ -124,6 +125,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
