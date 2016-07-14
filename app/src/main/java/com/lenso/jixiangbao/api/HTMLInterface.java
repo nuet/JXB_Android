@@ -41,12 +41,12 @@ public class HTMLInterface {
     public static final String GD = DOMAIN + "desc_more.html";
 
 
-    public static final String JI_CHE_DAI=DOMAIN+"borrowdetail.html";
-    public static final String CALCULATOR=DOMAIN+"borrow_calculator.html";
-    public static final String CALCULATOR2=DOMAIN+"calculator.html";
+    public static final String JI_CHE_DAI = DOMAIN+"borrowdetail.html";
+    public static final String CALCULATOR = DOMAIN+"borrow_calculator.html";
+    public static final String CALCULATOR2 = DOMAIN+"calculator.html";
 
-    public static final String DETAIL=DOMAIN+"detail.html";
-    public static final String RIGHT_DETAIL=DOMAIN+"rightdetail.html";
+    public static final String DETAIL = DOMAIN+"detail.html";//债权列表详情
+    public static final String RIGHT_DETAIL = DOMAIN+"rightdetail.html";//转让列表详情
 
     public final static String JFGZ = DOMAIN + "desc_integralrule.html";//积分规则
 }

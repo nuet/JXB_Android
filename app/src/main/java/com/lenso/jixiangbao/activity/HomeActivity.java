@@ -26,6 +26,7 @@ import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.InvestList;
+import com.lenso.jixiangbao.bean.RightList;
 import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
@@ -41,6 +42,7 @@ import com.lenso.jixiangbao.view.TopMenuBar;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +89,7 @@ public class HomeActivity extends BaseActivity {
     private List<AppScrollPic> picList;
     private int loadCount = 0;
     private InvestList investList;
+    private RightList rightList;
 
     private static KProgressHUD progressDialog;
     private Intent getIntent;
@@ -387,11 +390,28 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void loadInvestList() {
-        VolleyHttp.getInstance().getJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
+        Map<String, String> args = new HashMap<String, String>();
+        args.put("s_type","115");
+        VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     investList = gson.fromJson(json, InvestList.class);
+                } else {
+                    showToast(getString(R.string.no_internet));
+                }
+                loadCount++;
+                loadTransferList();
+            }
+        }, args);
+    }
+
+    private void loadTransferList(){
+        VolleyHttp.getInstance().getJson(ServerInterface.RIGHT_LIST, new VolleyHttp.JsonResponseListener() {
+            @Override
+            public void getJson(String json, boolean isConnectSuccess) {
+                if (json != null && !json.equals("") && !json.equals("null")) {
+                    rightList = gson.fromJson(json, RightList.class);
                 } else {
                     showToast(getString(R.string.no_internet));
                 }
@@ -403,10 +423,12 @@ public class HomeActivity extends BaseActivity {
 
     private void setData() {
         logDebug("home:" + loadCount);
-        if (loadCount < 4)
+        if (loadCount < 5){
             return;
+        }
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setInvestList(investList);
+        App.BASE_BEAN.setRightList(rightList);
         progressDialog.dismiss();
 
         initViewPager();

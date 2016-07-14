@@ -11,8 +11,6 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.adapter.ScreenListAdapter;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +72,7 @@ public class ScreenFragment extends BaseFragment {
                     ((HomeActivity)getActivity()).sortBorrowList();
                 }
                 if(type == 2){
-                    TransferListFragment.s_status = String.valueOf(adapter.getArgs().get(0));
+                    TransferListFragment.s_discount = String.valueOf(adapter.getArgs().get(0));
                     TransferListFragment.s_repay_way = String.valueOf(adapter.getArgs().get(1));
                     TransferListFragment.s_time_limit = String.valueOf(adapter.getArgs().get(2));
                     TransferListFragment.s_account = String.valueOf(adapter.getArgs().get(3));

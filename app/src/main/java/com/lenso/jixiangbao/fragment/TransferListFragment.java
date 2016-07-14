@@ -24,19 +24,16 @@ import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
-import com.lenso.jixiangbao.adapter.CreditListAdapter;
+import com.lenso.jixiangbao.adapter.TransferListAdapter;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.JSInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.bean.ChoiceList;
-import com.lenso.jixiangbao.bean.InvestList;
+import com.lenso.jixiangbao.bean.RightList;
+import com.lenso.jixiangbao.bean.TransferList;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.Config;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -68,16 +65,15 @@ public class TransferListFragment extends BaseFragment {
     @Bind(R.id.lv_transfer_list)
     PullToRefreshListView lvTransferList;
 
-    public static String s_status = "0";
+    public static String s_discount = "0";
     public static String s_repay_way = "0";
     public static String s_time_limit = "0";
     public static String s_account = "0";
     public static String order = "0";
-    public static String s_type = "115";
-    public static String page = "1";
+    public static String pageNum = "1";
 
     private SlidingMenu menu;
-    private CreditListAdapter adapter;
+    private TransferListAdapter adapter;
 
     private boolean LIMIT_ASC = true; //第一次点击为升序排列
     private boolean RATE_ASC = true; //第一次点击为升序排列
@@ -113,77 +109,78 @@ public class TransferListFragment extends BaseFragment {
     }
 
     private void initView() {
-        if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
+        if (App.BASE_BEAN == null || App.BASE_BEAN.getRightList() == null) {
             return;
+        } else {
+            adapter = new TransferListAdapter(getActivity(), App.BASE_BEAN.getRightList().getRtList());
+            lvTransferList.getRefreshableView().setAdapter(adapter);
+
+            lvTransferList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+                @Override
+                public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                    TransferListFragment.pageNum = String.valueOf(Integer.valueOf(TransferListFragment.pageNum) - 1);
+                    if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
+                        if (Integer.valueOf(TransferListFragment.pageNum) < 1) {
+                            TransferListFragment.pageNum = "1";
+                        }
+                        lvTransferList.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                lvTransferList.onRefreshComplete();
+                                showToast("当前已是第一页");
+                            }
+                        }, 500);
+                    } else {
+                        reLoadTransferList();
+                    }
+                }
+
+                @Override
+                public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                    TransferListFragment.pageNum = String.valueOf(Integer.valueOf(TransferListFragment.pageNum) + 1);
+                    if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
+                        if (Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
+                            TransferListFragment.pageNum = String.valueOf(App.BASE_BEAN.getRightList().getPage().getPages());
+                        }
+                        lvTransferList.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                lvTransferList.onRefreshComplete();
+                                showToast("当前已是最后一页");
+                            }
+                        }, 500);
+                    } else {
+                        reLoadTransferList();
+                    }
+                }
+            });
+
+            lvTransferList.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    TransferList item = adapter.getListItem(position - 1);
+                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                    String url = HTMLInterface.RIGHT_DETAIL + "?rtid=" + item.getId() + "&app_key=" + Config.getInstance(getActivity().getApplicationContext()).getConfig("app_key");
+                    Log.i("H5:", "URL:" + url);
+                    intent.putExtra(JSInterface.H5_URL, url);
+                    intent.putExtra(JSInterface.H5_TITLE, item.getName());
+                    intent.putExtra("apr", item.getApr());
+                    intent.putExtra("intent", JSInterface.DETAIL);
+                    getActivity().startActivity(intent);
+                }
+            });
+
+            unselected();
+            buttonDefault.setSelected(true);
+
+            progressDialog = KProgressHUD.create(getActivity())
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setLabel("正在加载中...")
+                    .setCancellable(true)
+                    .setAnimationSpeed(2)
+                    .setDimAmount(0.5f);
         }
 
-        adapter = new CreditListAdapter(getActivity(), App.BASE_BEAN.getInvestList().getBorrowList());
-        lvTransferList.getRefreshableView().setAdapter(adapter);
-
-        lvTransferList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                TransferListFragment.page = String.valueOf(Integer.valueOf(TransferListFragment.page) - 1);
-                if (Integer.valueOf(TransferListFragment.page) < 1 || Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if (Integer.valueOf(TransferListFragment.page) < 1) {
-                        TransferListFragment.page = "1";
-                    }
-                    lvTransferList.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            lvTransferList.onRefreshComplete();
-                            showToast("当前已是第一页");
-                        }
-                    }, 500);
-                } else {
-                    reLoadTransferList();
-                }
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                TransferListFragment.page = String.valueOf(Integer.valueOf(TransferListFragment.page) + 1);
-                if (Integer.valueOf(TransferListFragment.page) < 1 || Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                    if (Integer.valueOf(TransferListFragment.page) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                        TransferListFragment.page = String.valueOf(App.BASE_BEAN.getInvestList().getP().getPages());
-                    }
-                    lvTransferList.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            lvTransferList.onRefreshComplete();
-                            showToast("当前已是最后一页");
-                        }
-                    }, 500);
-                } else {
-                    reLoadTransferList();
-                }
-            }
-        });
-
-        lvTransferList.getRefreshableView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ChoiceList item = adapter.getListItem(position - 1);
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                String url = HTMLInterface.DETAIL + "?borrowid=" + item.getId() + "&app_key=" + Config.getInstance(getActivity().getApplicationContext()).getConfig("app_key");
-                Log.i("H5:", "URL:" + url);
-                intent.putExtra(JSInterface.H5_URL, url);
-                intent.putExtra(JSInterface.H5_TITLE, item.getName());
-                intent.putExtra("apr", item.getApr());
-                intent.putExtra("intent", JSInterface.DETAIL);
-                getActivity().startActivity(intent);
-            }
-        });
-
-        unselected();
-        buttonDefault.setSelected(true);
-
-        progressDialog = KProgressHUD.create(getActivity())
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("正在加载中...")
-                .setCancellable(true)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f);
     }
 
     private void unselected() {
@@ -228,7 +225,7 @@ public class TransferListFragment extends BaseFragment {
                         menu.getContent();
                     }
                 }
-                if (menu != null){
+                if (menu != null) {
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fl_sliding_menu, ((HomeActivity) getActivity()).screenFragment2).commit();
                     menu.showMenu();
                 }
@@ -272,39 +269,39 @@ public class TransferListFragment extends BaseFragment {
     }
 
     public void reLoadTransferList() {
-        if(App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null){
+        if (App.BASE_BEAN == null || App.BASE_BEAN.getRightList() == null) {
             return;
-        }
-        args.put("s_status", TransferListFragment.s_status);
-        args.put("s_repay_way", TransferListFragment.s_repay_way);
-        args.put("s_time_limit", TransferListFragment.s_time_limit);
-        args.put("s_account", TransferListFragment.s_account);
-        args.put("order", TransferListFragment.order);
-        args.put("s_type", TransferListFragment.s_type);
-        args.put("page", TransferListFragment.page);
-        progressDialog.show();
-        VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    InvestList investList = gson.fromJson(json, InvestList.class);
-                    App.BASE_BEAN.setInvestList(investList);
-                    adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
-                    lvTransferList.getRefreshableView().setAdapter(adapter);
-                    if (lvTransferList.isRefreshing()) {
-                        lvTransferList.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                lvTransferList.onRefreshComplete();
-                            }
-                        }, 500);
+        } else {
+            args.put("s_status", TransferListFragment.s_discount);
+            args.put("s_repay_way", TransferListFragment.s_repay_way);
+            args.put("s_time_limit", TransferListFragment.s_time_limit);
+            args.put("s_account", TransferListFragment.s_account);
+            args.put("order", TransferListFragment.order);
+            args.put("page", TransferListFragment.pageNum);
+            progressDialog.show();
+            VolleyHttp.getInstance().postParamsJson(ServerInterface.RIGHT_LIST, new VolleyHttp.JsonResponseListener() {
+                @Override
+                public void getJson(String json, boolean isConnectSuccess) {
+                    if (json != null && !json.equals("") && !json.equals("null")) {
+                        RightList rightList = gson.fromJson(json, RightList.class);
+                        App.BASE_BEAN.setRightList(rightList);
+                        adapter = new TransferListAdapter(context, App.BASE_BEAN.getRightList().getRtList());
+                        lvTransferList.getRefreshableView().setAdapter(adapter);
+                        if (lvTransferList.isRefreshing()) {
+                            lvTransferList.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    lvTransferList.onRefreshComplete();
+                                }
+                            }, 500);
+                        }
+                        progressDialog.dismiss();
+                    } else {
+                        Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
                     }
-                    progressDialog.dismiss();
-                } else {
-                    Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
                 }
-            }
-        }, args);
+            }, args);
+        }
 
     }
 

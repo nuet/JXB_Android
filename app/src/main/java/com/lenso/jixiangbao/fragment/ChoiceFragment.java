@@ -74,7 +74,7 @@ public class ChoiceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choice, null);
         ButterKnife.bind(this, view);
-        dp_280=getResources().getDimension(R.dimen.dp_280);
+        dp_280 = getResources().getDimension(R.dimen.dp_280);
         initRefreshList();
         initView();
         return view;
@@ -89,112 +89,111 @@ public class ChoiceFragment extends BaseFragment {
     }
 
     private void initView() {
-        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display()==null){
+        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display() == null) {
             return;
-        }
-        int padding = (int) getResources().getDimension(R.dimen.dp_2);
+        } else {
+            int padding = (int) getResources().getDimension(R.dimen.dp_2);
 
-
-        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
-            text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit_day() + "天");
-        }else{
-            text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit() + "个月");
-        }
-        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
-            text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit_day() + "天");
-        }else{
-            text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit() + "个月");
-        }
-        if(App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")){
-            text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit_day() + "天");
-        }else{
-            text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit() + "个月");
-        }
-
-
-        if (App.BASE_BEAN.getStatistic_display().equals("0")){
-            rlInfo.setVisibility(View.GONE);
-        }
-        else{
-            rlInfo.setVisibility(View.VISIBLE);
-            tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
-            tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
-        }
-        ArrayList<String> pics = new ArrayList<>();
-        for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
-            pics.add(ServerInterface.SERVER + pic.getPic());
-        }
-        lvpBanner.addLoopImageUrl(pics);
-        lvpBanner.setLoopTimer(3000);
-        lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+            if (App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")) {
+                text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit_day() + "天");
+            } else {
+                text1.setText(App.THREE_CHOICE.getThreeChoice().get(0).getTime_limit() + "个月");
+            }
+            if (App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")) {
+                text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit_day() + "天");
+            } else {
+                text2.setText(App.THREE_CHOICE.getThreeChoice().get(1).getTime_limit() + "个月");
+            }
+            if (App.THREE_CHOICE.getThreeChoice().get(0).getIsday().equals("1")) {
+                text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit_day() + "天");
+            } else {
+                text3.setText(App.THREE_CHOICE.getThreeChoice().get(2).getTime_limit() + "个月");
             }
 
-            @Override
-            public void onPageSelected(int position) {
-                selected(position);
+
+            if (App.BASE_BEAN.getStatistic_display().equals("0")) {
+                rlInfo.setVisibility(View.GONE);
+            } else {
+                rlInfo.setVisibility(View.VISIBLE);
+                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
+                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
             }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            ArrayList<String> pics = new ArrayList<>();
+            for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
+                pics.add(ServerInterface.SERVER + pic.getPic());
             }
+            lvpBanner.addLoopImageUrl(pics);
+            lvpBanner.setLoopTimer(3000);
+            lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            private void selected(int position) {
-                for (ImageView imageView : dots) {
-                    imageView.setSelected(false);
                 }
-                dots.get(position).setSelected(true);
+
+                @Override
+                public void onPageSelected(int position) {
+                    selected(position);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+
+                private void selected(int position) {
+                    for (ImageView imageView : dots) {
+                        imageView.setSelected(false);
+                    }
+                    dots.get(position).setSelected(true);
+                }
+            });
+            dots = new ArrayList<>();
+            for (int i = 0; i < pics.size(); i++) {
+                ImageView imageView = new ImageView(getActivity());
+                imageView.setImageResource(R.drawable.selector_dot);
+                dots.add(imageView);
+                llDot.addView(imageView);
+                imageView.setPadding(padding, padding, padding, padding);
             }
-        });
-        dots = new ArrayList<>();
-        for (int i = 0; i < pics.size(); i++) {
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setImageResource(R.drawable.selector_dot);
-            dots.add(imageView);
-            llDot.addView(imageView);
-            imageView.setPadding(padding, padding, padding, padding);
+            dots.get(0).setSelected(true);
+            Point outSize = new Point();
+            getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y - dp_280));
+            vpChoice.setLayoutParams(lp);
+
+            choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
+            choiceActionFragment1.setOnClickEvent(2);
+            choiceActionFragment2.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
+            choiceActionFragment2.setOnClickEvent(0);
+            choiceActionFragment3.setAPR(App.THREE_CHOICE.getThreeChoice().get(1).getApr() + "%");
+            choiceActionFragment3.setOnClickEvent(1);
+            choiceActionFragment4.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
+            choiceActionFragment4.setOnClickEvent(2);
+            choiceActionFragment5.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
+            choiceActionFragment5.setOnClickEvent(0);
+
+            vpChoice.addLoopFragment(choiceActionFragment1, choiceActionFragment2, choiceActionFragment3, choiceActionFragment4, choiceActionFragment5);
+
+            vpChoice.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    selectImage(position);
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+
+            selectImage(0);
         }
-        dots.get(0).setSelected(true);
-        Point outSize=new Point();
-        getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
-        RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y-dp_280));
-        vpChoice.setLayoutParams(lp);
 
-        choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
-        choiceActionFragment1.setOnClickEvent(2);
-        choiceActionFragment2.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
-        choiceActionFragment2.setOnClickEvent(0);
-        choiceActionFragment3.setAPR(App.THREE_CHOICE.getThreeChoice().get(1).getApr() + "%");
-        choiceActionFragment3.setOnClickEvent(1);
-        choiceActionFragment4.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
-        choiceActionFragment4.setOnClickEvent(2);
-        choiceActionFragment5.setAPR(App.THREE_CHOICE.getThreeChoice().get(0).getApr() + "%");
-        choiceActionFragment5.setOnClickEvent(0);
-
-        vpChoice.addLoopFragment(choiceActionFragment1, choiceActionFragment2, choiceActionFragment3, choiceActionFragment4, choiceActionFragment5);
-
-        vpChoice.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                selectImage(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-
-        selectImage(0);
     }
 
     private void selectImage(int position) {

@@ -10,6 +10,7 @@ public class BaseBean {
     private List<ChoiceList> xinList;
     private List<ChoiceList> sanList;
     private InvestList investList;
+    private RightList rightList;
     private String statistic_display;
     private String new_experience_apr;
     private String new_experience_valid_time;
@@ -72,6 +73,14 @@ public class BaseBean {
 
     public void setInvestList(InvestList investList) {
         this.investList = investList;
+    }
+
+    public RightList getRightList() {
+        return rightList;
+    }
+
+    public void setRightList(RightList rightList) {
+        this.rightList = rightList;
     }
 
     public List<AppScrollPic> getAppScrollPic() {
