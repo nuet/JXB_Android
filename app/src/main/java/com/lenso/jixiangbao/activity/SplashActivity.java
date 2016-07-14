@@ -48,7 +48,11 @@ public class SplashActivity extends BaseActivity {
         Time time = new Time();
         time.setToNow(); // 取得系统时间
         String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
-        VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);//new Options().errImage(R.mipmap.lockback)
+        if(CommonUtils.isNetworkConnected(context)){
+            VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);//new Options().errImage(R.mipmap.lockback)
+        } else {
+            ivActivitSplash.setImageResource(R.drawable.splash_background);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {

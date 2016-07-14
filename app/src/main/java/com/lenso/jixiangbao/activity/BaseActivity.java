@@ -12,7 +12,6 @@ import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.lenso.jixiangbao.util.CommonUtils;
@@ -25,6 +24,22 @@ import java.util.List;
 public class BaseActivity extends FragmentActivity {
     private String TAG = getClass().getSimpleName();
     protected int statusHeight = 0;
+    private CountDownTimer countDownTimer = new CountDownTimer(180000, 1000) {//总时间3min， 间隔时间0.5s
+        public void onTick(long millisUntilFinished) {
+        }
+
+        public void onFinish() {
+            logInfo("TimeOut finish");
+            SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+            String gesturePsw = sp.getString("GestureLock", "");
+            if (!TextUtils.isEmpty(gesturePsw)) {
+                Intent timeOutIntent = new Intent();
+                timeOutIntent.setClass(getApplicationContext(), GestureUnlockActivity.class);
+                timeOutIntent.putExtra("timeOut", true);
+                startActivity(timeOutIntent);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,31 +78,28 @@ public class BaseActivity extends FragmentActivity {
     }
 
 
-    /*****************超时锁*************/
+    /*****************
+     * 超时锁
+     *************/
     @Override
     protected void onPause() {
         super.onPause();
-        new CountDownTimer(180000, 1000) {//总时间3min， 间隔时间1s
-            public void onTick(long millisUntilFinished) {
+        if (isAppBackground(getApplicationContext())) {
+            logDebug("TimeOut:" + getClass().getSimpleName());
+            if (!getClass().getSimpleName().equals("GestureUnlockActivity")) {
+                countDownTimer.start();
+                logInfo("TimeOut start");
             }
-            public void onFinish() {
-                if (isAppBackground(getApplicationContext())){
-                    logInfo("isAppBackground 1 onPause");
-                    if(!getClass().getSimpleName().equals("GestureUnlockActivity")){
-                        SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-                        String gesturePsw = sp.getString("GestureLock", "");
-                        if(!TextUtils.isEmpty(gesturePsw)){
-                            Intent timeOutIntent = new Intent();
-                            timeOutIntent.setClass(getApplicationContext(), GestureUnlockActivity.class);
-                            timeOutIntent.putExtra("timeOut", true);
-                            startActivity(timeOutIntent);
-                        }
-                    }
-                }else {
-                    logInfo("isAppBackground 0 onPause");
-                }
-            }
-        }.start();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isAppBackground(getApplicationContext())) {
+            countDownTimer.cancel();
+            logInfo("TimeOut cancel");
+        }
     }
 
     public static boolean isAppBackground(final Context context) {
