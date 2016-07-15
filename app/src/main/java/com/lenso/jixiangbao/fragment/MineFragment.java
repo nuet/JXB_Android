@@ -141,7 +141,7 @@ public class MineFragment extends BaseFragment {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
                         CommonUtils.clearGesturePassword(getActivity());//清空手势密码
-                        Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
+//                        Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
 
                         //清空JPush别名
                         JPushSettings jPushSettings = new JPushSettings(getActivity());

@@ -61,6 +61,7 @@ public class JSInterface {
     private static String buy_money;
     private static String paypassword;
     private static String id;
+    private static String rtid;
     /*******宝付*******/
 
 
@@ -340,7 +341,7 @@ public class JSInterface {
      * @param willBuy 是否是静默购买调用
      */
     @JavascriptInterface
-    public void BAO_FOO_RECHARGE(String money, boolean willBuy){
+    public void BAO_FOO_RECHARGE(String money, boolean willBuy, String type){
         /*************宝付*********/
         BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
         BAO_FOO.put("money", money);
@@ -378,9 +379,14 @@ public class JSInterface {
         }, BAO_FOO);
 
         if(willBuy){
-            initHandler(buy_money, paypassword, id);
+            if(type.equals("1")){
+                initHandler(buy_money, paypassword, id, type);
+            }
+            if(type.equals("2")){
+                initHandler(buy_money, paypassword, rtid, type);
+            }
         }else{
-            initHandler("0", null, null);
+            initHandler("0", null, null, type);
         }
         /*************宝付*********/
     }
@@ -393,17 +399,24 @@ public class JSInterface {
      * @param id id
      */
     @JavascriptInterface
-    public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id){
+    public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id, String type){
+        if(type.equals("1")){
+            this.id = id;
+        }
+        if(type.equals("2")){
+            this.rtid = id;
+        }
         this.buy_money = buy_money;
         this.paypassword = paypassword;
-        this.id = id;
-        BAO_FOO_RECHARGE(recharge_money, true);
+        BAO_FOO_RECHARGE(recharge_money, true, type);
     }
 
-    private void initHandler(String buy_money, String paypassword, String id){
+
+    private void initHandler(String buy_money, String paypassword, String id, String type){
         final String MONEY = buy_money;
         final String PAY_PASSWORD = paypassword;
         final String ID = id;
+        final String TYPE = type;
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -415,30 +428,57 @@ public class JSInterface {
                             showToast((String) msg.obj);
                             break;
                         case 1:
-                            Map args = new HashMap();
-                            args.put("app_key", Config.getInstance(context).getConfig("app_key"));
-                            args.put("money", MONEY);
-                            args.put("paypassword", PAY_PASSWORD);
-                            args.put("id", ID);
-                            VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER, new VolleyHttp.JsonResponseListener() {
-                                @Override
-                                public void getJson(String json, boolean isConnectSuccess) {
-                                    if(isConnectSuccess){
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(json);
-                                            if(jsonObject.getString("status").equals("1")){
-                                                showToast(jsonObject.getString("rsmsg"));
-                                            }else{
-                                                showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
-                                                ((WebViewActivity) activity).reload();
-//                                                WebViewActivity.reload();
+                            if(TYPE.equals("1")){
+                                Map args = new HashMap();
+                                args.put("app_key", Config.getInstance(context).getConfig("app_key"));
+                                args.put("money", MONEY);
+                                args.put("paypassword", PAY_PASSWORD);
+                                args.put("id", ID);
+                                VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER, new VolleyHttp.JsonResponseListener() {
+                                    @Override
+                                    public void getJson(String json, boolean isConnectSuccess) {
+                                        if(isConnectSuccess){
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                if(jsonObject.getString("status").equals("1")){
+                                                    showToast(jsonObject.getString("rsmsg"));
+                                                }else{
+                                                    showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
+                                                    ((WebViewActivity) activity).reload();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
                                         }
                                     }
-                                }
-                            }, args);
+                                }, args);
+                            }
+                            if(TYPE.equals("2")){
+                                Map args = new HashMap();
+                                args.put("app_key", Config.getInstance(context).getConfig("app_key"));
+                                args.put("money", MONEY);
+                                args.put("paypassword", PAY_PASSWORD);
+                                args.put("rtid", ID);
+                                VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER_RIGHT, new VolleyHttp.JsonResponseListener() {
+                                    @Override
+                                    public void getJson(String json, boolean isConnectSuccess) {
+                                        if(isConnectSuccess){
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                if(jsonObject.getString("status").equals("1")){
+                                                    showToast(jsonObject.getString("rsmsg"));
+                                                }else{
+                                                    showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
+                                                    ((WebViewActivity) activity).reload();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }, args);
+                            }
+
                             break;
                     }
                 }
