@@ -38,7 +38,7 @@ public class ServerInterface {
 
     public final static String FINANCIAL_REPORTS = SERVER_DOMAIN + "getallsystemstatis.html";
 
-    public final static String RECHARGE = SERVER + "app/newrecharge.html";
+    public final static String RECHARGE = SERVER + "app/newrecharge.html";//充值
 
     public final static String TENDER = SERVER_DOMAIN + "tender.html";//债权列表投标
     public final static String TENDER_RIGHT = SERVER_DOMAIN + "tenderright.html";//转让列表投标

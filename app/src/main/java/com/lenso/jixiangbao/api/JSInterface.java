@@ -400,6 +400,7 @@ public class JSInterface {
      */
     @JavascriptInterface
     public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id, String type){
+        log(buy_money);
         if(type.equals("1")){
             this.id = id;
         }
