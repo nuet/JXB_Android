@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by king on 2016/5/16.
@@ -34,10 +35,12 @@ import butterknife.ButterKnife;
 public class ChoiceFragment extends BaseFragment {
     @Bind(R.id.iv_info)
     SpeakerView ivInfo;
-    @Bind(R.id.tv_info_2)
-    TextView tvInfo2;
-    @Bind(R.id.tv_info_4)
-    TextView tvInfo4;
+    @Bind(R.id.tv_info)
+    TextView tvInfo;
+    //    @Bind(R.id.tv_info_2)
+//    TextView tvInfo2;
+//    @Bind(R.id.tv_info_4)
+//    TextView tvInfo4;
     @Bind(R.id.vp_choice)
     ChoiceLoopViewPager vpChoice;
     @Bind(R.id.lvp_banner)
@@ -115,8 +118,9 @@ public class ChoiceFragment extends BaseFragment {
                 rlInfo.setVisibility(View.GONE);
             } else {
                 rlInfo.setVisibility(View.VISIBLE);
-                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
-                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
+                tvInfo.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
+//                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
+//                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
             }
             ArrayList<String> pics = new ArrayList<>();
             for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
@@ -239,5 +243,10 @@ public class ChoiceFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.tv_info)
+    public void onClick() {
+        showToast("重要通知");
     }
 }

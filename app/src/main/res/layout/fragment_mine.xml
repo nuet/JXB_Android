@@ -82,16 +82,16 @@
                             android:id="@+id/iv_mine_message"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:layout_gravity="left|top"
                             android:src="@mipmap/minefragment_message" />
 
                         <TextView
                             android:id="@+id/tv_mine_unreadmsg"
-                            android:layout_width="17dp"
-                            android:layout_height="17dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_gravity="top|left"
-                            android:layout_marginLeft="17dp"
+                            android:layout_marginLeft="18dp"
                             android:layout_toRightOf="@id/iv_mine_message"
                             android:background="@drawable/minefragment_message_count"
                             android:gravity="center"

@@ -66,7 +66,7 @@ public class TransferListAdapter extends BaseAdapter {
         holder.tvListItemContent2.setText(data.getTime_limit());
         holder.tvListItemContent2Day.setText(R.string.month);
 
-        float progress = (1 - Float.parseFloat(data.getSaled()) / Float.parseFloat(data.getPrice())) * 360;
+        float progress = (Float.parseFloat(data.getSaled()) / Float.parseFloat(data.getPrice())) * 360;
         if (data.getSaled().equals(data.getPrice())) {
             holder.pwListItem.setText(context.getString(R.string.sell_out));
         } else {
