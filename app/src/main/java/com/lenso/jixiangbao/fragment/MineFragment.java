@@ -141,7 +141,7 @@ public class MineFragment extends BaseFragment {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
                         CommonUtils.clearGesturePassword(getActivity());//清空手势密码
-//                        Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
+                        Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
 
                         //清空JPush别名
                         JPushSettings jPushSettings = new JPushSettings(getActivity());
@@ -253,6 +253,10 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zhxx,
             R.id.ll_gd})
     public void onClick(View view) {
+        if(TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))){
+            showToast("您的账号已被迫离线");
+            return;
+        }
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebViewActivity.class);
         switch (view.getId()) {
