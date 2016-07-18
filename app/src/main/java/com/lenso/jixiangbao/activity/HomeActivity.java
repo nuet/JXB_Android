@@ -347,6 +347,8 @@ public class HomeActivity extends BaseActivity {
                     App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());//体验标年利率
                     App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());//体验期
                     App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());//统计数据开关
+                    App.BASE_BEAN.setNotice_txt(bean.getNotice_txt());//最新通知
+                    App.BASE_BEAN.setNotice_url(bean.getNotice_url());//最新通知跳转url
                 } else {
                     showToast(getString(R.string.no_internet));
                 }

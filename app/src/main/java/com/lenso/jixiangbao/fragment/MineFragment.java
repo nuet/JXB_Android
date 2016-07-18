@@ -1,7 +1,5 @@
 package com.lenso.jixiangbao.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,8 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
+import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.LoginActivity;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
@@ -107,6 +106,8 @@ public class MineFragment extends BaseFragment {
     LinearLayout llZhxx;
     @Bind(R.id.ll_gd)
     LinearLayout llGd;
+    @Bind(R.id.mine_refresh_scrollview)
+    PullToRefreshScrollView mineRefreshScrollview;
 
     public static UserInfo userInfo;
     private Map args = new HashMap();
@@ -123,7 +124,16 @@ public class MineFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
         rlMineTop.setPadding(10, Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")) + 10, 10, 0);
+        initRefreshList();
         return view;
+    }
+
+    private void initRefreshList() {
+        LoadingLayoutProxy top = (LoadingLayoutProxy) mineRefreshScrollview.getLoadingLayoutProxy(true, false);
+        top.setPullLabel("下拉即可刷新...");
+        top.setRefreshingLabel("刷新中...");
+        top.setReleaseLabel("释放即可刷新...");
+        top.setLoadingDrawable(getActivity().getResources().getDrawable(R.mipmap.sx2));
     }
 
     public void initData() {
@@ -256,7 +266,7 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zhxx,
             R.id.ll_gd})
     public void onClick(View view) {
-        if(TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))){
+        if (TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))) {
             showToast("您的账号已被迫离线");
             return;
         }
@@ -332,20 +342,20 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
+                if (!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                     startActivity(intent);
-                }else {
+                } else {
                     showToast("请先绑定银行卡");
                 }
                 break;
             case R.id.btn_cz:
-                if(!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())){
+                if (!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                     startActivity(intent);
-                }else {
+                } else {
                     showToast("请先绑定银行卡");
                 }
                 break;
@@ -388,7 +398,7 @@ public class MineFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         logInfo("MineFragment onActivityResult0");
-        if(resultCode == 1){
+        if (resultCode == 1) {
             switch (requestCode) {
                 case ZHXX:
                     logInfo("MineFragment onActivityResult1");

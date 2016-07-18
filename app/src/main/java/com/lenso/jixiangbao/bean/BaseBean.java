@@ -17,7 +17,25 @@ public class BaseBean {
     private int versionCode;
     private String android_url;
     private String share_desc;
+    private String notice_txt;
+    private String notice_url;
     private PlatformFinancialReport platformFinancialReport;
+
+    public String getNotice_txt() {
+        return notice_txt;
+    }
+
+    public void setNotice_txt(String notice_txt) {
+        this.notice_txt = notice_txt;
+    }
+
+    public String getNotice_url() {
+        return notice_url;
+    }
+
+    public void setNotice_url(String notice_url) {
+        this.notice_url = notice_url;
+    }
 
     public String getShare_desc() {
         return share_desc;

@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.fragment;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,8 +17,11 @@ import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.WebViewActivity;
+import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
+import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ChoiceLoopViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
 import com.lenso.jixiangbao.view.SpeakerView;
@@ -118,7 +122,7 @@ public class ChoiceFragment extends BaseFragment {
                 rlInfo.setVisibility(View.GONE);
             } else {
                 rlInfo.setVisibility(View.VISIBLE);
-                tvInfo.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
+                tvInfo.setText(App.BASE_BEAN.getNotice_txt());
 //                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
 //                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
             }
@@ -247,6 +251,10 @@ public class ChoiceFragment extends BaseFragment {
 
     @OnClick(R.id.tv_info)
     public void onClick() {
-        showToast("重要通知");
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), WebViewActivity.class);
+        intent.putExtra(HTMLInterface.H5_URL, App.BASE_BEAN.getNotice_url());
+        intent.putExtra(HTMLInterface.H5_TITLE, "最新公告");
+        startActivity(intent);
     }
 }
