@@ -48,5 +48,17 @@ public class HTMLInterface {
     public static final String DETAIL = DOMAIN+"detail.html";//债权列表详情
     public static final String RIGHT_DETAIL = DOMAIN+"rightdetail.html";//转让列表详情
 
-    public final static String JFGZ = DOMAIN + "desc_integralrule.html";//积分规则
+    public static final String JFGZ = DOMAIN + "desc_integralrule.html";//积分规则
+
+    /*************FindFragment 原生****************/
+    public static final String FIND_1 = DOMAIN + "desc_novice-sail.html";
+    public static final String FIND_2 = DOMAIN + "top-activities.html?nid=activitys";
+    public static final String FIND_3 = DOMAIN + "articlelist.html?nid=notice";
+    public static final String FIND_4 = DOMAIN + "desc_introduction.html";
+    public static final String FIND_5 = DOMAIN + "desc_aboutus.html";
+    public static final String FIND_6 = DOMAIN + "desc_setmessage.html";
+//    public static final String FIND_7 = DOMAIN + "";
+    public static final String FIND_8 = DOMAIN + "borrow_security.html";
+    public static final String FIND_9 = DOMAIN + "desc_recommend-detail.html";
+    /***********************************/
 }
