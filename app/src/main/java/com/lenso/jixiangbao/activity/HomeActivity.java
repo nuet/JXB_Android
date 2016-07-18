@@ -350,7 +350,7 @@ public class HomeActivity extends BaseActivity {
                     App.BASE_BEAN.setNotice_txt(bean.getNotice_txt());//最新通知
                     App.BASE_BEAN.setNotice_url(bean.getNotice_url());//最新通知跳转url
                 } else {
-                    showToast(getString(R.string.no_internet));
+//                    showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
                 loadReports();
@@ -366,7 +366,7 @@ public class HomeActivity extends BaseActivity {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
                     App.BASE_BEAN.setPlatformFinancialReport(bean.getPlatformFinancialReport());
                 } else {
-                    showToast(getString(R.string.no_internet));
+//                    showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
                 loadPicList();
@@ -383,7 +383,7 @@ public class HomeActivity extends BaseActivity {
                     picList = bean.getAppScrollPic();
                     App.THREE_CHOICE.setThreeChoice(bean.getSanList());
                 } else {
-                    showToast(getString(R.string.no_internet));
+//                    showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
                 loadInvestList();
@@ -400,7 +400,7 @@ public class HomeActivity extends BaseActivity {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     investList = gson.fromJson(json, InvestList.class);
                 } else {
-                    showToast(getString(R.string.no_internet));
+//                    showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
                 loadTransferList();
@@ -415,7 +415,7 @@ public class HomeActivity extends BaseActivity {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     rightList = gson.fromJson(json, RightList.class);
                 } else {
-                    showToast(getString(R.string.no_internet));
+//                    showToast(getString(R.string.no_internet));
                 }
                 loadCount++;
                 setData();
@@ -426,6 +426,7 @@ public class HomeActivity extends BaseActivity {
     private void setData() {
         logDebug("home:" + loadCount);
         if (loadCount < 5){
+            showToast(getString(R.string.no_internet));
             return;
         }
         App.BASE_BEAN.setAppScrollPic(picList);
