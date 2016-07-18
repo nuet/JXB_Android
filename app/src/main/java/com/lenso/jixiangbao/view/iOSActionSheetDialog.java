@@ -56,21 +56,21 @@ public class iOSActionSheetDialog {
         pop_btn_take_photo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
                 Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.png")));
                 ((Activity) context).startActivityForResult(intentFromCapture, 1);
-                dialog.dismiss();
             }
         });
         pop_btn_choose_photo = (TextView) view.findViewById(R.id.pop_btn_choose_photo);
         pop_btn_choose_photo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
                 Intent intentFromGallery = new Intent();
                 intentFromGallery.setType("image/*"); // 设置文件类型
                 intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
                 ((Activity) context).startActivityForResult(intentFromGallery, 2);
-                dialog.dismiss();
             }
         });
         pop_btn_cancel = (TextView) view.findViewById(R.id.pop_btn_cancel);

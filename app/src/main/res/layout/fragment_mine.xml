@@ -94,7 +94,7 @@
                             android:layout_marginLeft="18dp"
                             android:layout_toRightOf="@id/iv_mine_message"
                             android:background="@drawable/minefragment_message_count"
-                            android:gravity="center"
+                            android:gravity="center_horizontal|top"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             android:visibility="invisible" />

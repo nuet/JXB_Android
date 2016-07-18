@@ -149,7 +149,7 @@ public class MineFragment extends BaseFragment {
 
                         new iOSAlertDialog(getActivity()).builder()
                                 .setTitle("警告")
-                                .setMsg("您的账号已被迫离线，是否重新登录?")
+                                .setMsg("您的账号已离线，是否重新登录?")
                                 .setCancelable(false)
                                 .setPositiveButton("确认", new View.OnClickListener() {
                                     @Override
@@ -167,7 +167,7 @@ public class MineFragment extends BaseFragment {
 
                     }
                 } else {
-                    showToast("请检查网络设置");
+//                    showToast("请检查网络设置");
                 }
             }
 
@@ -175,7 +175,10 @@ public class MineFragment extends BaseFragment {
     }
 
     public void initUI() {
-        String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle";
+        Time time = new Time();
+        time.setToNow(); // 取得系统时间
+        String url = ServerInterface.GET_HEAD_PIC + "?userid=" + userInfo.getAccount().getUser_id() + "&size=middle&time=" + time.toString();
+        ivHeadpic.setImageBitmap(null);
         VolleyHttp.getInstance().imageLoader(url, ivHeadpic, null);
 
         if (userInfo.getDetailuser().getReal_status().equals("1")) {
