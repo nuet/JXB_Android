@@ -10,15 +10,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
-import com.lenso.jixiangbao.api.JSInterface;
-import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -26,12 +26,16 @@ import butterknife.OnClick;
  * Created by Chung on 2016/7/6.
  */
 public class FindFragment extends BaseFragment {
+    @Bind(R.id.find_kf)
+    TextView findKf;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find, null);
-
         ButterKnife.bind(this, view);
+
+        findKf.setText(App.BASE_BEAN.getFuwutel());
         return view;
     }
 
@@ -86,12 +90,12 @@ public class FindFragment extends BaseFragment {
                             public void onClick(View v) {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                     if (getActivity().checkSelfPermission(Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                                        callPhone("4006808885");
+                                        callPhone(App.BASE_BEAN.getFuwutel());
                                     } else {
                                         showToast("没有权限：请为" + getResources().getString(R.string.app_name) + "开启拨打电话权限");
                                     }
                                 } else {
-                                    callPhone("4006808885");
+                                    callPhone(App.BASE_BEAN.getFuwutel());
                                 }
                             }
                         })
@@ -114,7 +118,7 @@ public class FindFragment extends BaseFragment {
         }
     }
 
-    private void callPhone(String phoneNumber){
+    private void callPhone(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

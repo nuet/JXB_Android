@@ -19,7 +19,16 @@ public class BaseBean {
     private String share_desc;
     private String notice_txt;
     private String notice_url;
+    private String fuwutel;
     private PlatformFinancialReport platformFinancialReport;
+
+    public String getFuwutel() {
+        return fuwutel;
+    }
+
+    public void setFuwutel(String fuwutel) {
+        this.fuwutel = fuwutel;
+    }
 
     public String getNotice_txt() {
         return notice_txt;

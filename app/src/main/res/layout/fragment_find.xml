@@ -343,12 +343,13 @@
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/find_kf"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:gravity="right"
                         android:padding="5dp"
-                        android:text="400-680-8885"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 

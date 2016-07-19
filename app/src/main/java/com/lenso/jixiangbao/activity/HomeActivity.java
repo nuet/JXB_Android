@@ -349,6 +349,7 @@ public class HomeActivity extends BaseActivity {
                     App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());//统计数据开关
                     App.BASE_BEAN.setNotice_txt(bean.getNotice_txt());//最新通知
                     App.BASE_BEAN.setNotice_url(bean.getNotice_url());//最新通知跳转url
+                    App.BASE_BEAN.setFuwutel(bean.getFuwutel());//客服电话
                 } else {
 //                    showToast(getString(R.string.no_internet));
                 }
