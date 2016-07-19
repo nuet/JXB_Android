@@ -123,7 +123,7 @@ public class MineFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, null);
         ButterKnife.bind(this, view);
-        rlMineTop.setPadding(10, Integer.parseInt(Config.getInstance(getActivity()).getConfig("statusHeight")) + 10, 10, 0);
+        rlMineTop.setPadding(10, 20, 10, 0);
         initRefreshList();
         return view;
     }

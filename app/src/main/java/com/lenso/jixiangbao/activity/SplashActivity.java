@@ -38,7 +38,7 @@ public class SplashActivity extends BaseActivity {
 
         context = SplashActivity.this;
 
-        Config.getInstance(this).putConfig("statusHeight", String.valueOf(CommonUtils.getStatusHeight(this)));
+//        Config.getInstance(this).putConfig("statusHeight", String.valueOf(CommonUtils.getStatusHeight(this)));
 
         init();
 
