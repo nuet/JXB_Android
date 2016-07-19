@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -43,7 +44,7 @@ public class WebViewActivity extends WebBaseActivity {
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
     //    @Bind(R.id.fl_web)
-    private FrameLayout flWeb;
+    private LinearLayout flWeb;
 
     private File headPIC;
     private WebView webView;
@@ -62,7 +63,7 @@ public class WebViewActivity extends WebBaseActivity {
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
 
-        flWeb = (FrameLayout) findViewById(R.id.fl_web);
+        flWeb = (LinearLayout) findViewById(R.id.fl_web);
 
         topMenuBar.setMenuTopPadding(statusHeight);
 
