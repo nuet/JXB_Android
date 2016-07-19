@@ -87,6 +87,7 @@
             android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".activity.WebViewActivity"
+            android:theme="@style/WebViewTheme"
             android:windowSoftInputMode="adjustUnspecified"/>
 
         <activity android:name=".activity.LoginOrRegisterActivity"

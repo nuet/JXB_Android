@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -43,8 +44,9 @@ import butterknife.ButterKnife;
 public class WebViewActivity extends WebBaseActivity {
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
-    //    @Bind(R.id.fl_web)
-    private LinearLayout flWeb;
+
+
+    private FrameLayout flWeb;
 
     private File headPIC;
     private WebView webView;
@@ -63,9 +65,9 @@ public class WebViewActivity extends WebBaseActivity {
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
 
-        flWeb = (LinearLayout) findViewById(R.id.fl_web);
+        flWeb = (FrameLayout) findViewById(R.id.fl_web);
 
-        topMenuBar.setMenuTopPadding(statusHeight);
+//        topMenuBar.setMenuTopPadding(statusHeight);
 
         Intent intent = getIntent();
         url = intent.getStringExtra(JSInterface.H5_URL);

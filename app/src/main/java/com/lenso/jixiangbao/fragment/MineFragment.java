@@ -267,7 +267,7 @@ public class MineFragment extends BaseFragment {
             R.id.ll_gd})
     public void onClick(View view) {
         if (TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))) {
-            showToast("您的账号已被迫离线");
+            showToast("您的账号已离线");
             return;
         }
         Intent intent = new Intent();

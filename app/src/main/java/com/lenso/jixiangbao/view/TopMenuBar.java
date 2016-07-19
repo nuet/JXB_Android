@@ -110,9 +110,9 @@ public class TopMenuBar extends LinearLayout {
         if (back != null)
             back.setImageResource(resId);
     }
-    public void setMenuTopPadding(int padding){
-        view.setPadding(view.getPaddingLeft(),view.getPaddingTop()+padding,view.getPaddingRight(),view.getPaddingBottom());
-    }
+//    public void setMenuTopPadding(int padding){
+//        view.setPadding(view.getPaddingLeft(),view.getPaddingTop()+padding,view.getPaddingRight(),view.getPaddingBottom());
+//    }
     public void setBackSrc(Drawable drawable) {
         if (back != null)
             back.setImageDrawable(drawable);

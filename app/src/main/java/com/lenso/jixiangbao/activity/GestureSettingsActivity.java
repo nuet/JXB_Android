@@ -47,7 +47,7 @@ public class GestureSettingsActivity extends BaseActivity {
         String gestureTitle = intent0.getStringExtra("gestureTitle");
         jsFlag = intent0.getBooleanExtra("jsFlag", false);
 
-        topMenuBarGesture.setMenuTopPadding(statusHeight);
+//        topMenuBarGesture.setMenuTopPadding(statusHeight);
 
         topMenuBarGesture.setTitleText(gestureTitle);
         topMenuBarGesture.setOnBackClickListener(new View.OnClickListener() {

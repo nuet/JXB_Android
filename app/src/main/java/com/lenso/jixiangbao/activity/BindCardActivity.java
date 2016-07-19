@@ -52,7 +52,7 @@ public class BindCardActivity extends BaseActivity {
         setContentView(R.layout.activity_bindcard);
         ButterKnife.bind(this);
 
-        topMenuBarBindcard.setMenuTopPadding(statusHeight);
+//        topMenuBarBindcard.setMenuTopPadding(statusHeight);
 
         topMenuBarBindcard.setOnBackClickListener(new View.OnClickListener() {
             @Override

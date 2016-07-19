@@ -41,7 +41,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_login_register);
         ButterKnife.bind(this);
 
-        topMenuBarLoginRegister.setMenuTopPadding(statusHeight);
+//        topMenuBarLoginRegister.setMenuTopPadding(statusHeight);
 
         etLoginRegister.setFocusable(true);
         etLoginRegister.setFocusableInTouchMode(true);

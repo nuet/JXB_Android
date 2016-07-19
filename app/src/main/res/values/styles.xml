@@ -3,12 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
     </style>
+
+    <style name="WebViewTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
     <style name="SplashTheme" parent="android:Theme.Translucent.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
+
     <style name="LaunchActivityTheme" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
     </style>
+
     <style name="financing_menu_text">
         <item name="android:textColor">@color/selector_financing_menu_text</item>
         <item name="android:textSize">15sp</item>
@@ -18,7 +24,7 @@
         <item name="android:clickable">true</item>
     </style>
     <style name="topMenu" >
-        <item name="tmb_padding">5dp</item>
+        <item name="tmb_padding">6dp</item>
         <item name="tmb_textSize">18sp</item>
         <item name="tmb_textColor">@android:color/white</item>
         <item name="tmb_backgroundColor">@color/blue</item>
@@ -72,6 +78,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
 
 
 </resources>

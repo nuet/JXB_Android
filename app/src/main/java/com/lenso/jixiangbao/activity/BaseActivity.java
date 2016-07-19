@@ -49,7 +49,7 @@ public class BaseActivity extends FragmentActivity {
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            //透明导航栏
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            statusHeight = CommonUtils.getStatusHeight(this);
+//            statusHeight = CommonUtils.getStatusHeight(this);
         }
     }
 

@@ -104,7 +104,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.android_home);
         ButterKnife.bind(this);
-        topMenuBar.setMenuTopPadding(statusHeight);
+//        topMenuBar.setMenuTopPadding(statusHeight);
         HOMECONTEXT = HomeActivity.this;
 
         ShareSDK.initSDK(this);//初始化shareSDK
