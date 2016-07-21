@@ -382,7 +382,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/find8" />
+                        android:src="@mipmap/find9" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -422,7 +422,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/find9" />
+                        android:src="@mipmap/find10" />
 
                     <TextView
                         android:layout_width="0dp"
