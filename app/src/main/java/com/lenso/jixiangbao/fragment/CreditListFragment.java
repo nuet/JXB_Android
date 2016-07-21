@@ -235,10 +235,12 @@ public class CreditListFragment extends BaseFragment {
 
     private void sortDefault() {
         CreditListFragment.order = "0";
+        CreditListFragment.pageNum = "";
         reLoadBorrowList();
     }
 
     private void sortLimit(boolean ASC) {
+        CreditListFragment.pageNum = "";
         if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
             CreditListFragment.order = "26";
@@ -254,6 +256,7 @@ public class CreditListFragment extends BaseFragment {
     }
 
     private void sortRate(boolean ASC) {
+        CreditListFragment.pageNum = "";
         if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
             CreditListFragment.order = "2";
