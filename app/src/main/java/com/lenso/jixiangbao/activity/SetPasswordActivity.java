@@ -10,6 +10,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CheckPassword;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -59,6 +60,9 @@ public class SetPasswordActivity extends BaseActivity {
 
     @OnClick(R.id.btn_set_confirm)
     public void onClick() {
+        if(CommonUtils.isFastClick()){
+            return;
+        }
         if(CheckPassword.check(etSetPsw.getText().toString().trim())){
             argsSet.put("password", etSetPsw.getText().toString().trim());
             argsSet.put("confirm_password", etSetAgain.getText().toString().trim());

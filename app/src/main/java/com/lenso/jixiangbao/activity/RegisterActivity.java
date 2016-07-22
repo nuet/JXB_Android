@@ -16,6 +16,7 @@ import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CheckPassword;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -144,6 +145,9 @@ public class RegisterActivity extends BaseActivity {
                 }
                 break;
             case R.id.btn_register_confirm:
+                if(CommonUtils.isFastClick()){
+                    return;
+                }
                 if (CheckPassword.check(etRegisterPsw.getText().toString().trim())) {
                     agrsRegister.put("phone", mobile);
                     agrsRegister.put("valicode", etRegisterCode.getText().toString().trim());

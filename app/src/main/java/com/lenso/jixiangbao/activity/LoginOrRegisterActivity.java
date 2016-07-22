@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -59,6 +61,17 @@ public class LoginOrRegisterActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login_register)
     public void onClick(View view) {
+//        final KProgressHUD progressDialog = KProgressHUD.create(LoginOrRegisterActivity.this)
+//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setLabel("正在处理中...")
+//                .setCancellable(true)
+//                .setAnimationSpeed(2)
+//                .setDimAmount(0.5f)
+//                .show();
+
+        if(CommonUtils.isFastClick()){
+            return;
+        }
         args.put("phone", etLoginRegister.getText().toString().trim());
         VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_ISPHONEREGISTER, new VolleyHttp.JsonResponseListener() {
                     @Override
@@ -68,6 +81,7 @@ public class LoginOrRegisterActivity extends BaseActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 if (jsonObject.getString("status").equals("1")) {
+//                                    progressDialog.dismiss();
                                     if (jsonObject.getString("reged").equals("1")) {
                                         intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
                                         intent.putExtra("mobile", etLoginRegister.getText().toString().trim());

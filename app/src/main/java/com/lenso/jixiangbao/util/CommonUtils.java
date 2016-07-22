@@ -132,4 +132,13 @@ public class CommonUtils {
         return deletedFiles;
     }
 
+    private static long lastClickTime;
+    public synchronized static boolean isFastClick() {
+        long clickTime = System.currentTimeMillis();
+        if ( clickTime - lastClickTime < 1000) {
+            return true;
+        }
+        lastClickTime = clickTime;
+        return false;
+    }
 }

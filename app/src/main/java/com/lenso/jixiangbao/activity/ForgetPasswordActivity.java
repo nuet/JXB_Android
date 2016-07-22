@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
 import org.json.JSONException;
@@ -102,6 +103,9 @@ public class ForgetPasswordActivity extends BaseActivity {
                 }.start();
                 break;
             case R.id.btn_forget_confirm:
+                if(CommonUtils.isFastClick()){
+                    return;
+                }
                 argsGet.put("phone", mobile);
                 argsGet.put("validcode", etForgetCode.getText().toString().trim());
                 argsGet.put("getpwdtype", "pwd");

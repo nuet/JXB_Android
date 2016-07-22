@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -60,6 +61,9 @@ public class VerifyActivity extends BaseActivity {
 
     @OnClick(R.id.btn_verify_confirm)
     public void onClick() {
+        if(CommonUtils.isFastClick()){
+            return;
+        }
         agrs.put("username", phone);
         agrs.put("password", etVerifyPsw.getText().toString().trim());
         agrs.put("actionType", "login");

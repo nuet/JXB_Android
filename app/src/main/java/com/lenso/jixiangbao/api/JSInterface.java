@@ -250,7 +250,7 @@ public class JSInterface {
         oks.disableSSOWhenAuthorize();
 
         // title标题：微信、QQ（新浪微博不需要标题）
-        oks.setTitle("邀请好友注册");  //最多30个字符
+        oks.setTitle(App.BASE_BEAN.getShare_title());  //最多30个字符
 
         // text是分享文本：所有平台都需要这个字段
         oks.setText(App.BASE_BEAN.getShare_desc());  //最多40个字符

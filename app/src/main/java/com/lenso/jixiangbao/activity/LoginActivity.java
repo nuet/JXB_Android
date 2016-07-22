@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.TopMenuBar;
@@ -87,6 +88,9 @@ public class LoginActivity extends BaseActivity {
 //                finish();
                 break;
             case R.id.btn_login_confirm:
+                if(CommonUtils.isFastClick()){
+                    return;
+                }
                 args.put("username", mobile);
                 args.put("password", etLoginPsw.getText().toString().trim());
                 args.put("actionType", "login");

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -62,6 +63,9 @@ public class IdentifyActivity extends BaseActivity {
 
     @OnClick(R.id.btn_identify_confirm)
     public void onClick() {
+        if(CommonUtils.isFastClick()){
+            return;
+        }
         args.put("app_key", Config.getInstance(IdentifyActivity.this).getConfig("app_key"));
         args.put("realname", etIdentifyName.getText().toString().trim());
         args.put("card_id", etIdentifyCertification.getText().toString().trim());

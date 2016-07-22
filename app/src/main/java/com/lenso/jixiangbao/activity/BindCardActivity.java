@@ -14,6 +14,7 @@ import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.BankList;
 import com.lenso.jixiangbao.http.VolleyHttp;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.TopMenuBar;
 
@@ -125,6 +126,9 @@ public class BindCardActivity extends BaseActivity {
 
     @OnClick(R.id.btn_bindcard_confirm)
     public void onClick() {
+        if(CommonUtils.isFastClick()){
+            return;
+        }
         if (bank != null) {
             args.put("app_key", Config.getInstance(BindCardActivity.this).getConfig("app_key"));
             args.put("bank", bank);
