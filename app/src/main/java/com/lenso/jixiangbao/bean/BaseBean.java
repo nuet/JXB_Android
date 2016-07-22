@@ -16,6 +16,7 @@ public class BaseBean {
     private String new_experience_valid_time;
     private int versionCode;
     private String android_url;
+    private String share_title;
     private String share_desc;
     private String notice_txt;
     private String notice_url;
@@ -44,6 +45,14 @@ public class BaseBean {
 
     public void setNotice_url(String notice_url) {
         this.notice_url = notice_url;
+    }
+
+    public String getShare_title() {
+        return share_title;
+    }
+
+    public void setShare_title(String share_title) {
+        this.share_title = share_title;
     }
 
     public String getShare_desc() {
