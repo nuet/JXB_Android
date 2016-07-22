@@ -236,7 +236,7 @@
                     android:background="@color/minedivider" />
 
                 <LinearLayout
-                    android:id="@+id/ll_gywm"
+                    android:id="@+id/ll_aqbz"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -251,14 +251,54 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/find5" />
+                        android:src="@mipmap/find9" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:padding="5dp"
-                        android:text="关于我们"
+                        android:text="安全保障"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/loanfragment_rightarrow" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/minedivider" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tjyj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingTop="6dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:src="@mipmap/find10" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:padding="5dp"
+                        android:text="推荐有奖"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -367,7 +407,7 @@
                     android:background="@color/minedivider" />
 
                 <LinearLayout
-                    android:id="@+id/ll_aqbz"
+                    android:id="@+id/ll_gywm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -382,14 +422,14 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:src="@mipmap/find9" />
+                        android:src="@mipmap/find5" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="8"
                         android:padding="5dp"
-                        android:text="安全保障"
+                        android:text="关于我们"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -399,47 +439,6 @@
                         android:layout_weight="1"
                         android:src="@mipmap/loanfragment_rightarrow" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="48dp"
-                    android:background="@color/minedivider" />
-
-                <LinearLayout
-                    android:id="@+id/ll_tjyj"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="6dp"
-                    android:paddingTop="6dp">
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:src="@mipmap/find10" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"
-                        android:padding="5dp"
-                        android:text="推荐有奖"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@mipmap/loanfragment_rightarrow" />
-                </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
