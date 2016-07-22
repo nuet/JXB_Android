@@ -71,7 +71,7 @@
             android:text="下一步"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:background="@drawable/shape_screen_item_selected"/>
+            android:background="@drawable/selector_btn_blue"/>
         <include
             layout="@layout/item_safe_footer">
 
