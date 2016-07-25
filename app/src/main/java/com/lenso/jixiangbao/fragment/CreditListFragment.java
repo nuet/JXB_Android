@@ -314,7 +314,8 @@ public class CreditListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(!FinancingFragment.firstHome){
+//        if(!FinancingFragment.firstHome){
+        logInfo("onResume");
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -322,6 +323,6 @@ public class CreditListFragment extends BaseFragment {
                     FinancingFragment.firstHome = false;
                 }
             }, 500);
-        }
+//        }
     }
 }
