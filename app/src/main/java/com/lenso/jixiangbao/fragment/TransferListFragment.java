@@ -82,10 +82,12 @@ public class TransferListFragment extends BaseFragment {
     private static KProgressHUD progressDialog;
     private static Context context;
 
+    private View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_transferlist, null);
+        view = inflater.inflate(R.layout.fragment_transferlist, null);
         ButterKnife.bind(this, view);
         initRefreshList();
 
@@ -303,6 +305,20 @@ public class TransferListFragment extends BaseFragment {
             }, args);
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(!FinancingFragment.firstHome){
+            view.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    reLoadTransferList();
+                    FinancingFragment.firstHome = false;
+                }
+            }, 500);
+        }
     }
 
 }

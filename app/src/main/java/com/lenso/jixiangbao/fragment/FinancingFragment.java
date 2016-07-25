@@ -43,7 +43,7 @@ public class FinancingFragment extends BaseFragment {
     private CreditListFragment creditListFragment;
     private TransferListFragment transferListFragment;
 
-    private boolean firstHome = true;
+    public static boolean firstHome = true;
     private View view;
 
     @Nullable
@@ -145,20 +145,6 @@ public class FinancingFragment extends BaseFragment {
 
     public void sortTransferList(){
         transferListFragment.reLoadTransferList();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(!firstHome){
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    sortBorrowList();
-                    firstHome = false;
-                }
-            }, 500);
-        }
     }
 
 }

@@ -63,7 +63,7 @@
         <View
             android:id="@+id/img_line"
             android:layout_width="1px"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/darker_gray" />
 
         <Button
