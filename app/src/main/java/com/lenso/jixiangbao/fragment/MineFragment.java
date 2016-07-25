@@ -14,10 +14,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.activity.LoginOrRegisterActivity;
@@ -134,6 +136,19 @@ public class MineFragment extends BaseFragment {
         top.setRefreshingLabel("刷新中...");
         top.setReleaseLabel("释放即可刷新...");
         top.setLoadingDrawable(getActivity().getResources().getDrawable(R.mipmap.sx2));
+
+        mineRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initData();
+                        mineRefreshScrollview.onRefreshComplete();
+                    }
+                }, 500);
+            }
+        });
     }
 
     public void initData() {
