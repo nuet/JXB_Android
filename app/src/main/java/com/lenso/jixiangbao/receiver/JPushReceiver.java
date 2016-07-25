@@ -1,5 +1,6 @@
 package com.lenso.jixiangbao.receiver;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
+import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.data.JPushLocalNotification;
@@ -39,7 +41,18 @@ public class JPushReceiver extends BroadcastReceiver {
 
         if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-            processCustomMessage(context, bundle);
+
+            ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(100);
+            String MY_PACKAGE_NAME = "com.lenso.jixiangbao";
+            for (ActivityManager.RunningTaskInfo info : list) {
+                //如果当前应用在运行，则处理推送的消息
+                if (info.topActivity.getPackageName().equals(MY_PACKAGE_NAME) || info.baseActivity.getPackageName().equals(MY_PACKAGE_NAME)) {
+                    Log.i(TAG,info.topActivity.getPackageName() + " info.baseActivity.getPackageName()="+info.baseActivity.getPackageName());
+                    processCustomMessage(context, bundle);
+                    break;
+                }
+            }
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
@@ -87,7 +100,6 @@ public class JPushReceiver extends BroadcastReceiver {
                 intentOpen.putExtra(HTMLInterface.H5_TITLE, title);
                 context.startActivity(intentOpen);
             } else {
-//                intentOpen.setClass(context, GestureUnlockActivity.class);/*****************调试语句，记得删掉*****************/
                 return;
             }
 
@@ -151,7 +163,6 @@ public class JPushReceiver extends BroadcastReceiver {
                 JPushInterface.addLocalNotification(context, jPushLocalNotification);
             }
         } else {
-//            jPushLocalNotification.setNotificationId(Integer.valueOf("4" + flag));/*****************调试语句，记得删掉*****************/
             return;
         }
 
