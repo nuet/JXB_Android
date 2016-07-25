@@ -43,7 +43,6 @@ public class FinancingFragment extends BaseFragment {
     private CreditListFragment creditListFragment;
     private TransferListFragment transferListFragment;
 
-    public static boolean firstHome = true;
     private View view;
 
     @Nullable
@@ -145,6 +144,14 @@ public class FinancingFragment extends BaseFragment {
 
     public void sortTransferList(){
         transferListFragment.reLoadTransferList();
+    }
+
+    public static boolean isVisible;
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        isVisible = isVisibleToUser;
+        logInfo("isVisible"+String.valueOf(isVisible));
     }
 
 }
