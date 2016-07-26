@@ -327,8 +327,7 @@ public class WebViewActivity extends WebBaseActivity {
 
         @Override
         protected void onPostExecute(String s) {
-//            webView.reload();
-            H5_JS();
+            webView.reload();
             progressDialog.dismiss();
             setResult(MineFragment.ZHXX, null);
             super.onPostExecute(s);
@@ -337,17 +336,6 @@ public class WebViewActivity extends WebBaseActivity {
         public MyAsyncTask() {
             super();
         }
-    }
-
-    private void H5_JS() {
-        Handler mHandler = new Handler();
-        mHandler.post(new Runnable() {
-            public void run() {
-                logInfo("h5 refreshHeadPic");
-                //调用js中的refreshHeadPic方法
-                webView.loadUrl("javascript:refreshHeadPic()");
-            }
-        });
     }
 
 }
