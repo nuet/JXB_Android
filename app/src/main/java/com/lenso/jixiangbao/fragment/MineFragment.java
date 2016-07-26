@@ -286,139 +286,144 @@ public class MineFragment extends BaseFragment {
             showToast("您的账号已离线");
             return;
         }
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), WebViewActivity.class);
-        switch (view.getId()) {
-            case R.id.ll_zhxx:
-            case R.id.iv_headpic:
+
+        if(CommonUtils.isNetworkConnected(getActivity())){
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), WebViewActivity.class);
+            switch (view.getId()) {
+                case R.id.ll_zhxx:
+                case R.id.iv_headpic:
 //            case R.id.tv_username:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
-                startActivityForResult(intent, ZHXX);
-                break;
-            case R.id.usertype:
-                if (userInfo.getDetailuser().getReal_status().equals("0")) {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
+                    startActivityForResult(intent, ZHXX);
+                    break;
+                case R.id.usertype:
+                    if (userInfo.getDetailuser().getReal_status().equals("0")) {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.USERTYPE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                        startActivity(intent);
+                    }
+                    break;
+                case R.id.iv_mine_message:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                     startActivity(intent);
-                }
-                break;
-            case R.id.iv_mine_message:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
-                startActivity(intent);
 //                userInfo.setUnreadmsg(0);
 //                tvMineUnreadmsg.setText("");
 //                tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
-                break;
-            case R.id.ll_tjyj:
-            case R.id.ib_tjyj:
-            case R.id.tv_tjyj:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "推荐有奖");
-                startActivity(intent);
-                break;
-            case R.id.ll_qd:
-            case R.id.ib_qd:
-            case R.id.tv_qd:
-                if (userInfo.getSigned() == 0) {
-                    argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
-                    VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
-                        @Override
-                        public void getJson(String json, boolean isConnectSuccess) {
-                            if (isConnectSuccess) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(json);
-                                    if (jsonObject.getString("status").equals("1")) {
-                                        showToast("签到成功");
-                                        userInfo.setSigned(1);
-                                    } else {
-                                        showToast(jsonObject.getString("rsmsg"));
+                    break;
+                case R.id.ll_tjyj:
+                case R.id.ib_tjyj:
+                case R.id.tv_tjyj:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TJYJ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "推荐有奖");
+                    startActivity(intent);
+                    break;
+                case R.id.ll_qd:
+                case R.id.ib_qd:
+                case R.id.tv_qd:
+                    if (userInfo.getSigned() == 0) {
+                        argsign.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+                        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_USERSIGN, new VolleyHttp.JsonResponseListener() {
+                            @Override
+                            public void getJson(String json, boolean isConnectSuccess) {
+                                if (isConnectSuccess) {
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(json);
+                                        if (jsonObject.getString("status").equals("1")) {
+                                            showToast("签到成功");
+                                            userInfo.setSigned(1);
+                                        } else {
+                                            showToast(jsonObject.getString("rsmsg"));
+                                        }
+                                    } catch (JSONException e) {
+                                        logInfo("sign error!");
+                                        e.printStackTrace();
                                     }
-                                } catch (JSONException e) {
-                                    logInfo("sign error!");
-                                    e.printStackTrace();
+                                } else {
+                                    showToast("请检查网络设置！");
                                 }
-                            } else {
-                                showToast("请检查网络设置！");
                             }
-                        }
-                    }, argsign);
-                    ibQd.setImageResource(R.mipmap.minefragment_yqd);
-                } else {
-                    showToast("您今日已签到，明天再来吧！");
-                }
-                break;
-            case R.id.ll_jf:
-            case R.id.ib_jf:
-            case R.id.tv_jf:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "我的积分");
-                startActivity(intent);
-                break;
-            case R.id.btn_tx:
-                if (userInfo.getDetailuser().getReal_status().equals("0")) {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                        }, argsign);
+                        ibQd.setImageResource(R.mipmap.minefragment_yqd);
+                    } else {
+                        showToast("您今日已签到，明天再来吧！");
+                    }
+                    break;
+                case R.id.ll_jf:
+                case R.id.ib_jf:
+                case R.id.tv_jf:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.JF + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "我的积分");
                     startActivity(intent);
-                }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                    break;
+                case R.id.btn_tx:
+                    if (userInfo.getDetailuser().getReal_status().equals("0")) {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                        startActivity(intent);
+                    }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                        startActivity(intent);
+                    } else {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "提现");
+                        startActivity(intent);
+                    }
+                    break;
+                case R.id.btn_cz:
+                    if (userInfo.getDetailuser().getReal_status().equals("0")) {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                        startActivity(intent);
+                    }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                        startActivity(intent);
+                    } else {
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "充值");
+                        startActivity(intent);
+                    }
+                    break;
+                case R.id.ll_ljsy:
+                case R.id.ll_zcze:
+                case R.id.ll_zjgk:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
                     startActivity(intent);
-                } else {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "提现");
+                    break;
+                case R.id.ll_wdtz:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "我的投资");
                     startActivity(intent);
-                }
-                break;
-            case R.id.btn_cz:
-                if (userInfo.getDetailuser().getReal_status().equals("0")) {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                    break;
+                case R.id.ll_zdtb:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZDTB + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "自动投标");
                     startActivity(intent);
-                }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                    break;
+                case R.id.ll_zqzr:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "债权转让");
                     startActivity(intent);
-                } else {
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "充值");
+                    break;
+                case R.id.ll_wdjk:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
                     startActivity(intent);
-                }
-                break;
-            case R.id.ll_ljsy:
-            case R.id.ll_zcze:
-            case R.id.ll_zjgk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZJGK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "资金概况");
-                startActivity(intent);
-                break;
-            case R.id.ll_wdtz:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDTZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "我的投资");
-                startActivity(intent);
-                break;
-            case R.id.ll_zdtb:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZDTB + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "自动投标");
-                startActivity(intent);
-                break;
-            case R.id.ll_zqzr:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZQZR + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "债权转让");
-                startActivity(intent);
-                break;
-            case R.id.ll_wdjk:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.WDJK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
-                startActivity(intent);
-                break;
-            case R.id.ll_gd:
-                intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                intent.putExtra(HTMLInterface.H5_TITLE, "更多");
-                startActivity(intent);
-                break;
+                    break;
+                case R.id.ll_gd:
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "更多");
+                    startActivity(intent);
+                    break;
+            }
+        }else{
+            showToast(getString(R.string.no_internet));
         }
     }
 

@@ -16,24 +16,15 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.api.HTMLInterface;
-import com.lenso.jixiangbao.api.ServerInterface;
-import com.lenso.jixiangbao.bean.AppScrollPic;
-import com.lenso.jixiangbao.bean.BaseBean;
-import com.lenso.jixiangbao.bean.InvestList;
-import com.lenso.jixiangbao.bean.RightList;
-import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.fragment.ChoiceFragment;
 import com.lenso.jixiangbao.fragment.FinancingFragment;
 import com.lenso.jixiangbao.fragment.FindFragment;
 import com.lenso.jixiangbao.fragment.MineFragment;
 import com.lenso.jixiangbao.fragment.ScreenFragment;
-import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.JViewPager;
@@ -42,7 +33,6 @@ import com.lenso.jixiangbao.view.TopMenuBar;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +95,7 @@ public class HomeActivity extends BaseActivity {
         getIntent = getIntent();
         trysOut = getIntent.getBooleanExtra("trysOut", false);
 
-        CommonUtils commonUtils = new CommonUtils(HOMECONTEXT);
+        CommonUtils commonUtils = new CommonUtils(HOMECONTEXT, true);
         commonUtils.load();
 
     }

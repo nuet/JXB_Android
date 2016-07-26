@@ -25,7 +25,6 @@ import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.util.CommonUtils;
-import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ChoiceLoopViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
 import com.lenso.jixiangbao.view.SpeakerView;
@@ -100,7 +99,7 @@ public class ChoiceFragment extends BaseFragment {
         pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                CommonUtils commonUtils = new CommonUtils(HomeActivity.HOMECONTEXT);
+                CommonUtils commonUtils = new CommonUtils(HomeActivity.HOMECONTEXT, false);
                 commonUtils.load();
             }
         });
@@ -262,10 +261,14 @@ public class ChoiceFragment extends BaseFragment {
 
     @OnClick(R.id.tv_info)
     public void onClick() {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), WebViewActivity.class);
-        intent.putExtra(HTMLInterface.H5_URL, App.BASE_BEAN.getNotice_url());
-        intent.putExtra(HTMLInterface.H5_TITLE, "最新公告");
-        startActivity(intent);
+        if(CommonUtils.isNetworkConnected(getActivity())){
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), WebViewActivity.class);
+            intent.putExtra(HTMLInterface.H5_URL, App.BASE_BEAN.getNotice_url());
+            intent.putExtra(HTMLInterface.H5_TITLE, "最新公告");
+            startActivity(intent);
+        }else{
+            showToast(getString(R.string.no_internet));
+        }
     }
 }

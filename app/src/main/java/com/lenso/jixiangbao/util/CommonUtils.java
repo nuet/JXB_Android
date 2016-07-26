@@ -37,9 +37,10 @@ import java.util.Map;
  */
 public class CommonUtils {
     private Context context;
-    public CommonUtils(Context context) {
+    public CommonUtils(Context context, boolean fromHome) {
         this.context = context;
         this.loadCount = 0;
+        this.fromHome = fromHome;
     }
 
     /**
@@ -170,16 +171,19 @@ public class CommonUtils {
     private InvestList investList;
     private RightList rightList;
     private KProgressHUD progressDialog;
+    private boolean fromHome = false;
     public void load() {
         App.BASE_BEAN = new BaseBean();
         App.THREE_CHOICE = new ThreeChoice();
-        progressDialog = KProgressHUD.create(context)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("加载数据中...")
-                .setCancellable(true)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
-                .show();
+        if(fromHome){
+            progressDialog = KProgressHUD.create(context)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setLabel("加载数据中...")
+                    .setCancellable(true)
+                    .setAnimationSpeed(2)
+                    .setDimAmount(0.5f)
+                    .show();
+        }
         loadValues();
     }
 
@@ -272,8 +276,10 @@ public class CommonUtils {
             App.BASE_BEAN.setInvestList(investList);
             App.BASE_BEAN.setRightList(rightList);
         }
-        progressDialog.dismiss();
         ((HomeActivity) context).initViewPager();
+        if(fromHome){
+            progressDialog.dismiss();
+        }
     }
 
 
