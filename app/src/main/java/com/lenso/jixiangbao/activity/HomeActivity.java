@@ -85,13 +85,6 @@ public class HomeActivity extends BaseActivity {
 
     private long backTime = 0;
 
-    private Gson gson = new Gson();
-    private List<AppScrollPic> picList;
-    private int loadCount = 0;
-    private InvestList investList;
-    private RightList rightList;
-
-    private static KProgressHUD progressDialog;
     private Intent getIntent;
     private boolean trysOut;
 
@@ -112,8 +105,95 @@ public class HomeActivity extends BaseActivity {
         getIntent = getIntent();
         trysOut = getIntent.getBooleanExtra("trysOut", false);
 
-        load();
+        CommonUtils commonUtils = new CommonUtils(HOMECONTEXT);
+        commonUtils.load();
 
+    }
+
+
+    public void initViewPager() {
+        List<Fragment> fragments = new ArrayList<>();
+        choiceFragment = new ChoiceFragment();
+        financingFragment = new FinancingFragment();
+        findFragment = new FindFragment();
+        mineFragment = new MineFragment();
+        fragments.add(choiceFragment);
+        fragments.add(financingFragment);
+        fragments.add(findFragment);
+        fragments.add(mineFragment);
+
+        FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
+        vpHome.setAdapter(adapter);
+        vpHome.setScrollable(false);
+        vpHome.setOffscreenPageLimit(5);
+        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                select(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+        select(0);
+
+        menuItem1.setMenuItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vpHome.setCurrentItem(0);
+            }
+        });
+        menuItem2.setMenuItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vpHome.setCurrentItem(1);
+            }
+        });
+        menuItem3.setMenuItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vpHome.setCurrentItem(2);
+            }
+        });
+        menuItem4.setMenuItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
+                SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+                String gesturePsw = sp.getString("GestureLock", "");
+                if (app_key == null || app_key.equals("") || TextUtils.isEmpty(gesturePsw)) {
+                    Intent intentLogin = new Intent();
+                    intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
+                    startActivity(intentLogin);
+                } else {
+                    mineFragment.initData();
+                    vpHome.setCurrentItem(3);
+                }
+            }
+        });
+
+        if (trysOut) {
+            alertDialog("您已连续5次输入错误,请重新登录!");
+            return;
+        }
+
+        try {
+            PackageManager pm = HOMECONTEXT.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(HOMECONTEXT.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+
+            if(pi.versionCode < App.BASE_BEAN.getVersionCode()){ //如果小于和服务器的最新版本号
+                alertUpdateDialog("当前软件不是最新版本");
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public SlidingMenu getSlidingMenu() {
@@ -234,212 +314,6 @@ public class HomeActivity extends BaseActivity {
         super.onWindowFocusChanged(hasFocus);
     }
 
-    private void initViewPager() {
-        List<Fragment> fragments = new ArrayList<>();
-        choiceFragment = new ChoiceFragment();
-        financingFragment = new FinancingFragment();
-        findFragment = new FindFragment();
-        mineFragment = new MineFragment();
-        fragments.add(choiceFragment);
-        fragments.add(financingFragment);
-        fragments.add(findFragment);
-        fragments.add(mineFragment);
-
-        FragmentViewPageAdapter adapter = new FragmentViewPageAdapter(getSupportFragmentManager(), fragments);
-        vpHome.setAdapter(adapter);
-        vpHome.setScrollable(false);
-        vpHome.setOffscreenPageLimit(5);
-        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                select(i);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-        select(0);
-
-        menuItem1.setMenuItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vpHome.setCurrentItem(0);
-            }
-        });
-        menuItem2.setMenuItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vpHome.setCurrentItem(1);
-            }
-        });
-        menuItem3.setMenuItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vpHome.setCurrentItem(2);
-            }
-        });
-        menuItem4.setMenuItemClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String app_key = Config.getInstance(HomeActivity.this).getConfig("app_key");
-                SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
-                String gesturePsw = sp.getString("GestureLock", "");
-                if (app_key == null || app_key.equals("") || TextUtils.isEmpty(gesturePsw)) {
-                    Intent intentLogin = new Intent();
-                    intentLogin.setClass(HomeActivity.this, LoginOrRegisterActivity.class);
-                    startActivity(intentLogin);
-                } else {
-                    mineFragment.initData();
-                    vpHome.setCurrentItem(3);
-                }
-            }
-        });
-
-        if (trysOut) {
-            alertDialog("您已连续5次输入错误,请重新登录!");
-            return;
-        }
-
-        try {
-            PackageManager pm = HOMECONTEXT.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(HOMECONTEXT.getPackageName(), PackageManager.GET_CONFIGURATIONS);
-
-            if(pi.versionCode < App.BASE_BEAN.getVersionCode()){ //如果小于和服务器的最新版本号
-                alertUpdateDialog("当前软件不是最新版本");
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void load() {
-        logDebug("load...");
-        App.BASE_BEAN = new BaseBean();
-        App.THREE_CHOICE = new ThreeChoice();
-
-        progressDialog = KProgressHUD.create(HomeActivity.this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("加载数据中...")
-                .setCancellable(true)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
-                .show();
-
-        loadValues();
-    }
-
-    private void loadValues() {
-        VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    App.BASE_BEAN.setVersionCode(bean.getVersionCode());//版本号
-                    App.BASE_BEAN.setAndroid_url(bean.getAndroid_url());//更新地址
-                    App.BASE_BEAN.setShare_title(bean.getShare_title());//分享标题
-                    App.BASE_BEAN.setShare_desc(bean.getShare_desc());//分享文本
-                    App.BASE_BEAN.setNew_experience_apr(bean.getNew_experience_apr());//体验标年利率
-                    App.BASE_BEAN.setNew_experience_valid_time(bean.getNew_experience_valid_time());//体验期
-                    App.BASE_BEAN.setStatistic_display(bean.getStatistic_display());//统计数据开关
-                    App.BASE_BEAN.setNotice_txt(bean.getNotice_txt());//最新通知
-                    App.BASE_BEAN.setNotice_url(bean.getNotice_url());//最新通知跳转url
-                    App.BASE_BEAN.setFuwutel(bean.getFuwutel());//客服电话
-                } else {
-//                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadReports();
-            }
-        });
-    }
-
-    private void loadReports() {
-        VolleyHttp.getInstance().getJson(ServerInterface.FINANCIAL_REPORTS, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    App.BASE_BEAN.setPlatformFinancialReport(bean.getPlatformFinancialReport());
-                } else {
-//                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadPicList();
-            }
-        });
-    }
-
-    private void loadPicList() {
-        VolleyHttp.getInstance().getJson(ServerInterface.ALL_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    BaseBean bean = gson.fromJson(json, BaseBean.class);
-                    picList = bean.getAppScrollPic();
-                    App.THREE_CHOICE.setThreeChoice(bean.getSanList());
-                } else {
-//                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadInvestList();
-            }
-        });
-    }
-
-    private void loadInvestList() {
-        Map<String, String> args = new HashMap<String, String>();
-        args.put("s_type","115");
-        VolleyHttp.getInstance().postParamsJson(ServerInterface.INVEST_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    investList = gson.fromJson(json, InvestList.class);
-                } else {
-//                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                loadTransferList();
-            }
-        }, args);
-    }
-
-    private void loadTransferList(){
-        VolleyHttp.getInstance().getJson(ServerInterface.RIGHT_LIST, new VolleyHttp.JsonResponseListener() {
-            @Override
-            public void getJson(String json, boolean isConnectSuccess) {
-                if (json != null && !json.equals("") && !json.equals("null")) {
-                    rightList = gson.fromJson(json, RightList.class);
-                } else {
-//                    showToast(getString(R.string.no_internet));
-                }
-                loadCount++;
-                setData();
-            }
-        });
-    }
-
-    private void setData() {
-        logDebug("home:" + loadCount);
-        if (loadCount < 5){
-            showToast(getString(R.string.no_internet));
-            return;
-        }
-        App.BASE_BEAN.setAppScrollPic(picList);
-        App.BASE_BEAN.setInvestList(investList);
-        App.BASE_BEAN.setRightList(rightList);
-        progressDialog.dismiss();
-
-        initViewPager();
-
-    }
-
     @Override
     public void onBackPressed() {
         if (moreOpen) {
@@ -475,6 +349,7 @@ public class HomeActivity extends BaseActivity {
     public void sortBorrowList() {
         financingFragment.sortBorrowList();
     }
+
     public void sortTransferList() {
         financingFragment.sortTransferList();
     }

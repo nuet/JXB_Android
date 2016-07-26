@@ -11,16 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.LoadingLayoutProxy;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.activity.WebViewActivity;
 import com.lenso.jixiangbao.api.HTMLInterface;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
+import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.view.ChoiceLoopViewPager;
 import com.lenso.jixiangbao.view.LoopViewPager;
@@ -41,7 +45,7 @@ public class ChoiceFragment extends BaseFragment {
     SpeakerView ivInfo;
     @Bind(R.id.tv_info)
     TextView tvInfo;
-    //    @Bind(R.id.tv_info_2)
+//    @Bind(R.id.tv_info_2)
 //    TextView tvInfo2;
 //    @Bind(R.id.tv_info_4)
 //    TextView tvInfo4;
@@ -93,6 +97,13 @@ public class ChoiceFragment extends BaseFragment {
         top.setRefreshingLabel("刷新中...");
         top.setReleaseLabel("释放即可刷新...");
         top.setLoadingDrawable(getActivity().getResources().getDrawable(R.mipmap.sx2));
+        pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                CommonUtils commonUtils = new CommonUtils(HomeActivity.HOMECONTEXT);
+                commonUtils.load();
+            }
+        });
     }
 
     private void initView() {

@@ -24,7 +24,7 @@
         <item name="android:clickable">true</item>
     </style>
     <style name="topMenu" >
-        <item name="tmb_padding">8dp</item>
+        <item name="tmb_padding">10dp</item>
         <item name="tmb_textSize">18sp</item>
         <item name="tmb_textColor">@android:color/white</item>
         <item name="tmb_backgroundColor">@color/blue</item>

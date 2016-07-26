@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
+import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
@@ -35,6 +36,12 @@ import java.util.Map;
  * Created by king on 2016/5/10.
  */
 public class CommonUtils {
+    private Context context;
+    public CommonUtils(Context context) {
+        this.context = context;
+        this.loadCount = 0;
+    }
+
     /**
      * 检测网络是否可用
      * @return
@@ -162,11 +169,17 @@ public class CommonUtils {
     private List<AppScrollPic> picList;
     private InvestList investList;
     private RightList rightList;
-
+    private KProgressHUD progressDialog;
     public void load() {
         App.BASE_BEAN = new BaseBean();
         App.THREE_CHOICE = new ThreeChoice();
-
+        progressDialog = KProgressHUD.create(context)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel("加载数据中...")
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show();
         loadValues();
     }
 
@@ -186,8 +199,8 @@ public class CommonUtils {
                     App.BASE_BEAN.setNotice_txt(bean.getNotice_txt());//最新通知
                     App.BASE_BEAN.setNotice_url(bean.getNotice_url());//最新通知跳转url
                     App.BASE_BEAN.setFuwutel(bean.getFuwutel());//客服电话
+                    loadCount++;
                 }
-                loadCount++;
                 loadReports();
             }
         });
@@ -200,8 +213,8 @@ public class CommonUtils {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
                     App.BASE_BEAN.setPlatformFinancialReport(bean.getPlatformFinancialReport());
+                    loadCount++;
                 }
-                loadCount++;
                 loadPicList();
             }
         });
@@ -215,8 +228,8 @@ public class CommonUtils {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
                     picList = bean.getAppScrollPic();
                     App.THREE_CHOICE.setThreeChoice(bean.getSanList());
+                    loadCount++;
                 }
-                loadCount++;
                 loadInvestList();
             }
         });
@@ -230,8 +243,8 @@ public class CommonUtils {
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     investList = gson.fromJson(json, InvestList.class);
+                    loadCount++;
                 }
-                loadCount++;
                 loadTransferList();
             }
         }, args);
@@ -243,8 +256,8 @@ public class CommonUtils {
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     rightList = gson.fromJson(json, RightList.class);
+                    loadCount++;
                 }
-                loadCount++;
                 setData();
             }
         });
@@ -252,11 +265,15 @@ public class CommonUtils {
 
     private void setData() {
         if (loadCount < 5){
+            Log.i("load", "数据加载失败");
+            progressDialog.dismiss();
             return;
         }
         App.BASE_BEAN.setAppScrollPic(picList);
         App.BASE_BEAN.setInvestList(investList);
         App.BASE_BEAN.setRightList(rightList);
+        progressDialog.dismiss();
+        ((HomeActivity) context).initViewPager();
     }
 
 
