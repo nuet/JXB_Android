@@ -79,7 +79,7 @@ public class TransferListFragment extends BaseFragment {
     private boolean RATE_ASC = true; //第一次点击为升序排列
     private Gson gson = new Gson();
     private Map<String, String> args = new HashMap<String, String>();
-    private static KProgressHUD progressDialog;
+//    private static KProgressHUD progressDialog;
     private static Context context;
 
     private View view;
@@ -124,14 +124,15 @@ public class TransferListFragment extends BaseFragment {
                     if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
                         if (Integer.valueOf(TransferListFragment.pageNum) < 1) {
                             TransferListFragment.pageNum = "1";
+                            reLoadTransferList();
                         }
-                        lvTransferList.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                lvTransferList.onRefreshComplete();
-                                showToast("当前已是第一页");
-                            }
-                        }, 500);
+//                        lvTransferList.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                lvTransferList.onRefreshComplete();
+//                                showToast("当前已是第一页");
+//                            }
+//                        }, 500);
                     } else {
                         reLoadTransferList();
                     }
@@ -175,12 +176,12 @@ public class TransferListFragment extends BaseFragment {
             unselected();
             buttonDefault.setSelected(true);
 
-            progressDialog = KProgressHUD.create(getActivity())
-                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                    .setLabel("正在加载中...")
-                    .setCancellable(true)
-                    .setAnimationSpeed(2)
-                    .setDimAmount(0.5f);
+//            progressDialog = KProgressHUD.create(getActivity())
+//                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                    .setLabel("正在加载中...")
+//                    .setCancellable(true)
+//                    .setAnimationSpeed(2)
+//                    .setDimAmount(0.5f);
         }
 
     }
@@ -280,7 +281,7 @@ public class TransferListFragment extends BaseFragment {
             args.put("s_account", TransferListFragment.s_account);
             args.put("order", TransferListFragment.order);
             args.put("page", TransferListFragment.pageNum);
-            progressDialog.show();
+//            progressDialog.show();
             VolleyHttp.getInstance().postParamsJson(ServerInterface.RIGHT_LIST, new VolleyHttp.JsonResponseListener() {
                 @Override
                 public void getJson(String json, boolean isConnectSuccess) {
@@ -297,7 +298,7 @@ public class TransferListFragment extends BaseFragment {
                                 }
                             }, 500);
                         }
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                     } else {
                         Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
                     }
