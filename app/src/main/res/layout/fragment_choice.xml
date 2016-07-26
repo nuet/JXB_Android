@@ -58,7 +58,7 @@
                 android:layout_toRightOf="@id/iv_info"
                 android:padding="5dp"
                 android:textSize="13sp"
-                android:text="重要公告" />
+                android:text="" />
 
             <!--<TextView-->
                 <!--android:id="@+id/tv_info_1"-->

@@ -266,12 +266,12 @@ public class CommonUtils {
     private void setData() {
         if (loadCount < 5){
             Log.i("load", "数据加载失败");
-            progressDialog.dismiss();
-            return;
+            Toast.makeText(context, context.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+        }else {
+            App.BASE_BEAN.setAppScrollPic(picList);
+            App.BASE_BEAN.setInvestList(investList);
+            App.BASE_BEAN.setRightList(rightList);
         }
-        App.BASE_BEAN.setAppScrollPic(picList);
-        App.BASE_BEAN.setInvestList(investList);
-        App.BASE_BEAN.setRightList(rightList);
         progressDialog.dismiss();
         ((HomeActivity) context).initViewPager();
     }
