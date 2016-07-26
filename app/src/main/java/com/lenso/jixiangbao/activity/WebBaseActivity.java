@@ -1,6 +1,15 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.CountDownTimer;
 import android.os.Environment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -9,12 +18,14 @@ import com.lenso.jixiangbao.util.CommonUtils;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by king on 2016/5/17.
  */
-public class WebBaseActivity extends BaseActivity {
+public class WebBaseActivity extends Activity {
+    private static final String TAG = "WebBaseActivity";
     private Map<String, WebView> webViews;
     private static final String CACHE_PATH = Environment.getDownloadCacheDirectory().getAbsolutePath();
 
@@ -55,10 +66,10 @@ public class WebBaseActivity extends BaseActivity {
 //            /********/
 //
 //            webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-            logDebug("network connect!");
+            Log.d(TAG, "network connect!");
         } else {
             webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-            logDebug("network not connect!");
+            Log.d(TAG, "network not connect!");
         }
         webSettings.setAppCacheEnabled(true);
         webSettings.setAppCachePath(CACHE_PATH);

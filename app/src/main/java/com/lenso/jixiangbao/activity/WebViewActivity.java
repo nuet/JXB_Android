@@ -1,11 +1,16 @@
 package com.lenso.jixiangbao.activity;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +22,7 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.baofoo.sdk.vip.BaofooPayActivity;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -34,6 +40,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -46,7 +53,7 @@ public class WebViewActivity extends WebBaseActivity {
     @Bind(R.id.top_menu_bar)
     TopMenuBar topMenuBar;
 
-
+    private static final String TAG = "WebViewActivity";
     private FrameLayout flWeb;
 
     private File headPIC;
@@ -59,6 +66,22 @@ public class WebViewActivity extends WebBaseActivity {
 
     private KProgressHUD progressDialog;
 
+    private CountDownTimer countDownTimer = new CountDownTimer(8000, 1000) {//总时间3min， 间隔时间0.5s
+        public void onTick(long millisUntilFinished) {
+        }
+
+        public void onFinish() {
+            Log.d(TAG, "TimeOut finish");
+            SharedPreferences sp = getSharedPreferences("GestureLock", Activity.MODE_PRIVATE);
+            String gesturePsw = sp.getString("GestureLock", "");
+            if (!TextUtils.isEmpty(gesturePsw)) {
+                Intent timeOutIntent = new Intent();
+                timeOutIntent.setClass(getApplicationContext(), GestureUnlockActivity.class);
+                timeOutIntent.putExtra("timeOut", true);
+                startActivity(timeOutIntent);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +182,6 @@ public class WebViewActivity extends WebBaseActivity {
         topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("规则");
                 Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
                 intent.putExtra(JSInterface.H5_TITLE, "规则");
                 intent.putExtra(JSInterface.H5_URL, HTMLInterface.JFGZ);
@@ -194,13 +216,15 @@ public class WebViewActivity extends WebBaseActivity {
                         File tempFile = new File(Environment.getExternalStorageDirectory(), "head.png");
                         startPhotoZoom(Uri.fromFile(tempFile));
                     } else {
-                        showToast("未找到存储卡，无法存储照片！");
+                        Toast.makeText(context, "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case 2:
                     startPhotoZoom(data.getData());
                     break;
                 case 0:
+                    Log.d(TAG, "TimeOut cancel");
+                    countDownTimer.cancel();
                     if (data != null) {
                         saveImage(data);
                     }
@@ -298,7 +322,6 @@ public class WebViewActivity extends WebBaseActivity {
                 e.printStackTrace();
             }
 
-
         }
     }
 
@@ -337,5 +360,43 @@ public class WebViewActivity extends WebBaseActivity {
             super();
         }
     }
+
+
+    /*****************
+     * 超时锁
+     *************/
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (isAppBackground(getApplicationContext())) {
+            Log.d(TAG, "TimeOut:" + getClass().getSimpleName());
+            if (!getClass().getSimpleName().equals("GestureUnlockActivity")) {
+                countDownTimer.start();
+                Log.d(TAG, "TimeOut start");
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isAppBackground(getApplicationContext())) {
+            countDownTimer.cancel();
+            Log.d(TAG, "TimeOut cancel");
+        }
+    }
+
+    public static boolean isAppBackground(final Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /*****************超时锁*************/
 
 }
