@@ -30,6 +30,8 @@ public class HTMLInterface {
     public static final String JF = DOMAIN + "member/integral.html";
     public static final String TX = DOMAIN + "member/withdraw.html";
     public static final String CZ = DOMAIN + "member/recharge.html";
+    public static final String BDYHK = DOMAIN + "member/bindingCard.html";//绑定银行卡
+    public static final String SMRZ = DOMAIN + "member/verified.html";//实名认证
 
     public static final String ZJGK = DOMAIN + "member/income.html";
     public static final String WDTZ = DOMAIN + "member/investment.html";

@@ -358,21 +358,33 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.btn_tx:
-                if (!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                if (userInfo.getDetailuser().getReal_status().equals("0")) {
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                    startActivity(intent);
+                }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                    startActivity(intent);
+                } else {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                     startActivity(intent);
-                } else {
-                    showToast("请先绑定银行卡");
                 }
                 break;
             case R.id.btn_cz:
-                if (!TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                if (userInfo.getDetailuser().getReal_status().equals("0")) {
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
+                    startActivity(intent);
+                }else if (TextUtils.isEmpty(userInfo.getAccount().getBankaccount())) {
+                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                    intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
+                    startActivity(intent);
+                } else {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.CZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "充值");
                     startActivity(intent);
-                } else {
-                    showToast("请先绑定银行卡");
                 }
                 break;
             case R.id.ll_ljsy:
