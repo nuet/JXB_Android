@@ -161,6 +161,7 @@ public class MineFragment extends BaseFragment {
                         Gson gson = new Gson();
                         userInfo = gson.fromJson(json, UserInfo.class);
                         Config.getInstance(getActivity()).putConfig("phone", userInfo.getDetailuser().getPhone());
+                        Config.getInstance(getActivity()).putConfig("userid", userInfo.getAccount().getUser_id());
                         initUI();
                     } catch (Exception e) {
                         e.printStackTrace();

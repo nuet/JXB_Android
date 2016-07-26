@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
@@ -326,7 +327,8 @@ public class WebViewActivity extends WebBaseActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            webView.reload();
+//            webView.reload();
+            H5_JS();
             progressDialog.dismiss();
             setResult(MineFragment.ZHXX, null);
             super.onPostExecute(s);
@@ -335,6 +337,17 @@ public class WebViewActivity extends WebBaseActivity {
         public MyAsyncTask() {
             super();
         }
+    }
+
+    private void H5_JS() {
+        Handler mHandler = new Handler();
+        mHandler.post(new Runnable() {
+            public void run() {
+                logInfo("h5 refreshHeadPic");
+                //调用js中的refreshHeadPic方法
+                webView.loadUrl("javascript:refreshHeadPic()");
+            }
+        });
     }
 
 }
