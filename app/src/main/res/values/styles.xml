@@ -8,7 +8,7 @@
     </style>
 
     <style name="SplashTheme" parent="android:Theme.Translucent.NoTitleBar.Fullscreen">
-        <item name="android:windowBackground">@drawable/splash_background</item>
+        <!--<item name="android:windowBackground">@drawable/splash_background</item>-->
     </style>
 
     <style name="LaunchActivityTheme" parent="AppTheme">
