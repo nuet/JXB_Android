@@ -66,7 +66,7 @@ public class WebViewActivity extends WebBaseActivity {
 
     private KProgressHUD progressDialog;
 
-    private CountDownTimer countDownTimer = new CountDownTimer(8000, 1000) {//总时间3min， 间隔时间0.5s
+    private CountDownTimer countDownTimer = new CountDownTimer(180000, 1000) {//总时间3min， 间隔时间1s
         public void onTick(long millisUntilFinished) {
         }
 
@@ -232,6 +232,8 @@ public class WebViewActivity extends WebBaseActivity {
 
                 /*************宝付*********/
                 case JSInterface.REQUEST_CODE_BAOFOO_SDK:
+                    Log.d(TAG, "TimeOut cancel");
+                    countDownTimer.cancel();
                     String result = "";
                     String msg = "";
                     if (data == null || data.getExtras() == null) {

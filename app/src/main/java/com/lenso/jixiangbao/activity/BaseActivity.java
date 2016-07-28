@@ -24,7 +24,7 @@ import java.util.List;
 public class BaseActivity extends FragmentActivity {
     private String TAG = getClass().getSimpleName();
     protected int statusHeight = 0;
-    private CountDownTimer countDownTimer = new CountDownTimer(180000, 1000) {//总时间3min， 间隔时间0.5s
+    private CountDownTimer countDownTimer = new CountDownTimer(180000, 1000) {//总时间3min， 间隔时间1s
         public void onTick(long millisUntilFinished) {
         }
 
