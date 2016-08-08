@@ -17,6 +17,10 @@ public class RightList {
         this.rtList = rtList;
     }
 
+    public void addRtList(List<TransferList> rtList){
+        this.rtList.addAll(rtList);
+    }
+
     public Page getPage() {
         return page;
     }

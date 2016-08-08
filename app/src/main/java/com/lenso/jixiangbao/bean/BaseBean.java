@@ -111,12 +111,20 @@ public class BaseBean {
         this.investList = investList;
     }
 
+    public void addInvest(InvestList investList){
+        this.investList.addBorrowList(investList.getBorrowList());
+    }
+
     public RightList getRightList() {
         return rightList;
     }
 
     public void setRightList(RightList rightList) {
         this.rightList = rightList;
+    }
+
+    public void addRight(RightList rightList){
+        this.rightList.addRtList(rightList.getRtList());
     }
 
     public List<AppScrollPic> getAppScrollPic() {

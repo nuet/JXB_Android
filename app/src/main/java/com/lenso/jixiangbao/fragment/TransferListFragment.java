@@ -124,7 +124,7 @@ public class TransferListFragment extends BaseFragment {
                     if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
                         if (Integer.valueOf(TransferListFragment.pageNum) < 1) {
                             TransferListFragment.pageNum = "1";
-                            reLoadTransferList();
+                            reLoadTransferList(false);
                         }
 //                        lvTransferList.postDelayed(new Runnable() {
 //                            @Override
@@ -134,7 +134,7 @@ public class TransferListFragment extends BaseFragment {
 //                            }
 //                        }, 500);
                     } else {
-                        reLoadTransferList();
+                        reLoadTransferList(false);
                     }
                 }
 
@@ -153,7 +153,7 @@ public class TransferListFragment extends BaseFragment {
                             }
                         }, 500);
                     } else {
-                        reLoadTransferList();
+                        reLoadTransferList(true);
                     }
                 }
             });
@@ -238,19 +238,19 @@ public class TransferListFragment extends BaseFragment {
 
     private void sortDefault() {
         TransferListFragment.order = "0";
-        reLoadTransferList();
+        reLoadTransferList(false);
     }
 
     private void sortLimit(boolean ASC) {
         if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
             TransferListFragment.order = "26";
-            reLoadTransferList();
+            reLoadTransferList(false);
             LIMIT_ASC = false;
         } else {
             ivTimeLimit.setImageResource(R.mipmap.sx2);
             TransferListFragment.order = "-26";
-            reLoadTransferList();
+            reLoadTransferList(false);
             LIMIT_ASC = true;
         }
         RATE_ASC = true;
@@ -260,18 +260,18 @@ public class TransferListFragment extends BaseFragment {
         if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
             TransferListFragment.order = "2";
-            reLoadTransferList();
+            reLoadTransferList(false);
             RATE_ASC = false;
         } else {
             ivAnnualRate.setImageResource(R.mipmap.sx2);
             TransferListFragment.order = "-2";
-            reLoadTransferList();
+            reLoadTransferList(false);
             RATE_ASC = true;
         }
         LIMIT_ASC = true;
     }
 
-    public void reLoadTransferList() {
+    public void reLoadTransferList(final boolean pullUp) {
         if (App.BASE_BEAN == null || App.BASE_BEAN.getRightList() == null) {
             return;
         } else {
@@ -287,7 +287,11 @@ public class TransferListFragment extends BaseFragment {
                 public void getJson(String json, boolean isConnectSuccess) {
                     if (json != null && !json.equals("") && !json.equals("null")) {
                         RightList rightList = gson.fromJson(json, RightList.class);
-                        App.BASE_BEAN.setRightList(rightList);
+                        if(pullUp){
+                            App.BASE_BEAN.addRight(rightList);
+                        }else {
+                            App.BASE_BEAN.setRightList(rightList);
+                        }
                         adapter = new TransferListAdapter(context, App.BASE_BEAN.getRightList().getRtList());
                         lvTransferList.getRefreshableView().setAdapter(adapter);
                         if (lvTransferList.isRefreshing()) {
@@ -315,7 +319,7 @@ public class TransferListFragment extends BaseFragment {
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    reLoadTransferList();
+                    reLoadTransferList(false);
                 }
             }, 500);
         }

@@ -139,11 +139,11 @@ public class FinancingFragment extends BaseFragment {
     }
 
     public void sortBorrowList(){
-        creditListFragment.reLoadBorrowList();
+        creditListFragment.reLoadBorrowList(false);
     }
 
     public void sortTransferList(){
-        transferListFragment.reLoadTransferList();
+        transferListFragment.reLoadTransferList(false);
     }
 
     public static boolean isVisible;

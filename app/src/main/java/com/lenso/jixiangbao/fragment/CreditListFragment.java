@@ -124,7 +124,7 @@ public class CreditListFragment extends BaseFragment {
                     if (Integer.valueOf(CreditListFragment.pageNum) < 1 || Integer.valueOf(CreditListFragment.pageNum) > App.BASE_BEAN.getInvestList().getP().getPages()) {
                         if (Integer.valueOf(CreditListFragment.pageNum) < 1) {
                             CreditListFragment.pageNum = "1";
-                            reLoadBorrowList();
+                            reLoadBorrowList(false);
                         }
 //                        lvCreditList.postDelayed(new Runnable() {
 //                            @Override
@@ -134,7 +134,7 @@ public class CreditListFragment extends BaseFragment {
 //                            }
 //                        }, 500);
                     } else {
-                        reLoadBorrowList();
+                        reLoadBorrowList(false);
                     }
                 }
 
@@ -153,7 +153,7 @@ public class CreditListFragment extends BaseFragment {
                             }
                         }, 500);
                     } else {
-                        reLoadBorrowList();
+                        reLoadBorrowList(true);
                     }
                 }
             });
@@ -239,7 +239,7 @@ public class CreditListFragment extends BaseFragment {
     private void sortDefault() {
         CreditListFragment.order = "0";
         CreditListFragment.pageNum = "1";
-        reLoadBorrowList();
+        reLoadBorrowList(false);
     }
 
     private void sortLimit(boolean ASC) {
@@ -247,12 +247,12 @@ public class CreditListFragment extends BaseFragment {
         if (ASC) {
             ivTimeLimit.setImageResource(R.mipmap.sx1);
             CreditListFragment.order = "26";
-            reLoadBorrowList();
+            reLoadBorrowList(false);
             LIMIT_ASC = false;
         } else {
             ivTimeLimit.setImageResource(R.mipmap.sx2);
             CreditListFragment.order = "-26";
-            reLoadBorrowList();
+            reLoadBorrowList(false);
             LIMIT_ASC = true;
         }
         RATE_ASC = true;
@@ -263,18 +263,18 @@ public class CreditListFragment extends BaseFragment {
         if (ASC) {
             ivAnnualRate.setImageResource(R.mipmap.sx1);
             CreditListFragment.order = "2";
-            reLoadBorrowList();
+            reLoadBorrowList(false);
             RATE_ASC = false;
         } else {
             ivAnnualRate.setImageResource(R.mipmap.sx2);
             CreditListFragment.order = "-2";
-            reLoadBorrowList();
+            reLoadBorrowList(false);
             RATE_ASC = true;
         }
         LIMIT_ASC = true;
     }
 
-    public void reLoadBorrowList() {
+    public void reLoadBorrowList(final boolean pullUp) {
         if (App.BASE_BEAN == null || App.BASE_BEAN.getInvestList() == null) {
             return;
         } else {
@@ -291,7 +291,11 @@ public class CreditListFragment extends BaseFragment {
                 public void getJson(String json, boolean isConnectSuccess) {
                     if (json != null && !json.equals("") && !json.equals("null")) {
                         InvestList investList = gson.fromJson(json, InvestList.class);
-                        App.BASE_BEAN.setInvestList(investList);
+                        if(pullUp){
+                            App.BASE_BEAN.addInvest(investList);
+                        }else {
+                            App.BASE_BEAN.setInvestList(investList);
+                        }
                         adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
                         lvCreditList.getRefreshableView().setAdapter(adapter);
                         if (lvCreditList.isRefreshing()) {
@@ -319,7 +323,7 @@ public class CreditListFragment extends BaseFragment {
             view.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    reLoadBorrowList();
+                    reLoadBorrowList(false);
                 }
             }, 500);
         }

@@ -36,4 +36,8 @@ public class InvestList {
             this.pages = pages;
         }
     }
+
+    public void addBorrowList(List<ChoiceList> borrowList){
+        this.borrowList.addAll(borrowList);
+    }
 }
