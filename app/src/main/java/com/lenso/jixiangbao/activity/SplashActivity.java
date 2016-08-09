@@ -52,6 +52,7 @@ public class SplashActivity extends BaseActivity {
             VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);//new Options().errImage(R.mipmap.lockback)
         } else {
             ivActivitSplash.setImageResource(R.drawable.splash_background);
+            logInfo("chung");
         }
         new Thread(new Runnable() {
             @Override
