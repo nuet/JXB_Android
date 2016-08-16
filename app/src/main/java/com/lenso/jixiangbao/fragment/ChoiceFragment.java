@@ -44,10 +44,6 @@ public class ChoiceFragment extends BaseFragment {
     SpeakerView ivInfo;
     @Bind(R.id.tv_info)
     TextView tvInfo;
-//    @Bind(R.id.tv_info_2)
-//    TextView tvInfo2;
-//    @Bind(R.id.tv_info_4)
-//    TextView tvInfo4;
     @Bind(R.id.vp_choice)
     ChoiceLoopViewPager vpChoice;
     @Bind(R.id.lvp_banner)
@@ -84,6 +80,7 @@ public class ChoiceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_choice, null);
         ButterKnife.bind(this, view);
+        logInfo("bug choice created");
         dp_280 = getResources().getDimension(R.dimen.dp_280);
         initRefreshList();
         initView();
@@ -99,13 +96,15 @@ public class ChoiceFragment extends BaseFragment {
         pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                CommonUtils commonUtils = new CommonUtils(HomeActivity.HOMECONTEXT, false);
-                commonUtils.load();
+                CommonUtils commonUtils = new CommonUtils();
+                commonUtils.loadValues();
+                ((HomeActivity) getActivity()).initViewPager();
             }
         });
     }
 
     private void initView() {
+        logInfo("bug choice initView");
         if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display() == null) {
             return;
         } else {
@@ -247,6 +246,7 @@ public class ChoiceFragment extends BaseFragment {
 
     @Override
     public void onPause() {
+        logInfo("bug choice pause");
         ivInfo.stopSpeaker();
         if (lvpBanner != null)
             lvpBanner.cancelLoopTimer();
@@ -255,6 +255,7 @@ public class ChoiceFragment extends BaseFragment {
 
     @Override
     public void onDestroyView() {
+        logInfo("bug choice destroy");
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

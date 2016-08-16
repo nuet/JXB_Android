@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.lenso.jixiangbao.util.CommonUtils;
 
 import java.util.List;
 

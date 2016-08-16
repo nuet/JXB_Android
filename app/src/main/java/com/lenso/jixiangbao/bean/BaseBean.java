@@ -23,6 +23,28 @@ public class BaseBean {
     private String fuwutel;
     private PlatformFinancialReport platformFinancialReport;
 
+    @Override
+    public String toString() {
+        return "BaseBean{" +
+                "appScrollPic=" + appScrollPic +
+                ", xinList=" + xinList +
+                ", sanList=" + sanList +
+                ", investList=" + investList +
+                ", rightList=" + rightList +
+                ", statistic_display='" + statistic_display + '\'' +
+                ", new_experience_apr='" + new_experience_apr + '\'' +
+                ", new_experience_valid_time='" + new_experience_valid_time + '\'' +
+                ", versionCode=" + versionCode +
+                ", android_url='" + android_url + '\'' +
+                ", share_title='" + share_title + '\'' +
+                ", share_desc='" + share_desc + '\'' +
+                ", notice_txt='" + notice_txt + '\'' +
+                ", notice_url='" + notice_url + '\'' +
+                ", fuwutel='" + fuwutel + '\'' +
+                ", platformFinancialReport=" + platformFinancialReport +
+                '}';
+    }
+
     public String getFuwutel() {
         return fuwutel;
     }

@@ -9,19 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
-import com.lenso.jixiangbao.activity.HomeActivity;
 import com.lenso.jixiangbao.api.ServerInterface;
 import com.lenso.jixiangbao.bean.AppScrollPic;
 import com.lenso.jixiangbao.bean.BaseBean;
 import com.lenso.jixiangbao.bean.InvestList;
 import com.lenso.jixiangbao.bean.RightList;
-import com.lenso.jixiangbao.bean.ThreeChoice;
 import com.lenso.jixiangbao.http.VolleyHttp;
 
 import java.io.File;
@@ -36,12 +32,6 @@ import java.util.Map;
  * Created by king on 2016/5/10.
  */
 public class CommonUtils {
-    private Context context;
-    public CommonUtils(Context context, boolean fromHome) {
-        this.context = context;
-        this.loadCount = 0;
-        this.fromHome = fromHome;
-    }
 
     /**
      * 检测网络是否可用
@@ -170,24 +160,8 @@ public class CommonUtils {
     private List<AppScrollPic> picList;
     private InvestList investList;
     private RightList rightList;
-    private KProgressHUD progressDialog;
-    private boolean fromHome = false;
-    public void load() {
-        App.BASE_BEAN = new BaseBean();
-        App.THREE_CHOICE = new ThreeChoice();
-        if(fromHome){
-            progressDialog = KProgressHUD.create(context)
-                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                    .setLabel("加载数据中...")
-                    .setCancellable(true)
-                    .setAnimationSpeed(2)
-                    .setDimAmount(0.5f)
-                    .show();
-        }
-        loadValues();
-    }
 
-    private void loadValues() {
+    public void loadValues() {
         VolleyHttp.getInstance().getJson(ServerInterface.ALL_DATA, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
@@ -270,15 +244,11 @@ public class CommonUtils {
     private void setData() {
         if (loadCount < 5){
             Log.i("load", "数据加载失败");
-            Toast.makeText(context, context.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, context.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }else {
             App.BASE_BEAN.setAppScrollPic(picList);
             App.BASE_BEAN.setInvestList(investList);
             App.BASE_BEAN.setRightList(rightList);
-        }
-        ((HomeActivity) context).initViewPager();
-        if(fromHome){
-            progressDialog.dismiss();
         }
     }
 

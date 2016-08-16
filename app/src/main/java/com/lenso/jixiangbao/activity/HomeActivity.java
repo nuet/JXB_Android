@@ -69,7 +69,6 @@ public class HomeActivity extends BaseActivity {
     private boolean isFirst = true;
     private ChoiceFragment choiceFragment;
     private FinancingFragment financingFragment;
-    //    private LoanFragment loanFragment;
     private FindFragment findFragment;
     private MineFragment mineFragment;
 
@@ -80,7 +79,6 @@ public class HomeActivity extends BaseActivity {
 
     public ScreenFragment screenFragment1;
     public ScreenFragment screenFragment2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,13 +93,27 @@ public class HomeActivity extends BaseActivity {
         getIntent = getIntent();
         trysOut = getIntent.getBooleanExtra("trysOut", false);
 
-        CommonUtils commonUtils = new CommonUtils(HOMECONTEXT, true);
-        commonUtils.load();
+        logInfo("bug home created");
 
+        initViewPager();
     }
 
 
+    @Override
+    protected void onPause() {
+        logInfo("bug home pause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+//        vpHome.removeAllViews();
+        logInfo("bug home stop");
+        super.onStop();
+    }
+
     public void initViewPager() {
+        logInfo("bug home initViewPager");
         List<Fragment> fragments = new ArrayList<>();
         choiceFragment = new ChoiceFragment();
         financingFragment = new FinancingFragment();
@@ -316,6 +328,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        logInfo("bug home destroy");
         super.onDestroy();
         ShareSDK.stopSDK(this);
     }
