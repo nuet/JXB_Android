@@ -85,6 +85,9 @@ public class WebViewActivity extends WebBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            Log.i(TAG, savedInstanceState.getString("onSaveInstanceState"));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
@@ -133,6 +136,12 @@ public class WebViewActivity extends WebBaseActivity {
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("onSaveInstanceState", "true");
+        super.onSaveInstanceState(outState);
     }
 
     public void reload() {
@@ -189,21 +198,6 @@ public class WebViewActivity extends WebBaseActivity {
             }
         });
     }
-
-//    private void ji_che_dai() {
-//        topMenuBar.setMenuSrc(R.mipmap.calculator);
-//        topMenuBar.setMenuVisibility(View.VISIBLE);
-//        topMenuBar.setOnMenuClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(WebViewActivity.this, WebViewActivity.class);
-//                intent.putExtra(JSInterface.H5_TITLE, "计算器");
-//                intent.putExtra(JSInterface.H5_URL, HTMLInterface.CALCULATOR);
-//                intent.putExtra("intent", JSInterface.CALCULATOR);
-//                startActivity(intent);
-//            }
-//        });
-//    }
 
 
     @Override

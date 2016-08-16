@@ -293,11 +293,12 @@ public class CreditListFragment extends BaseFragment {
                         InvestList investList = gson.fromJson(json, InvestList.class);
                         if(pullUp){
                             App.BASE_BEAN.addInvest(investList);
+                            adapter.notifyDataSetChanged();
                         }else {
                             App.BASE_BEAN.setInvestList(investList);
+                            adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
+                            lvCreditList.getRefreshableView().setAdapter(adapter);
                         }
-                        adapter = new CreditListAdapter(context, App.BASE_BEAN.getInvestList().getBorrowList());
-                        lvCreditList.getRefreshableView().setAdapter(adapter);
                         if (lvCreditList.isRefreshing()) {
                             lvCreditList.postDelayed(new Runnable() {
                                 @Override

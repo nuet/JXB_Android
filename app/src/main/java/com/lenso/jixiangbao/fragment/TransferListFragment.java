@@ -289,11 +289,12 @@ public class TransferListFragment extends BaseFragment {
                         RightList rightList = gson.fromJson(json, RightList.class);
                         if(pullUp){
                             App.BASE_BEAN.addRight(rightList);
+                            adapter.notifyDataSetChanged();
                         }else {
                             App.BASE_BEAN.setRightList(rightList);
+                            adapter = new TransferListAdapter(context, App.BASE_BEAN.getRightList().getRtList());
+                            lvTransferList.getRefreshableView().setAdapter(adapter);
                         }
-                        adapter = new TransferListAdapter(context, App.BASE_BEAN.getRightList().getRtList());
-                        lvTransferList.getRefreshableView().setAdapter(adapter);
                         if (lvTransferList.isRefreshing()) {
                             lvTransferList.postDelayed(new Runnable() {
                                 @Override
