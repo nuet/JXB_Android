@@ -106,8 +106,8 @@ public class MineFragment extends BaseFragment {
     LinearLayout llWdjk;
     @Bind(R.id.ll_zhxx)
     LinearLayout llZhxx;
-    @Bind(R.id.ll_gd)
-    LinearLayout llGd;
+//    @Bind(R.id.ll_gd)
+//    LinearLayout llGd;
     @Bind(R.id.mine_refresh_scrollview)
     PullToRefreshScrollView mineRefreshScrollview;
 
@@ -280,7 +280,8 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zqzr,
             R.id.ll_wdjk,
             R.id.ll_zhxx,
-            R.id.ll_gd})
+//            R.id.ll_gd
+    })
     public void onClick(View view) {
         if (TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))) {
             showToast("您的账号已离线");
@@ -416,11 +417,11 @@ public class MineFragment extends BaseFragment {
                     intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
                     startActivity(intent);
                     break;
-                case R.id.ll_gd:
-                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-                    intent.putExtra(HTMLInterface.H5_TITLE, "更多");
-                    startActivity(intent);
-                    break;
+//                case R.id.ll_gd:
+//                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+//                    intent.putExtra(HTMLInterface.H5_TITLE, "更多");
+//                    startActivity(intent);
+//                    break;
             }
         }else{
             showToast(getString(R.string.no_internet));
