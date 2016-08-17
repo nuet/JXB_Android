@@ -321,12 +321,12 @@ public class CreditListFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if(FinancingFragment.isVisible){
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    reLoadBorrowList(false);
-                }
-            }, 500);
+//            view.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    reLoadBorrowList(false);
+//                }
+//            }, 500);
         }
     }
 }

@@ -316,13 +316,13 @@ public class TransferListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if(FinancingFragment.isVisible){
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    reLoadTransferList(false);
-                }
-            }, 500);
-        }
+//        if(FinancingFragment.isVisible){
+//            view.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    reLoadTransferList(false);
+//                }
+//            }, 500);
+//        }
     }
 }
