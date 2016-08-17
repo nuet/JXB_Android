@@ -120,12 +120,12 @@ public class TransferListFragment extends BaseFragment {
             lvTransferList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    TransferListFragment.pageNum = String.valueOf(Integer.valueOf(TransferListFragment.pageNum) - 1);
-                    if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
-                        if (Integer.valueOf(TransferListFragment.pageNum) < 1) {
+//                    TransferListFragment.pageNum = String.valueOf(Integer.valueOf(TransferListFragment.pageNum) - 1);
+//                    if (Integer.valueOf(TransferListFragment.pageNum) < 1 || Integer.valueOf(TransferListFragment.pageNum) > App.BASE_BEAN.getRightList().getPage().getPages()) {
+//                        if (Integer.valueOf(TransferListFragment.pageNum) < 1) {
                             TransferListFragment.pageNum = "1";
                             reLoadTransferList(false);
-                        }
+//                        }
 //                        lvTransferList.postDelayed(new Runnable() {
 //                            @Override
 //                            public void run() {
@@ -133,9 +133,9 @@ public class TransferListFragment extends BaseFragment {
 //                                showToast("当前已是第一页");
 //                            }
 //                        }, 500);
-                    } else {
-                        reLoadTransferList(false);
-                    }
+//                    } else {
+//                        reLoadTransferList(false);
+//                    }
                 }
 
                 @Override

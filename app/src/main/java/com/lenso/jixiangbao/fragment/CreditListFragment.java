@@ -120,22 +120,22 @@ public class CreditListFragment extends BaseFragment {
             lvCreditList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                    CreditListFragment.pageNum = String.valueOf(Integer.valueOf(CreditListFragment.pageNum) - 1);
-                    if (Integer.valueOf(CreditListFragment.pageNum) < 1 || Integer.valueOf(CreditListFragment.pageNum) > App.BASE_BEAN.getInvestList().getP().getPages()) {
-                        if (Integer.valueOf(CreditListFragment.pageNum) < 1) {
+//                    CreditListFragment.pageNum = String.valueOf(Integer.valueOf(CreditListFragment.pageNum) - 1);
+//                    if (Integer.valueOf(CreditListFragment.pageNum) < 1 || Integer.valueOf(CreditListFragment.pageNum) > App.BASE_BEAN.getInvestList().getP().getPages()) {
+//                        if (Integer.valueOf(CreditListFragment.pageNum) < 1) {
                             CreditListFragment.pageNum = "1";
                             reLoadBorrowList(false);
-                        }
-//                        lvCreditList.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                lvCreditList.onRefreshComplete();
-//                                showToast("当前已是第一页");
-//                            }
-//                        }, 500);
-                    } else {
-                        reLoadBorrowList(false);
-                    }
+//                        }
+////                        lvCreditList.postDelayed(new Runnable() {
+////                            @Override
+////                            public void run() {
+////                                lvCreditList.onRefreshComplete();
+////                                showToast("当前已是第一页");
+////                            }
+////                        }, 500);
+//                    } else {
+//                        reLoadBorrowList(false);
+//                    }
                 }
 
                 @Override
