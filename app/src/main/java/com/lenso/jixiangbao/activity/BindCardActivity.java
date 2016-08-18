@@ -80,10 +80,10 @@ public class BindCardActivity extends BaseActivity {
         VolleyHttp.getInstance().getJson(ServerInterface.SERVER_BANKLIST, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
-                if(isConnectSuccess){
+                if (isConnectSuccess) {
                     Gson gson = new Gson();
                     banklist = gson.fromJson(json, BankList.class);
-                }else{
+                } else {
                     showToast("请检查网络设置");
                 }
                 new Handler().post(new Runnable() {
@@ -99,8 +99,8 @@ public class BindCardActivity extends BaseActivity {
 
     private void setBankData() {
         dataList = new ArrayList<String>();
-        dataList.add("请选择");
-        for(int i=0;i<banklist.getBanklist().size();i++){
+//        dataList.add("请选择");
+        for (int i = 0; i < banklist.getBanklist().size(); i++) {
             dataList.add(banklist.getBanklist().get(i).getName());
         }
 
@@ -113,12 +113,13 @@ public class BindCardActivity extends BaseActivity {
         spBindcardBank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bank = dataList.get(position);
+                bank = banklist.getBanklist().get(position).getId();
+                showToast(bank);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                bank = null;
+                bank = banklist.getBanklist().get(0).getId();
                 showToast("bank is null");
             }
         });
@@ -126,7 +127,7 @@ public class BindCardActivity extends BaseActivity {
 
     @OnClick(R.id.btn_bindcard_confirm)
     public void onClick() {
-        if(CommonUtils.isFastClick()){
+        if (CommonUtils.isFastClick()) {
             return;
         }
         if (bank != null) {
