@@ -43,4 +43,8 @@ public class ServerInterface {
     public final static String TENDER = SERVER_DOMAIN + "tender.html";//债权列表投标
     public final static String TENDER_RIGHT = SERVER_DOMAIN + "tenderright.html";//转让列表投标
 
+
+    public final static String GET_USER_INFO = SERVER_DOMAIN + "getuserinfo.html";//用户信息
+
+
 }

@@ -114,13 +114,13 @@ public class BindCardActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bank = banklist.getBanklist().get(position).getId();
-                showToast(bank);
+//                showToast(bank);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 bank = banklist.getBanklist().get(0).getId();
-                showToast("bank is null");
+//                showToast("bank is null");
             }
         });
     }

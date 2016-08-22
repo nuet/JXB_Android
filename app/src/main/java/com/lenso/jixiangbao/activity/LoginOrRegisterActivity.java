@@ -61,50 +61,46 @@ public class LoginOrRegisterActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login_register)
     public void onClick(View view) {
-//        final KProgressHUD progressDialog = KProgressHUD.create(LoginOrRegisterActivity.this)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setLabel("正在处理中...")
-//                .setCancellable(true)
-//                .setAnimationSpeed(2)
-//                .setDimAmount(0.5f)
-//                .show();
-
         if(CommonUtils.isFastClick()){
             return;
         }
-        args.put("phone", etLoginRegister.getText().toString().trim());
-        VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_ISPHONEREGISTER, new VolleyHttp.JsonResponseListener() {
-                    @Override
-                    public void getJson(String json, boolean isConnectSuccess) {
+        if(CommonUtils.checkPhoneNum(etLoginRegister.getText().toString().trim())){
+            args.put("phone", etLoginRegister.getText().toString().trim());
+            VolleyHttp.getInstance().postParamsJson(ServerInterface.SERVER_ISPHONEREGISTER, new VolleyHttp.JsonResponseListener() {
+                        @Override
+                        public void getJson(String json, boolean isConnectSuccess) {
 //                        logInfo(json);
-                        if (isConnectSuccess) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(json);
-                                if (jsonObject.getString("status").equals("1")) {
-//                                    progressDialog.dismiss();
-                                    if (jsonObject.getString("reged").equals("1")) {
-                                        intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
-                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
-                                    } else {
-                                        intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
-                                        intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
-                                    }
-                                    startActivity(intent);
+                            if (isConnectSuccess) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    if (jsonObject.getString("status").equals("1")) {
+                                        if (jsonObject.getString("reged").equals("1")) {
+                                            intent.setClass(LoginOrRegisterActivity.this, LoginActivity.class);
+                                            intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                                        } else {
+                                            intent.setClass(LoginOrRegisterActivity.this, RegisterActivity.class);
+                                            intent.putExtra("mobile", etLoginRegister.getText().toString().trim());
+                                        }
+                                        startActivity(intent);
 //                                    finish();
-                                } else {
-                                    showToast(jsonObject.getString("rsmsg"));
+                                    } else {
+                                        showToast(jsonObject.getString("rsmsg"));
+                                    }
+                                } catch (JSONException e) {
+                                    logInfo("next http error");
+                                    e.printStackTrace();
                                 }
-                            } catch (JSONException e) {
-                                logInfo("next http error");
-                                e.printStackTrace();
+                            } else {
+                                showToast("请检查网络设置");
                             }
-                        } else {
-                            showToast("请检查网络设置");
-                        }
 
-                    }
-                }, args
-        );
+                        }
+                    }, args
+            );
+        } else {
+            showToast("请输入正确的手机号");
+        }
+
     }
 
 }

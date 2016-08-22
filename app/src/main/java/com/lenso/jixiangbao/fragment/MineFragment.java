@@ -118,6 +118,8 @@ public class MineFragment extends BaseFragment {
 
     public final static int ZHXX = 1;
 
+    private String paypassword = "";
+
     private View view;
 
     @Nullable
@@ -361,6 +363,23 @@ public class MineFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.btn_tx:
+                    Map args = new HashMap();
+                    args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
+                    VolleyHttp.getInstance().postParamsJson(ServerInterface.GET_USER_INFO, new VolleyHttp.JsonResponseListener() {
+                        @Override
+                        public void getJson(String json, boolean isConnectSuccess) {
+                            if (isConnectSuccess) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    if (jsonObject.getString("status").equals("1")) {
+                                        paypassword = jsonObject.getString("paypassword");
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }, args);
                     if (userInfo.getDetailuser().getReal_status().equals("0")) {
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
@@ -369,7 +388,12 @@ public class MineFragment extends BaseFragment {
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
                         startActivity(intent);
-                    } else {
+                    }else if(paypassword.isEmpty()){
+                        intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.PAY_PASSWORD + "&app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
+                        intent.putExtra(HTMLInterface.H5_TITLE, "验证身份");
+                        startActivity(intent);
+                    }
+                    else {
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.TX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                         startActivity(intent);

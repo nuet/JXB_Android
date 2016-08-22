@@ -20,6 +20,9 @@ import com.lenso.jixiangbao.bean.InvestList;
 import com.lenso.jixiangbao.bean.RightList;
 import com.lenso.jixiangbao.http.VolleyHttp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
@@ -252,5 +255,11 @@ public class CommonUtils {
         }
     }
 
-
+    public static boolean checkPhoneNum(String phoneNum){
+        if(phoneNum.startsWith("1") && (phoneNum.length() == 11)){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

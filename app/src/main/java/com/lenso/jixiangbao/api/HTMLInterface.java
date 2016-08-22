@@ -63,4 +63,8 @@ public class HTMLInterface {
     public static final String FIND_8 = DOMAIN + "borrow_security.html";
     public static final String FIND_9 = DOMAIN + "desc_recommend-detail.html";
     /***********************************/
+
+
+    public static final String PAY_PASSWORD = DOMAIN + "member/forgetpassword-1.html?type=pay";
+
 }
