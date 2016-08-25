@@ -85,6 +85,15 @@ public class UserInfo {
         private String username;
         private String typename;
         private String real_status;
+        private String paypassword;
+
+        public String getPaypassword() {
+            return paypassword;
+        }
+
+        public void setPaypassword(String paypassword) {
+            this.paypassword = paypassword;
+        }
 
         public String getPhone() {
             return phone;

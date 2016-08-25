@@ -106,8 +106,6 @@ public class MineFragment extends BaseFragment {
     LinearLayout llWdjk;
     @Bind(R.id.ll_zhxx)
     LinearLayout llZhxx;
-//    @Bind(R.id.ll_gd)
-//    LinearLayout llGd;
     @Bind(R.id.mine_refresh_scrollview)
     PullToRefreshScrollView mineRefreshScrollview;
 
@@ -117,8 +115,6 @@ public class MineFragment extends BaseFragment {
     private DecimalFormat df = new DecimalFormat("0.00");
 
     public final static int ZHXX = 1;
-
-    private String paypassword = "";
 
     private View view;
 
@@ -282,7 +278,6 @@ public class MineFragment extends BaseFragment {
             R.id.ll_zqzr,
             R.id.ll_wdjk,
             R.id.ll_zhxx,
-//            R.id.ll_gd
     })
     public void onClick(View view) {
         if (TextUtils.isEmpty(Config.getInstance(getActivity()).getConfig("app_key"))) {
@@ -296,7 +291,6 @@ public class MineFragment extends BaseFragment {
             switch (view.getId()) {
                 case R.id.ll_zhxx:
                 case R.id.iv_headpic:
-//            case R.id.tv_username:
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.ZHXX + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     logInfo("chung" + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "账户信息");
@@ -313,9 +307,6 @@ public class MineFragment extends BaseFragment {
                     intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.MESSAGE + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                     intent.putExtra(HTMLInterface.H5_TITLE, "消息通知");
                     startActivity(intent);
-//                userInfo.setUnreadmsg(0);
-//                tvMineUnreadmsg.setText("");
-//                tvMineUnreadmsg.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 case R.id.ll_tjyj:
                 case R.id.ib_tjyj:
@@ -363,23 +354,6 @@ public class MineFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.btn_tx:
-                    Map args = new HashMap();
-                    args.put("app_key", Config.getInstance(getActivity()).getConfig("app_key"));
-                    VolleyHttp.getInstance().postParamsJson(ServerInterface.GET_USER_INFO, new VolleyHttp.JsonResponseListener() {
-                        @Override
-                        public void getJson(String json, boolean isConnectSuccess) {
-                            if (isConnectSuccess) {
-                                try {
-                                    JSONObject jsonObject = new JSONObject(json);
-                                    if (jsonObject.getString("status").equals("1")) {
-                                        paypassword = jsonObject.getString("paypassword");
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    }, args);
                     if (userInfo.getDetailuser().getReal_status().equals("0")) {
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.SMRZ + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "实名认证");
@@ -388,7 +362,7 @@ public class MineFragment extends BaseFragment {
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.BDYHK + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "绑定银行卡");
                         startActivity(intent);
-                    }else if(paypassword.isEmpty()){
+                    } else if(userInfo.getDetailuser().getPaypassword().isEmpty()){
                         intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.PAY_PASSWORD + "&app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
                         intent.putExtra(HTMLInterface.H5_TITLE, "验证身份");
                         startActivity(intent);
@@ -398,6 +372,7 @@ public class MineFragment extends BaseFragment {
                         intent.putExtra(HTMLInterface.H5_TITLE, "提现");
                         startActivity(intent);
                     }
+
                     break;
                 case R.id.btn_cz:
                     if (userInfo.getDetailuser().getReal_status().equals("0")) {
@@ -441,11 +416,6 @@ public class MineFragment extends BaseFragment {
                     intent.putExtra(HTMLInterface.H5_TITLE, "我的借款");
                     startActivity(intent);
                     break;
-//                case R.id.ll_gd:
-//                    intent.putExtra(HTMLInterface.H5_URL, HTMLInterface.GD + "?app_key=" + Config.getInstance(getActivity()).getConfig("app_key"));
-//                    intent.putExtra(HTMLInterface.H5_TITLE, "更多");
-//                    startActivity(intent);
-//                    break;
             }
         }else{
             showToast(getString(R.string.no_internet));
