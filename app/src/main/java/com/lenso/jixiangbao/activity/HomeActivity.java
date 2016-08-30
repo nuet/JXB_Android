@@ -8,7 +8,10 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -16,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
@@ -79,6 +83,8 @@ public class HomeActivity extends BaseActivity {
 
     public ScreenFragment screenFragment1;
     public ScreenFragment screenFragment2;
+
+    private DownloadAsyncTask downloadAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -390,9 +396,15 @@ public class HomeActivity extends BaseActivity {
                 .setPositiveButton("去更新", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Uri uri = Uri.parse(App.BASE_BEAN.getAndroid_url());//应用更新地址
-                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intent);
+                        downloadAsyncTask = new DownloadAsyncTask(App.BASE_BEAN.getAndroid_url());
+                        if(CommonUtils.isNetworkConnected(HOMECONTEXT)){
+                            downloadAsyncTask.execute();
+                        } else {
+                            showToast("请检查网络设置");
+                        }
+//                        Uri uri = Uri.parse(App.BASE_BEAN.getAndroid_url());//应用更新地址
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("取消", new View.OnClickListener() {
@@ -482,4 +494,42 @@ public class HomeActivity extends BaseActivity {
         screenFragment2.initData(data, 2);
     }
 
+    public class DownloadAsyncTask extends AsyncTask<Integer, Integer, String> {
+        KProgressHUD kProgressHUD;
+        String url;
+        public DownloadAsyncTask(String url) {
+            super();
+            this.url = url;
+            this.kProgressHUD = KProgressHUD.create(HOMECONTEXT)
+                    .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                    .setLabel("正在下载中...")
+                    .setMaxProgress(100)
+                    .setCancellable(false);
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            CommonUtils.openFile(CommonUtils.downFile(url, HOMECONTEXT, new Handler(HOMECONTEXT.getMainLooper()){
+                @Override
+                public void handleMessage(Message msg) {
+                    int progress = (int) msg.obj;
+                    kProgressHUD.setProgress(progress);
+                    super.handleMessage(msg);
+                }
+            }), HOMECONTEXT);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            kProgressHUD.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            kProgressHUD.dismiss();
+            super.onPostExecute(s);
+        }
+    }
 }

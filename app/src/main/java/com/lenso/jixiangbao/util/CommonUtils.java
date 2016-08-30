@@ -2,13 +2,18 @@ package com.lenso.jixiangbao.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lenso.jixiangbao.App;
@@ -24,7 +29,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -261,5 +272,72 @@ public class CommonUtils {
         } else {
             return false;
         }
+    }
+
+    public static File downFile(String httpUrl, Context context, Handler handler) {
+        String fileName = httpUrl.substring(httpUrl.lastIndexOf("/") + 1);
+        File tmpFile = new File("/sdcard/update");
+        if (!tmpFile.exists()) {
+            tmpFile.mkdir();
+        }
+        File file = new File("/sdcard/update/" + fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            URL url = new URL(httpUrl);
+            try {
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                InputStream is = conn.getInputStream();
+
+                int contentLength = conn.getContentLength();
+                int currentLength = 0;
+
+                FileOutputStream fos = new FileOutputStream(file);
+                byte[] buf = new byte[5120];
+                conn.connect();
+                double count = 0;
+                if (conn.getResponseCode() >= 400) {
+                    Toast.makeText(context, "连接超时", Toast.LENGTH_SHORT).show();
+                } else {
+                    while (count <= 100) {
+                        if (is != null) {
+                            int numRead = is.read(buf);
+                            if (numRead <= 0) {
+                                break;
+                            } else {
+                                fos.write(buf, 0, numRead);
+                                currentLength += numRead;
+                                int progress = (int) Math.floor((100 * currentLength)/contentLength);
+                                Message msg = new Message();
+                                msg.obj = progress;
+                                handler.sendMessage(msg);
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                conn.disconnect();
+                fos.close();
+                is.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    public static void openFile(File file, Context context) {
+        // TODO Auto-generated method stub
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        context.startActivity(intent);
     }
 }
