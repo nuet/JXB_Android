@@ -131,17 +131,13 @@ public class HomeActivity extends BaseActivity {
         vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
-
             @Override
             public void onPageSelected(int i) {
                 select(i);
             }
-
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
         select(0);
@@ -150,12 +146,22 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 vpHome.setCurrentItem(0);
+                vpHome.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        CommonUtils commonUtils = new CommonUtils();
+                        commonUtils.loadValues();
+                        initViewPager();
+                    }
+                }, 800);
+
             }
         });
         menuItem2.setMenuItemClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 vpHome.setCurrentItem(1);
+                financingFragment.refresh();
             }
         });
         menuItem3.setMenuItemClickListener(new View.OnClickListener() {

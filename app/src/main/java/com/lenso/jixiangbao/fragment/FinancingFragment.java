@@ -154,4 +154,11 @@ public class FinancingFragment extends BaseFragment {
         logInfo("isVisible"+String.valueOf(isVisible));
     }
 
+    public void refresh(){
+        CreditListFragment.pageNum = "1";
+        creditListFragment.reLoadBorrowList(false);
+
+        TransferListFragment.pageNum = "1";
+        transferListFragment.reLoadTransferList(false);
+    }
 }
