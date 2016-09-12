@@ -164,31 +164,32 @@ public class MineFragment extends BaseFragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                         logInfo("GSon解析出错");
-                        CommonUtils.clearGesturePassword(getActivity());//清空手势密码
-                        Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
+                        if(getActivity() != null){
+                            CommonUtils.clearGesturePassword(getActivity());//清空手势密码
+                            Config.getInstance(getActivity()).putConfig("app_key", "");//清空app_key
 
-                        //清空JPush别名
-                        JPushSettings jPushSettings = new JPushSettings(getActivity());
-                        jPushSettings.setAlias("");
+                            //清空JPush别名
+                            JPushSettings jPushSettings = new JPushSettings(getActivity());
+                            jPushSettings.setAlias("");
 
-                        new iOSAlertDialog(getActivity()).builder()
-                                .setTitle("警告")
-                                .setMsg("您的账号已离线，是否重新登录?")
-                                .setCancelable(false)
-                                .setPositiveButton("确认", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Intent intent = new Intent();
-                                        intent.setClass(getActivity(), LoginOrRegisterActivity.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                                .setNegativeButton("取消", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                    }
-                                }).show();
-
+                            new iOSAlertDialog(getActivity()).builder()
+                                    .setTitle("警告")
+                                    .setMsg("您的账号已离线，是否重新登录?")
+                                    .setCancelable(false)
+                                    .setPositiveButton("确认", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent();
+                                            intent.setClass(getActivity(), LoginOrRegisterActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .setNegativeButton("取消", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                        }
+                                    }).show();
+                        }
                     }
                 } else {
 //                    showToast("请检查网络设置");
