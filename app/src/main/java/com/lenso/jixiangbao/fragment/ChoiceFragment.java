@@ -96,9 +96,11 @@ public class ChoiceFragment extends BaseFragment {
         pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                CommonUtils commonUtils = new CommonUtils();
-                commonUtils.loadValues();
-                ((HomeActivity) getActivity()).initViewPager();
+                if(!isFastPull()){
+                    CommonUtils commonUtils = new CommonUtils();
+                    commonUtils.loadValues();
+                    ((HomeActivity) getActivity()).initViewPager();
+                }
             }
         });
     }
@@ -272,4 +274,15 @@ public class ChoiceFragment extends BaseFragment {
             showToast(getString(R.string.no_internet));
         }
     }
+
+    private static long lastClickTime;
+    private synchronized static boolean isFastPull() {
+        long time = System.currentTimeMillis();
+        if (time - lastClickTime < 1000) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
 }
