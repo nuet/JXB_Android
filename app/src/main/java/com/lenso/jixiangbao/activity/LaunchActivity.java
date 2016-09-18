@@ -23,12 +23,12 @@ import butterknife.ButterKnife;
 public class LaunchActivity extends BaseActivity {
     @Bind(R.id.vp_launch)
     ViewPager vpLaunch;//引导页视图
-    @Bind(R.id.ll_launch)
-    LinearLayout llLaunch;//引导页导航视图
+//    @Bind(R.id.ll_launch)
+//    LinearLayout llLaunch;//引导页导航视图
 
     private ArrayList<View> viewList;//引导页子页
-    private ImageView[] dots;//引导页导航点
-    private int currentDot;//当前导航点
+//    private ImageView[] dots;//引导页导航点
+//    private int currentDot;//当前导航点
     private LaunchViewPagerAdapter mPagerAdapter;//引导页适配器
 
     @Override
@@ -38,7 +38,7 @@ public class LaunchActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         initPageView();//初始化引导页面
-        initDotView();//初始化导航小圆点
+//        initDotView();//初始化导航小圆点
 
     }
 
@@ -74,18 +74,18 @@ public class LaunchActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int i) {
-                setCurrentDot(i);//设置选中导航点状态
+//                setCurrentDot(i);//设置选中导航点状态
                 if(i == 4){
-                    viewList.get(i).findViewById(R.id.btn_login_register).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-//                            showToast("登陆/注册");
-                            Intent intent = new Intent();
-                            intent.setClass(LaunchActivity.this,LoginOrRegisterActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
+//                    viewList.get(i).findViewById(R.id.btn_login_register).setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+////                            showToast("登陆/注册");
+//                            Intent intent = new Intent();
+//                            intent.setClass(LaunchActivity.this,LoginOrRegisterActivity.class);
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//                    });
 
                     viewList.get(i).findViewById(R.id.btn_go_enjoy).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -110,29 +110,29 @@ public class LaunchActivity extends BaseActivity {
     /**
      * 初始化导航点
      */
-    private void initDotView() {
-        dots = new ImageView[viewList.size()];
-
-        for (int i = 0; i < viewList.size(); i++) {
-            dots[i] = (ImageView) llLaunch.getChildAt(i);
-            if (i == 0) {
-                dots[i].setSelected(true);// 设为选中
-            } else {
-                dots[i].setSelected(false);// 设为为选中
-            }
-        }
-        currentDot = 0;
-    }
+//    private void initDotView() {
+//        dots = new ImageView[viewList.size()];
+//
+//        for (int i = 0; i < viewList.size(); i++) {
+//            dots[i] = (ImageView) llLaunch.getChildAt(i);
+//            if (i == 0) {
+//                dots[i].setSelected(true);// 设为选中
+//            } else {
+//                dots[i].setSelected(false);// 设为为选中
+//            }
+//        }
+//        currentDot = 0;
+//    }
 
     /**
      * 设置当前导航点
      *
      * @param position ViewPager当前位置
      */
-    private void setCurrentDot(int position) {
-        dots[currentDot].setSelected(false);//改变上一页状态
-        dots[position].setSelected(true);//设置当前页状态
-        currentDot = position;//重设当前导航点位置
-    }
+//    private void setCurrentDot(int position) {
+//        dots[currentDot].setSelected(false);//改变上一页状态
+//        dots[position].setSelected(true);//设置当前页状态
+//        currentDot = position;//重设当前导航点位置
+//    }
 
 }
