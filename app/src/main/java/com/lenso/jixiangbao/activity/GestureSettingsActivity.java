@@ -96,6 +96,7 @@ public class GestureSettingsActivity extends BaseActivity {
                 if(jsFlag){
                     finish();
                 }else{
+                    HomeActivity.trysOut = false;
                     Intent intent = new Intent();
                     intent.setClass(GestureSettingsActivity.this, HomeActivity.class);
                     startActivity(intent);

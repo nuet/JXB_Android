@@ -79,7 +79,7 @@ public class HomeActivity extends BaseActivity {
     private long backTime = 0;
 
     private Intent getIntent;
-    private boolean trysOut;
+    public static boolean trysOut;
 
     public ScreenFragment screenFragment1;
     public ScreenFragment screenFragment2;
