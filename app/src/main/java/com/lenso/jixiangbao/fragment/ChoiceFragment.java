@@ -99,7 +99,9 @@ public class ChoiceFragment extends BaseFragment {
                 if(!isFastPull()){
                     CommonUtils commonUtils = new CommonUtils();
                     commonUtils.loadValues();
-                    ((HomeActivity) getActivity()).initViewPager();
+                    if(getActivity() != null){
+                        ((HomeActivity) getActivity()).initViewPager();
+                    }
                 }
             }
         });
@@ -278,7 +280,7 @@ public class ChoiceFragment extends BaseFragment {
     private static long lastClickTime;
     private synchronized static boolean isFastPull() {
         long time = System.currentTimeMillis();
-        if (time - lastClickTime < 3000) {
+        if (time - lastClickTime < 1000) {
             return true;
         }
         lastClickTime = time;
