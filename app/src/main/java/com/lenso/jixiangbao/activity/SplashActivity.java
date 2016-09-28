@@ -1,6 +1,7 @@
 package com.lenso.jixiangbao.activity;
 
 import android.app.Activity;
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 
 import com.lenso.jixiangbao.R;
 import com.lenso.jixiangbao.api.ServerInterface;
+import com.lenso.jixiangbao.http.Options;
 import com.lenso.jixiangbao.http.VolleyHttp;
 import com.lenso.jixiangbao.util.CommonUtils;
 import com.lenso.jixiangbao.util.Config;
@@ -48,8 +50,11 @@ public class SplashActivity extends BaseActivity {
         Time time = new Time();
         time.setToNow(); // 取得系统时间
         String url = ServerInterface.GET_SPLASH_PIC + "?time=" + time.toString();
+        Options opt = new Options();
+        opt.defImage(R.drawable.splash_background);
+        opt.errImage(R.drawable.splash_background);
         if(CommonUtils.isNetworkConnected(context)){
-            VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, null);//new Options().errImage(R.mipmap.lockback)
+            VolleyHttp.getInstance().imageLoader(url, ivActivitSplash, opt);
         } else {
             ivActivitSplash.setImageResource(R.drawable.splash_background);
             logInfo("chung");

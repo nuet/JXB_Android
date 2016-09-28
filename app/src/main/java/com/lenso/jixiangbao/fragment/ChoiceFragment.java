@@ -96,18 +96,18 @@ public class ChoiceFragment extends BaseFragment {
         pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-//                if(!isFastPull()){
+                if(!isFastPull()){
                     CommonUtils commonUtils = new CommonUtils();
                     commonUtils.loadValues();
                     ((HomeActivity) getActivity()).initViewPager();
-//                }
+                }
             }
         });
     }
 
     private void initView() {
         logInfo("bug choice initView");
-        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display() == null) {
+        if (App.BASE_BEAN == null || App.THREE_CHOICE == null || App.BASE_BEAN.getStatistic_display() == null || App.BASE_BEAN.getAppScrollPic() == null) {
             return;
         } else {
             int padding = (int) getResources().getDimension(R.dimen.dp_2);
@@ -275,14 +275,14 @@ public class ChoiceFragment extends BaseFragment {
         }
     }
 
-//    private static long lastClickTime;
-//    private synchronized static boolean isFastPull() {
-//        long time = System.currentTimeMillis();
-//        if (time - lastClickTime < 1000) {
-//            return true;
-//        }
-//        lastClickTime = time;
-//        return false;
-//    }
+    private static long lastClickTime;
+    private synchronized static boolean isFastPull() {
+        long time = System.currentTimeMillis();
+        if (time - lastClickTime < 3000) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
 
 }

@@ -9,5 +9,5 @@
         android:bottomRightRadius="5dp"/>
     <!-- 填充 -->
     <solid
-        android:color="@color/btn_dark_blue"/>
+        android:color="@color/darker_orange"/>
 </shape>
