@@ -72,13 +72,13 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:background="@drawable/selector_btn_orange"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:scaleType="fitStart"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/login_or_register"/>
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:scaleType="fitStart"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:src="@mipmap/login_or_register"/>-->
         <!--<TextView-->
             <!--android:id="@+id/tv_test"-->
             <!--android:layout_width="wrap_content"-->
