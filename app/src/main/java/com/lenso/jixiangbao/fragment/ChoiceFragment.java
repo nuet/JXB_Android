@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -96,10 +97,10 @@ public class ChoiceFragment extends BaseFragment {
         pullRefreshScrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                if(!isFastPull()){
+                if (!isFastPull()) {
                     CommonUtils commonUtils = new CommonUtils();
                     commonUtils.loadValues();
-                    if(getActivity() != null){
+                    if (getActivity() != null) {
                         ((HomeActivity) getActivity()).initViewPager();
                     }
                 }
@@ -179,8 +180,14 @@ public class ChoiceFragment extends BaseFragment {
             dots.get(0).setSelected(true);
             Point outSize = new Point();
             getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y - dp_280));
-            vpChoice.setLayoutParams(lp);
+
+            int height = 3 * outSize.x / 8;
+            logDebug("height:"+String.valueOf(height));
+            FrameLayout.LayoutParams lp1 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+            lvpBanner.setLayoutParams(lp1);
+
+            RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (outSize.y - dp_280));
+            vpChoice.setLayoutParams(lp2);
 
             choiceActionFragment1.setAPR(App.THREE_CHOICE.getThreeChoice().get(2).getApr() + "%");
             choiceActionFragment1.setOnClickEvent(2);
@@ -266,18 +273,19 @@ public class ChoiceFragment extends BaseFragment {
 
     @OnClick(R.id.tv_info)
     public void onClick() {
-        if(CommonUtils.isNetworkConnected(getActivity())){
+        if (CommonUtils.isNetworkConnected(getActivity())) {
             Intent intent = new Intent();
             intent.setClass(getActivity(), WebViewActivity.class);
             intent.putExtra(HTMLInterface.H5_URL, App.BASE_BEAN.getNotice_url());
             intent.putExtra(HTMLInterface.H5_TITLE, "最新公告");
             startActivity(intent);
-        }else{
+        } else {
             showToast(getString(R.string.no_internet));
         }
     }
 
     private static long lastClickTime;
+
     private synchronized static boolean isFastPull() {
         long time = System.currentTimeMillis();
         if (time - lastClickTime < 1000) {
