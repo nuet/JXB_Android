@@ -86,37 +86,26 @@
             android:launchMode="singleTask"
             android:alwaysRetainTaskState="true"
             android:windowSoftInputMode="adjustPan"/>
-
         <activity android:name=".activity.WebViewActivity"
             android:theme="@style/WebViewTheme"
             android:windowSoftInputMode="adjustUnspecified"/>
-
         <activity android:name=".activity.LoginOrRegisterActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.RegisterActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.IdentifyActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.VerifyActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.ForgetPasswordActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.SetPasswordActivity"
             android:windowSoftInputMode="stateVisible"/>
-
         <activity android:name=".activity.BindCardActivity"/>
-
         <activity android:name=".activity.GestureSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
         <activity android:name=".activity.GestureUnlockActivity"
             android:theme="@style/LaunchActivityTheme"/>
 
@@ -217,7 +206,8 @@
 
         <!-- JPush . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="43afae061fe3960329d8b7f6" /> <!-- 值来自开发者平台取得的AppKey-->
+        <!--<meta-data android:name="JPUSH_APPKEY" android:value="43afae061fe3960329d8b7f6" /> &lt;!&ndash; 值来自开发者平台取得的AppKey&ndash;&gt;-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="03a72b048ca17f0e93b15ab1" /> <!-- 值来自开发者平台取得的AppKey-->
 
     </application>
 
