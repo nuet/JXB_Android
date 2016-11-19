@@ -26,6 +26,8 @@ import com.lenso.jixiangbao.util.Config;
 import com.lenso.jixiangbao.util.JPushSettings;
 import com.lenso.jixiangbao.view.iOSActionSheetDialog;
 import com.lenso.jixiangbao.view.iOSAlertDialog;
+import com.mob.tools.utils.LocationHelper;
+import com.mob.tools.utils.UIHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,10 +36,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+import cn.sharesdk.sina.weibo.SinaWeibo;
 
 /**
  * Created by king on 2016/5/17.
@@ -52,7 +59,9 @@ public class JSInterface {
     private final Context context;
     private final Activity activity;
 
-    /*******宝付*******/
+    /*******
+     * 宝付
+     *******/
     private Map BAO_FOO = new HashMap();
     private String tradeNo = "";
     public final static int REQUEST_CODE_BAOFOO_SDK = 100;
@@ -62,7 +71,10 @@ public class JSInterface {
     private static String paypassword;
     private static String id;
     private static String rtid;
-    /*******宝付*******/
+
+    /*******
+     * 宝付
+     *******/
 
 
     public JSInterface(Context context) {
@@ -264,6 +276,60 @@ public class JSInterface {
         // Url：仅在QQ空间使用
         oks.setTitleUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));  //网友点进链接后，可以看到分享的详情
 
+
+        //移除新浪微博授权
+        oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+            @Override
+            public void onShare(Platform platform, Platform.ShareParams paramsToShare) {
+                if (SinaWeibo.NAME.equals(platform.getName())) {
+                    Log.d("shareSDK", "sina");
+                    paramsToShare.setText(App.BASE_BEAN.getShare_desc());
+                    paramsToShare.setUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));
+                    paramsToShare.setImageUrl(ServerInterface.SHARE_PIC);
+                    if (platform.isAuthValid()) {
+                        platform.removeAccount(true);
+                        ShareSDK.removeCookieOnAuthorize(true);
+                    }
+                }
+            }
+        });
+
+        //调试信息
+        oks.setCallback(new PlatformActionListener() {
+            Handler.Callback callback = new Handler.Callback() {
+                @Override
+                public boolean handleMessage(Message msg) {
+                    Log.d("shareSDK", msg.obj.toString());
+                    return false;
+                }
+            };
+
+            @Override
+            public void onError(Platform arg0, int arg1, Throwable t) {
+                // TODO Auto-generated method stub
+                Message msg = new Message();
+                msg.obj = t;
+                msg.arg1 = 2;
+                UIHandler.sendMessage(msg, callback);
+            }
+
+            @Override
+            public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
+                Message msg = new Message();
+                msg.obj = arg2;
+                msg.arg1 = 1;
+                UIHandler.sendMessage(msg, callback);
+            }
+
+            @Override
+            public void onCancel(Platform arg0, int arg1) {
+                Message msg = new Message();
+                msg.arg1 = 3;
+                UIHandler.sendMessage(msg, callback);
+            }
+        });
+
+
         // 启动分享GUI
         oks.show(context);
     }
@@ -272,25 +338,26 @@ public class JSInterface {
      * 跳转至注册登录页
      */
     @JavascriptInterface
-    public void toLoginOrRegister(){
+    public void toLoginOrRegister() {
         Intent intent = new Intent(context, LoginOrRegisterActivity.class);
         context.startActivity(intent);
     }
 
     /**
      * 设置免打扰时段
+     *
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void noBother(boolean isSelected){
-        if(isSelected){
+    public void noBother(boolean isSelected) {
+        if (isSelected) {
             Set<Integer> days = new HashSet<Integer>();
-            for(int i=0;i<7;i++){
+            for (int i = 0; i < 7; i++) {
                 days.add(i);
             }
             JPushInterface.setPushTime(context, days, 8, 22);
             Config.getInstance(context).putConfig("noBother", "1");
-        }else{
+        } else {
             JPushInterface.setPushTime(context, null, 0, 23);
             Config.getInstance(context).putConfig("noBother", "0");
         }
@@ -298,50 +365,54 @@ public class JSInterface {
 
     /**
      * 设置活动消息
+     *
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void activityMSG(boolean isSelected){
-        if(isSelected){
-            Config.getInstance(context).putConfig("activityMSG","1");
-        }else{
-            Config.getInstance(context).putConfig("activityMSG","0");
+    public void activityMSG(boolean isSelected) {
+        if (isSelected) {
+            Config.getInstance(context).putConfig("activityMSG", "1");
+        } else {
+            Config.getInstance(context).putConfig("activityMSG", "0");
         }
     }
 
     /**
      * 设置通知消息
+     *
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void notificationMSG(boolean isSelected){
-        if(isSelected){
-            Config.getInstance(context).putConfig("notificationMSG","1");
-        }else{
-            Config.getInstance(context).putConfig("notificationMSG","0");
+    public void notificationMSG(boolean isSelected) {
+        if (isSelected) {
+            Config.getInstance(context).putConfig("notificationMSG", "1");
+        } else {
+            Config.getInstance(context).putConfig("notificationMSG", "0");
         }
     }
 
     /**
      * 设置新标消息
+     *
      * @param isSelected 开关是否打开
      */
     @JavascriptInterface
-    public void newTenderMSG(boolean isSelected){
-        if(isSelected){
-            Config.getInstance(context).putConfig("newTenderMSG","1");
-        }else{
-            Config.getInstance(context).putConfig("newTenderMSG","0");
+    public void newTenderMSG(boolean isSelected) {
+        if (isSelected) {
+            Config.getInstance(context).putConfig("newTenderMSG", "1");
+        } else {
+            Config.getInstance(context).putConfig("newTenderMSG", "0");
         }
     }
 
     /**
      * 宝付充值接口
-     * @param money 需要充值金额
+     *
+     * @param money   需要充值金额
      * @param willBuy 是否是静默购买调用
      */
     @JavascriptInterface
-    public void BAO_FOO_RECHARGE(String money, boolean willBuy, String type){
+    public void BAO_FOO_RECHARGE(String money, boolean willBuy, String type) {
         /*************宝付*********/
         BAO_FOO.put("app_key", Config.getInstance(context).getConfig("app_key"));
         BAO_FOO.put("money", money);
@@ -351,11 +422,11 @@ public class JSInterface {
         VolleyHttp.getInstance().postParamsJson(ServerInterface.RECHARGE, new VolleyHttp.JsonResponseListener() {
             @Override
             public void getJson(String json, boolean isConnectSuccess) {
-                if(isConnectSuccess){
+                if (isConnectSuccess) {
                     try {
 //                        Log.i("BAOFOO", json);
                         JSONObject jsonObject = new JSONObject(json);
-                        if (jsonObject.getString("status").equals("1")){
+                        if (jsonObject.getString("status").equals("1")) {
                             tradeNo = jsonObject.getString("tradeNo");
                             Log.i("tradeNo", tradeNo);
                             Intent payintent = new Intent(context, BaofooPayActivity.class);
@@ -366,26 +437,26 @@ public class JSInterface {
                             activity.startActivityForResult(payintent, REQUEST_CODE_BAOFOO_SDK);
                             tradeNo = ""; //清空本次交易号
                             BAO_FOO = new HashMap(); // 清空本次参数
-                        }else {
+                        } else {
                             showToast("交易失败");
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
+                } else {
                     showToast("请检查网络设置");
                 }
             }
         }, BAO_FOO);
 
-        if(willBuy){
-            if(type.equals("1")){
+        if (willBuy) {
+            if (type.equals("1")) {
                 initHandler(buy_money, paypassword, id, type);
             }
-            if(type.equals("2")){
+            if (type.equals("2")) {
                 initHandler(buy_money, paypassword, rtid, type);
             }
-        }else{
+        } else {
             initHandler("0", null, null, type);
         }
         /*************宝付*********/
@@ -393,18 +464,19 @@ public class JSInterface {
 
     /**
      * 充值并静默购买接口
-     * @param buy_money 需要投标的总额
+     *
+     * @param buy_money      需要投标的总额
      * @param recharge_money 需要充值的金额
-     * @param paypassword 支付密码
-     * @param id id
+     * @param paypassword    支付密码
+     * @param id             id
      */
     @JavascriptInterface
-    public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id, String type){
+    public void BAO_FOO_RECHARGE_AND_BUY(String buy_money, String recharge_money, String paypassword, String id, String type) {
         log(buy_money);
-        if(type.equals("1")){
+        if (type.equals("1")) {
             this.id = id;
         }
-        if(type.equals("2")){
+        if (type.equals("2")) {
             this.rtid = id;
         }
         this.buy_money = buy_money;
@@ -413,23 +485,23 @@ public class JSInterface {
     }
 
 
-    private void initHandler(String buy_money, String paypassword, String id, String type){
+    private void initHandler(String buy_money, String paypassword, String id, String type) {
         final String MONEY = buy_money;
         final String PAY_PASSWORD = paypassword;
         final String ID = id;
         final String TYPE = type;
-        handler = new Handler(){
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if(!MONEY.equals("0")){
-                    switch (msg.what){
+                if (!MONEY.equals("0")) {
+                    switch (msg.what) {
                         case -1:
                         case 0:
                         case 10:
                             showToast((String) msg.obj);
                             break;
                         case 1:
-                            if(TYPE.equals("1")){
+                            if (TYPE.equals("1")) {
                                 Map args = new HashMap();
                                 args.put("app_key", Config.getInstance(context).getConfig("app_key"));
                                 args.put("money", MONEY);
@@ -438,12 +510,12 @@ public class JSInterface {
                                 VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER, new VolleyHttp.JsonResponseListener() {
                                     @Override
                                     public void getJson(String json, boolean isConnectSuccess) {
-                                        if(isConnectSuccess){
+                                        if (isConnectSuccess) {
                                             try {
                                                 JSONObject jsonObject = new JSONObject(json);
-                                                if(jsonObject.getString("status").equals("1")){
+                                                if (jsonObject.getString("status").equals("1")) {
                                                     showToast(jsonObject.getString("rsmsg"));
-                                                }else{
+                                                } else {
                                                     showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
                                                     ((WebViewActivity) activity).reload();
                                                 }
@@ -454,7 +526,7 @@ public class JSInterface {
                                     }
                                 }, args);
                             }
-                            if(TYPE.equals("2")){
+                            if (TYPE.equals("2")) {
                                 Map args = new HashMap();
                                 args.put("app_key", Config.getInstance(context).getConfig("app_key"));
                                 args.put("money", MONEY);
@@ -463,12 +535,12 @@ public class JSInterface {
                                 VolleyHttp.getInstance().postParamsJson(ServerInterface.TENDER_RIGHT, new VolleyHttp.JsonResponseListener() {
                                     @Override
                                     public void getJson(String json, boolean isConnectSuccess) {
-                                        if(isConnectSuccess){
+                                        if (isConnectSuccess) {
                                             try {
                                                 JSONObject jsonObject = new JSONObject(json);
-                                                if(jsonObject.getString("status").equals("1")){
+                                                if (jsonObject.getString("status").equals("1")) {
                                                     showToast(jsonObject.getString("rsmsg"));
-                                                }else{
+                                                } else {
                                                     showToast("您已充值成功,但" + jsonObject.getString("rsmsg"));
                                                     ((WebViewActivity) activity).reload();
                                                 }
@@ -490,11 +562,12 @@ public class JSInterface {
 
     /**
      * 花积分接口
+     *
      * @param title 标题
-     * @param url 网址
+     * @param url   网址
      */
     @JavascriptInterface
-    public void HuaJiFen(String title, String url){
+    public void HuaJiFen(String title, String url) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(H5_URL, url);
         intent.putExtra(H5_TITLE, title);

@@ -32,8 +32,8 @@
         SortId="1"
         AppKey="3006699354"
         AppSecret="bf7aefd414a0ae71afed7a313a909dc4"
-        RedirectUrl="http://len.so.com"
-        ShareByAppClient="true"
+        RedirectUrl="https://api.weibo.com/oauth2/default.html"
+        ShareByAppClient="false"
         Enable="true" />
 
     <TencentWeibo
