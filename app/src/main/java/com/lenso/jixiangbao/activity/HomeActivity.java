@@ -138,10 +138,12 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }
+
             @Override
             public void onPageSelected(int i) {
                 select(i);
             }
+
             @Override
             public void onPageScrollStateChanged(int i) {
             }
@@ -201,8 +203,20 @@ public class HomeActivity extends BaseActivity {
         try {
             PackageManager pm = HOMECONTEXT.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(HOMECONTEXT.getPackageName(), PackageManager.GET_CONFIGURATIONS);
+            String[] pvn = pi.versionName.split("\\.");
+            String[] svn = App.BASE_BEAN.getVersionCode().split("\\.");
+            logDebug(pi.versionName);
+            logDebug(App.BASE_BEAN.getVersionCode());
+            boolean needUpdate = false;
+            for (int i = 0; i < pvn.length; i++) {
+                logDebug(pvn[i] + i);
+                if (Integer.parseInt(pvn[i]) < Integer.parseInt(svn[i])) {
+                    needUpdate = true;
+                    break;
+                }
+            }
 
-            if(pi.versionCode < App.BASE_BEAN.getVersionCode()){ //如果小于和服务器的最新版本号
+            if (needUpdate) { //如果小于和服务器的最新版本号
                 alertUpdateDialog("当前软件不是最新版本");
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -397,7 +411,7 @@ public class HomeActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         downloadAsyncTask = new DownloadAsyncTask(App.BASE_BEAN.getAndroid_url());
-                        if(CommonUtils.isNetworkConnected(HOMECONTEXT)){
+                        if (CommonUtils.isNetworkConnected(HOMECONTEXT)) {
                             downloadAsyncTask.execute();
                         } else {
                             showToast("请检查网络设置");
@@ -416,7 +430,7 @@ public class HomeActivity extends BaseActivity {
                 .show();
     }
 
-    public void setScreenFragmentOneData(){
+    public void setScreenFragmentOneData() {
         screenFragment1 = new ScreenFragment();
 
         Map<String, List<String>> data = new LinkedHashMap<>();
@@ -456,7 +470,7 @@ public class HomeActivity extends BaseActivity {
         screenFragment1.initData(data, 1);
     }
 
-    public void setScreenFragmentTwoData(){
+    public void setScreenFragmentTwoData() {
         screenFragment2 = new ScreenFragment();
 
         Map<String, List<String>> data = new LinkedHashMap<>();
@@ -497,6 +511,7 @@ public class HomeActivity extends BaseActivity {
     public class DownloadAsyncTask extends AsyncTask<Integer, Integer, String> {
         KProgressHUD kProgressHUD;
         String url;
+
         public DownloadAsyncTask(String url) {
             super();
             this.url = url;
@@ -509,7 +524,7 @@ public class HomeActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(Integer... params) {
-            CommonUtils.openFile(CommonUtils.downFile(url, HOMECONTEXT, new Handler(HOMECONTEXT.getMainLooper()){
+            CommonUtils.openFile(CommonUtils.downFile(url, HOMECONTEXT, new Handler(HOMECONTEXT.getMainLooper()) {
                 @Override
                 public void handleMessage(Message msg) {
                     int progress = (int) msg.obj;

@@ -181,6 +181,7 @@ public class CommonUtils {
             public void getJson(String json, boolean isConnectSuccess) {
                 if (json != null && !json.equals("") && !json.equals("null")) {
                     BaseBean bean = gson.fromJson(json, BaseBean.class);
+                    App.BASE_BEAN.setWeburl(bean.getWeburl());//webURL
                     App.BASE_BEAN.setVersionCode(bean.getVersionCode());//版本号
                     App.BASE_BEAN.setAndroid_url(bean.getAndroid_url());//更新地址
                     App.BASE_BEAN.setShare_title(bean.getShare_title());//分享标题

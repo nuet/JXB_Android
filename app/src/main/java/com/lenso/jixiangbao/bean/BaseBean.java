@@ -14,7 +14,17 @@ public class BaseBean {
     private String statistic_display;
     private String new_experience_apr;
     private String new_experience_valid_time;
-    private int versionCode;
+    private String versionCode;
+    private String weburl;
+
+    public String getWeburl() {
+        return weburl;
+    }
+
+    public void setWeburl(String weburl) {
+        this.weburl = weburl;
+    }
+
     private String android_url;
     private String share_title;
     private String share_desc;
@@ -85,11 +95,11 @@ public class BaseBean {
         this.share_desc = share_desc;
     }
 
-    public int getVersionCode() {
+    public String getVersionCode() {
         return versionCode;
     }
 
-    public void setVersionCode(int versionCode) {
+    public void setVersionCode(String versionCode) {
         this.versionCode = versionCode;
     }
 

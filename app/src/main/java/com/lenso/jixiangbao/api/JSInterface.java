@@ -362,7 +362,7 @@ public class JSInterface {
                             // 通过业务流水请求报文获得的交易号
                             payintent.putExtra(BaofooPayActivity.PAY_TOKEN, tradeNo);
                             // 标记是否为测试，传True为正式环境，不传或者传False则为测试调用
-                            payintent.putExtra(BaofooPayActivity.PAY_BUSINESS, false);
+                            payintent.putExtra(BaofooPayActivity.PAY_BUSINESS, true);
                             activity.startActivityForResult(payintent, REQUEST_CODE_BAOFOO_SDK);
                             tradeNo = ""; //清空本次交易号
                             BAO_FOO = new HashMap(); // 清空本次参数

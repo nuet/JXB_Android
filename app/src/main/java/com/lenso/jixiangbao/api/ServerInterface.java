@@ -5,8 +5,10 @@ package com.lenso.jixiangbao.api;
  */
 public class ServerInterface {
 
-    public final static String SERVER = "http://app.pongyoo.com/";
-    public final static String SERVER_DOMAIN = "http://app.pongyoo.com/app/";
+//    public final static String SERVER = "http://app.pongyoo.com/";//开发环境
+
+    public final static String SERVER = "https://www.jixiangbao.net/";//正式环境
+    public final static String SERVER_DOMAIN = SERVER + "app/";
 
     public final static String SERVER_ISPHONEREGISTER = SERVER_DOMAIN + "isphonereged.html";
     public final static String SERVER_GETPHONECODE = SERVER_DOMAIN + "getphonecode.html";

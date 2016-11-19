@@ -6,7 +6,8 @@ package com.lenso.jixiangbao.api;
 public class HTMLInterface {
     public static final String H5_URL = "h5_url";
     public static final String H5_TITLE = "h5_title";
-    public static final String DOMAIN = "http://app.pongyoo.com/appweb/";
+//    public static final String DOMAIN = "http://app.pongyoo.com/appweb/";  //测试环境
+    public static final String DOMAIN = "https://www.jixiangbao.net/appweb/";  //正式环境
 
     public static final String YHXY = DOMAIN + "desc_user_interface.html";//用户协议
 //    public static final String YHXY = DOMAIN + "article.html?type=protocol";
