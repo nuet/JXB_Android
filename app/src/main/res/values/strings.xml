@@ -22,8 +22,8 @@
     <string name="financing_list_item_text_2">期限</string>
     <string name="financing_list_item_content_2">0</string>
     <string name="financing_list_item_content_2_day">天</string>
-    <string name="credit_list">债权列表</string>
-    <string name="transfer_zone">转让专区</string>
+    <string name="credit_list">投资列表</string>
+    <string name="transfer_zone">债权转让</string>
     <string name="no_internet">网络异常</string>
     <string name="xin_list_title">新手专享</string>
     <string name="tender_amount">招标金额：</string>

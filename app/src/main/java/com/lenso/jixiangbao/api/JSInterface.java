@@ -278,21 +278,21 @@ public class JSInterface {
 
 
         //移除新浪微博授权
-        oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
-            @Override
-            public void onShare(Platform platform, Platform.ShareParams paramsToShare) {
-                if (SinaWeibo.NAME.equals(platform.getName())) {
-                    Log.d("shareSDK", "sina");
-                    paramsToShare.setText(App.BASE_BEAN.getShare_desc());
-                    paramsToShare.setUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));
-                    paramsToShare.setImageUrl(ServerInterface.SHARE_PIC);
-                    if (platform.isAuthValid()) {
-                        platform.removeAccount(true);
-                        ShareSDK.removeCookieOnAuthorize(true);
-                    }
-                }
-            }
-        });
+//        oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+//            @Override
+//            public void onShare(Platform platform, Platform.ShareParams paramsToShare) {
+//                if (SinaWeibo.NAME.equals(platform.getName())) {
+//                    Log.d("shareSDK", "sina");
+//                    paramsToShare.setText(App.BASE_BEAN.getShare_desc());
+//                    paramsToShare.setUrl(ServerInterface.SHARE_LINK + "?invite_username=" + Config.getInstance(context).getConfig("phone"));
+//                    paramsToShare.setImageUrl(ServerInterface.SHARE_PIC);
+//                    if (platform.isAuthValid()) {
+//                        platform.removeAccount(true);
+//                        ShareSDK.removeCookieOnAuthorize(true);
+//                    }
+//                }
+//            }
+//        });
 
         //调试信息
         oks.setCallback(new PlatformActionListener() {
