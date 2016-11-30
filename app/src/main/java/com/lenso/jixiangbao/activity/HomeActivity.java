@@ -201,21 +201,22 @@ public class HomeActivity extends BaseActivity {
         }
 
         try {
+            boolean needUpdate = false;
             PackageManager pm = HOMECONTEXT.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(HOMECONTEXT.getPackageName(), PackageManager.GET_CONFIGURATIONS);
             String[] pvn = pi.versionName.split("\\.");
-            String[] svn = App.BASE_BEAN.getVersionCode().split("\\.");
-            logDebug(pi.versionName);
-            logDebug(App.BASE_BEAN.getVersionCode());
-            boolean needUpdate = false;
-            for (int i = 0; i < pvn.length; i++) {
-                logDebug(pvn[i] + i);
-                if (Integer.parseInt(pvn[i]) < Integer.parseInt(svn[i])) {
-                    needUpdate = true;
-                    break;
+            if (!TextUtils.isEmpty(App.BASE_BEAN.getVersionCode())) {
+                String[] svn = App.BASE_BEAN.getVersionCode().split("\\.");
+                logDebug(pi.versionName);
+                logDebug(App.BASE_BEAN.getVersionCode());
+                for (int i = 0; i < pvn.length; i++) {
+                    logDebug(pvn[i] + i);
+                    if (Integer.parseInt(pvn[i]) < Integer.parseInt(svn[i])) {
+                        needUpdate = true;
+                        break;
+                    }
                 }
             }
-
             if (needUpdate) { //如果小于和服务器的最新版本号
                 alertUpdateDialog("当前软件不是最新版本");
             }
