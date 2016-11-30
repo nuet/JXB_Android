@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.lenso.jixiangbao.App;
 import com.lenso.jixiangbao.adapter.FragmentViewPageAdapter;
 import com.lenso.jixiangbao.adapter.LoopViewPagerAdapter;
+import com.lenso.jixiangbao.bean.AppScrollPic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,6 @@ public class LoopViewPager extends JViewPager {
     }
 
 
-
     private Runnable action = new Runnable() {
         @Override
         public void run() {
@@ -47,17 +48,19 @@ public class LoopViewPager extends JViewPager {
         openTimer = true;
         postDelayed(action, time);
     }
-    public void openLoopTimer(){
-        if(time>0 && !openTimer)
+
+    public void openLoopTimer() {
+        if (time > 0 && !openTimer)
             setLoopTimer(time);
     }
+
     public void cancelLoopTimer() {
         this.openTimer = false;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        isTouch=false;
+        isTouch = false;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 isTouch = true;
@@ -68,27 +71,27 @@ public class LoopViewPager extends JViewPager {
         }
         return super.onTouchEvent(event);
     }
-    public  void addLoopImageUrl(List<String> urls){
-        count=urls.size();
-        setAdapter(new LoopViewPagerAdapter(getContext(),urls));
+
+    public void addLoopImageUrl(List<AppScrollPic> appScrollPics) {
+        count = appScrollPics.size();
+        setAdapter(new LoopViewPagerAdapter(getContext(), appScrollPics));
         pagerChangeListener();
         super.setOffscreenPageLimit(count);
     }
-    public  void addLoopImageUrl(String... us){
-        List<String> urls=new ArrayList<>();
-        for(String u:us){
-            urls.add(u);
-        }
-        addLoopImageUrl(urls);
-    }
 
+//    public void addLoopImageUrl(String... us) {
+//        List<String> urls = new ArrayList<>();
+//        for (String u : us) {
+//            urls.add(u);
+//        }
+//        addLoopImageUrl(urls);
+//    }
 
 
     @Override
     public void setOffscreenPageLimit(int limit) {
 
     }
-
 
 
     public void setOnLoopPagerChangeListener(OnPageChangeListener changeListener) {
@@ -134,9 +137,9 @@ public class LoopViewPager extends JViewPager {
         });
     }
 
-    public void addLoopFragment(Fragment...fragments) {
-        count=fragments.length-2;
-        setAdapter(new FragmentViewPageAdapter(((FragmentActivity)getContext()).getSupportFragmentManager(),fragments));
+    public void addLoopFragment(Fragment... fragments) {
+        count = fragments.length - 2;
+        setAdapter(new FragmentViewPageAdapter(((FragmentActivity) getContext()).getSupportFragmentManager(), fragments));
         super.setOffscreenPageLimit(count);
         pagerChangeListener();
     }

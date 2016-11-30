@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,11 +141,15 @@ public class ChoiceFragment extends BaseFragment {
 //                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
 //                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
             }
-            ArrayList<String> pics = new ArrayList<>();
-            for (AppScrollPic pic : App.BASE_BEAN.getAppScrollPic()) {
-                pics.add(ServerInterface.SERVER + pic.getPic());
-            }
-            lvpBanner.addLoopImageUrl(pics);
+//            ArrayList<String> pic = new ArrayList<>();
+//            ArrayList<String> name = new ArrayList<>();
+//            ArrayList<String> url = new ArrayList<>();
+//            for (AppScrollPic appScrollPic : App.BASE_BEAN.getAppScrollPic()) {
+//                pic.add(ServerInterface.SERVER + appScrollPic.getPic());
+//                name.add(appScrollPic.getName());
+//                url.add(appScrollPic.getUrl());
+//            }
+            lvpBanner.addLoopImageUrl(App.BASE_BEAN.getAppScrollPic());
             lvpBanner.setLoopTimer(3000);
             lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
@@ -162,7 +167,7 @@ public class ChoiceFragment extends BaseFragment {
 
                 }
 
-                private void selected(int position) {
+                private void selected(final int position) {
                     for (ImageView imageView : dots) {
                         imageView.setSelected(false);
                     }
@@ -170,7 +175,7 @@ public class ChoiceFragment extends BaseFragment {
                 }
             });
             dots = new ArrayList<>();
-            for (int i = 0; i < pics.size(); i++) {
+            for (int i = 0; i < App.BASE_BEAN.getAppScrollPic().size(); i++) {
                 ImageView imageView = new ImageView(getActivity());
                 imageView.setImageResource(R.drawable.selector_dot);
                 dots.add(imageView);
@@ -182,7 +187,7 @@ public class ChoiceFragment extends BaseFragment {
             getActivity().getWindowManager().getDefaultDisplay().getSize(outSize);
 
             int height = 3 * outSize.x / 8;
-            logDebug("height:"+String.valueOf(height));
+            logDebug("height:" + String.valueOf(height));
             FrameLayout.LayoutParams lp1 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
             lvpBanner.setLayoutParams(lp1);
 

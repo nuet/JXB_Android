@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -111,6 +112,13 @@ public class WebViewActivity extends WebBaseActivity {
         setNetworkCache(webSettings);
 
         webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
         topMenuBar.setTitleText(title);
         topMenuBar.setTitleSecected(true);
         topMenuBar.setOnBackClickListener(new View.OnClickListener() {
