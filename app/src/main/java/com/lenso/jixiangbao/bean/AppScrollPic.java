@@ -24,7 +24,7 @@ public class AppScrollPic {
     }
 
     public void setPic(String pic) {
-        this.pic = ServerInterface.SERVER + pic;
+        this.pic = pic;
     }
 
     public String getName() {

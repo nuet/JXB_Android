@@ -141,15 +141,12 @@ public class ChoiceFragment extends BaseFragment {
 //                tvInfo2.setText(App.BASE_BEAN.getPlatformFinancialReport().getTender_total());
 //                tvInfo4.setText(App.BASE_BEAN.getPlatformFinancialReport().getNew_user_total());
             }
-//            ArrayList<String> pic = new ArrayList<>();
-//            ArrayList<String> name = new ArrayList<>();
-//            ArrayList<String> url = new ArrayList<>();
-//            for (AppScrollPic appScrollPic : App.BASE_BEAN.getAppScrollPic()) {
-//                pic.add(ServerInterface.SERVER + appScrollPic.getPic());
-//                name.add(appScrollPic.getName());
-//                url.add(appScrollPic.getUrl());
-//            }
-            lvpBanner.addLoopImageUrl(App.BASE_BEAN.getAppScrollPic());
+
+            for (int i = 0; i < App.BASE_BEAN.getAppScrollPic().size(); i++) {
+                App.BASE_BEAN.getAppScrollPic().get(i).setPic(ServerInterface.SERVER +
+                        App.BASE_BEAN.getAppScrollPic().get(i).getPic());
+            }
+
             lvpBanner.setLoopTimer(3000);
             lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
