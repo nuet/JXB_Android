@@ -147,6 +147,7 @@ public class ChoiceFragment extends BaseFragment {
                         App.BASE_BEAN.getAppScrollPic().get(i).getPic());
             }
 
+            lvpBanner.addLoopImageUrl(App.BASE_BEAN.getAppScrollPic());
             lvpBanner.setLoopTimer(3000);
             lvpBanner.setOnLoopPagerChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
