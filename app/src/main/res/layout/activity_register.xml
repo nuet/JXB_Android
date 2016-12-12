@@ -141,7 +141,7 @@
                 android:id="@+id/tv_register_yhxy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="《吉祥宝金融用户协议》"
+                android:text="《吉祥宝理财用户协议》"
                 android:textSize="12sp"
                 android:textColor="@color/blue"/>
         </LinearLayout>

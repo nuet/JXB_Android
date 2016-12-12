@@ -58,7 +58,7 @@
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
             android:gravity="center"
-            android:text="吉祥宝金融不会在任何地方泄露您的号码"
+            android:text="吉祥宝理财不会在任何地方泄露您的号码"
             android:textSize="12sp"
             android:textColor="@color/darker_gray"/>
         <Button
